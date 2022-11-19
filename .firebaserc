@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "portfolio-a59e2"
+  },
+  "targets": {
+    "portfolio-a59e2": {
+      "hosting": {
+        "website": [
+          "portfolio-a59e2"
+        ]
+      }
+    }
   }
 }
