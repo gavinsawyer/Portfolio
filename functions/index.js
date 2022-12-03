@@ -5,15 +5,15 @@ app
   .initializeApp();
 
 exports
-  .getFocus = require("./focus/get")
-  .default;
-exports
-  .setFocus = require("./focus/set")
+  .getAll = require("./all/get")
   .default;
 
 exports
-  .getDaytime = require("./daytime/get")
+  .setFocus = require("./focus/set")
   .default;
 exports
-  .setDaytime = require("./daytime/set")
+  .setLocation = require("./location/set")
+  .default;
+exports
+  .setTime = require("./time/set")
   .default;

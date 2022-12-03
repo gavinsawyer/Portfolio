@@ -20,6 +20,7 @@
           "apps/website/src/assets"
         ],
         "styles": [
+          "apps/website/src/custom-theme.sass",
           "apps/website/src/styles.sass"
         ],
         "scripts": []
