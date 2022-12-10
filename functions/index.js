@@ -9,10 +9,10 @@ exports
   .default;
 
 exports
-  .setFocus = require("./focus/set")
+  .resetFocus = require("./focus/reset")
   .default;
 exports
-  .resetFocus = require("./focus/reset")
+  .setFocus = require("./focus/set")
   .default;
 
 exports

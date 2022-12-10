@@ -11,4 +11,4 @@ exports
   })))({
     "focus": documentSnapshot.data()["focusPrior"],
     "focusPrior": documentSnapshot.data()["focus"],
-  })))(firestore.collection("_").doc("_")))(firestore.getFirestore()) : response.status(403).end());
+  })))(firestore.collection("_").doc("_")))(firestore.getFirestore()) : ((_response) => {})(response.status(403).end()));
