@@ -1,8 +1,8 @@
-import { NgModule }                from "@angular/core";
-import { BrowserModule }           from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterModule }            from "@angular/router";
-import { AppComponent }            from "./app.component";
+import { NgModule }         from "@angular/core";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { BrowserModule }    from "@angular/platform-browser";
+import { RouterModule }     from "@angular/router";
+import { AppComponent }     from "./app.component";
 
 
 @NgModule({
@@ -10,6 +10,7 @@ import { AppComponent }            from "./app.component";
     AppComponent,
   ],
   imports: [
+    FlexLayoutModule,
     BrowserModule.withServerTransition({
       appId: "serverApp",
     }),
@@ -24,7 +25,6 @@ import { AppComponent }            from "./app.component";
         initialNavigation: "enabledBlocking",
       }
     ),
-    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [

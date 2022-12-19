@@ -10,4 +10,4 @@ exports
     ...updateData,
   }).end())))({
     "location": request.body["location"],
-  })))(firestore.collection("_").doc("_")))(firestore.getFirestore()) : ((_response) => {})(response.status(403).end()));
+  })))(firestore.collection("_").doc(process.env["ShortcutsAPIPrivateDocumentID"])))(firestore.getFirestore()) : ((_response) => {})(response.status(403).end()));
