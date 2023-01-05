@@ -1,18 +1,24 @@
 \:host
   display: flex
+  flex-basis: calc(100% - 2rem)
   flex-direction: column
-  width: 100%
 
-  > div
-    width: 100%
+  div.image::after
+    content: ''
+    background-image: url("https://via.placeholder.com/448x597")
+    background-position: center
+    background-size: cover
+    background-repeat: no-repeat
+    margin: 1rem 0
+    border-radius: 2.543875rem
+    padding-bottom: 133.3333%
+    overflow: hidden
 
-    .image
-      width: 28rem
-      background-image: url("https://via.placeholder.com/448x597")
-      background-position: center
-      background-size: cover
-      background-repeat: no-repeat
-      margin-top: 1rem
-      border-radius: 2.543875rem
-      padding-bottom: 133.3333%
-      overflow: hidden
+  article > p
+    text-align: justify
+
+  div.image,
+  article
+    display: flex
+    flex-direction: column
+    flex-basis: 28rem

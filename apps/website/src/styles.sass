@@ -1,98 +1,14 @@
 @import '~normalize.css'
+@import 'colors'
 
 body
   font-family: ui-sans-serif
-
-  a
-    text-decoration: none
-
-    &:hover
-      text-decoration: underline
-
-  h1
-    font-size: 2rem
-
-  h3
-    font-size: 1.17rem
-
-  nav
-    position: sticky
-    top: 0
-    padding: 1.005rem 1.005rem 0
-    width: 100vw
-
-    > div
-      padding: 0 1.538875rem
-      border-radius: 1.538875rem
-      backdrop-filter: blur(2.543875rem)
-
-      h1
-        font-size: 1.5rem
-
-      h3
-        font-size: 0.8775rem
-
-  main
-    padding: 0 2.543875rem
-    margin-top: -0.8775rem
-
-    article
-      display: flex
-      flex-direction: column
-      width: 100%
-      max-width: 28rem
-
-      p
-        text-align: justify
-
-
-  footer
-    padding: 0 2.543875rem
-    width: 100vw
-
-    ul
-      padding-inline-start: 0
-
-      li
-        list-style: none
+  font-size: 16px
 
 @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-text-function)
   body
     color: $body-foreground
     background-color: $body-background
-
-    a
-      text-decoration: none
-
-      @if $degrade-text-function == lighten
-        color: lighten($body-foreground, (100%)/3)
-
-      @if $degrade-text-function == darken
-        color: darken($body-foreground, (100%)/3)
-
-      &:hover
-        text-decoration: underline
-
-    nav > div
-      background-color: transparentize($body-background, 3/4)
-
-      h3
-        @if $degrade-text-function == lighten
-          color: lighten($body-foreground, (100%)/3)
-
-        @if $degrade-text-function == darken
-          color: darken($body-foreground, (100%)/3)
-
-    footer
-      color: $footer-foreground
-      background-color: $footer-background
-
-$body-light: hsl(0, 0%, 100%)
-$test: hsl(240, 3%, 61%)
-$body-dark: hsl(0, 0%, 18%)
-
-$footer-light: hsl(240, 11%, 95%)
-$footer-dark: hsl(0, 0%, 13%)
 
 @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
 

@@ -1,43 +1,39 @@
-<div
-  fxLayout="column"
-  fxFlex>
-  <nav
-    fxLayout="row"
-    fxLayoutAlign="space-around">
+<nav
+  fxLayout="row wrap"
+  fxLayoutGap="1rem grid">
+  <div
+    fxLayout="column"
+    fxFlex="calc(100% - 1rem)">
     <div
-      fxLayout="column"
-      fxFlex="61.621625rem">
-      <div
-        fxLayout="row"
-        fxLayoutAlign="space-between">
-        <div fxLayout="column">
-          <h1 style="margin-bottom: 0">
-            Gavin Sawyer
-          </h1>
-          <h3 style="margin-top: 0">
-            Boston
-          </h3>
-        </div>
+      fxLayout="row"
+      fxLayoutAlign="space-between">
+      <div fxLayout="column">
+        <h1 style="margin-bottom: 0">
+          Gavin Sawyer
+        </h1>
+        <h3 style="margin-top: 0">
+          Boston
+        </h3>
       </div>
     </div>
-  </nav>
-  <main
-    fxLayout="row"
-    fxFlex>
-    <router-outlet></router-outlet>
-  </main>
-  <footer
-    fxHide
-    fxLayout="row"
-    fxLayoutAlign="space-around">
-    <div
-      fxLayout="column"
-      fxFlex="58.543875rem">
-      <h4>
-
-      </h4>
-      <ul>
-      </ul>
-    </div>
-  </footer>
-</div>
+  </div>
+</nav>
+<main
+  fxLayout="row wrap"
+  fxLayoutGap="1rem grid"
+  fxFlex="100%">
+  <router-outlet></router-outlet>
+</main>
+<footer
+  fxLayout="row wrap"
+  fxLayoutGap="2rem grid">
+  <div
+    fxLayout="column"
+    fxFlex="calc(100% - 1rem) 1 1">
+    <ul>
+      <li>
+        <a href="https://instagram.com/gavinsawyer">Instagram</a>
+      </li>
+    </ul>
+  </div>
+</footer>
