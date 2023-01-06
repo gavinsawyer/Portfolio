@@ -2,15 +2,48 @@
 @import 'colors'
 
 body
+  display: flex
+  flex-direction: row
   font-family: ui-sans-serif
   font-size: 16px
+  padding: 1rem 2rem
 
-@mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-text-function)
-  body
+  a
+    text-decoration: none
+
+    &:hover
+      text-decoration: underline
+
+  h1
+    font-size: 2rem
+
+  h3
+    font-size: 1.2rem
+
+  h5
+    font-size: 0.8rem
+
+  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
     color: $body-foreground
     background-color: $body-background
 
-@include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
+    h1
+      color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
 
-@media (prefers-color-scheme: dark)
-  @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)
+    h3
+      color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
+
+    h5
+      color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+
+    a
+      text-decoration: none
+      color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+
+      &:hover
+        text-decoration: underline
+
+  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
+
+  @media (prefers-color-scheme: dark)
+    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)

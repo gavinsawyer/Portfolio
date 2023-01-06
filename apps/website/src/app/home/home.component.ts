@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component }                           from "@angular/core";
+import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
+import { map, Observable }                     from "rxjs";
 
 
 @Component({
@@ -6,8 +8,22 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })
-export class HomeComponent implements OnInit {
-  constructor() {}
+export class HomeComponent {
+  constructor(
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
-  ngOnInit(): void {}
+  public readonly backgroundAppearanceObservable: Observable<"light" | "dark"> = this
+    .breakpointObserver
+    .observe("(prefers-color-scheme: light)")
+    .pipe(
+      map((breakpointState: BreakpointState) => breakpointState.matches ? "light" : "dark")
+    )
+
+  public readonly foregroundAppearanceObservable: Observable<"dark" | "light"> = this
+    .breakpointObserver
+    .observe("(prefers-color-scheme: light)")
+    .pipe(
+      map((breakpointState: BreakpointState) => breakpointState.matches ? "dark" : "light")
+    )
 }

@@ -1,32 +1,15 @@
 @import '../colors'
 
 \:host
-  display: flex
   flex-direction: column
-  flex-basis: 100%
+  flex-grow: 1
   min-height: 100vh
-  contain: paint
 
-  a
-    text-decoration: none
-
-    &:hover
-      text-decoration: underline
-
-  h1
-    font-size: 2rem
-
-  h3
-    font-size: 1.17rem
-
-  nav
-    position: sticky
-    top: 0
-    padding-top: 1rem
-    padding-left: 1rem
-
-    > div > div
-      padding: 0 1rem
+  main > div
+    header
+      position: sticky
+      top: 1rem
+      margin: 0 -1rem
       border-radius: 1rem
       backdrop-filter: saturate(2) blur(1.2rem)
 
@@ -36,14 +19,12 @@
       h3
         font-size: 0.8775rem
 
-  main
-    padding-left: 1rem
-
-    > router-outlet
+    router-outlet
       display: none
 
   footer
-    padding-left: 2rem
+    margin: 0 -2rem -1rem
+    padding: 1rem 2rem
 
     ul
       padding-inline-start: 0
@@ -51,24 +32,9 @@
       li
         list-style: none
 
-  nav,
-  main,
-  footer
-    max-width: 100%
-
-  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-text-function)
-    a
-      text-decoration: none
-      color: call(get-function($degrade-text-function), $body-foreground, (100%)/3)
-
-      &:hover
-        text-decoration: underline
-
-    nav > div > div
+  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
+    header
       background-color: transparentize($body-background, 1/4)
-
-      h3
-        color: call(get-function($degrade-text-function), $body-foreground, (100%)/3)
 
     footer
       color: $footer-foreground
