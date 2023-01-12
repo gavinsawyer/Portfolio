@@ -1,14 +1,66 @@
+<aside
+  fxHide
+  fxLayout="column">
+  <h1>
+    Send a message
+  </h1>
+  <div
+    fxLayout="row wrap"
+    fxLayoutGap="1rem">
+    <div
+      class="focus"
+      fxFlex=""
+      fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayoutGap="0.5rem">
+        <div fxLayout="column">
+          <img [src]="'/assets/Developing.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Developing focus icon">
+        </div>
+        <div
+          fxFlex=""
+          fxLayout="column">
+          <span>
+            Developing
+          </span>
+        </div>
+      </div>
+    </div>
+    <button
+      fxFlex=""
+      fxLayout="column"
+      fxLayoutAlign="start stretch">
+      <div
+        fxLayout="row"
+        fxLayoutGap="0.5rem">
+        <div fxLayout="column">
+          <img [src]="'/assets/mail.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Mail icon">
+        </div>
+        <div
+          fxFlex=""
+          fxLayout="column">
+          <a href="mailto:hello@gavinsawyer.dev">
+            Mail
+          </a>
+        </div>
+      </div>
+    </button>
+  </div>
+</aside>
 <div
-  fxFlex="0 1 448px"
+  fxFlex="0 1 57rem"
   fxLayout="column">
   <div
     fxLayout="row wrap"
-    fxLayoutAlign="start">
-    <div class="image" fxHide fxFlex="28rem" fxLayout="column"></div>
+    fxLayoutAlign="center"
+    fxLayoutGap="1rem grid"
+    style="width: min(100vw - 3rem, 58rem)">
+    <div class="image" fxFlex="0 1 29rem" fxLayout="column"></div>
     <div
-      fxFlex="0 1 448px"
-      fxLayout="column">
-      <div fxLayout="row wrap">
+      fxFlex="0 1 29rem"
+      fxLayout="column"
+      fxLayoutGap="1rem grid">
+      <div fxLayout="row">
         <article fxLayout="column">
           <div>
             <h1>
@@ -61,6 +113,8 @@
             </h5>
           </div>
         </article>
+      </div>
+      <div fxLayout="row">
         <article>
           <div>
             <h1>
@@ -68,7 +122,7 @@
             </h1>
           </div>
           <h3 style="margin-bottom: 0;">
-            HTML, CSS, JavaScript, PHP
+            HTML, CSS, JavaScript
           </h3>
           <h5 style="margin-top: 0;">
             6 years
@@ -102,24 +156,3 @@
     </div>
   </div>
 </div>
-<aside
-  fxHide
-  fxLayout="column">
-  <h1>
-    Send a message
-  </h1>
-  <div fxLayout="row">
-    <div
-      class="focus"
-      fxLayout="column">
-      <div fxLayout="row">
-        <div>
-          <img [src]="'/assets/Studying.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Gavin's Current Focus">
-        </div>
-        <div>
-          Studying
-        </div>
-      </div>
-    </div>
-  </div>
-</aside>

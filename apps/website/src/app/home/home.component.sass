@@ -3,45 +3,55 @@
 \:host
   display: flex
   flex-direction: row
-  flex-wrap: wrap-reverse
+  flex-wrap: wrap
   gap: 1rem
+  justify-content: center
+  padding-right: 1rem
 
-  > div > div,
-  > div > div > div > div
-    gap: 1rem
+  div.image::after
+    content: ''
+    background-image: url("https://via.placeholder.com/448x597")
+    background-position: center
+    background-size: cover
+    background-repeat: no-repeat
+    margin: 1rem 0
+    border-radius: 2.543875rem
+    padding-bottom: 133.3333%
+    overflow: hidden
 
-  div.image
-    flex: 1 1 0
+  aside
+    div.focus
+      border-radius: 1rem
+      padding: 0.75rem 0.75rem 0.75rem
+      text-align: center
 
-    &::after
-      content: ''
-      background-image: url("https://via.placeholder.com/448x597")
-      background-position: center
-      background-size: cover
-      background-repeat: no-repeat
-      margin: 1rem 0
-      border-radius: 2.543875rem
-      padding-bottom: 133.3333%
-      overflow: hidden
+    button
+      color: inherit
+      border-radius: 1rem
+      border: 0
+      padding: 0.75rem 0.75rem 0.75rem
 
-  aside div.focus
-    border-radius: 1rem
-    padding: 1.25rem 0.75rem
+      > div a
+        color: inherit
+        text-decoration: underline
 
-    > div
-      gap: 0.5rem
+    div.focus,
+    button
+      > div > div:first-child
+        justify-content: center
 
   div.image,
   aside,
   article
-    max-width: 28rem
+    max-width: 29rem
 
-  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-background-function)
+  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     aside
-      div.focus
+      div.focus,
+      button
         background: transparentize(call(get-function($degrade-background-function), $body-background, 10%), 0.5)
 
-  @include colors($body-dark, $body-light, $footer-dark, $footer-light, darken)
+  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
 
   @media (prefers-color-scheme: dark)
-    @include colors($body-light, $body-dark, $footer-light, $footer-dark, lighten)
+    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken, lighten)
