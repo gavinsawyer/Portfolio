@@ -1,53 +1,125 @@
-<article fxLayout="column">
-  <div>
-    <h1>
-      Postsecondary Education
-    </h1>
-    <h3 style="margin-bottom: 0;">
-      Suffolk University
-    </h3>
-    <h5 style="margin-top: 0;">
-      Fall '19-Spring '23
-    </h5>
-    <p>
-      Gavin is a BSBA candidate double-majoring in Global Business and Big Data and minoring in Cybersecurity.
-    </p>
-    <p>
-      The Sawyer Business School is accredited by AACSB
-    </p>
-    <h3 style="margin-bottom: 0;">
-      Don Quixote Language School
-    </h3>
-    <h5 style="margin-top: 0;">
-      Spring '21
-    </h5>
-    <p>
-      Gavin earned a B1-level certification for intermediate Spanish proficiency while living in Madrid.
-    </p>
-    <p>
-      Don Quixote is accredited by the Cervantes Institute
-    </p>
-    <h3 style="margin-bottom: 0;">
-      Suffolk University Madrid Campus
-    </h3>
-    <h5 style="margin-top: 0;">
-      Spring '20-Fall '20
-    </h5>
-    <h1>
-      Basic Education
-    </h1>
-    <h3 style="margin-bottom: 0;">
-      Saint Joseph Preparatory High School
-    </h3>
-    <h5 style="margin-top: 0;">
-      Fall '15-Spring '19
-    </h5>
-    <h3 style="margin-bottom: 0;">
-      Saint Mary of the Annunciation School
-    </h3>
-    <h5 style="margin-top: 0;">
-      Fall '07-Spring '15
-    </h5>
+<div
+  fxFlex="0 1 448px"
+  fxLayout="column">
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="start">
+    <div class="image" fxHide fxFlex="28rem" fxLayout="column"></div>
+    <div
+      fxFlex="0 1 448px"
+      fxLayout="column">
+      <div fxLayout="row wrap">
+        <article fxLayout="column">
+          <div>
+            <h1>
+              Postsecondary Education
+            </h1>
+            <h3 style="margin-bottom: 0;">
+              Suffolk University
+            </h3>
+            <h5 style="margin-top: 0;">
+              Fall '19-Spring '23
+            </h5>
+            <p>
+              Gavin is a BSBA candidate double-majoring in Global Business and Big Data and minoring in Cybersecurity.
+            </p>
+            <p>
+              The Sawyer Business School is accredited by AACSB
+            </p>
+            <h3 style="margin-bottom: 0;">
+              Don Quixote Language School
+            </h3>
+            <h5 style="margin-top: 0;">
+              Spring '21
+            </h5>
+            <p>
+              Gavin earned a B1-level certification for intermediate Spanish proficiency while living in Madrid.
+            </p>
+            <p>
+              Don Quixote is accredited by the Cervantes Institute
+            </p>
+            <h3 style="margin-bottom: 0;">
+              Suffolk University Madrid Campus
+            </h3>
+            <h5 style="margin-top: 0;">
+              Spring '20-Fall '20
+            </h5>
+            <h1>
+              Basic Education
+            </h1>
+            <h3 style="margin-bottom: 0;">
+              Saint Joseph Preparatory High School
+            </h3>
+            <h5 style="margin-top: 0;">
+              Fall '15-Spring '19
+            </h5>
+            <h3 style="margin-bottom: 0;">
+              Saint Mary of the Annunciation School
+            </h3>
+            <h5 style="margin-top: 0;">
+              Fall '07-Spring '15
+            </h5>
+          </div>
+        </article>
+        <article>
+          <div>
+            <h1>
+              Technologies
+            </h1>
+          </div>
+          <h3 style="margin-bottom: 0;">
+            HTML, CSS, JavaScript, PHP
+          </h3>
+          <h5 style="margin-top: 0;">
+            6 years
+          </h5>
+          <h3 style="margin-bottom: 0;">
+            TypeScript, NodeJS, MongoDB, SQL, Git
+          </h3>
+          <h5 style="margin-top: 0;">
+            4 years
+          </h5>
+          <h3 style="margin-bottom: 0;">
+            Angular, Sass, AWS, RESTful APIs
+          </h3>
+          <h5 style="margin-top: 0;">
+            3 years
+          </h5>
+          <h3 style="margin-bottom: 0;">
+            Google Cloud Platform, Firebase, Amplify
+          </h3>
+          <h5 style="margin-top: 0;">
+            2 years
+          </h5>
+          <h3 style="margin-bottom: 0;">
+            Adobe Illustrator & Photoshop
+          </h3>
+          <h5 style="margin-top: 0;">
+            2 years
+          </h5>
+        </article>
+      </div>
+    </div>
   </div>
-</article>
-
+</div>
+<aside
+  fxHide
+  fxLayout="column">
+  <h1>
+    Send a message
+  </h1>
+  <div fxLayout="row">
+    <div
+      class="focus"
+      fxLayout="column">
+      <div fxLayout="row">
+        <div>
+          <img [src]="'/assets/Studying.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Gavin's Current Focus">
+        </div>
+        <div>
+          Studying
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

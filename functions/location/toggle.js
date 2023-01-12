@@ -9,5 +9,5 @@ exports
     ...documentSnapshot.data(),
     ...updateData,
   }).end())))({
-    "location": documentSnapshot.data()["location"] === "home" ? "away" : "home",
+    "location": documentSnapshot.data()["location"] === "away" ? process.env["ShortcutsAPIHomeName"] : "away",
   })))(firestore.collection("_").doc(process.env["ShortcutsAPIPrivateDocumentID"])))(firestore.getFirestore()) : ((_response) => {})(response.status(403).end()));

@@ -23,8 +23,8 @@
       display: none
 
   footer
-    margin: 0 -2rem -1rem
-    padding: 1rem 2rem
+    margin: 0 -2rem
+    padding: 0 2rem
 
     ul
       padding-inline-start: 0
@@ -32,7 +32,7 @@
       li
         list-style: none
 
-  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
+  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     header
       background-color: transparentize($body-background, 1/4)
 
@@ -40,7 +40,7 @@
       color: $footer-foreground
       background-color: $footer-background
 
-  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
+  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
 
   @media (prefers-color-scheme: dark)
-    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)
+    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken, lighten)
