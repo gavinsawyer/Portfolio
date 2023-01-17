@@ -1,35 +1,44 @@
 <aside
   fxHide
-  fxLayout="column">
-  <h1>
-    Send a message
-  </h1>
+  fxLayout="column"
+  fxLayoutGap="1rem">
+  <form
+    class="message-input"
+    fxLayout="row"
+    fxLayoutAlign="start end"
+    fxLayoutGap="1rem"
+    [formGroup]="messageForm">
+    <textarea placeholder="Send a message" [rows]="(messageInputRows + 1) >= 2 ? (messageInputRows + 1) : 2" fxFlex="" fxLayout="column" #messageInput formControlName="message" (input)="adjustMessageInputRows();"></textarea>
+    <button fxLayout="column">
+      <img [src]="'/assets/message.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Mail icon">
+    </button>
+  </form>
   <div
-    fxLayout="row wrap"
+    fxLayout="row"
     fxLayoutGap="1rem">
-    <div
-      class="focus"
+    <button
       fxFlex=""
-      fxLayout="column">
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+      (click)="adjustMessageInputRows();">
       <div
         fxLayout="row"
         fxLayoutGap="0.5rem">
         <div fxLayout="column">
-          <img [src]="'/assets/Developing.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Developing focus icon">
+          <img [src]="'/assets/phone.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Phone icon">
         </div>
         <div
           fxFlex=""
           fxLayout="column">
-          <span>
-            Developing
-          </span>
+          Call
         </div>
       </div>
-    </div>
+    </button>
     <button
       fxFlex=""
       fxLayout="column"
-      fxLayoutAlign="start stretch">
+      fxLayoutAlign="start stretch"
+      (click)="adjustMessageInputRows();">
       <div
         fxLayout="row"
         fxLayoutGap="0.5rem">
@@ -39,12 +48,31 @@
         <div
           fxFlex=""
           fxLayout="column">
-          <a href="mailto:hello@gavinsawyer.dev">
-            Mail
-          </a>
+          Mail
         </div>
       </div>
     </button>
+  </div>
+  <div fxLayout="row">
+    <div
+      class="focus"
+      fxFlex=""
+      fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayoutGap="0.5rem">
+        <div fxLayout="column">
+          <img [src]="'/assets/' + focus + '.' + (foregroundAppearanceObservable | async) + '.svg'" [alt]="focus + ' focus icon'">
+        </div>
+        <div
+          fxFlex=""
+          fxLayout="column">
+          <span>
+            {{ focus }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </aside>
 <div
@@ -55,7 +83,7 @@
     fxLayoutAlign="center"
     fxLayoutGap="1rem grid"
     style="width: min(100vw - 3rem, 58rem)">
-    <div class="image" fxFlex="0 1 29rem" fxLayout="column"></div>
+    <div class="image" fxHide fxFlex="0 1 29rem" fxLayout="column"></div>
     <div
       fxFlex="0 1 29rem"
       fxLayout="column"
