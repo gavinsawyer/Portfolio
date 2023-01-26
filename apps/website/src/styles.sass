@@ -27,6 +27,13 @@ body
     color: $body-foreground
     background-color: $body-background
 
+    a
+      text-decoration: none
+      color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+
+      &:hover
+        text-decoration: underline
+
     h1
       color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
 
@@ -36,12 +43,18 @@ body
     h5
       color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
 
-    a
-      text-decoration: none
-      color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+    h1,
+    h3,
+    h5
+      a
+        font-weight: bolder
 
-      &:hover
-        text-decoration: underline
+    ul
+      padding-inline-start: 0
+
+      li
+        margin: 0.25rem 0
+        list-style: none
 
   @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
 
