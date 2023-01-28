@@ -87,10 +87,10 @@
     </div>
     <div fxLayout="column" class="image"></div>
   </aside>
-  <div
+  <article
     [fxFlex]="(breakpointObservable(52) | async) ? '' : '0 1 29rem'"
     fxLayout="column">
-    <article fxLayout="column">
+    <section fxLayout="column">
       <div>
         <h1>
           Education
@@ -196,8 +196,8 @@
           In high school, Gavin was involved in art and robotics and became interested in his major from taking AP Statistics.
         </p>
       </div>
-    </article>
-    <article fxLayout="column">
+    </section>
+    <section fxLayout="column">
       <div>
         <h1>
           Familiar technologies
@@ -236,6 +236,6 @@
           2 years
         </h5>
       </div>
-    </article>
-  </div>
+    </section>
+  </article>
 </div>
