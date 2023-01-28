@@ -29,6 +29,9 @@ export class HomeComponent implements AfterContentInit, OnDestroy {
         .focusBehaviorSubject
         .next(documentSnapshot.data()?.["focus"]);
 
+      console
+        .log(documentSnapshot.data()?.["focus"]);
+
       this
         .changeDetectorRef
         .detectChanges()

@@ -3,8 +3,8 @@
   fxLayoutAlign="center"
   fxLayoutGap="1rem">
   <aside
-    fxLayout="column"
-    *ngIf="false">
+    fxHide
+    fxLayout="column">
     <div
       class="contact"
       fxLayout="column"
@@ -53,8 +53,8 @@
         </a>
       </div>
       <div
-        [fxHide]="(focusObservable | async) == ''"
-        fxLayout="row">
+        fxLayout="row"
+        *ngIf="(focusObservable | async)">
         <div
           class="focus"
           fxFlex=""

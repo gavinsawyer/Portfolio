@@ -1,12 +1,13 @@
-import { NgModule }                          from "@angular/core";
-import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
-import { getFirestore, provideFirestore }    from "@angular/fire/firestore";
-import { FlexLayoutModule }                  from "@angular/flex-layout";
-import { ReactiveFormsModule }               from "@angular/forms";
-import { BrowserModule }                     from "@angular/platform-browser";
-import { RouterModule }                      from "@angular/router";
-import { environment }                       from "../environments/environment";
-import { AppComponent }                      from "./app.component";
+import { NgModule }                                                           from "@angular/core";
+import { FirebaseApp, initializeApp, provideFirebaseApp }                     from "@angular/fire/app";
+import { AppCheck, initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from "@angular/fire/app-check";
+import { getFirestore, provideFirestore }                                     from "@angular/fire/firestore";
+import { FlexLayoutModule }                                                   from "@angular/flex-layout";
+import { ReactiveFormsModule }                                                from "@angular/forms";
+import { BrowserModule }                                                      from "@angular/platform-browser";
+import { RouterModule }                                                       from "@angular/router";
+import { environment }                                                        from "../environments/environment";
+import { AppComponent }                                                       from "./app.component";
 
 
 @NgModule({
@@ -18,7 +19,11 @@ import { AppComponent }                      from "./app.component";
       appId: "serverApp",
     }),
     FlexLayoutModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
+    provideAppCheck((): AppCheck => initializeAppCheck(undefined, {
+      provider: new ReCaptchaV3Provider(environment.recaptcha),
+      isTokenAutoRefreshEnabled: true,
+    })),
     provideFirestore(() => getFirestore()),
     ReactiveFormsModule,
     RouterModule.forRoot(
