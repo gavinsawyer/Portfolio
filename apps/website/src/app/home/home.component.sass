@@ -49,13 +49,21 @@
       h3
         margin: 0
 
+    a.button
+      text-align: center
+
+      &:hover
+        text-decoration: none
+
     form.message-input,
     div.focus,
-    button
+    button,
+    a.button
       border-radius: 1rem
       padding: 0.75rem
 
-    button
+    button,
+    a.button
       &:hover
         cursor: pointer
 
@@ -63,7 +71,8 @@
         color: inherit
 
     form.message-input textarea,
-    button
+    button,
+    a.button
       color: inherit
       border: 0
 
@@ -83,7 +92,8 @@
       form.message-input,
       div.focus,
       div.focus__indicator,
-      button
+      button,
+      a.button
         background: transparentize(call(get-function($degrade-background-function), $body-background, 10%), 0.5)
 
   @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)

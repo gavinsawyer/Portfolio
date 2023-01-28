@@ -11,13 +11,19 @@
       top: 1rem
       margin: 0 -1rem
       border-radius: 1rem
-      backdrop-filter: saturate(2) blur(50vw)
+      backdrop-filter: saturate(2) blur(30px)
+      transition: top ease 50ms, border-radius ease 50ms
 
       h1
         font-size: 1.5rem
 
       h3
         font-size: 0.8775rem
+
+      @media (max-width: 33rem)
+        top: 0
+        margin: 0 calc(-50vw + 50%)
+        border-radius: 0
 
     router-outlet
       display: none

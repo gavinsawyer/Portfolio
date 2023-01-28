@@ -1,9 +1,12 @@
-import { NgModule }            from "@angular/core";
-import { FlexLayoutModule }    from "@angular/flex-layout";
-import { ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule }       from "@angular/platform-browser";
-import { RouterModule }        from "@angular/router";
-import { AppComponent }        from "./app.component";
+import { NgModule }                          from "@angular/core";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { getFirestore, provideFirestore }    from "@angular/fire/firestore";
+import { FlexLayoutModule }                  from "@angular/flex-layout";
+import { ReactiveFormsModule }               from "@angular/forms";
+import { BrowserModule }                     from "@angular/platform-browser";
+import { RouterModule }                      from "@angular/router";
+import { environment }                       from "../environments/environment";
+import { AppComponent }                      from "./app.component";
 
 
 @NgModule({
@@ -15,6 +18,8 @@ import { AppComponent }        from "./app.component";
       appId: "serverApp",
     }),
     FlexLayoutModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
     ReactiveFormsModule,
     RouterModule.forRoot(
       [
