@@ -2,39 +2,38 @@
   [fxLayout]="(breakpointObservable(52) | async) ? 'column' : 'row'"
   fxLayoutAlign="center"
   fxLayoutGap="1rem">
-  <aside
-    fxHide
-    fxLayout="column">
+  <aside fxLayout="column">
     <div
       class="contact"
       fxLayout="column"
       fxLayoutGap="1rem">
       <form
         class="message-input"
+        fxHide=""
         fxLayout="row"
         fxLayoutAlign="start end"
         fxLayoutGap="1rem"
         [formGroup]="messageForm">
         <textarea placeholder="Send a message" [rows]="(messageInputRows + 1) >= 2 ? (messageInputRows + 1) : 2" fxFlex="" fxLayout="column" #messageInput formControlName="message" (input)="adjustMessageInputRows();"></textarea>
         <button fxLayout="column">
-          <img [src]="'/assets/message.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Send message icon">
+          <img [src]="'/assets/arrow up.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Send message icon">
         </button>
       </form>
       <div
         fxLayout="row"
         fxLayoutGap="1rem">
         <a
-          href="tel:+16177979041"
+          href="sms:+16177979041"
           class="button"
           fxFlex=""
           fxLayout="row"
           fxLayoutAlign="start center"
           fxLayoutGap="0.5rem">
-          <img [src]="'/assets/phone.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Phone icon">
+          <img [src]="'/assets/message.' + (foregroundAppearanceObservable | async) + '.svg'" alt="Phone icon">
           <div
             fxFlex=""
             fxLayout="column">
-            Call
+            Message
           </div>
         </a>
         <a
@@ -58,34 +57,34 @@
         <div
           class="focus"
           fxFlex=""
-          fxLayout="column">
+          fxLayout="row"
+          fxLayoutAlign="start start"
+          fxLayoutGap="0.5rem">
           <div
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            fxLayoutGap="0.5rem">
-            <div
-              class="focus__indicator"
-              fxLayout="column">
-              <img [src]="'/assets/' + (focusObservable | async) + '.' + (foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusObservable | async) + ' focus icon'">
-            </div>
-            <div
-              class="focus__liveBadge"
-              fxLayout="column">
-              <img [src]="'/assets/bolt.horizontal.circle.svg'" alt="Live status">
-            </div>
-            <div
-              fxFlex=""
-              fxLayout="column">
-              <h3>
-                {{ (focusObservable | async) }}
-              </h3>
-            </div>
-            <div fxFlex="50px" fxLayout="column"></div>
+            class="focus__indicator"
+            fxLayout="column">
+            <img [src]="'/assets/' + (focusObservable | async) + '.' + (foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusObservable | async) + ' focus icon'">
+          </div>
+          <div
+            class="focus__liveBadge"
+            fxLayout="column">
+            <img [src]="'/assets/bolt.horizontal.circle.svg'" alt="Live status">
+          </div>
+          <div
+            class="focus__description"
+            fxLayout="column">
+            <h3>
+              {{ (focusObservable | async) }}
+            </h3>
+            <p
+              [ngStyle]="{'max-width': (breakpointObservable(52) | async) ? '100%' : '10rem'}">
+              Gavin {{ (focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <div fxLayout="column" class="image"></div>
+    <div fxHide="" fxLayout="column" class="image"></div>
   </aside>
   <article
     [fxFlex]="(breakpointObservable(52) | async) ? '' : '0 1 29rem'"
