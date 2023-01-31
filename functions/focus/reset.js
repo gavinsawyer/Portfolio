@@ -4,6 +4,9 @@ const firestore = require("firebase-admin/firestore");
 
 exports
   .default = functions
+  .runWith({
+    enforceAppCheck: true,
+  })
   .https
   .onRequest((request, response) => request.body["ShortcutsAPIKey"] === process.env["ShortcutsAPIKey"] ? ((firestore) => ((collectionReference) => ((documentReference) => documentReference.get().then((documentSnapshot) => ((updateData) => documentReference.update(updateData).then(() => ((_response) => ((_promise) => {})(collectionReference.doc(process.env["ShortcutsAPIPublicDocumentID"]).update({
     "focus": documentSnapshot.data()["focusPrior"], // Public document new data

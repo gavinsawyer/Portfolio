@@ -4,6 +4,9 @@ const firestore = require("firebase-admin/firestore");
 
 exports
   .default = functions
+  .runWith({
+    enforceAppCheck: true,
+  })
   .https
   .onRequest((request, response) => request.body["ShortcutsAPIKey"] === process.env["ShortcutsAPIKey"] && typeof request.body["time"] === "string" ? ((firestore) => ((documentReference) => documentReference.get().then((documentSnapshot) => documentSnapshot.data()["time"] === request.body["time"] ? ((_response) => {})(response.json(documentSnapshot.data()).end()) : ((updateData) => documentReference.update(updateData).then(() => ((_response) => {})(response.json({
     ...documentSnapshot.data(),
