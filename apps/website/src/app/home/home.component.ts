@@ -50,22 +50,22 @@ export class HomeComponent implements AfterContentInit, OnDestroy {
   public adjustMessageInputRows: () => void = (): void => this
     .messageInputElement
     ?.nativeElement && ((): void => {
-    this
-      .messageInputElement
-      .nativeElement
-      .style
-      .height = 0;
+      this
+        .messageInputElement
+        .nativeElement
+        .style
+        .height = 0;
 
-    this
-      .messageInputRows = Math
-      .round(this.messageInputElement.nativeElement.scrollHeight / (1.15*16) - 1);
+      this
+        .messageInputRows = Math
+        .round(this.messageInputElement.nativeElement.scrollHeight / (1.15*16) - 1);
 
-    this
-      .messageInputElement
-      .nativeElement
-      .style
-      .height = "auto";
-  })();
+      this
+        .messageInputElement
+        .nativeElement
+        .style
+        .height = "auto";
+    })();
 
   public readonly breakpointObservable: (breakpoint: number) => Observable<boolean> = (breakpoint: number): Observable<boolean> => this
     .breakpointObserver

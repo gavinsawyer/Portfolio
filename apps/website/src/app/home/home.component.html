@@ -1,5 +1,5 @@
 <div
-  [fxLayout]="(breakpointObservable(52) | async) ? 'column' : 'row'"
+  [fxLayout]="(breakpointObservable(48.75) | async) ? 'column' : 'row'"
   fxLayoutAlign="center"
   fxLayoutGap="1rem">
   <aside fxLayout="column">
@@ -77,7 +77,7 @@
               {{ (focusObservable | async) }}
             </h3>
             <p
-              [ngStyle]="{'max-width': (breakpointObservable(52) | async) ? '100%' : '10rem'}">
+              [ngStyle]="{'max-width': (breakpointObservable(48.75) | async) ? '100%' : '10rem'}">
               Gavin {{ (focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
             </p>
           </div>
@@ -87,7 +87,7 @@
     <div fxHide="" fxLayout="column" class="image"></div>
   </aside>
   <article
-    [fxFlex]="(breakpointObservable(52) | async) ? '' : '0 1 29rem'"
+    [fxFlex]="(breakpointObservable(48.75) | async) ? '' : '0 1 29rem'"
     fxLayout="column">
     <section fxLayout="column">
       <div>
@@ -203,6 +203,9 @@
         </h1>
         <p>
           Gavin has over six years of experience self-teaching software engineering.
+        </p>
+        <p>
+          <a href="https://github.com/gavinsawyer/Portfolio" target="_blank">See the source code for this site on GitHub</a>
         </p>
         <h3 style="margin-bottom: 0;">
           HTML, CSS, JavaScript
