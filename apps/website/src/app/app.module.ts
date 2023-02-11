@@ -1,9 +1,9 @@
 import { NgModule }                                                           from "@angular/core";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                     from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from "@angular/fire/app-check";
-import { getFirestore, provideFirestore } from "@angular/fire/firestore";
-import { getFunctions, provideFunctions } from "@angular/fire/functions";
-import { FlexLayoutModule }               from "@angular/flex-layout";
+import { getFirestore, provideFirestore }                                     from "@angular/fire/firestore";
+import { getFunctions, provideFunctions }                                     from "@angular/fire/functions";
+import { FlexLayoutModule }                                                   from "@angular/flex-layout";
 import { ReactiveFormsModule }                                                from "@angular/forms";
 import { BrowserModule }                                                      from "@angular/platform-browser";
 import { RouterModule }                                                       from "@angular/router";

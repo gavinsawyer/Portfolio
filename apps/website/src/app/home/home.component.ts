@@ -1,9 +1,9 @@
-import { BreakpointObserver, BreakpointState }                                                                               from "@angular/cdk/layout";
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { doc, DocumentSnapshot, Firestore, onSnapshot }                                                                      from "@angular/fire/firestore";
-import { FormBuilder, FormGroup }                                                                                            from "@angular/forms";
-import { map, Observable }                                                                                                   from "rxjs";
-import { AuthenticationService }                                                                                             from "../authentication.service";
+import { BreakpointObserver, BreakpointState }                                                                       from "@angular/cdk/layout";
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild } from "@angular/core";
+import { doc, DocumentSnapshot, Firestore, onSnapshot }                                                              from "@angular/fire/firestore";
+import { FormBuilder, FormGroup }                                                                                    from "@angular/forms";
+import { map, Observable }                                                                                           from "rxjs";
+import { AuthenticationService }                                                                                     from "../authentication.service";
 
 
 @Component({
@@ -12,7 +12,7 @@ import { AuthenticationService }                                                
   styleUrls: ['./home.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
+export class HomeComponent implements AfterContentInit, OnDestroy {
 
   private readonly unsubscribeShortcutsAPIPublicDocumentOnSnapshot;
 
@@ -88,6 +88,23 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
       .pipe(
         map((breakpointState: BreakpointState): "light" | "dark" => breakpointState.matches ? "dark" : "light")
       );
+
+    this
+      .ngAfterContentInit = (): void => {
+        this
+          .messageInputRows = Math
+          .round(this.messageInputElement?.nativeElement.scrollHeight / (1.15*16) - 1);
+
+        this
+          .messageInputElement
+          ?.nativeElement
+          .focus();
+      };
+    this
+      .ngOnDestroy = (): void => {
+        this
+          .unsubscribeShortcutsAPIPublicDocumentOnSnapshot();
+      };
   };
 
   public focus: string;
@@ -102,25 +119,6 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   public readonly backgroundAppearanceObservable: Observable<"light" | "dark">;
   public readonly foregroundAppearanceObservable: Observable<"dark" | "light">;
 
-  ngOnInit(): void {
-    this
-      .authenticationService
-      .register();
-  }
-
-  ngAfterContentInit(): void {
-    this
-      .messageInputRows = Math
-      .round(this.messageInputElement?.nativeElement.scrollHeight / (1.15*16) - 1);
-
-    this
-      .messageInputElement
-      ?.nativeElement
-      .focus();
-  }
-
-  ngOnDestroy(): void {
-    this
-      .unsubscribeShortcutsAPIPublicDocumentOnSnapshot();
-  }
+  ngAfterContentInit: () => void;
+  ngOnDestroy: () => void;
 }

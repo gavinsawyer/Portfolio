@@ -1,4 +1,4 @@
-import { Injectable }                      from "@angular/core";
+import { Injectable }                                           from "@angular/core";
 import { Functions, httpsCallableFromURL, HttpsCallableResult } from "@angular/fire/functions";
 
 
@@ -17,17 +17,17 @@ export class AuthenticationService {
             navigator
               .credentials
               .create({
-                "publicKey": {
+                publicKey: {
                   ...httpsCallableResult.data,
-                  "user": {
-                    "displayName": "Gavin Sawyer",
-                    "id": new TextEncoder().encode("_"),
-                    "name": "gavinsawyer",
+                  user: {
+                    displayName: "Gavin Sawyer",
+                    id: new TextEncoder().encode("_"),
+                    name: "gavinsawyer",
                   },
                   challenge: ((challenge: any): BufferSource => new TextEncoder().encode(challenge))(httpsCallableResult.data.challenge),
                 },
               })
-              .then((credential: Credential | null) => console.log(credential))
+              .then((credential: Credential | null): void => console.log(credential))
               .catch((reason: any): void => console.error(reason));
           })
           .catch((reason: any): void => console.error(reason));
