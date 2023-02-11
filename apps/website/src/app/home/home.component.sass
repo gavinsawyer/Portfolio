@@ -35,6 +35,20 @@
         border-radius: 50%
         padding: 0.75rem 0.84125rem
 
+    button,
+    a.button
+      &:hover
+        cursor: pointer
+
+      > div a
+        color: inherit
+
+    a.button
+      text-align: center
+
+      &:hover
+        text-decoration: none
+
     div.focus
       &__indicator
         border-radius: 50%
@@ -54,32 +68,23 @@
           font-size: 0.85rem
           margin-bottom: 0
 
-    a.button
-      text-align: center
-
-      &:hover
-        text-decoration: none
-
-    form.message-input,
-    div.focus,
-    button,
-    a.button
-      border-radius: 1rem
-      padding: 0.75rem
-
-    button,
-    a.button
-      &:hover
-        cursor: pointer
-
-      > div a
-        color: inherit
-
     form.message-input textarea,
     button,
     a.button
       color: inherit
       border: 0
+
+    button,
+    a.button,
+    div.focus
+      user-select: none
+
+    form.message-input,
+    button,
+    a.button,
+    div.focus
+      border-radius: 1rem
+      padding: 0.75rem
 
   article section div div
     margin: 1rem 0

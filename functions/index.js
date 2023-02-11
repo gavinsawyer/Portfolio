@@ -5,23 +5,36 @@ app
   .initializeApp();
 
 exports
-  .getAll = require("./all/get")
+  .authAssertionOptions = require("./authentication/assertionOptions")
+  .default;
+exports
+  .authAssertionResult = require("./authentication/assertionResult")
+  .default;
+exports
+  .authAttestationOptions = require("./authentication/attestationOptions")
+  .default;
+exports
+  .authAttestationResult = require("./authentication/attestationResult")
   .default;
 
 exports
-  .resetFocus = require("./focus/reset")
-  .default;
-exports
-  .setFocus = require("./focus/set")
+  .getAll = require("./shortcuts/all/get")
   .default;
 
 exports
-  .setLocation = require("./location/set")
+  .resetFocus = require("./shortcuts/focus/reset")
   .default;
 exports
-  .toggleLocation = require("./location/toggle")
+  .setFocus = require("./shortcuts/focus/set")
   .default;
 
 exports
-  .setTime = require("./time/set")
+  .setLocation = require("./shortcuts/location/set")
+  .default;
+exports
+  .toggleLocation = require("./shortcuts/location/toggle")
+  .default;
+
+exports
+  .setTime = require("./shortcuts/time/set")
   .default;

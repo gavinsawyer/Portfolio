@@ -35,7 +35,7 @@ import { AppComponent }                                                       fr
       ],
       {
         initialNavigation: "enabledBlocking",
-      }
+      },
     ),
   ],
   providers: [],
