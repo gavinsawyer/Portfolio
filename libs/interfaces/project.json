@@ -1,0 +1,17 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/interfaces/src",
+  "prefix": "portfolio",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/interfaces/**/*.ts",
+          "libs/interfaces/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

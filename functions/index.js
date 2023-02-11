@@ -5,19 +5,6 @@ app
   .initializeApp();
 
 exports
-  .authAssertionOptions = require("./authentication/assertionOptions")
-  .default;
-exports
-  .authAssertionResult = require("./authentication/assertionResult")
-  .default;
-exports
-  .authAttestationOptions = require("./authentication/attestationOptions")
-  .default;
-exports
-  .authAttestationResult = require("./authentication/attestationResult")
-  .default;
-
-exports
   .getAll = require("./shortcuts/all/get")
   .default;
 
