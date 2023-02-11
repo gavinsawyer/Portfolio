@@ -11,7 +11,9 @@ exports
   .onRequest((request, response) => ((fido2Lib) => fido2Lib
     .attestationResult()
     .then((fido2AttestationResult) => response
-      .json(fido2AttestationResult)
+      .json({
+        "data": fido2AttestationResult,
+      })
       .end())
     .catch(() => response
       .status(500)

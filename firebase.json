@@ -28,6 +28,22 @@
       ],
       "rewrites": [
         {
+          "source": "/auth/assertionOptions",
+          "function": "authAssertionOptions"
+        },
+        {
+          "source": "/auth/assertionResult",
+          "function": "authAssertionResult"
+        },
+        {
+          "source": "/auth/attestationOptions",
+          "function": "authAttestationOptions"
+        },
+        {
+          "source": "/auth/attestationResult",
+          "function": "authAttestationResult"
+        },
+        {
           "source": "**",
           "run": {
             "serviceId": "ssr-website"

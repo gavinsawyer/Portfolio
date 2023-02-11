@@ -11,7 +11,9 @@ exports
   .onRequest((request, response) => ((fido2Lib) => fido2Lib
     .assertionOptions()
     .then((publicKeyCredentialRequestOptions) => response
-      .json(publicKeyCredentialRequestOptions)
+      .json({
+        "data": publicKeyCredentialRequestOptions,
+      })
       .end())
     .catch(() => response
       .status(500)
