@@ -3,6 +3,8 @@ import { Injectable }                          from "@angular/core";
 import { map, Observable }                     from "rxjs";
 
 
+type Appearance = "light" | "dark"
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,21 +16,21 @@ export class ResponsivityService {
     this
       .backgroundAppearanceObservable = BreakpointObserver
       .observe("(prefers-color-scheme: light)")
-      .pipe(
-        map((breakpointState: BreakpointState): "light" | "dark" => breakpointState.matches ? "light" : "dark")
+      .pipe<Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "light" : "dark")
       );
     this
       .foregroundAppearanceObservable = BreakpointObserver
       .observe("(prefers-color-scheme: light)")
-      .pipe(
-        map((breakpointState: BreakpointState): "light" | "dark" => breakpointState.matches ? "dark" : "light")
+      .pipe<Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "dark" : "light")
       );
 
     this
       .getBreakpointObservable = (breakpoint: number): Observable<boolean> => BreakpointObserver
       .observe("(max-width: " + breakpoint + "rem)")
-      .pipe(
-        map((breakpointState: BreakpointState): boolean => breakpointState.matches)
+      .pipe<boolean>(
+        map<BreakpointState, boolean>((breakpointState: BreakpointState): boolean => breakpointState.matches)
       );
 
     this
@@ -43,7 +45,8 @@ export class ResponsivityService {
           .height = "0";
 
         textAreaElement
-          .rows = Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
+          .rows = this
+          .getTextAreaRows(textAreaElement, options);
 
         textAreaElement
           .style
@@ -58,8 +61,8 @@ export class ResponsivityService {
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
   }
 
-  public readonly backgroundAppearanceObservable: Observable<"light" | "dark">;
-  public readonly foregroundAppearanceObservable: Observable<"dark" | "light">;
+  public readonly backgroundAppearanceObservable: Observable<Appearance>;
+  public readonly foregroundAppearanceObservable: Observable<Appearance>;
 
   public readonly getBreakpointObservable: (breakpoint: number) => Observable<boolean>;
 

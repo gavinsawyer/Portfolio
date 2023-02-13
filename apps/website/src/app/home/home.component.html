@@ -81,11 +81,11 @@
         fxLayout="row"
         fxLayoutAlign="start start"
         fxLayoutGap="0.5rem"
-        *ngIf="(focusObservable | async)">
+        *ngIf="(FocusService.focusObservable | async)">
         <div
           class="focus__indicator"
           fxLayout="column">
-          <img [src]="'/assets/' + (focusObservable | async) + '.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusObservable | async) + ' focus icon'">
+          <img [src]="'/assets/' + (FocusService.focusObservable | async) + '.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(FocusService.focusObservable | async) + ' focus icon'">
         </div>
         <div
           class="focus__liveBadge"
@@ -96,11 +96,11 @@
           class="focus__description"
           fxLayout="column">
           <h3>
-            {{ (focusObservable | async) }}
+            {{ (FocusService.focusObservable | async) }}
           </h3>
           <p
             [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(48.75) | async) ? '100%' : '10rem'}">
-            Gavin {{ (focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
+            Gavin {{ (FocusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
           </p>
         </div>
       </div>
