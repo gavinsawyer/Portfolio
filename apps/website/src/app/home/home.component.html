@@ -14,9 +14,11 @@
         fxLayoutAlign="start end"
         fxLayoutGap="1rem"
         [formGroup]="messageForm">
-        <textarea placeholder="Send a message" [rows]="ResponsivityService.getTextAreaRows(message, { min: 2 })" fxFlex="" fxLayout="column" formControlName="message" #message (input)="ResponsivityService.adjustTextAreaRows(message, { min: 2 });"></textarea>
-        <button fxLayout="column">
-          <img [src]="'/assets/arrow up.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" alt="Send message icon">
+        <textarea placeholder="Send a message" [rows]="ResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" fxFlex="" fxLayout="column" formControlName="message" #messageHTMLTextAreaElement (input)="ResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
+        <button
+          fxLayout="column"
+          [ngClass]="{'raised': messageForm.value['message'] !== ''}">
+          <img [src]="'/assets/arrow up.' + ((messageForm.value['message'] == '') ? (ResponsivityService.foregroundAppearanceObservable | async) : 'dark') + '.svg'" alt="Send message icon">
         </button>
       </form>
       <div
@@ -77,26 +79,26 @@
         fxLayout="row"
         fxLayoutAlign="start start"
         fxLayoutGap="0.5rem"
-        *ngIf="focus">
+        *ngIf="(focusObservable | async)">
         <div
           class="focus__indicator"
           fxLayout="column">
-          <img [src]="'/assets/' + focus + '.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="focus + ' focus icon'">
+          <img [src]="'/assets/' + (focusObservable | async) + '.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusObservable | async) + ' focus icon'">
         </div>
         <div
           class="focus__liveBadge"
           fxLayout="column">
-          <img [src]="'/assets/bolt horizontal circle.svg'" alt="Live status">
+          <img [src]="'/assets/bolt circle.svg'" alt="Live status">
         </div>
         <div
           class="focus__description"
           fxLayout="column">
           <h3>
-            {{ focus }}
+            {{ (focusObservable | async) }}
           </h3>
           <p
             [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(48.75) | async) ? '100%' : '10rem'}">
-            Gavin {{ focus == "Personal" ? "will" : "won't"  }} see your message right away.
+            Gavin {{ (focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
           </p>
         </div>
       </div>

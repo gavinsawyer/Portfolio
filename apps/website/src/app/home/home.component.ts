@@ -1,8 +1,9 @@
-import { AfterContentInit, Component, ElementRef, OnDestroy, ViewChild }   from "@angular/core";
-import { doc, DocumentReference, DocumentSnapshot, Firestore, onSnapshot } from "@angular/fire/firestore";
-import { FormBuilder, FormGroup }                                          from "@angular/forms";
-import { ShortcutsAPIPublicDocument }                                      from "@portfolio/interfaces";
-import { ResponsivityService }                                             from "@portfolio/services";
+import { Component, OnDestroy }                                                         from "@angular/core";
+import { doc, DocumentReference, DocumentSnapshot, Firestore, onSnapshot, Unsubscribe } from "@angular/fire/firestore";
+import { FormBuilder, FormGroup }                                                       from "@angular/forms";
+import { ShortcutsAPIPublicDocument }                                                   from "@portfolio/interfaces";
+import { ResponsivityService }                                                          from "@portfolio/services";
+import { BehaviorSubject, Observable }                                                  from "rxjs";
 
 
 @Component({
@@ -10,9 +11,7 @@ import { ResponsivityService }                                             from 
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })
-export class HomeComponent implements AfterContentInit, OnDestroy {
-
-  private readonly unsubscribeShortcutsAPIPublicDocumentOnSnapshot;
+export class HomeComponent implements OnDestroy {
 
   constructor(
     Firestore: Firestore,
@@ -20,45 +19,32 @@ export class HomeComponent implements AfterContentInit, OnDestroy {
     ResponsivityService: ResponsivityService,
   ) {
     this
-      .ResponsivityService = ResponsivityService;
+      .focusSubject = new BehaviorSubject("");
+    this
+      .unsubscribeShortcutsAPIPublicDocumentOnSnapshot = onSnapshot<ShortcutsAPIPublicDocument>(doc(Firestore, "_/ZdrDhz5fPVSfBjOnAqwi") as DocumentReference<ShortcutsAPIPublicDocument>, (documentSnapshot: DocumentSnapshot<ShortcutsAPIPublicDocument>): void => ((shortcutsAPIPublicDocument?: ShortcutsAPIPublicDocument): void => this.focusSubject.next(shortcutsAPIPublicDocument ? shortcutsAPIPublicDocument.focus : ""))(documentSnapshot.data()));
 
     this
-      .focus = "";
-    this
-      .unsubscribeShortcutsAPIPublicDocumentOnSnapshot = onSnapshot<ShortcutsAPIPublicDocument>(doc(Firestore, "_/ZdrDhz5fPVSfBjOnAqwi") as DocumentReference<ShortcutsAPIPublicDocument>, (documentSnapshot: DocumentSnapshot<ShortcutsAPIPublicDocument>): void => ((shortcutsAPIPublicDocument?: ShortcutsAPIPublicDocument): void => {
-        this
-          .focus = shortcutsAPIPublicDocument ? shortcutsAPIPublicDocument.focus : "";
-      })(documentSnapshot.data()));
-
+      .focusObservable = this
+      .focusSubject
+      .asObservable();
     this
       .messageForm = FormBuilder
       .group({
         message: [""],
       });
-
     this
-      .ngAfterContentInit = (): void => {
-        this
-          .messageTextAreaElementRef
-          .nativeElement
-          .focus();
-      };
-    this
-      .ngOnDestroy = (): void => {
-        this
-          .unsubscribeShortcutsAPIPublicDocumentOnSnapshot();
-      };
+      .ResponsivityService = ResponsivityService;
   };
 
-  @ViewChild("messageTextAreaElement")
-  public readonly messageTextAreaElementRef!: ElementRef;
+  private readonly focusSubject: BehaviorSubject<string>;
+  private readonly unsubscribeShortcutsAPIPublicDocumentOnSnapshot: Unsubscribe;
 
-  public ResponsivityService: ResponsivityService;
-
-  public focus: string;
-
+  public readonly focusObservable: Observable<string>;
   public readonly messageForm: FormGroup;
+  public readonly ResponsivityService: ResponsivityService;
 
-  ngAfterContentInit: () => void;
-  ngOnDestroy: () => void;
+  ngOnDestroy(): void {
+    this
+      .unsubscribeShortcutsAPIPublicDocumentOnSnapshot();
+  };
 }
