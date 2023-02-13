@@ -31,7 +31,12 @@ export class HomeComponent implements OnDestroy {
       .messageForm = FormBuilder
       .group({
         message: [""],
-      });
+      })
+    this
+      .submitMessageForm = (): void => {
+        console
+          .log(this.messageForm.value);
+      };
     this
       .ResponsivityService = ResponsivityService;
   };
@@ -41,6 +46,7 @@ export class HomeComponent implements OnDestroy {
 
   public readonly focusObservable: Observable<string>;
   public readonly messageForm: FormGroup;
+  public readonly submitMessageForm: () => void;
   public readonly ResponsivityService: ResponsivityService;
 
   ngOnDestroy(): void {

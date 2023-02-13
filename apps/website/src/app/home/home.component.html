@@ -8,14 +8,16 @@
       fxLayout="column"
       fxLayoutGap="1rem">
       <form
-        class="message-input"
+        class="message-form"
         fxHide=""
         fxLayout="row"
         fxLayoutAlign="start end"
         fxLayoutGap="1rem"
-        [formGroup]="messageForm">
+        [formGroup]="messageForm"
+        (ngSubmit)="submitMessageForm();">
         <textarea placeholder="Send a message" [rows]="ResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" fxFlex="" fxLayout="column" formControlName="message" #messageHTMLTextAreaElement (input)="ResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
         <button
+          type="submit"
           fxLayout="column"
           [ngClass]="{'raised': messageForm.value['message'] !== ''}">
           <img [src]="'/assets/arrow up.' + ((messageForm.value['message'] == '') ? (ResponsivityService.foregroundAppearanceObservable | async) : 'dark') + '.svg'" alt="Send message icon">
