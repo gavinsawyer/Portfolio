@@ -18,7 +18,9 @@ export class HomeComponent {
     this
       .messageForm = FormBuilder
       .group({
+        name: [""],
         message: [""],
+        phone: [""],
       });
 
     this

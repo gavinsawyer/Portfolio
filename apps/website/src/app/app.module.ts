@@ -7,6 +7,7 @@ import { FlexLayoutModule }                                                   fr
 import { ReactiveFormsModule }                                                from "@angular/forms";
 import { BrowserModule }                                                      from "@angular/platform-browser";
 import { RouterModule }                                                       from "@angular/router";
+import { NgxMaskModule }                                                      from "ngx-mask";
 import { environment }                                                        from "../environments/environment";
 import { AppComponent }                                                       from "./app.component";
 
@@ -39,6 +40,7 @@ import { AppComponent }                                                       fr
         initialNavigation: "enabledBlocking",
       },
     ),
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [

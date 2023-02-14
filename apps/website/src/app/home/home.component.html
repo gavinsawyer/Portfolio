@@ -15,12 +15,19 @@
         fxLayoutGap="1rem"
         [formGroup]="messageForm"
         (ngSubmit)="submitMessageForm();">
-        <textarea placeholder="Send a message" [rows]="ResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" fxFlex="" fxLayout="column" formControlName="message" #messageHTMLTextAreaElement (input)="ResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
+        <div
+          fxFlex=""
+          fxLayout="column"
+          fxLayoutGap="0.5rem">
+          <input type="text" placeholder="Name" formControlName="name" [required]="true">
+          <textarea placeholder="Message" [rows]="ResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" formControlName="message" [required]="true" #messageHTMLTextAreaElement (input)="ResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
+          <input type="tel" placeholder="Phone number" formControlName="phone" [required]="true" [validation]="true" mask="(000) 000-0000">
+        </div>
         <button
           type="submit"
           fxLayout="column"
-          [ngClass]="{'raised': messageForm.value['message'] !== ''}">
-          <img [src]="'/assets/arrow up.' + ((messageForm.value['message'] == '') ? (ResponsivityService.foregroundAppearanceObservable | async) : 'dark') + '.svg'" alt="Send message icon">
+          [ngClass]="{'raised': messageForm.valid}">
+          <img [src]="'/assets/arrow up.' + (messageForm.valid ? (ResponsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (ResponsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
         </button>
       </form>
       <div
@@ -99,7 +106,7 @@
             {{ (FocusService.focusObservable | async) }}
           </h3>
           <p
-            [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(48.75) | async) ? '100%' : '10rem'}">
+            [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(48.75) | async) ? '100%' : '12rem'}">
             Gavin {{ (FocusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
           </p>
         </div>

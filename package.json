@@ -50,6 +50,7 @@
     "@nguniversal/express-engine": "~14.2.0",
     "base64url": "^3.0.1",
     "fido2-lib": "^3.3.5",
+    "ngx-mask": "^14.2.4",
     "normalize.css": "^8.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

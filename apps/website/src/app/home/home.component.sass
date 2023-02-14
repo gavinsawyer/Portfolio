@@ -4,32 +4,23 @@
   display: flex
   flex-direction: column
 
-  div.image::after
-    width: 100%
-    content: ''
-    //noinspection CssUnknownTarget
-    background-image: url("/assets/photo.jpeg")
-    background-position: center
-    background-size: cover
-    background-repeat: no-repeat
-    margin: 1rem 0
-    border-radius: 2.543875rem
-    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.14) 0 2px 2px 0px, rgba(0, 0, 0, 0.12) 0 1px 5px 0px
-    padding-bottom: 133.3333%
-    overflow: hidden
-
   aside div.contact
     margin: 1rem 0
 
     form.message-form
+      padding: 0.75rem 0.75rem 0.75rem calc(0.75rem + 0.84125rem)
+
+      input,
       textarea
-        resize: none
-        overflow: hidden
         background: transparent
         padding: 0 0 2.75px
 
         &:focus
           outline: none
+
+      textarea
+        resize: none
+        overflow: hidden
 
       button
         border-radius: 50%
@@ -41,21 +32,20 @@
           background: $primary
           cursor: pointer
 
-    button,
     a.button
+      text-align: center
+      padding: 0.75rem calc(0.75rem + 0.84125rem)
+
       &:hover
         cursor: pointer
+        text-decoration: none
 
       > div a
         color: inherit
 
-    a.button
-      text-align: center
-
-      &:hover
-        text-decoration: none
-
     div.focus
+      padding: 0.75rem calc(0.75rem + 0.84125rem) 0.75rem 0.75rem
+
       &__indicator
         border-radius: 50%
         padding: 0.75rem 0.84125rem
@@ -74,23 +64,42 @@
           font-size: 0.85rem
           margin-bottom: 0
 
+    form.message-form input,
     form.message-form textarea,
-    button,
+    form.message-form button,
     a.button
       color: inherit
       border: 0
 
-    button,
+    form.message-form,
+    a.button,
+    div.focus
+      border-radius: calc(1.5rem + (14.28125px / 2))
+
     a.button,
     div.focus
       user-select: none
 
+    div.image::after
+      width: 100%
+      content: ''
+      //noinspection CssUnknownTarget
+      background-image: url("/assets/photo.jpeg")
+      background-position: center
+      background-size: cover
+      background-repeat: no-repeat
+      margin: 1rem 0
+      border-radius: 2.543875rem
+      padding-bottom: 133.3333%
+      overflow: hidden
+
     form.message-form,
-    button,
+    form.message-form button.raised,
     a.button,
-    div.focus
-      border-radius: 1rem
-      padding: 0.75rem
+    div.focus,
+    div.image::after
+      box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
+
 
   article section div div
     margin: 1rem 0
