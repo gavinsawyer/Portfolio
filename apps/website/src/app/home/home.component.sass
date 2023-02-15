@@ -8,10 +8,11 @@
     margin: 1rem 0
 
     form.message-form
-      padding: 0.75rem 0.75rem 0.75rem calc(0.75rem + 0.84125rem)
+      padding: 0.75rem 0.75rem 0.75rem 1.5rem
 
       input,
       textarea
+        width: 100%
         background: transparent
         padding: 0 0 2.75px
 
@@ -28,13 +29,13 @@
         transition: all ease 200ms
         cursor: default
 
-        &.raised
+        &:not([disabled])
           background: $primary
           cursor: pointer
 
     a.button
       text-align: center
-      padding: 0.75rem calc(0.75rem + 0.84125rem)
+      padding: 1.25rem 1.5rem
 
       &:hover
         cursor: pointer
@@ -44,7 +45,7 @@
         color: inherit
 
     div.focus
-      padding: 0.75rem calc(0.75rem + 0.84125rem) 0.75rem 0.75rem
+      padding: 0.75rem 1.5rem 0.75rem 0.75rem
 
       &__indicator
         border-radius: 50%
@@ -94,7 +95,7 @@
       overflow: hidden
 
     form.message-form,
-    form.message-form button.raised,
+    form.message-form button:not([disabled]),
     a.button,
     div.focus,
     div.image::after

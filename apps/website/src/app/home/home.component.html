@@ -1,5 +1,5 @@
 <div
-  [fxLayout]="(ResponsivityService.getBreakpointObservable(48.75) | async) ? 'column' : 'row'"
+  [fxLayout]="(ResponsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? 'column' : 'row'"
   fxLayoutAlign="center"
   fxLayoutGap="1rem">
   <aside fxLayout="column">
@@ -12,21 +12,44 @@
         fxHide=""
         fxLayout="row"
         fxLayoutAlign="start end"
-        fxLayoutGap="1rem"
+        fxLayoutGap="0.5rem"
         [formGroup]="messageForm"
         (ngSubmit)="submitMessageForm();">
         <div
           fxFlex=""
           fxLayout="column"
           fxLayoutGap="0.5rem">
-          <input type="text" placeholder="Name" formControlName="name" [required]="true">
-          <textarea placeholder="Message" [rows]="ResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" formControlName="message" [required]="true" #messageHTMLTextAreaElement (input)="ResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
-          <input type="tel" placeholder="Phone number" formControlName="phone" [required]="true" [validation]="true" mask="(000) 000-0000">
+          <div>
+            <h3 style="margin: 0.5rem 0 0;">
+              Get in touch now
+            </h3>
+          </div>
+          <div>
+            <h5 style="margin: 0.5rem 0 0;">
+              Name:
+            </h5>
+          </div>
+          <input type="text" formControlName="name" #nameHTMLInputElement [required]="true">
+          <div>
+            <h5 style="margin: 0.5rem 0 0;">
+              Message:
+            </h5>
+          </div>
+          <textarea [rows]="ResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" formControlName="message" [required]="true" #messageHTMLTextAreaElement (input)="ResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
+          <div>
+            <h5 style="margin: 0.5rem 0 0;">
+              Enter one or both:
+            </h5>
+          </div>
+          <input type="tel" placeholder="Phone number" formControlName="phone" [required]="messageForm.value['email'] == ''" [validation]="true" mask="(000) 000-0000">
+          <input type="email" placeholder="Email" formControlName="email" [required]="messageForm.value['phone'] == ''" [email]="true">
+          <div></div>
         </div>
         <button
           type="submit"
           fxLayout="column"
-          [ngClass]="{'raised': messageForm.valid}">
+          disabled=""
+          [disabled]="!messageForm.valid">
           <img [src]="'/assets/arrow up.' + (messageForm.valid ? (ResponsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (ResponsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
         </button>
       </form>
@@ -106,16 +129,16 @@
             {{ (FocusService.focusObservable | async) }}
           </h3>
           <p
-            [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(48.75) | async) ? '100%' : '12rem'}">
+            [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? '100%' : '12rem'}">
             Gavin {{ (FocusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
           </p>
         </div>
       </div>
     </div>
-    <div fxHide="" fxLayout="column" class="image"></div>
+    <div class="image" fxHide="" fxLayout="column"></div>
   </aside>
   <article
-    [fxFlex]="(ResponsivityService.getBreakpointObservable(48.75) | async) ? '' : '0 1 29rem'"
+    [fxFlex]="(ResponsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? '' : '0 1 29rem'"
     fxLayout="column">
     <section fxLayout="column">
       <div>
