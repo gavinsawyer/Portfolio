@@ -6,7 +6,8 @@
     fxLayoutAlign="start stretch">
     <header
       fxLayout="row"
-      fxLayoutAlign="center">
+      fxLayoutAlign="center"
+      [ngClass]="{'raised': ((ResponsivityService.scrollPositionObservable | async) || 0) > 16}">
       <div fxLayout="column">
         <h1 style="margin-bottom: 0; text-align: center;">
           Gavin Sawyer

@@ -10,11 +10,6 @@ import { FocusService, ResponsivityService }               from "@portfolio/serv
 })
 export class HomeComponent implements AfterViewInit {
 
-  @ViewChild("nameHTMLInputElement", {
-    read: ElementRef
-  })
-  private readonly nameElementRef!: ElementRef<HTMLInputElement>;
-
   constructor(
     FormBuilder: FormBuilder,
     FocusService: FocusService,
@@ -39,6 +34,11 @@ export class HomeComponent implements AfterViewInit {
         console.log(this.messageForm.value)
       };
   };
+
+  @ViewChild("nameHTMLInputElement", {
+    read: ElementRef
+  })
+  private readonly nameElementRef!: ElementRef<HTMLInputElement>;
 
   public readonly FocusService: FocusService;
   public readonly messageForm: FormGroup;

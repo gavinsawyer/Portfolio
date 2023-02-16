@@ -21,7 +21,7 @@
           fxLayoutGap="0.5rem">
           <div>
             <h3 style="margin: 0.5rem 0 0;">
-              Get in touch now
+              Want to connect?
             </h3>
           </div>
           <div>
@@ -105,35 +105,7 @@
           <div fxLayout="column" fxFlex="1.15rem"></div>
         </a>
       </div>
-      <div
-        class="focus"
-        fxFlex=""
-        fxLayout="row"
-        fxLayoutAlign="start start"
-        fxLayoutGap="0.5rem"
-        *ngIf="(FocusService.focusObservable | async)">
-        <div
-          class="focus__indicator"
-          fxLayout="column">
-          <img [src]="'/assets/' + (FocusService.focusObservable | async) + '.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(FocusService.focusObservable | async) + ' focus icon'">
-        </div>
-        <div
-          class="focus__liveBadge"
-          fxLayout="column">
-          <img [src]="'/assets/bolt circle.svg'" alt="Live status">
-        </div>
-        <div
-          class="focus__description"
-          fxLayout="column">
-          <h3>
-            {{ (FocusService.focusObservable | async) }}
-          </h3>
-          <p
-            [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? '100%' : '12rem'}">
-            Gavin {{ (FocusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
-          </p>
-        </div>
-      </div>
+      <portfolio-focus *ngIf="(FocusService.focusObservable | async)"></portfolio-focus>
     </div>
     <div class="image" fxHide="" fxLayout="column"></div>
   </aside>

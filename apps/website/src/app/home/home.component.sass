@@ -4,82 +4,64 @@
   display: flex
   flex-direction: column
 
-  aside div.contact
-    margin: 1rem 0
+  aside
+    div.contact
+      margin: 1rem 0
 
-    form.message-form
-      padding: 0.75rem 0.75rem 0.75rem 1.5rem
+      form.message-form
+        padding: 0.75rem 0.75rem 0.75rem 1.5rem
 
-      input,
-      textarea
-        width: 100%
-        background: transparent
-        padding: 0 0 2.75px
+        input,
+        textarea
+          width: 100%
+          background: transparent
+          padding: 0 0 2.75px
 
-        &:focus
-          outline: none
+          &:focus
+            outline: none
 
-      textarea
-        resize: none
-        overflow: hidden
+        textarea
+          resize: none
+          overflow: hidden
 
-      button
-        border-radius: 50%
-        padding: 0.75rem 0.84125rem
-        transition: all ease 200ms
-        cursor: default
+        button
+          border-radius: 50%
+          padding: 0.75rem 0.84125rem
+          transition: all ease 200ms
+          cursor: default
 
-        &:not([disabled])
-          background: $primary
+          &:not([disabled])
+            background: $primary
+            cursor: pointer
+
+      a.button
+        padding: 1.25rem 1.5rem
+        text-align: center
+        user-select: none
+
+        &:hover
           cursor: pointer
+          text-decoration: none
 
-    a.button
-      text-align: center
-      padding: 1.25rem 1.5rem
+        > div a
+          color: inherit
 
-      &:hover
-        cursor: pointer
-        text-decoration: none
-
-      > div a
+      form.message-form input,
+      form.message-form textarea,
+      form.message-form button,
+      a.button
         color: inherit
+        border: 0
 
-    div.focus
-      padding: 0.75rem 1.5rem 0.75rem 0.75rem
+      form.message-form,
+      a.button
+        border-radius: calc(1.5rem + (14.28125px / 2))
 
-      &__indicator
-        border-radius: 50%
-        padding: 0.75rem 0.84125rem
-
-      &__liveBadge
-        height: 38.289px
-        margin-left: -1.25rem
-
-      &__description
-        padding: 0.5rem 0
-
-        h3
-          margin: 0
-
-        p
-          font-size: 0.85rem
-          margin-bottom: 0
-
-    form.message-form input,
-    form.message-form textarea,
-    form.message-form button,
-    a.button
-      color: inherit
-      border: 0
-
-    form.message-form,
-    a.button,
-    div.focus
-      border-radius: calc(1.5rem + (14.28125px / 2))
-
-    a.button,
-    div.focus
-      user-select: none
+      form.message-form,
+      form.message-form button:not([disabled]),
+      a.button,
+      div.image::after
+        box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
 
     div.image::after
       width: 100%
@@ -93,14 +75,6 @@
       border-radius: 2.543875rem
       padding-bottom: 133.3333%
       overflow: hidden
-
-    form.message-form,
-    form.message-form button:not([disabled]),
-    a.button,
-    div.focus,
-    div.image::after
-      box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
-
 
   article section div div
     margin: 1rem 0

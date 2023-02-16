@@ -1,0 +1,21 @@
+<div
+  class="indicator"
+  fxLayout="column">
+  <img [src]="'/assets/' + (FocusService.focusObservable | async) + '.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(FocusService.focusObservable | async) + ' focus icon'">
+</div>
+<div
+  class="liveBadge"
+  fxLayout="column">
+  <img [src]="'/assets/bolt circle.svg'" alt="Live status">
+</div>
+<div
+  class="description"
+  fxLayout="column">
+  <h3>
+    {{ (FocusService.focusObservable | async) }}
+  </h3>
+  <p
+    [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? '100%' : '12rem'}">
+    Gavin {{ (FocusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
+  </p>
+</div>

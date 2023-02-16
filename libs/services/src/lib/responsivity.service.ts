@@ -1,6 +1,6 @@
 import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
-import { Injectable }                          from "@angular/core";
-import { map, Observable }                     from "rxjs";
+import { Injectable }                 from "@angular/core";
+import { fromEvent, map, Observable } from "rxjs";
 
 
 type Appearance = "light" | "dark"
@@ -13,6 +13,12 @@ export class ResponsivityService {
   constructor(
     BreakpointObserver: BreakpointObserver,
   ) {
+    this
+      .scrollPositionObservable = fromEvent(window, "scroll")
+      .pipe(
+        map((): number => window.scrollY)
+      );
+
     this
       .backgroundAppearanceObservable = BreakpointObserver
       .observe("(prefers-color-scheme: light)")
@@ -60,6 +66,8 @@ export class ResponsivityService {
         max?: number,
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
   }
+
+  public readonly scrollPositionObservable: Observable<number>;
 
   public readonly backgroundAppearanceObservable: Observable<Appearance>;
   public readonly foregroundAppearanceObservable: Observable<Appearance>;

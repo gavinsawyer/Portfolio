@@ -8,12 +8,15 @@
 
   main > div
     header
+      margin: 0 -1rem
+      backdrop-filter: saturate(2) blur(30px)
+      border-radius: 1rem
       position: sticky
       top: 1rem
-      margin: 0 -1rem
-      border-radius: 1rem
-      backdrop-filter: saturate(2) blur(30px)
-      transition: all ease 50ms
+      transition: all ease 100ms
+
+      &.raised
+        box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
 
       h1
         font-size: 1.5rem

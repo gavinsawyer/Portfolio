@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component }           from "@angular/core";
+import { ResponsivityService } from "@portfolio/services";
 
 
 @Component({
@@ -8,4 +9,15 @@ import { Component } from "@angular/core";
     "./app.component.sass",
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+
+  constructor(
+    ResponsivityService: ResponsivityService,
+  ) {
+    this
+      .ResponsivityService = ResponsivityService;
+  }
+
+  public readonly ResponsivityService: ResponsivityService;
+
+}
