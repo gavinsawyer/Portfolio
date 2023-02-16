@@ -1,0 +1,19 @@
+<aside
+  fxFlex=""
+  fxLayout="column">
+  <div
+    class="contact"
+    fxLayout="column"
+    fxLayoutGap="1rem">
+    <portfolio-message-form fxHide=""></portfolio-message-form>
+    <div
+      [fxLayout]="(responsivityService.getBreakpointObservable(24.4375) | async) ? 'column' : 'row'"
+      fxLayoutGap="1rem">
+      <portfolio-button [navigation]="true" svgName="bubble left" text="Message" url="sms:+16177979041"></portfolio-button>
+      <portfolio-button [navigation]="true" svgName="envelope"    text="Mail"    url="mailto:hello@gavinsawyer.dev"></portfolio-button>
+    </div>
+    <portfolio-button [navigation]="true" svgName="person text rectangle" text="Add to contacts" url="/assets/Gavin Sawyer.vcf"></portfolio-button>
+    <portfolio-focus *ngIf="(focusService.focusObservable | async)"></portfolio-focus>
+  </div>
+  <div class="image" fxHide="" fxLayout="column"></div>
+</aside>

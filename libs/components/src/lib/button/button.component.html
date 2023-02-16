@@ -1,0 +1,28 @@
+<ng-template #buttonTemplate>
+  <img [src]="'/assets/' + svgName + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" alt="Mail icon">
+  <div
+    fxFlex=""
+    fxLayout="column">
+    {{ text }}
+  </div>
+  <div fxFlex=" 0 1 1.15rem" [fxHide]="!(responsivityService.getBreakpointObservable(51.580078125) | async)" fxLayout="column"></div>
+</ng-template>
+
+<a
+  [href]="url"
+  fxFlex=""
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="1.25rem"
+  *ngIf="navigation">
+  <ng-container *ngTemplateOutlet="buttonTemplate;context: this"></ng-container>
+</a>
+<button
+  fxFlex=""
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="1.25rem"
+  (click)="callback.emit();"
+  *ngIf="action">
+  <ng-container *ngTemplateOutlet="buttonTemplate;context: this"></ng-container>
+</button>

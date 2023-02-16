@@ -1,62 +1,65 @@
 @import '~normalize.css'
 @import 'colors'
 
-body
-  display: flex
-  flex-direction: row
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif
-  font-size: 16px
-  padding: 1rem 2rem
+html
+  overflow-x: hidden
 
-  a
-    text-decoration: none
-
-    &:hover
-      text-decoration: underline
-
-  h1
-    font-size: 2rem
-
-  h3
-    font-size: 1.2rem
-
-  h5
-    font-size: 0.8rem
-
-  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
-    color: $body-foreground
-    background-color: $body-background
+  body
+    display: flex
+    flex-direction: row
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif
+    font-size: 16px
+    padding: 1rem 2rem
 
     a
       text-decoration: none
-      color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
 
       &:hover
         text-decoration: underline
 
     h1
-      color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
+      font-size: 2rem
 
     h3
-      color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
+      font-size: 1.2rem
 
     h5
-      color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+      font-size: 0.8rem
 
-    h1,
-    h3,
-    h5
+    @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
+      color: $body-foreground
+      background-color: $body-background
+
       a
-        font-weight: bolder
+        text-decoration: none
+        color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
 
-    ul
-      padding-inline-start: 0
+        &:hover
+          text-decoration: underline
 
-      li
-        margin: 0.25rem 0
-        list-style: none
+      h1
+        color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
 
-  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
+      h3
+        color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
 
-  @media (prefers-color-scheme: dark)
-    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)
+      h5
+        color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+
+      h1,
+      h3,
+      h5
+        a
+          font-weight: bolder
+
+      ul
+        padding-inline-start: 0
+
+        li
+          margin: 0.25rem 0
+          list-style: none
+
+    @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
+
+    @media (prefers-color-scheme: dark)
+      @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)

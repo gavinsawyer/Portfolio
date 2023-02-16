@@ -1,13 +1,12 @@
-import { Component }                         from "@angular/core";
+import { Component }                         from '@angular/core';
 import { FocusService, ResponsivityService } from "@portfolio/services";
 
-
 @Component({
-  selector: 'portfolio-focus',
-  templateUrl: './focus.component.html',
-  styleUrls: ['./focus.component.sass'],
+  selector: 'portfolio-aside',
+  templateUrl: './aside.component.html',
+  styleUrls: ['./aside.component.sass'],
 })
-export class FocusComponent {
+export class AsideComponent {
 
   constructor(
     FocusService: FocusService,

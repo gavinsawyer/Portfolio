@@ -4,61 +4,11 @@
   display: flex
   flex-direction: column
 
-  aside
-    div.contact
-      margin: 1rem 0
-
-      a.button
-        border: 0
-        border-radius: calc(1.5rem + (14.28125px / 2))
-        box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
-        color: inherit
-        padding: 1.25rem 1.5rem
-        text-align: center
-        user-select: none
-
-        &:hover
-          cursor: pointer
-          text-decoration: none
-
-        > div a
-          color: inherit
-
-    div.image::after
-      width: 100%
-      content: ''
-      //noinspection CssUnknownTarget
-      background-image: url("/assets/photo.jpeg")
-      background-position: center
-      background-size: cover
-      background-repeat: no-repeat
-      margin: 1rem 0
-      border-radius: calc(1.5rem + (14.28125px / 2))
-      box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
-      padding-bottom: 133.3333%
-      overflow: hidden
-
   article section div div
     margin: 1rem 0
 
     ul
       margin: 0
 
-  div.image,
-  aside,
   article section
     max-width: 29rem
-
-  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
-    aside
-      form.message-form,
-      div.focus,
-      div.focus__indicator,
-      button,
-      a.button
-        background: transparentize(call(get-function($degrade-background-function), $body-background, 10%), 0.5)
-
-  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
-
-  @media (prefers-color-scheme: dark)
-    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken, lighten)

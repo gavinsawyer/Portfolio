@@ -1,71 +1,10 @@
 <div
-  [fxLayout]="(responsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? 'column' : 'row'"
+  [fxLayout]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? 'column' : 'row'"
   fxLayoutAlign="center"
   fxLayoutGap="1rem">
-  <aside fxLayout="column">
-    <div
-      class="contact"
-      fxLayout="column"
-      fxLayoutGap="1rem">
-      <portfolio-message-form fxHide=""></portfolio-message-form>
-      <div
-        fxLayout="row"
-        fxLayoutGap="1rem">
-        <a
-          href="sms:+16177979041"
-          class="button"
-          fxFlex=""
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayoutGap="0.5rem">
-          <img [src]="'/assets/bubble left.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" alt="Phone icon">
-          <div
-            fxFlex=""
-            fxLayout="column">
-            Message
-          </div>
-        </a>
-        <a
-          href="mailto:hello@gavinsawyer.dev"
-          class="button"
-          fxFlex=""
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayoutGap="0.5rem">
-          <img [src]="'/assets/envelope.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" alt="Mail icon">
-          <div
-            fxFlex=""
-            fxLayout="column">
-            Mail
-          </div>
-        </a>
-      </div>
-      <div
-        fxLayout="row"
-        fxLayoutGap="1rem">
-        <!--suppress HtmlUnknownTarget -->
-        <a
-          href="/assets/Gavin Sawyer.vcf"
-          class="button"
-          fxFlex=""
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayoutGap="0.5rem">
-          <img [src]="'/assets/person text rectangle.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" alt="Mail icon">
-          <div
-            fxFlex=""
-            fxLayout="column">
-            Add to contacts
-          </div>
-          <div fxLayout="column" fxFlex="1.15rem"></div>
-        </a>
-      </div>
-      <portfolio-focus *ngIf="(focusService.focusObservable | async)"></portfolio-focus>
-    </div>
-    <div class="image" fxHide="" fxLayout="column"></div>
-  </aside>
+  <portfolio-aside [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '17.56rem'"></portfolio-aside>
   <article
-    [fxFlex]="(responsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? '' : '0 1 29rem'"
+    [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '29rem'"
     fxLayout="column">
     <section fxLayout="column">
       <div>

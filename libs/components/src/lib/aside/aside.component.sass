@@ -1,0 +1,24 @@
+@import '../../../../../apps/website/src/colors'
+
+\:host
+  display: flex
+
+  aside
+    max-width: 29rem
+
+    div.contact
+      margin: 1rem 0
+
+    div.image::after
+      width: 100%
+      content: ''
+      //noinspection CssUnknownTarget
+      background-image: url("/assets/photo.jpeg")
+      background-position: center
+      background-size: cover
+      background-repeat: no-repeat
+      margin: 1rem 0
+      border-radius: calc(1.5rem + (14.28125px / 2))
+      box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
+      padding-bottom: 133.3333%
+      overflow: hidden
