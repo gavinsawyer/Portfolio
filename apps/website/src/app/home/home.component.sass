@@ -8,33 +8,11 @@
     div.contact
       margin: 1rem 0
 
-      form.message-form
-        padding: 0.75rem 0.75rem 0.75rem 1.5rem
-
-        input,
-        textarea
-          width: 100%
-          background: transparent
-          padding: 0 0 2.75px
-
-          &:focus
-            outline: none
-
-        textarea
-          resize: none
-          overflow: hidden
-
-        button
-          border-radius: 50%
-          padding: 0.75rem 0.84125rem
-          transition: all ease 200ms
-          cursor: default
-
-          &:not([disabled])
-            background: $primary
-            cursor: pointer
-
       a.button
+        border: 0
+        border-radius: calc(1.5rem + (14.28125px / 2))
+        box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
+        color: inherit
         padding: 1.25rem 1.5rem
         text-align: center
         user-select: none
@@ -46,23 +24,6 @@
         > div a
           color: inherit
 
-      form.message-form input,
-      form.message-form textarea,
-      form.message-form button,
-      a.button
-        color: inherit
-        border: 0
-
-      form.message-form,
-      a.button
-        border-radius: calc(1.5rem + (14.28125px / 2))
-
-      form.message-form,
-      form.message-form button:not([disabled]),
-      a.button,
-      div.image::after
-        box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
-
     div.image::after
       width: 100%
       content: ''
@@ -72,7 +33,8 @@
       background-size: cover
       background-repeat: no-repeat
       margin: 1rem 0
-      border-radius: 2.543875rem
+      border-radius: calc(1.5rem + (14.28125px / 2))
+      box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
       padding-bottom: 133.3333%
       overflow: hidden
 

@@ -3,11 +3,9 @@ import { ResponsivityService } from "@portfolio/services";
 
 
 @Component({
-  selector: "websiteApp-root",
-  templateUrl: "./app.component.html",
-  styleUrls: [
-    "./app.component.sass",
-  ],
+  selector: 'websiteApp-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
 
@@ -15,9 +13,9 @@ export class AppComponent {
     ResponsivityService: ResponsivityService,
   ) {
     this
-      .ResponsivityService = ResponsivityService;
+      .responsivityService = ResponsivityService;
   }
 
-  public readonly ResponsivityService: ResponsivityService;
+  public readonly responsivityService: ResponsivityService;
 
 }

@@ -14,13 +14,13 @@ export class FocusComponent implements OnInit {
     ResponsivityService: ResponsivityService,
   ) {
     this
-      .FocusService = FocusService;
+      .focusService = FocusService;
     this
-      .ResponsivityService = ResponsivityService;
+      .responsivityService = ResponsivityService;
   }
 
-  public readonly FocusService: FocusService;
-  public readonly ResponsivityService: ResponsivityService;
+  public readonly focusService: FocusService;
+  public readonly responsivityService: ResponsivityService;
 
   ngOnInit(): void {}
 }

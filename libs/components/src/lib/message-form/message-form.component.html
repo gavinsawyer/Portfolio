@@ -1,0 +1,44 @@
+<form
+  fxLayout="row"
+  fxLayoutAlign="start end"
+  fxLayoutGap="0.5rem"
+  [formGroup]="formGroup"
+  (ngSubmit)="submit();">
+  <div
+    fxFlex=""
+    fxLayout="column"
+    fxLayoutGap="0.5rem">
+    <div>
+      <h3 style="margin: 0.5rem 0 0;">
+        Want to connect?
+      </h3>
+    </div>
+    <div>
+      <h5 style="margin: 0.5rem 0 0;">
+        Name:
+      </h5>
+    </div>
+    <input type="text" autofocus formControlName="name" [required]="true">
+    <div>
+      <h5 style="margin: 0.5rem 0 0;">
+        Message:
+      </h5>
+    </div>
+    <textarea [rows]="responsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" formControlName="message" [required]="true" #messageHTMLTextAreaElement (input)="responsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
+    <div>
+      <h5 style="margin: 0.5rem 0 0;">
+        Enter one or both:
+      </h5>
+    </div>
+    <input type="tel" placeholder="Phone number" formControlName="phone" [required]="formGroup.value['email'] == ''" [validation]="true" mask="(000) 000-0000">
+    <input type="email" placeholder="Email" formControlName="email" [required]="formGroup.value['phone'] == ''" [email]="true">
+    <div></div>
+  </div>
+  <button
+    type="submit"
+    fxLayout="column"
+    disabled=""
+    [disabled]="!formGroup.valid">
+    <img [src]="'/assets/arrow up.' + (formGroup.valid ? (responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (responsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
+  </button>
+</form>

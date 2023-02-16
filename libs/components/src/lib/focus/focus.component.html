@@ -1,7 +1,7 @@
 <div
   class="indicator"
   fxLayout="column">
-  <img [src]="'/assets/' + (FocusService.focusObservable | async) + '.' + (ResponsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(FocusService.focusObservable | async) + ' focus icon'">
+  <img [src]="'/assets/' + (focusService.focusObservable | async) + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusService.focusObservable | async) + ' focus icon'">
 </div>
 <div
   class="liveBadge"
@@ -12,10 +12,10 @@
   class="description"
   fxLayout="column">
   <h3>
-    {{ (FocusService.focusObservable | async) }}
+    {{ (focusService.focusObservable | async) }}
   </h3>
   <p
-    [ngStyle]="{'max-width': (ResponsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? '100%' : '12rem'}">
-    Gavin {{ (FocusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
+    [ngStyle]="{'max-width': (responsivityService.getBreakpointObservable(16.080078125 + 1 + 29) | async) ? '100%' : '12rem'}">
+    Gavin {{ (focusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
   </p>
 </div>
