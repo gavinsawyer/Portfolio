@@ -1,27 +1,16 @@
 const app = require("firebase-admin/app");
 
 
-app
-  .initializeApp();
+app.initializeApp();
 
-exports
-  .getAll = require("./shortcuts/all/get")
-  .default;
+// Shortcuts API endpoints
 
-exports
-  .resetFocus = require("./shortcuts/focus/reset")
-  .default;
-exports
-  .setFocus = require("./shortcuts/focus/set")
-  .default;
+exports.getAll         = require("./shortcuts/all/get").default;
 
-exports
-  .setLocation = require("./shortcuts/location/set")
-  .default;
-exports
-  .toggleLocation = require("./shortcuts/location/toggle")
-  .default;
+exports.resetFocus     = require("./shortcuts/focus/reset").default;
+exports.setFocus       = require("./shortcuts/focus/set").default;
 
-exports
-  .setTime = require("./shortcuts/time/set")
-  .default;
+exports.setLocation    = require("./shortcuts/location/set").default;
+exports.toggleLocation = require("./shortcuts/location/toggle").default;
+
+exports.setTime        = require("./shortcuts/time/set").default;

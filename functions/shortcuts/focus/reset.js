@@ -10,27 +10,25 @@ exports
   .https
   .onRequest((request, response) => request
     .body["ShortcutsAPIKey"] === process
-    .env["ShortcutsAPIKey"] ? ((firestore) => ((collectionReference) => ((documentReference) => documentReference
+    .env["ShortcutsAPIKey"] ? ((firestore) => ((environmentCollectionReference) => ((privateDocumentReference) => privateDocumentReference
       .get()
-      .then((documentSnapshot) => ((updateData) => documentReference
+      .then((privateDocumentSnapshot) => ((updateData) => privateDocumentReference
         .update(updateData)
-        .then(() => ((_response) => ((_promise) => {})(collectionReference
-          .doc(process
-            .env["ShortcutsAPIPublicDocumentID"])
+        .then(() => ((_response) => ((_promise) => {})(environmentCollectionReference
+          .doc("public")
           .update({
-            "focus": documentSnapshot.data()["focusPrior"], // Public document new data
+            "focus": privateDocumentSnapshot.data()["focusPrior"], // Public document new data
           })))(response
             .json({
-              ...documentSnapshot.data(),
+              ...privateDocumentSnapshot.data(),
               ...updateData,
             })
             .end())))({
-              "focus": documentSnapshot.data()["focusPrior"], // Private document new data
-              "focusPrior": documentSnapshot.data()["focus"], // Private document new data
-            })))(collectionReference
-              .doc(process
-                .env["ShortcutsAPIPrivateDocumentID"])))(firestore
-                  .collection("_")))(firestore
-                    .getFirestore()) : ((_response) => {})(response
-                      .status(403)
-                      .end()));
+              "focus": privateDocumentSnapshot.data()["focusPrior"], // Private document new data
+              "focusPrior": privateDocumentSnapshot.data()["focus"], // Private document new data
+            })))(environmentCollectionReference
+              .doc("private")))(firestore
+                .collection("environment")))(firestore
+                  .getFirestore()) : ((_response) => {})(response
+                    .status(403)
+                    .end()));

@@ -10,21 +10,20 @@ exports
   .https
   .onRequest((request, response) => request
     .body["ShortcutsAPIKey"] === process
-    .env["ShortcutsAPIKey"] ? ((firestore) => ((documentReference) => documentReference
+    .env["ShortcutsAPIKey"] ? ((firestore) => ((privateDocumentReference) => privateDocumentReference
       .get()
-      .then((documentSnapshot) => ((updateData) => documentReference
+      .then((privateDocumentSnapshot) => ((updateData) => privateDocumentReference
         .update(updateData)
         .then(() => ((_response) => {})(response
           .json({
-            ...documentSnapshot.data(),
+            ...privateDocumentSnapshot.data(),
             ...updateData,
           })
           .end())))({
-            "location": documentSnapshot.data()["location"] === "away" ? process.env["ShortcutsAPIHomeName"] : "away",
+            "location": privateDocumentSnapshot.data()["location"] === "away" ? process.env["ShortcutsAPIHomeName"] : "away",
           })))(firestore
-            .collection("_")
-            .doc(process
-              .env["ShortcutsAPIPrivateDocumentID"])))(firestore
-                .getFirestore()) : ((_response) => {})(response
-                  .status(403)
-                  .end()));
+            .collection("environment")
+            .doc("private")))(firestore
+              .getFirestore()) : ((_response) => {})(response
+                .status(403)
+                .end()));

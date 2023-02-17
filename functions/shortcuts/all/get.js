@@ -12,9 +12,8 @@ exports
     .body["ShortcutsAPIKey"] === process
     .env["ShortcutsAPIKey"] && request
     .secure ? ((firestore) => firestore
-      .collection("_")
-      .doc(process
-        .env["ShortcutsAPIPrivateDocumentID"])
+      .collection("environment")
+      .doc("private")
       .get()
       .then((documentSnapshot) => ((_response) => {})(response
         .json(documentSnapshot

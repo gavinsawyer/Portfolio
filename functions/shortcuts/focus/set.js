@@ -11,18 +11,17 @@ exports
   .onRequest((request, response) => request
     .body["ShortcutsAPIKey"] === process
     .env["ShortcutsAPIKey"] && typeof request
-    .body["focus"] === "string" ? ((firestore) => ((collectionReference) => ((documentReference) => documentReference
+    .body["focus"] === "string" ? ((firestore) => ((environmentCollectionReference) => ((privateDocumentReference) => documentReference
       .get()
-      .then((documentSnapshot) => documentSnapshot
+      .then((privateDocumentSnapshot) => privateDocumentSnapshot
         .data()["focus"] === request
         .body["focus"] ? ((_response) => {})(response
-          .json(documentSnapshot
+          .json(privateDocumentSnapshot
             .data())
-          .end()) : ((updateData) => documentReference
+          .end()) : ((updateData) => privateDocumentReference
             .update(updateData)
-            .then(() => ((_response) => ((_promise) => {})(collectionReference
-              .doc(process
-                .env["ShortcutsAPIPublicDocumentID"])
+            .then(() => ((_response) => ((_promise) => {})(environmentCollectionReference
+              .doc("public")
               .update({
                 "focus": request.body["focus"], // Public document new data
               })))(response
@@ -32,11 +31,10 @@ exports
                 })
                 .end())))({
                   "focus": request.body["focus"],                 // Private document new data
-                  "focusPrior": documentSnapshot.data()["focus"], // Private document new data
-                })))(collectionReference
-                  .doc(process
-                    .env["ShortcutsAPIPrivateDocumentID"])))(firestore
-                      .collection("_")))(firestore
-                        .getFirestore()) : ((_response) => {})(response
-                          .status(403)
-                          .end()));
+                  "focusPrior": privateDocumentSnapshot.data()["focus"], // Private document new data
+                })))(environmentCollectionReference
+                  .doc("private")))(firestore
+                    .collection("environment")))(firestore
+                      .getFirestore()) : ((_response) => {})(response
+                        .status(403)
+                        .end()));
