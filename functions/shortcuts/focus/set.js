@@ -26,11 +26,11 @@ exports
                 "focus": request.body["focus"], // Public document new data
               })))(response
                 .json({
-                  ...documentSnapshot.data(),
+                  ...privateDocumentSnapshot.data(),
                   ...updateData,
                 })
                 .end())))({
-                  "focus": request.body["focus"],                 // Private document new data
+                  "focus": request.body["focus"],                        // Private document new data
                   "focusPrior": privateDocumentSnapshot.data()["focus"], // Private document new data
                 })))(environmentCollectionReference
                   .doc("private")))(firestore

@@ -15,8 +15,8 @@ exports
       .collection("environment")
       .doc("private")
       .get()
-      .then((documentSnapshot) => ((_response) => {})(response
-        .json(documentSnapshot
+      .then((privateDocumentSnapshot) => ((_response) => {})(response
+        .json(privateDocumentSnapshot
           .data())
         .end())))(firestore
           .getFirestore()) : ((_response) => {})(response

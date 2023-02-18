@@ -1,6 +1,7 @@
 import { NgModule }                                                           from "@angular/core";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                     from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from "@angular/fire/app-check";
+import { Auth, getAuth, provideAuth }                                         from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }                          from "@angular/fire/firestore";
 import { Functions, getFunctions, provideFunctions }                          from "@angular/fire/functions";
 import { FlexLayoutModule }                                                   from "@angular/flex-layout";
@@ -22,6 +23,7 @@ import { AppComponent }                                                       fr
     }),
     FlexLayoutModule,
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
+    provideAuth((): Auth => getAuth()),
     provideAppCheck((): AppCheck => initializeAppCheck(undefined, {
       provider: new ReCaptchaV3Provider(environment.recaptcha),
       isTokenAutoRefreshEnabled: true,

@@ -10,7 +10,7 @@
     fxLayoutGap="0.5rem">
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        Want to connect?
+        {{ (statusObservable | async) == "unsent" ? "Want to connect?" : ((statusObservable | async) == "sending" ? "Sending" : "We'll be in touch") + (ellipsesService.ellipsesObservable | async) }}
       </h3>
     </div>
     <div>
@@ -18,7 +18,7 @@
         Name:
       </h5>
     </div>
-    <input type="text" autofocus formControlName="name" [required]="true">
+    <input autofocus type="text" formControlName="name" [required]="true">
     <div>
       <h5 style="margin: 0.5rem 0 0;">
         Message:
@@ -30,15 +30,15 @@
         Enter one or both:
       </h5>
     </div>
-    <input type="tel" placeholder="Phone number" formControlName="phone" [required]="formGroup.value['email'] == ''" [validation]="true" mask="(000) 000-0000">
-    <input type="email" placeholder="Email" formControlName="email" [required]="formGroup.value['phone'] == ''" [email]="true">
+    <input placeholder="Phone number" type="tel" formControlName="phone" [required]="formGroup.value['email'] == ''" [validation]="true" mask="(000) 000-0000">
+    <input placeholder="Email" type="email" formControlName="email" [required]="formGroup.value['phone'] == ''" [email]="true">
     <div></div>
   </div>
   <button
     type="submit"
     fxLayout="column"
     disabled=""
-    [disabled]="!formGroup.valid">
-    <img [src]="'/assets/arrow up.' + (formGroup.valid ? (responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (responsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
+    [disabled]="(!authenticationService.userCredentialSubject.value) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'">
+    <img [src]="'/assets/arrow up.' + (authenticationService.userCredentialSubject.value && formGroup.valid && (statusObservable | async) == 'unsent' ? (responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (responsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
   </button>
 </form>

@@ -40,12 +40,19 @@
       color: inherit
       border: 0
 
-  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
-    form,
-    button
-      background: transparentize(call(get-function($degrade-background-function), $body-background, 10%), 0.5)
+    @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
+      input,
+      textarea
+        &[disabled]
+          color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+          -webkit-text-fill-color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
 
-  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
+      &,
+      button
+        background: transparentize(call(get-function($degrade-background-function), $body-background, 10%), 0.5)
 
-  @media (prefers-color-scheme: dark)
-    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken, lighten)
+    @media (prefers-color-scheme: light)
+      @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
+
+    @media (prefers-color-scheme: dark)
+      @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken, lighten)

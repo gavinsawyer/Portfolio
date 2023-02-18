@@ -31,4 +31,5 @@ export class FocusService implements OnDestroy {
     this
       .unsubscribeShortcutsAPIPublicDocumentOnSnapshot();
   }
+  
 }
