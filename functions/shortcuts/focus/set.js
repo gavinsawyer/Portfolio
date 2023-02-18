@@ -11,7 +11,7 @@ exports
   .onRequest((request, response) => request
     .body["ShortcutsAPIKey"] === process
     .env["ShortcutsAPIKey"] && typeof request
-    .body["focus"] === "string" ? ((firestore) => ((environmentCollectionReference) => ((privateDocumentReference) => documentReference
+    .body["focus"] === "string" ? ((firestore) => ((environmentCollectionReference) => ((privateDocumentReference) => privateDocumentReference
       .get()
       .then((privateDocumentSnapshot) => privateDocumentSnapshot
         .data()["focus"] === request
