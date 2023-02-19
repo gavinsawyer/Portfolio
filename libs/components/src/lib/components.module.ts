@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
-import { FocusComponent } from './focus/focus.component';
-import { MessageFormComponent } from './message-form/message-form.component';
-import { ButtonComponent } from './button/button.component';
 import { AsideComponent } from './aside/aside.component';
+import { ButtonComponent } from './button/button.component';
+import { FocusComponent } from './focus/focus.component';
+import { IconButtonComponent } from './icon-button/icon-button.component';
+import { MessageFormComponent } from './message-form/message-form.component';
 
 @NgModule({
   imports: [
@@ -16,11 +17,18 @@ import { AsideComponent } from './aside/aside.component';
     NgxMaskModule.forChild(),
   ],
   declarations: [
-    FocusComponent,
-    MessageFormComponent,
-    ButtonComponent,
     AsideComponent,
+    ButtonComponent,
+    FocusComponent,
+    IconButtonComponent,
+    MessageFormComponent,
   ],
-  exports: [FocusComponent, MessageFormComponent, ButtonComponent, AsideComponent],
+  exports: [
+    AsideComponent,
+    ButtonComponent,
+    FocusComponent,
+    IconButtonComponent,
+    MessageFormComponent,
+  ],
 })
 export class ComponentsModule {}

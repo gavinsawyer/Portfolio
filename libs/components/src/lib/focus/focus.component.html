@@ -1,12 +1,12 @@
 <div
   class="indicator"
   fxLayout="column">
-  <img [src]="'/assets/' + (focusService.focusObservable | async) + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusService.focusObservable | async) + ' focus icon'">
+  <img [src]="'/assets/icons/focus/' + (focusService.focusObservable | async) + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusService.focusObservable | async) + ' focus icon'">
 </div>
 <div
   class="liveBadge"
   fxLayout="column">
-  <img [src]="'/assets/live badge.svg'" alt="Live status">
+  <img [src]="'/assets/icons/live badge.svg'" alt="Live status">
 </div>
 <div
   class="description"

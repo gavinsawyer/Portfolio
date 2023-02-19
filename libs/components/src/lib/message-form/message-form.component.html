@@ -39,6 +39,6 @@
     fxLayout="column"
     disabled=""
     [disabled]="(!authenticationService.userCredentialSubject.value) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'">
-    <img [src]="'/assets/arrow up.' + (authenticationService.userCredentialSubject.value && formGroup.valid && (statusObservable | async) == 'unsent' ? (responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (responsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
+    <img [src]="'/assets/icons/submit.' + (authenticationService.userCredentialSubject.value && formGroup.valid && (statusObservable | async) == 'unsent' ? (responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (responsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
   </button>
 </form>
