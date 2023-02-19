@@ -20,9 +20,12 @@
 
       h1
         font-size: 1.5rem
-
-      h3
+      h2
         font-size: 0.8775rem
+
+      h1,
+      h2
+        margin-bottom: 1em
 
       @media (max-width: 33rem)
         top: 0
@@ -39,6 +42,11 @@
   @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     header
       background-color: transparentize($body-background, math.div(1, 4))
+
+      h1
+        color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
+      h2
+        color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
 
     footer
       color: $footer-foreground
