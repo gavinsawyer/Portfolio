@@ -1,5 +1,6 @@
-import { NgModule }                                                           from "@angular/core";
-import { FirebaseApp, initializeApp, provideFirebaseApp }                     from "@angular/fire/app";
+import { NgModule }                                                                              from "@angular/core";
+import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
+import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck, ReCaptchaV3Provider } from "@angular/fire/app-check";
 import { Auth, getAuth, provideAuth }                                         from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }                          from "@angular/fire/firestore";
@@ -23,6 +24,7 @@ import { AppComponent }                                                       fr
     }),
     FlexLayoutModule,
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
+    provideAnalytics((): Analytics => getAnalytics()),
     provideAuth((): Auth => getAuth()),
     provideAppCheck((): AppCheck => initializeAppCheck(undefined, {
       provider: new ReCaptchaV3Provider(environment.recaptcha),
@@ -44,7 +46,10 @@ import { AppComponent }                                                       fr
     ),
     NgxMaskModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    ScreenTrackingService,
+    UserTrackingService,
+  ],
   bootstrap: [
     AppComponent,
   ],
