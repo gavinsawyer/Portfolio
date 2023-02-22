@@ -1,8 +1,8 @@
 <aside
   fxFlex=""
-  fxLayout="column">
+  fxLayout="column"
+  fxLayoutGap="2rem">
   <div
-    class="contact"
     fxLayout="column"
     fxLayoutGap="1rem">
     <portfolio-message-form></portfolio-message-form>
@@ -15,5 +15,5 @@
     <portfolio-button [navigation]="true" svgName="add to contacts" text="Add to contacts" url="/assets/Gavin Sawyer.vcf"></portfolio-button>
     <portfolio-focus *ngIf="(focusService.focusObservable | async)"></portfolio-focus>
   </div>
-  <div class="image" fxHide="" fxLayout="column"></div>
+  <portfolio-photo></portfolio-photo>
 </aside>
