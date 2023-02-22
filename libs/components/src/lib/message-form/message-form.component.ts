@@ -1,9 +1,9 @@
-import { Component, OnDestroy }                                        from "@angular/core";
-import { FormBuilder, FormGroup }                                      from "@angular/forms";
-import { MessageDocument, MessageFormStatus }                          from "@portfolio/interfaces";
-import { AuthenticationService, MessagesService, ResponsivityService } from "@portfolio/services";
-import { BehaviorSubject, Observable, Subscription }                   from "rxjs";
-import { EllipsesService }                                             from "../../../../services/src/lib/ellipses.service";
+import { Component, OnDestroy }                                                         from "@angular/core";
+import { Analytics, logEvent }                                                          from "@angular/fire/analytics";
+import { FormBuilder, FormGroup }                                                       from "@angular/forms";
+import { MessageDocument, MessageFormStatus }                                           from "@portfolio/interfaces";
+import { AuthenticationService, EllipsesService, MessagesService, ResponsivityService } from "@portfolio/services";
+import { BehaviorSubject, Observable, Subscription }                                    from "rxjs";
 
 
 @Component({
@@ -14,6 +14,7 @@ import { EllipsesService }                                             from "../
 export class MessageFormComponent implements OnDestroy {
 
   constructor(
+    Analytics: Analytics,
     AuthenticationService: AuthenticationService,
     EllipsesService: EllipsesService,
     FormBuilder: FormBuilder,
@@ -67,6 +68,12 @@ export class MessageFormComponent implements OnDestroy {
         this
           .statusSubject
           .next("sending");
+
+        logEvent(Analytics, "form_submit", {
+          "form_id": "",
+          "form_name": "message",
+          "form_destination": window.location.protocol + "//" + window.location.hostname + (window.location.port !== "" ? ":" + window.location.port : "") + "/",
+        });
 
         MessagesService
           .createMessage(this.formGroup.value);
