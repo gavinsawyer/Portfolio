@@ -11,17 +11,14 @@ export class ButtonComponent {
     ResponsivityService: ResponsivityService,
   ) {
     this
-      .callback = new EventEmitter<void>();
+      .click = new EventEmitter<void>();
 
     this
       .responsivityService = ResponsivityService;
   }
 
   @Output()
-  callback: EventEmitter<void>;
-
-  @Input()
-  navigation?: boolean;
+  click: EventEmitter<void>;
 
   @Input()
   svgName?: string;
@@ -30,10 +27,10 @@ export class ButtonComponent {
   text?: string;
 
   @Input()
-  url?: string;
+  type?: string;
 
   @Input()
-  action?: boolean;
+  url?: string;
 
   public readonly responsivityService: ResponsivityService;
 }

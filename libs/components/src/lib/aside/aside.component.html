@@ -9,10 +9,10 @@
     <div
       [fxLayout]="(responsivityService.getBreakpointObservable(24.4375) | async) ? 'column' : 'row'"
       fxLayoutGap="1rem">
-      <portfolio-button [navigation]="true" svgName="send message" text="Message" url="sms:+16177979041"></portfolio-button>
-      <portfolio-button [navigation]="true" svgName="send mail"    text="Mail"    url="mailto:hello@gavinsawyer.dev"></portfolio-button>
+      <portfolio-button svgName="send message" text="Message" type="anchor" url="sms:+16177979041"></portfolio-button>
+      <portfolio-button svgName="send mail"    text="Mail"    type="anchor" url="mailto:hello@gavinsawyer.dev"></portfolio-button>
     </div>
-    <portfolio-button [navigation]="true" svgName="add to contacts" text="Add to contacts" url="/assets/Gavin Sawyer.vcf"></portfolio-button>
+    <portfolio-button svgName="add to contacts" text="Add to contacts" type="anchor" url="/assets/Gavin Sawyer.vcf" (click)="logClickAddToContactsEvent();"></portfolio-button>
     <portfolio-focus *ngIf="(focusService.focusObservable | async)"></portfolio-focus>
   </div>
   <portfolio-photo></portfolio-photo>

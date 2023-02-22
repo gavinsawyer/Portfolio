@@ -1,4 +1,5 @@
 import { Component }                         from '@angular/core';
+import { Analytics, logEvent }               from "@angular/fire/analytics";
 import { FocusService, ResponsivityService } from "@portfolio/services";
 
 @Component({
@@ -9,6 +10,7 @@ import { FocusService, ResponsivityService } from "@portfolio/services";
 export class AsideComponent {
 
   constructor(
+    Analytics: Analytics,
     FocusService: FocusService,
     ResponsivityService: ResponsivityService,
   ) {
@@ -16,8 +18,12 @@ export class AsideComponent {
       .focusService = FocusService;
     this
       .responsivityService = ResponsivityService;
+
+    this
+      .logClickAddToContactsEvent = (): void => logEvent(Analytics, "click_addToContacts");
   }
 
   public readonly focusService: FocusService;
   public readonly responsivityService: ResponsivityService;
+  public readonly logClickAddToContactsEvent: () => void;
 }
