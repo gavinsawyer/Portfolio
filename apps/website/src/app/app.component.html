@@ -21,7 +21,7 @@
       [fxLayout]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? 'column' : 'row'"
       fxLayoutAlign="center"
       fxLayoutGap="1rem">
-      <portfolio-aside [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '17.56rem'"></portfolio-aside>
+      <portfolio-aside [fxHide]="(urlObservable | async) !== '/' && (responsivityService.getBreakpointObservable(51.580078125) | async)" [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '17.56rem'"></portfolio-aside>
       <router-outlet></router-outlet>
     </div>
   </div>
