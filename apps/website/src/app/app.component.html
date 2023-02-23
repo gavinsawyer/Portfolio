@@ -10,26 +10,29 @@
       [ngClass]="{'raised': ((responsivityService.scrollPositionObservable | async) || 0) > 16}">
       <div fxLayout="column">
         <h1 style="margin-bottom: 0; text-align: center;">
-          Gavin Sawyer
+          <a routerLink="" routerLinkActive="" #routerLinkActive="routerLinkActive" [routerLinkActiveOptions]="{'exact': true}" [ngClass]="{'active': routerLinkActive.isActive}">Gavin Sawyer</a>
         </h1>
         <h2 style="margin-top: 0; text-align: center;">
           Boston
         </h2>
       </div>
     </header>
-    <router-outlet></router-outlet>
+    <div fxLayout="column">
+      <div
+        [fxLayout]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? 'column' : 'row'"
+        fxLayoutAlign="center"
+        fxLayoutGap="1rem">
+        <portfolio-aside [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '17.56rem'"></portfolio-aside>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </div>
 </main>
-<footer
-  fxHide
-  fxLayout="row wrap">
+<footer fxLayout="row wrap">
   <div fxLayout="column">
     <ul>
       <li>
-        <a href="https://linkedin.com/in/gavinsawyer-dev">LinkedIn</a>
-      </li>
-      <li>
-        <a href="https://instagram.com/gavinsawyer">Instagram</a>
+        <a [routerLink]="'privacy'">privacy</a>
       </li>
     </ul>
   </div>

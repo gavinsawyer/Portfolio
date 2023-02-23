@@ -1,160 +1,150 @@
-<div
-  [fxLayout]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? 'column' : 'row'"
-  fxLayoutAlign="center"
-  fxLayoutGap="1rem">
-  <portfolio-aside [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '17.56rem'"></portfolio-aside>
-  <article
-    [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '29rem'"
-    fxLayout="column">
-    <section fxLayout="column">
-      <div>
-        <h2>
-          Education
-        </h2>
-        <h3 style="margin-bottom: 0;">
-          Suffolk University
-        </h3>
-        <h4>
-          Fall '19-Spring '23 – The Sawyer Business School is <a href="https://www.aacsb.edu/accredited/s/suffolk-university">accredited by the AACSB</a>.
-        </h4>
-        <p>
-          Gavin is a BSBA candidate double-majoring in Global Business and Analytics and minoring in Cybersecurity. He has taken classes including:
-        </p>
-        <ul
-          fxLayout="row wrap"
-          fxLayoutAlign="start center">
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/sib-strategy-and-international-business/400/sib-419/">Global Business</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/mkt-marketing/400/mkt-421/">Global Marketing</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/ent-entrepreneurship/300/ent-354/">Global Entrepreneurship</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/fin-finance/400/fin-417/">Multinational Financial Management</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/100/isom-130/">Business Analytics</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/200/isom-230/">Big Data</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/mkt-marketing/300/mkt-322/">Marketing Analytics</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/300/isom-330/">Applied Statistics</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/ec-economics/400/ec-450/">Applied Econometrics</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/300/isom-340/">Cybersecurity</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/200/isom-240/">Data Privacy</a>
-          </li>
-          <li
-            fxFlex="1 0 calc(29rem/2)"
-            fxLayout="column">
-            <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/acct-accounting/100/acct-150/">Fraud Examination</a>
-          </li>
-        </ul>
-        <h3 style="margin-bottom: 0;">
-          don Quijote Madrid
-        </h3>
-        <h4>
-          Spring '21 – don Quijote is <a href="https://acreditacion.cervantes.es/centros_espana.htm#madrid">accredited by the Cervantes Institute</a>.
-        </h4>
-        <p>
-          Gavin earned a B1-level certification for intermediate Spanish proficiency in Madrid during a semester of online classes.
-        </p>
-        <h3 style="margin-bottom: 0;">
-          Suffolk University Madrid Campus
-        </h3>
-        <h4>
-          Spring '20-Fall '20
-        </h4>
-        <p>
-          Gavin studied abroad for two semesters, taking classes on Spanish <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/span-spanish/200/span-201/">language</a> and <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/hst-history/300/hst-357/">history</a> alongside <a href="https://suffolk.smartcatalogiq.com/en/2021-2022/catalog/courses/sib-strategy-and-international-business/300/sib-321/">international business</a>, <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/cjn-communication-and-journalism/200/cjn-216/">intercultural communication</a>, <a href="https://suffolk.smartcatalogiq.com/en/2021-2022/catalog/courses/ec-economics/100/ec-102/">macroeconomics</a>, <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/ble-business-law-and-ethics/200/ble-214/">business law</a>, and <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/acct-accounting/200/acct-202/">accounting</a>.
-        </p>
-        <h3 style="margin-bottom: 0;">
-          Saint Joseph Preparatory High School
-        </h3>
-        <h4>
-          Fall '15-Spring '19
-        </h4>
-        <p>
-          In high school, Gavin was involved in art and robotics and became interested in his major from taking AP Statistics.
-        </p>
-      </div>
-    </section>
-    <section fxLayout="column">
-      <div>
-        <h2>
-          Familiar technologies
-        </h2>
-        <p>
-          Gavin has over six years of experience self-teaching software engineering.
-        </p>
-        <p>
-          <a href="https://github.com/gavinsawyer/Portfolio" target="_blank">See the source code for this site on GitHub</a>
-        </p>
-        <h3 style="margin-bottom: 0;">
-          HTML, CSS, JavaScript
-        </h3>
-        <h4>
-          6 years
-        </h4>
-        <h3 style="margin-bottom: 0;">
-          TypeScript, NodeJS, MongoDB, SQL, Git
-        </h3>
-        <h4>
-          4 years
-        </h4>
-        <h3 style="margin-bottom: 0;">
-          Angular, Sass, AWS, RESTful APIs
-        </h3>
-        <h4>
-          3 years
-        </h4>
-        <h3 style="margin-bottom: 0;">
-          Google Cloud Platform, Firebase, Amplify, Nx
-        </h3>
-        <h4>
-          2 years
-        </h4>
-        <h3 style="margin-bottom: 0;">
-          Adobe Illustrator & Photoshop
-        </h3>
-        <h4>
-          2 years
-        </h4>
-      </div>
-    </section>
-  </article>
-</div>
+<article
+  fxFlex="0 1 29rem"
+  fxLayout="column">
+  <section>
+    <h2>
+      Education
+    </h2>
+    <h3 style="margin-bottom: 0;">
+      Suffolk University
+    </h3>
+    <h4>
+      Fall '19-Spring '23 – The Sawyer Business School is <a href="https://www.aacsb.edu/accredited/s/suffolk-university">accredited by the AACSB</a>.
+    </h4>
+    <p>
+      Gavin is a BSBA candidate double-majoring in Global Business and Analytics and minoring in Cybersecurity. He has taken classes including:
+    </p>
+    <ul
+      fxLayout="row wrap"
+      fxLayoutAlign="start center">
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/sib-strategy-and-international-business/400/sib-419/">Global Business</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/mkt-marketing/400/mkt-421/">Global Marketing</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/ent-entrepreneurship/300/ent-354/">Global Entrepreneurship</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/fin-finance/400/fin-417/">Multinational Financial Management</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/100/isom-130/">Business Analytics</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/200/isom-230/">Big Data</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/mkt-marketing/300/mkt-322/">Marketing Analytics</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/300/isom-330/">Applied Statistics</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/ec-economics/400/ec-450/">Applied Econometrics</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/300/isom-340/">Cybersecurity</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/isom-info-systems-and-operations-management/200/isom-240/">Data Privacy</a>
+      </li>
+      <li
+        fxFlex="1 0 calc(29rem/2)"
+        fxLayout="column">
+        <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/acct-accounting/100/acct-150/">Fraud Examination</a>
+      </li>
+    </ul>
+    <h3 style="margin-bottom: 0;">
+      don Quijote Madrid
+    </h3>
+    <h4>
+      Spring '21 – don Quijote is <a href="https://acreditacion.cervantes.es/centros_espana.htm#madrid">accredited by the Cervantes Institute</a>.
+    </h4>
+    <p>
+      Gavin earned a B1-level certification for intermediate Spanish proficiency in Madrid during a semester of online classes.
+    </p>
+    <h3 style="margin-bottom: 0;">
+      Suffolk University Madrid Campus
+    </h3>
+    <h4>
+      Spring '20-Fall '20
+    </h4>
+    <p>
+      Gavin studied abroad for two semesters, taking classes on Spanish <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/span-spanish/200/span-201/">language</a> and <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/hst-history/300/hst-357/">history</a> alongside <a href="https://suffolk.smartcatalogiq.com/en/2021-2022/catalog/courses/sib-strategy-and-international-business/300/sib-321/">international business</a>, <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/cjn-communication-and-journalism/200/cjn-216/">intercultural communication</a>, <a href="https://suffolk.smartcatalogiq.com/en/2021-2022/catalog/courses/ec-economics/100/ec-102/">macroeconomics</a>, <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/ble-business-law-and-ethics/200/ble-214/">business law</a>, and <a href="https://suffolk.smartcatalogiq.com/2021-2022/catalog/courses/acct-accounting/200/acct-202/">accounting</a>.
+    </p>
+    <h3 style="margin-bottom: 0;">
+      Saint Joseph Preparatory High School
+    </h3>
+    <h4>
+      Fall '15-Spring '19
+    </h4>
+    <p>
+      In high school, Gavin was involved in art and robotics and became interested in his major from taking AP Statistics.
+    </p>
+  </section>
+  <section>
+    <h2>
+      Familiar technologies
+    </h2>
+    <p>
+      Gavin has over six years of experience self-teaching software engineering.
+    </p>
+    <p>
+      <a href="https://github.com/gavinsawyer/Portfolio" target="_blank">See the source code for this site on GitHub</a>
+    </p>
+    <h3 style="margin-bottom: 0;">
+      HTML, CSS, JavaScript
+    </h3>
+    <h4>
+      6 years
+    </h4>
+    <h3 style="margin-bottom: 0;">
+      TypeScript, NodeJS, MongoDB, SQL, Git
+    </h3>
+    <h4>
+      4 years
+    </h4>
+    <h3 style="margin-bottom: 0;">
+      Angular, Sass, AWS, RESTful APIs
+    </h3>
+    <h4>
+      3 years
+    </h4>
+    <h3 style="margin-bottom: 0;">
+      Google Cloud Platform, Firebase, Amplify, Nx
+    </h3>
+    <h4>
+      2 years
+    </h4>
+    <h3 style="margin-bottom: 0;">
+      Adobe Illustrator & Photoshop
+    </h3>
+    <h4>
+      2 years
+    </h4>
+  </section>
+</article>

@@ -20,6 +20,16 @@
 
       h1
         font-size: 1.5rem
+
+        a
+          color: inherit
+
+          &.active
+            cursor: default
+
+          &:hover
+            text-decoration: none
+
       h2
         font-size: 0.8775rem
 
@@ -35,8 +45,8 @@
       display: none
 
   footer
-    margin: 0 -2rem
-    padding: 0 2rem
+    margin: 1rem -2rem -1rem
+    padding: 0 1rem
 
   @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     header

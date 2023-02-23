@@ -17,6 +17,13 @@ html
       &:hover
         text-decoration: underline
 
+    ul
+      padding-inline-start: 0
+
+      li
+        margin: 0.25rem 0
+        list-style: none
+
     h1
       font-size: 2.8rem
     h2
@@ -56,13 +63,6 @@ html
         color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
       h4
         color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
-
-      ul
-        padding-inline-start: 0
-
-        li
-          margin: 0.25rem 0
-          list-style: none
 
     @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
 

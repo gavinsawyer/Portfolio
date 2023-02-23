@@ -6,7 +6,10 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/services/**/*.ts", "libs/services/**/*.html"]
+        "lintFilePatterns": [
+          "libs/services/**/*.ts",
+          "libs/services/**/*.html"
+        ]
       }
     }
   },
