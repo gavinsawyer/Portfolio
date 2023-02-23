@@ -17,22 +17,22 @@
         </h2>
       </div>
     </header>
-    <div fxLayout="column">
-      <div
-        [fxLayout]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? 'column' : 'row'"
-        fxLayoutAlign="center"
-        fxLayoutGap="1rem">
-        <portfolio-aside [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '17.56rem'"></portfolio-aside>
-        <router-outlet></router-outlet>
-      </div>
+    <div
+      [fxLayout]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? 'column' : 'row'"
+      fxLayoutAlign="center"
+      fxLayoutGap="1rem">
+      <portfolio-aside [fxFlex]="(responsivityService.getBreakpointObservable(51.580078125) | async) ? '' : '17.56rem'"></portfolio-aside>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </main>
-<footer fxLayout="row wrap">
+<footer
+  fxLayout="row wrap"
+  fxLayoutAlign="end">
   <div fxLayout="column">
     <ul>
       <li>
-        <a [routerLink]="'privacy'">privacy</a>
+        <a [routerLink]="'privacy'">Privacy</a>
       </li>
     </ul>
   </div>

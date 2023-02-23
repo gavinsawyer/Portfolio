@@ -37,6 +37,9 @@ import { NgxMaskModule } from 'ngx-mask';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 
+
+const baseTitle: string = "Gavin Sawyer";
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -62,14 +65,14 @@ import { AppComponent } from './app.component';
     RouterModule.forRoot(
       [
         {
-          path: '',
-          loadChildren: () =>
-            import('./home/home.module').then((m) => m.HomeModule),
+          path: "",
+          loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
+          title: baseTitle,
         },
         {
-          path: 'privacy',
-          loadChildren: () =>
-            import('./privacy/privacy.module').then((m) => m.PrivacyModule),
+          path: "privacy",
+          loadChildren: () => import("./privacy/privacy.module").then((m) => m.PrivacyModule),
+          title: baseTitle + " | Privacy",
         },
       ],
       {

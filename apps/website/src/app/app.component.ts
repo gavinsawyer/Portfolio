@@ -1,5 +1,5 @@
-import { Component }           from "@angular/core";
-import { ResponsivityService } from "@portfolio/services";
+import { Component }                  from "@angular/core";
+import { ResponsivityService }        from "@portfolio/services";
 
 
 @Component({
