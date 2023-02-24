@@ -11,8 +11,8 @@ const routes: Routes = [{ path: '', component: PrivacyComponent }];
   declarations: [PrivacyComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
     FlexLayoutModule,
+    RouterModule.forChild(routes),
   ],
 })
 export class PrivacyModule {}
