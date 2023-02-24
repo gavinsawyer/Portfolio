@@ -1,6 +1,7 @@
-import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
-import { Injectable }                 from "@angular/core";
-import { fromEvent, map, Observable } from "rxjs";
+import { BreakpointObserver, BreakpointState }         from "@angular/cdk/layout";
+import { DOCUMENT }                                    from "@angular/common";
+import { Inject, Injectable }                          from "@angular/core";
+import { BehaviorSubject, fromEvent, map, Observable } from "rxjs";
 
 
 type Appearance = "light" | "dark"
@@ -11,13 +12,16 @@ type Appearance = "light" | "dark"
 export class ResponsivityService {
 
   constructor(
+    @Inject(DOCUMENT)
+    Document: Document,
+
     BreakpointObserver: BreakpointObserver,
   ) {
     this
-      .scrollPositionObservable = fromEvent(window, "scroll")
+      .scrollPositionObservable = Document.defaultView ? fromEvent(Document.defaultView, "scroll")
       .pipe(
         map((): number => window.scrollY)
-      );
+      ) : (new BehaviorSubject(0)).asObservable();
 
     this
       .backgroundAppearanceObservable = BreakpointObserver

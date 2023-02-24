@@ -1,7 +1,7 @@
-import { NgModule }                                                                              from "@angular/core";
+import { Injector, NgModule }                                                                    from "@angular/core";
 import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
-import { AppCheck, initializeAppCheck, provideAppCheck, ReCaptchaV3Provider }                    from "@angular/fire/app-check";
+import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
 import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
 import { Functions, getFunctions, provideFunctions }                                             from "@angular/fire/functions";
@@ -10,6 +10,7 @@ import { ReactiveFormsModule }                                                  
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { RouterModule }                                                                          from "@angular/router";
 import { ComponentsModule }                                                                      from "@portfolio/components";
+import { AppCheckOptionsService }                                                                from "@portfolio/services";
 import { NgxMaskModule }                                                                         from "ngx-mask";
 import { environment }                                                                           from "../environments/environment";
 import { AppComponent }                                                                          from "./app.component";
@@ -29,10 +30,7 @@ const baseTitle: string = "Gavin Sawyer";
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideAnalytics((): Analytics => getAnalytics()),
     provideAuth((): Auth => getAuth()),
-    provideAppCheck((): AppCheck => initializeAppCheck(undefined, {
-      provider: new ReCaptchaV3Provider(environment.recaptcha),
-      isTokenAutoRefreshEnabled: true,
-    })),
+    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).options(injector))),
     provideFirestore((): Firestore => getFirestore()),
     provideFunctions((): Functions => getFunctions()),
     ReactiveFormsModule,

@@ -128,7 +128,8 @@
       "executor": "@nguniversal/builders:prerender",
       "options": {
         "routes": [
-          "/"
+          "/",
+          "/privacy"
         ]
       },
       "configurations": {
@@ -147,7 +148,7 @@
       "executor": "@angular/fire:deploy",
       "options": {
         "ssr": "cloud-run",
-        "prerender": true,
+        "prerender": false,
         "firebaseProject": "portfolio-a59e2",
         "firebaseHostingSite": "portfolio-a59e2",
         "functionName": "ssr-website",

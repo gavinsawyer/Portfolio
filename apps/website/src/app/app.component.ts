@@ -1,7 +1,7 @@
-import { Component }                                                                                                                                                                                       from "@angular/core";
+import { Component, OnDestroy }                                                                                                                                                                                                                                                                             from "@angular/core";
 import { ActivationEnd, ActivationStart, ChildActivationEnd, ChildActivationStart, GuardsCheckEnd, GuardsCheckStart, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, ResolveEnd, ResolveStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterEvent, RoutesRecognized, Scroll } from "@angular/router";
-import { ResponsivityService }                 from "@portfolio/services";
-import { BehaviorSubject, filter, Observable } from "rxjs";
+import { ResponsivityService }                                                                                                                                                                                                                                                                              from "@portfolio/services";
+import { BehaviorSubject, filter, Observable }                                                                                                                                                                                                                                                              from "rxjs";
 
 
 @Component({
@@ -9,7 +9,7 @@ import { BehaviorSubject, filter, Observable } from "rxjs";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
 
   constructor(
     Router: Router,
@@ -17,7 +17,6 @@ export class AppComponent {
   ) {
     this
       .responsivityService = ResponsivityService;
-
     this
       .urlSubject = new BehaviorSubject<string>(Router.url);
     this
@@ -38,5 +37,10 @@ export class AppComponent {
 
   public readonly responsivityService: ResponsivityService;
   public readonly urlObservable: Observable<string>;
+
+  ngOnDestroy(): void {
+    this
+      .unsubscribeRouterEvents();
+  }
 
 }

@@ -1,3 +1,4 @@
+export * from "./lib/appCheckOptions.service";
 export * from "./lib/authentication.service";
 export * from "./lib/ellipses.service";
 export * from "./lib/focus.service";
