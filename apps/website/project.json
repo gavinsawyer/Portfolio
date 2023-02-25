@@ -16,8 +16,10 @@
         "tsConfig": "apps/website/tsconfig.app.json",
         "inlineStyleLanguage": "sass",
         "assets": [
+          "apps/website/src/assets",
           "apps/website/src/favicon.png",
-          "apps/website/src/assets"
+          "apps/website/src/robots.txt",
+          "apps/website/src/sitemap.xml"
         ],
         "styles": [
           "apps/website/src/styles.sass"
@@ -48,7 +50,7 @@
         },
         "development": {
           "buildOptimizer": false,
-          "optimization": false,
+          "optimization": true,
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,

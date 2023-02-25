@@ -15,24 +15,24 @@
       </h3>
     </div>
     <div>
-      <h4 style="margin: 0.5rem 0 0;">
+      <h4 id="nameInputLabel" style="margin: 0.5rem 0 0;">
         Name:
       </h4>
     </div>
-    <input autofocus type="text" formControlName="name" [required]="true">
+    <input aria-labelledby="nameInputLabel" autofocus autocapitalize="words" autocomplete="name" formControlName="name" [required]="true" type="text">
     <div>
-      <h4 style="margin: 0.5rem 0 0;">
+      <h4 id="messageInputLabel" style="margin: 0.5rem 0 0;">
         Message:
       </h4>
     </div>
-    <textarea [rows]="responsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })" formControlName="message" [required]="true" #messageHTMLTextAreaElement (input)="responsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"></textarea>
+    <textarea #messageHTMLTextAreaElement aria-labelledby="messageInputLabel" formControlName="message"  (input)="responsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });" [required]="true" [rows]="responsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })"></textarea>
     <div>
       <h4 style="margin: 0.5rem 0 0;">
         Enter one or both:
       </h4>
     </div>
-    <input placeholder="Phone number" type="tel" formControlName="phone" [required]="formGroup.value['email'] == ''" [validation]="true" mask="(000) 000-0000">
-    <input placeholder="Email" type="email" formControlName="email" [required]="formGroup.value['phone'] == ''" [email]="true">
+    <input aria-label="U.S. Phone number" autocomplete="tel-national" formControlName="phone" mask="(000) 000-0000" placeholder="Phone number" [required]="formGroup.value['email'] == ''" type="tel" [validation]="true">
+    <input aria-label="Email address" autocomplete="email" [email]="true" formControlName="email" placeholder="Email" [required]="formGroup.value['phone'] == ''" type="email">
     <div></div>
   </div>
   <button
