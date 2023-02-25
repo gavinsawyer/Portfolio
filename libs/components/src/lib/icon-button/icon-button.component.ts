@@ -7,30 +7,28 @@ import { ResponsivityService }                    from "@portfolio/services";
   styleUrls: ['./icon-button.component.sass'],
 })
 export class IconButtonComponent {
+
   constructor(
     ResponsivityService: ResponsivityService,
   ) {
     this
-      .callback = new EventEmitter<void>();
-
+      .click = new EventEmitter<void>();
     this
       .responsivityService = ResponsivityService;
   }
 
   @Output()
-  callback: EventEmitter<void>;
+  click: EventEmitter<void>;
 
-  @Input()
-  navigation?: boolean;
+  public readonly responsivityService: ResponsivityService;
 
   @Input()
   svgName?: string;
 
   @Input()
-  url?: string;
+  type?: string;
 
   @Input()
-  action?: boolean;
+  url?: string;
 
-  public readonly responsivityService: ResponsivityService;
 }

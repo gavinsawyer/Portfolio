@@ -148,7 +148,7 @@
       "executor": "@angular/fire:deploy",
       "options": {
         "ssr": "cloud-run",
-        "prerender": false,
+        "prerender": true,
         "firebaseProject": "portfolio-a59e2",
         "firebaseHostingSite": "portfolio-a59e2",
         "functionName": "ssr-website",

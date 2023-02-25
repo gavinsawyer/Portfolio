@@ -1,8 +1,9 @@
-import { Injectable, OnDestroy }                                                                                from "@angular/core";
+import { isPlatformBrowser, isPlatformServer }                                                                  from "@angular/common";
+import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                                           from "@angular/core";
 import { UserCredential }                                                                                       from "@angular/fire/auth";
 import { doc, DocumentReference, DocumentSnapshot, Firestore, FirestoreError, onSnapshot, setDoc, Unsubscribe } from "@angular/fire/firestore";
 import { MessageDocument }                                                                                      from "@portfolio/interfaces";
-import { BehaviorSubject, filter, firstValueFrom, map, Observable }                                             from "rxjs";
+import { BehaviorSubject, filter, firstValueFrom, map, Observable, shareReplay, take }                          from "rxjs";
 import { AuthenticationService }                                                                                from "./authentication.service";
 
 
@@ -12,16 +13,12 @@ import { AuthenticationService }                                                
 export class MessagesService implements OnDestroy {
 
   constructor(
+    @Inject(PLATFORM_ID)
+    platform_id: string,
+
     AuthenticationService: AuthenticationService,
     Firestore: Firestore,
   ) {
-    this
-      .sentMessageSubject = new BehaviorSubject<MessageDocument | undefined>(undefined);
-    this
-      .sentMessageObservable = this
-      .sentMessageSubject
-      .asObservable();
-
     this
       .createMessage = (messageDocument: MessageDocument): void => {
         AuthenticationService
@@ -30,8 +27,18 @@ export class MessagesService implements OnDestroy {
           .then((): void => this.sentMessageSubject.next(messageDocument))
           .catch((reason: any): void => console.error(reason));
       };
+    this
+      .sentMessageSubject = new BehaviorSubject<MessageDocument | undefined>(undefined);
+    this
+      .sentMessageObservable = this
+      .sentMessageSubject
+      .asObservable()
+      .pipe<MessageDocument | undefined, MessageDocument | undefined>(
+        shareReplay<MessageDocument | undefined>(),
+        isPlatformServer(platform_id) ? take<MessageDocument | undefined>(1) : filter<MessageDocument | undefined>((): boolean => true)
+      );
 
-    ((callback: (userCredential: UserCredential) => void): void => ((userCredential?: UserCredential): void => userCredential ? callback(userCredential) : ((): void => {
+    isPlatformBrowser(platform_id) && ((callback: (userCredential: UserCredential) => void): void => ((userCredential?: UserCredential): void => userCredential ? callback(userCredential) : ((): void => {
       firstValueFrom(AuthenticationService.userCredentialObservable.pipe(
         filter<UserCredential | undefined>((userCredential?: UserCredential): boolean => !!userCredential),
         map<UserCredential | undefined, UserCredential>((userCredential?: UserCredential): UserCredential => userCredential as UserCredential)
@@ -42,7 +49,7 @@ export class MessagesService implements OnDestroy {
       this
         .unsubscribeSentMessageDocumentOnSnapshot = onSnapshot<MessageDocument>(doc(Firestore, "/messages/" + userCredential.user.uid) as DocumentReference<MessageDocument>, (sentMessageDocumentSnapshot: DocumentSnapshot<MessageDocument>): void => this.sentMessageSubject.next(sentMessageDocumentSnapshot.data()), (firestoreError: FirestoreError): void => {
           firestoreError
-            .code !== "permission-denied" && console
+            .code == "permission-denied" || console
             .error(firestoreError);
         });
     });
@@ -50,10 +57,10 @@ export class MessagesService implements OnDestroy {
 
   private unsubscribeSentMessageDocumentOnSnapshot?: Unsubscribe;
 
-  public readonly sentMessageSubject: BehaviorSubject<MessageDocument | undefined>;
-  public readonly sentMessageObservable: Observable<MessageDocument | undefined>;
-
   public readonly createMessage: (messageDocument: MessageDocument) => void;
+  public readonly sentMessageObservable: Observable<MessageDocument | undefined>;
+  public readonly sentMessageSubject: BehaviorSubject<MessageDocument | undefined>;
+
 
   ngOnDestroy(): void {
     this

@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component }  from "@angular/core";
+import { UrlService } from "@portfolio/services";
 
 @Component({
   selector: 'websiteApp-otherwise',
@@ -6,5 +7,14 @@ import { Component } from "@angular/core";
   styleUrls: ['./otherwise.component.sass'],
 })
 export class OtherwiseComponent {
-  constructor() {}
+
+  constructor(
+    UrlService: UrlService,
+  ) {
+    this
+      .urlService = UrlService;
+  }
+
+  public urlService: UrlService;
+
 }

@@ -1,5 +1,3 @@
-export type MessageFormStatus = "unsent" | "sending" | "sent"
-
 export interface MessageDocument {
   "email"?: string,
   "message": string,

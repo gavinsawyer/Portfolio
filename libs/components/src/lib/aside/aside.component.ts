@@ -17,13 +17,13 @@ export class AsideComponent {
     this
       .focusService = FocusService;
     this
-      .responsivityService = ResponsivityService;
-
-    this
       .logClickAddToContactsEvent = (): void => logEvent(Analytics, "click_addToContacts");
+    this
+      .responsivityService = ResponsivityService;
   }
 
   public readonly focusService: FocusService;
-  public readonly responsivityService: ResponsivityService;
   public readonly logClickAddToContactsEvent: () => void;
+  public readonly responsivityService: ResponsivityService;
+
 }

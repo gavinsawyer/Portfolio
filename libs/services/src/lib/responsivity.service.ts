@@ -1,7 +1,7 @@
-import { BreakpointObserver, BreakpointState }         from "@angular/cdk/layout";
-import { DOCUMENT }                                    from "@angular/common";
-import { Inject, Injectable }                          from "@angular/core";
-import { BehaviorSubject, fromEvent, map, Observable } from "rxjs";
+import { BreakpointObserver, BreakpointState }                                    from "@angular/cdk/layout";
+import { DOCUMENT, isPlatformServer }                                             from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID }                                        from "@angular/core";
+import { BehaviorSubject, filter, fromEvent, map, Observable, shareReplay, take } from "rxjs";
 
 
 type Appearance = "light" | "dark"
@@ -15,34 +15,11 @@ export class ResponsivityService {
     @Inject(DOCUMENT)
     Document: Document,
 
+    @Inject(PLATFORM_ID)
+    platform_id: string,
+
     BreakpointObserver: BreakpointObserver,
   ) {
-    this
-      .scrollPositionObservable = Document.defaultView ? fromEvent(Document.defaultView, "scroll")
-      .pipe(
-        map((): number => window.scrollY)
-      ) : (new BehaviorSubject(0)).asObservable();
-
-    this
-      .backgroundAppearanceObservable = BreakpointObserver
-      .observe("(prefers-color-scheme: light)")
-      .pipe<Appearance>(
-        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "light" : "dark")
-      );
-    this
-      .foregroundAppearanceObservable = BreakpointObserver
-      .observe("(prefers-color-scheme: light)")
-      .pipe<Appearance>(
-        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "dark" : "light")
-      );
-
-    this
-      .getBreakpointObservable = (breakpoint: number): Observable<boolean> => BreakpointObserver
-      .observe("(max-width: " + breakpoint + "rem)")
-      .pipe<boolean>(
-        map<BreakpointState, boolean>((breakpointState: BreakpointState): boolean => breakpointState.matches)
-      );
-
     this
       .adjustTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
         fontSize?: number,
@@ -63,12 +40,44 @@ export class ResponsivityService {
           .height = "auto";
       };
     this
+      .backgroundAppearanceObservable = BreakpointObserver
+      .observe("(prefers-color-scheme: light)")
+      .pipe<BreakpointState, Appearance, Appearance>(
+        shareReplay<BreakpointState>(),
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "light" : "dark"),
+        isPlatformServer(platform_id) ? take<Appearance>(1) : filter<Appearance>((): boolean => true)
+      );
+    this
+      .foregroundAppearanceObservable = BreakpointObserver
+      .observe("(prefers-color-scheme: light)")
+      .pipe<BreakpointState, Appearance, Appearance>(
+        shareReplay<BreakpointState>(),
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "dark" : "light"),
+        isPlatformServer(platform_id) ? take<Appearance>(1) : filter<Appearance>((): boolean => true)
+      );
+    this
+      .getBreakpointObservable = (breakpoint: number): Observable<boolean> => BreakpointObserver
+      .observe("(max-width: " + breakpoint + "rem)")
+      .pipe<BreakpointState, boolean, boolean>(
+        shareReplay<BreakpointState>(),
+        map<BreakpointState, boolean>((breakpointState: BreakpointState): boolean => breakpointState.matches),
+        isPlatformServer(platform_id) ? take<boolean>(1) : filter<boolean>((): boolean => true)
+      );
+    this
       .getTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
         fontSize?: number,
         lineHeight?: number,
         min?: number,
         max?: number,
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
+    this
+      .scrollPositionObservable = (Document.defaultView ? fromEvent<Event>(Document.defaultView, "scroll").pipe<number>(
+        map<Event, number>((): number => window.scrollY || 0)
+      ) : (new BehaviorSubject<number>(0)).asObservable())
+      .pipe<number, number>(
+        shareReplay<number>(),
+        isPlatformServer(platform_id) ? take<number>(1) : filter<number>((): boolean => true)
+      );
   }
 
   public readonly scrollPositionObservable: Observable<number>;

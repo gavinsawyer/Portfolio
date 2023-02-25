@@ -1,28 +1,40 @@
-import { Injectable }                  from '@angular/core';
-import { BehaviorSubject, Observable } from "rxjs";
+import { isPlatformServer }                                       from "@angular/common";
+import { Inject, Injectable, OnDestroy, PLATFORM_ID }             from "@angular/core";
+import { BehaviorSubject, filter, Observable, shareReplay, take } from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class EllipsesService {
+export class EllipsesService implements OnDestroy {
 
-  constructor() {
+  constructor(
+    @Inject(PLATFORM_ID)
+    platform_id: string,
+  ) {
+    this
+      .ellipsesInterval = setInterval((): void => this.ellipsesSubject.next(this.ellipsesSubject.value == "..." ? "." : this.ellipsesSubject.value + "."), 800);
     this
       .ellipsesSubject = new BehaviorSubject<string>(".");
     this
       .ellipsesObservable = this
       .ellipsesSubject
-      .asObservable();
+      .asObservable()
+      .pipe<string, string>(
+        shareReplay<string>(),
+        isPlatformServer(platform_id) ? take<string>(1) : filter<string>((): boolean => true)
+      );
 
-    setInterval((): void => {
-      this
-        .ellipsesSubject
-        .next(this.ellipsesSubject.value !== "..." ? this.ellipsesSubject.value + "." : ".");
-    }, 800);
+    isPlatformServer(platform_id) && clearInterval(this.ellipsesInterval);
   }
 
   private readonly ellipsesSubject: BehaviorSubject<string>;
+  private readonly ellipsesInterval: NodeJS.Timeout;
 
   public readonly ellipsesObservable: Observable<string>;
+
+  ngOnDestroy(): void {
+    clearInterval(this.ellipsesInterval);
+  }
 
 }

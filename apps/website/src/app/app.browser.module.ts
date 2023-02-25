@@ -9,6 +9,7 @@ import { FlexLayoutModule }                                                     
 import { ReactiveFormsModule }                                                                   from "@angular/forms";
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { RouterModule }                                                                          from "@angular/router";
+import { TransferHttpCacheModule }                                                               from "@nguniversal/common"
 import { ComponentsModule }                                                                      from "@portfolio/components";
 import { AppCheckOptionsService }                                                                from "@portfolio/services";
 import { NgxMaskModule }                                                                         from "ngx-mask";
@@ -30,7 +31,7 @@ const baseTitle: string = "Gavin Sawyer";
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideAnalytics((): Analytics => getAnalytics()),
     provideAuth((): Auth => getAuth()),
-    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).options(injector))),
+    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions(injector))),
     provideFirestore((): Firestore => getFirestore()),
     provideFunctions((): Functions => getFunctions()),
     ReactiveFormsModule,
@@ -58,6 +59,7 @@ const baseTitle: string = "Gavin Sawyer";
         scrollPositionRestoration: "enabled",
       },
     ),
+    TransferHttpCacheModule,
   ],
   providers: [
     ScreenTrackingService,
@@ -65,4 +67,4 @@ const baseTitle: string = "Gavin Sawyer";
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppBrowserModule {}

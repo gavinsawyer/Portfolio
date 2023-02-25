@@ -1,6 +1,6 @@
 import { enableProdMode }         from "@angular/core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-import { AppModule }              from "./app/app.module";
+import { AppBrowserModule }       from "./app/app.browser.module";
 import { environment }            from "./environments/environment";
 
 
@@ -10,7 +10,7 @@ environment
 ((bootstrap: () => void) => document
   .readyState === "complete" ? bootstrap() : document
   .addEventListener('DOMContentLoaded', bootstrap))(() => platformBrowserDynamic()
-    .bootstrapModule(AppModule)
+    .bootstrapModule(AppBrowserModule)
     .then(() => {})
     .catch((err) => console
       .error(err)));

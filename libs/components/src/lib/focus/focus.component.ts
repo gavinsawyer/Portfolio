@@ -21,4 +21,5 @@ export class FocusComponent {
 
   public readonly focusService: FocusService;
   public readonly responsivityService: ResponsivityService;
+
 }

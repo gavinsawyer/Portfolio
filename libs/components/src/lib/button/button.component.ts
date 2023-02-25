@@ -7,18 +7,20 @@ import { ResponsivityService }                    from "@portfolio/services";
   styleUrls: ['./button.component.sass'],
 })
 export class ButtonComponent {
+
   constructor(
     ResponsivityService: ResponsivityService,
   ) {
     this
       .click = new EventEmitter<void>();
-
     this
       .responsivityService = ResponsivityService;
   }
 
   @Output()
   click: EventEmitter<void>;
+
+  public readonly responsivityService: ResponsivityService;
 
   @Input()
   svgName?: string;
@@ -32,5 +34,4 @@ export class ButtonComponent {
   @Input()
   url?: string;
 
-  public readonly responsivityService: ResponsivityService;
 }

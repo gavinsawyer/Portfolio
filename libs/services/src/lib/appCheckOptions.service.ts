@@ -1,11 +1,10 @@
 import { isPlatformServer }                                                    from "@angular/common";
 import { Inject, Injectable, InjectionToken, Injector, PLATFORM_ID }           from "@angular/core";
 import { CustomProvider, ReCaptchaV3Provider, AppCheckToken, AppCheckOptions } from "@angular/fire/app-check"
-import type { app }                                                            from "firebase-admin";
 import { environment }                                                         from "../../../../apps/website/src/environments/environment";
 
 
-export const FIREBASE_ADMIN = new InjectionToken<app.App>("firebase-admin");
+export const APP_CHECK_TOKEN_PROMISE = new InjectionToken<Promise<AppCheckToken>>("app_check_token_promise");
 
 @Injectable({
   providedIn: 'root'
@@ -17,22 +16,17 @@ export class AppCheckOptionsService {
     platform_id: string,
   ) {
     this
-      .options = (injector: Injector): AppCheckOptions => ((firebaseAdmin) => isPlatformServer(platform_id) && firebaseAdmin ? {
-        provider: new CustomProvider({
-          getToken: () => firebaseAdmin.appCheck().createToken(environment.firebase.appId, {
-            ttlMillis: 604800000,
-          }).then((appCheckToken: any): AppCheckToken => ({
-            ...appCheckToken,
-            expireTimeMillis: appCheckToken.ttlMillis,
-          })),
-        }),
+      .appCheckOptions = (injector: Injector): AppCheckOptions => ((appCheckTokenPromise: Promise<AppCheckToken> | null): AppCheckOptions => isPlatformServer(platform_id) && appCheckTokenPromise ? {
         isTokenAutoRefreshEnabled: false,
+        provider: new CustomProvider({
+          getToken: (): Promise<AppCheckToken> => appCheckTokenPromise,
+        }),
       } : {
-        provider: new ReCaptchaV3Provider(environment.recaptcha),
         isTokenAutoRefreshEnabled: true,
-      })(injector.get<app.App | null>(FIREBASE_ADMIN, null));
+        provider: new ReCaptchaV3Provider(environment.recaptcha),
+      })(injector.get<Promise<AppCheckToken> | null>(APP_CHECK_TOKEN_PROMISE, null));
   }
 
-  public readonly options: (injector: Injector) => AppCheckOptions
+  public readonly appCheckOptions: (injector: Injector) => AppCheckOptions
 
 }

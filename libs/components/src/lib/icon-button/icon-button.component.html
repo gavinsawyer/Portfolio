@@ -8,7 +8,8 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="1.25rem"
-  *ngIf="navigation">
+  (click)="click.emit();"
+  *ngIf="type == 'anchor'">
   <ng-container *ngTemplateOutlet="buttonTemplate;context: this"></ng-container>
 </a>
 <button
@@ -16,7 +17,7 @@
   fxLayout="row"
   fxLayoutAlign="start center"
   fxLayoutGap="1.25rem"
-  (click)="callback.emit();"
-  *ngIf="action">
+  (click)="click.emit();"
+  *ngIf="type == 'button'">
   <ng-container *ngTemplateOutlet="buttonTemplate;context: this"></ng-container>
 </button>

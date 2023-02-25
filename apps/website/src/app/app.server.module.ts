@@ -1,16 +1,18 @@
-import { NgModule }               from "@angular/core";
-import { FlexLayoutServerModule } from "@angular/flex-layout/server";
-import { ServerModule }           from "@angular/platform-server";
-import { FIREBASE_ADMIN }         from "@portfolio/services";
-import { AppComponent }           from "./app.component";
-import { AppModule }              from "./app.module";
+import { NgModule }                                                 from "@angular/core";
+import { AppCheckToken as AngularFireAppCheckToken }                from "@angular/fire/app-check";
+import { FlexLayoutServerModule }                                   from "@angular/flex-layout/server";
+import { ServerModule }                                             from "@angular/platform-server";
+import { APP_CHECK_TOKEN_PROMISE }                                  from "@portfolio/services";
+import { getApps, initializeApp }                                   from "firebase-admin/app";
+import { AppCheckToken as FirebaseAdminAppCheckToken, getAppCheck } from "firebase-admin/app-check";
+import { environment }                                              from "../environments/environment";
+import { AppComponent }     from "./app.component";
+import { AppBrowserModule } from "./app.browser.module";
 
-
-import * as admin from 'firebase-admin';
 
 @NgModule({
   imports: [
-    AppModule,
+    AppBrowserModule,
     FlexLayoutServerModule,
     ServerModule,
   ],
@@ -19,10 +21,11 @@ import * as admin from 'firebase-admin';
   ],
   providers: [
     {
-      provide: FIREBASE_ADMIN,
-      useFactory: () => admin.apps[0] || admin.initializeApp(process.env["FUNCTION_NAME"] ? undefined : {
-        credential: admin.credential.applicationDefault(),
-      }),
+      provide: APP_CHECK_TOKEN_PROMISE,
+      useFactory: (): Promise<AngularFireAppCheckToken> => getAppCheck(getApps()[0] || initializeApp()).createToken(environment.firebase.appId).then((appCheckToken: FirebaseAdminAppCheckToken): AngularFireAppCheckToken => ({
+        token: appCheckToken.token,
+        expireTimeMillis: appCheckToken.ttlMillis,
+      })),
     },
   ]
 })
