@@ -1,9 +1,9 @@
 <ng-template #buttonTemplate>
-  <img #svg alt="Icon" [attr.height]="svgHeight" [attr.width]="svgWidth" [src]="(responsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/' + svgName + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg' : ''">
+  <img alt="Icon" [attr.height]="svgHeight" [attr.width]="svgWidth" [src]="(responsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/' + svgName + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg' : ''">
   <div id="text">
     {{ text }}
   </div>
-  <div id="spacer" [ngStyle]="{'flex-basis': svg.offsetWidth + 'px', 'min-width': svg.offsetWidth + 'px'}"></div>
+  <div id="spacer" [ngStyle]="{'flex-basis': svgWidth, 'max-width': svgWidth}"></div>
 </ng-template>
 
 <a
