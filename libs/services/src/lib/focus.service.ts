@@ -2,7 +2,7 @@ import { isPlatformServer }                                                     
 import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                   from '@angular/core';
 import { doc, DocumentReference, DocumentSnapshot, Firestore, onSnapshot, Unsubscribe } from "@angular/fire/firestore";
 import { ShortcutsAPIPublicDocument }                                                   from "@portfolio/interfaces";
-import { BehaviorSubject, filter, Observable, shareReplay, take }                       from "rxjs";
+import { BehaviorSubject, filter, Observable, take }                                    from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,14 @@ export class FocusService implements OnDestroy {
       .focusObservable = this
       .focusSubject
       .asObservable()
-      .pipe<string, string>(
-        shareReplay<string>(),
+      .pipe<string>(
         isPlatformServer(platform_id) ? take<string>(1) : filter<string>((): boolean => true)
       );
     this
       .unsubscribeShortcutsAPIPublicDocumentOnSnapshot = onSnapshot<ShortcutsAPIPublicDocument>(doc(Firestore, "environment/public") as DocumentReference<ShortcutsAPIPublicDocument>, (documentSnapshot: DocumentSnapshot<ShortcutsAPIPublicDocument>): void => ((shortcutsAPIPublicDocument?: ShortcutsAPIPublicDocument): void => this.focusSubject.next(shortcutsAPIPublicDocument?.focus || ""))(documentSnapshot.data()));
+
+    isPlatformServer(platform_id) && this
+      .unsubscribeShortcutsAPIPublicDocumentOnSnapshot();
   }
 
   private readonly focusSubject: BehaviorSubject<string>;

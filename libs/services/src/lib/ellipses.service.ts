@@ -1,6 +1,6 @@
-import { isPlatformServer }                                       from "@angular/common";
-import { Inject, Injectable, OnDestroy, PLATFORM_ID }             from "@angular/core";
-import { BehaviorSubject, filter, Observable, shareReplay, take } from "rxjs";
+import { isPlatformServer }                           from "@angular/common";
+import { Inject, Injectable, OnDestroy, PLATFORM_ID } from "@angular/core";
+import { BehaviorSubject, filter, Observable, take }  from "rxjs";
 
 
 @Injectable({
@@ -20,8 +20,7 @@ export class EllipsesService implements OnDestroy {
       .ellipsesObservable = this
       .ellipsesSubject
       .asObservable()
-      .pipe<string, string>(
-        shareReplay<string>(),
+      .pipe<string>(
         isPlatformServer(platform_id) ? take<string>(1) : filter<string>((): boolean => true)
       );
 

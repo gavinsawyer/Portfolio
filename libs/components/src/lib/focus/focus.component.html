@@ -1,6 +1,6 @@
 <div
   class="indicator">
-  <img [src]="'/assets/icons/focus/' + (focusService.focusObservable | async) + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" [alt]="(focusService.focusObservable | async) + ' focus icon'">
+  <img [src]="(focusService.focusObservable | async) && (responsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/focus/' + (focusService.focusObservable | async) + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg' : ''" [alt]="(focusService.focusObservable | async) ? (focusService.focusObservable | async) + ' focus icon' : 'Focus icon'">
 </div>
 <div
   class="liveBadge">

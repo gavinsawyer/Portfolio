@@ -3,7 +3,7 @@ import { Inject, Injectable, OnDestroy, PLATFORM_ID }                           
 import { UserCredential }                                                                                       from "@angular/fire/auth";
 import { doc, DocumentReference, DocumentSnapshot, Firestore, FirestoreError, onSnapshot, setDoc, Unsubscribe } from "@angular/fire/firestore";
 import { MessageDocument }                                                                                      from "@portfolio/interfaces";
-import { BehaviorSubject, filter, firstValueFrom, map, Observable, shareReplay, take }                          from "rxjs";
+import { BehaviorSubject, filter, firstValueFrom, map, Observable, take }                                       from "rxjs";
 import { AuthenticationService }                                                                                from "./authentication.service";
 
 
@@ -33,8 +33,7 @@ export class MessagesService implements OnDestroy {
       .sentMessageObservable = this
       .sentMessageSubject
       .asObservable()
-      .pipe<MessageDocument | undefined, MessageDocument | undefined>(
-        shareReplay<MessageDocument | undefined>(),
+      .pipe<MessageDocument | undefined>(
         isPlatformServer(platform_id) ? take<MessageDocument | undefined>(1) : filter<MessageDocument | undefined>((): boolean => true)
       );
 

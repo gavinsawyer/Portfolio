@@ -1,7 +1,7 @@
-import { isPlatformBrowser, isPlatformServer }                    from "@angular/common";
-import { Inject, Injectable, PLATFORM_ID }                        from "@angular/core";
-import { Auth, signInAnonymously, UserCredential }                from "@angular/fire/auth";
-import { BehaviorSubject, filter, Observable, shareReplay, take } from "rxjs";
+import { isPlatformBrowser, isPlatformServer }       from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID }           from "@angular/core";
+import { Auth, signInAnonymously, UserCredential }   from "@angular/fire/auth";
+import { BehaviorSubject, filter, Observable, take } from "rxjs";
 
 
 @Injectable({
@@ -21,8 +21,7 @@ export class AuthenticationService {
       .userCredentialObservable = this
       .userCredentialSubject
       .asObservable()
-      .pipe<UserCredential | undefined, UserCredential | undefined>(
-        shareReplay<UserCredential | undefined>(),
+      .pipe<UserCredential | undefined>(
         isPlatformServer(platform_id) ? take<UserCredential | undefined>(1) : filter<UserCredential | undefined>((): boolean => true)
       );
 

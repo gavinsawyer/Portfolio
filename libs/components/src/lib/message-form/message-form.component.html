@@ -33,6 +33,6 @@
     type="submit"
     disabled=""
     [disabled]="(!authenticationService.userCredentialSubject.value) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'">
-    <img [src]="'/assets/icons/submit.' + (authenticationService.userCredentialSubject.value && formGroup.valid && (statusObservable | async) == 'unsent' ? (responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (responsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">
+    <img alt="Send message icon" height="14.7578px" [src]="(responsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/submit.' + (authenticationService.userCredentialSubject.value && formGroup.valid && (statusObservable | async) == 'unsent' ? ((responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light') : (responsivityService.foregroundAppearanceObservable | async)) + '.svg' : ''" width="11.8438px">
   </button>
 </form>

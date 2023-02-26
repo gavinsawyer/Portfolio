@@ -23,7 +23,13 @@ export class ButtonComponent {
   public readonly responsivityService: ResponsivityService;
 
   @Input()
+  svgHeight?: string;
+
+  @Input()
   svgName?: string;
+
+  @Input()
+  svgWidth?: string;
 
   @Input()
   text?: string;

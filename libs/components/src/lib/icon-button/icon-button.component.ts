@@ -23,7 +23,13 @@ export class IconButtonComponent {
   public readonly responsivityService: ResponsivityService;
 
   @Input()
+  svgHeight?: string;
+
+  @Input()
   svgName?: string;
+
+  @Input()
+  svgWidth?: string;
 
   @Input()
   type?: string;
