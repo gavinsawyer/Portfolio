@@ -1,6 +1,6 @@
 \:host
   display: flex
-  flex-basis: 17.56rem
+  flex-basis: 17.580078125rem
   flex-direction: column
   flex-grow: 1
   flex-shrink: 1
@@ -16,8 +16,9 @@
   aside
     display: flex
     flex-direction: column
+    flex-shrink: 1
     gap: 2rem
-    max-width: 29rem
+    max-width: 17.580078125rem
     margin-top: 1rem
 
     & > div
@@ -30,6 +31,9 @@
         flex-direction: row
         gap: 1rem
 
-        @media (max-width: 26.1875rem)
+        @media (max-width: 24.080078125rem)
           flex-direction: column
 
+    @media (max-width: 51.580078125rem)
+      flex-shrink: 0
+      max-width: calc(100vw - 4rem)
