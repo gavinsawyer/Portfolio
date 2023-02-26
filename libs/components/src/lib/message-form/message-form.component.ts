@@ -1,10 +1,10 @@
-import { isPlatformServer }                                                             from "@angular/common";
-import { Component, Inject, OnDestroy, PLATFORM_ID }                                    from "@angular/core";
-import { Analytics, logEvent }                                                          from "@angular/fire/analytics";
-import { FormBuilder, FormGroup }                                                       from "@angular/forms";
-import { MessageDocument }                                                              from "@portfolio/interfaces";
-import { AuthenticationService, EllipsesService, MessagesService, ResponsivityService } from "@portfolio/services";
-import { BehaviorSubject, filter, Observable, shareReplay, Subscription, take }         from "rxjs";
+import { isPlatformServer }                                                                from "@angular/common";
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild } from "@angular/core";
+import { Analytics, logEvent }                                                             from "@angular/fire/analytics";
+import { FormBuilder, FormGroup }                                                          from "@angular/forms";
+import { MessageDocument }                                                                 from "@portfolio/interfaces";
+import { AuthenticationService, EllipsesService, MessagesService, ResponsivityService }    from "@portfolio/services";
+import { BehaviorSubject, filter, Observable, shareReplay, Subscription, take }            from "rxjs";
 
 
 type MessageFormStatus = "unsent" | "sending" | "sent"
@@ -14,7 +14,7 @@ type MessageFormStatus = "unsent" | "sending" | "sent"
   templateUrl: './message-form.component.html',
   styleUrls: ['./message-form.component.sass'],
 })
-export class MessageFormComponent implements OnDestroy {
+export class MessageFormComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
@@ -87,6 +87,11 @@ export class MessageFormComponent implements OnDestroy {
       .unsubscribe;
   }
 
+  @ViewChild("nameHTMLInputElement", {
+    read: ElementRef
+  })
+  private nameInputElementRef!: ElementRef;
+
   private readonly statusSubject: BehaviorSubject<MessageFormStatus>;
   private readonly unsubscribeSentMessageDocument: Subscription["unsubscribe"];
 
@@ -96,6 +101,13 @@ export class MessageFormComponent implements OnDestroy {
   public readonly responsivityService: ResponsivityService;
   public readonly statusObservable: Observable<MessageFormStatus>;
   public readonly submit: () => void;
+
+  ngAfterViewInit(): void {
+    this
+      .nameInputElementRef
+      .nativeElement
+      .focus();
+  }
 
   ngOnDestroy(): void {
     this
