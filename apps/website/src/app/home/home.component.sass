@@ -1,3 +1,23 @@
 \:host
   display: flex
   flex-direction: row
+
+  article
+    display: flex
+    flex-basis: 29rem
+    flex-direction: column
+    flex-shrink: 1
+    max-width: 29rem
+
+    ul
+      align-items: center
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+
+      li
+        display: flex
+        flex-basis: calc(29rem/2)
+        flex-direction: column
+        flex-grow: 1
+        min-width: calc(29rem/2)

@@ -1,28 +1,18 @@
 <ng-template #buttonTemplate>
   <img [src]="'/assets/icons/' + svgName + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg'" alt="Icon" #svg>
-  <div
-    fxFlex=""
-    fxLayout="column">
+  <div id="text">
     {{ text }}
   </div>
-  <div id="spacer" [fxFlex]="'0 1 ' + svg.offsetWidth + 'px'" fxLayout="column"></div>
+  <div id="spacer" [ngStyle]="{'flex-basis': svg.offsetWidth + 'px', 'min-width': svg.offsetWidth + 'px'}"></div>
 </ng-template>
 
 <a
   [href]="url"
-  fxFlex=""
-  fxLayout="row"
-  fxLayoutAlign="start center"
-  fxLayoutGap="1.25rem"
   (click)="click.emit();"
   *ngIf="type == 'anchor'">
   <ng-container *ngTemplateOutlet="buttonTemplate; context: this"></ng-container>
 </a>
 <button
-  fxFlex=""
-  fxLayout="row"
-  fxLayoutAlign="start center"
-  fxLayoutGap="1.25rem"
   (click)="click.emit();"
   *ngIf="type == 'button'">
   <ng-container *ngTemplateOutlet="buttonTemplate; context: this"></ng-container>

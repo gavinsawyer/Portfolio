@@ -1,19 +1,11 @@
-<main
-  fxFlex=""
-  fxLayout="row"
-  fxLayoutAlign="center">
-  <div
-    fxLayout="column"
-    fxLayoutAlign="start stretch">
-    <header
-      fxLayout="row"
-      fxLayoutAlign="center"
-      [ngClass]="{'raised': ((responsivityService.scrollPositionObservable | async) || 0) > 16}">
-      <div fxLayout="column">
+<main>
+  <div>
+    <header [ngClass]="{'raised': ((responsivityService.scrollPositionObservable | async) || 0) > 16}">
+      <div>
         <h1 style="margin-bottom: 0; text-align: center;">
           <a routerLink="" routerLinkActive="" #routerLinkActive="routerLinkActive" [routerLinkActiveOptions]="{'exact': true}" [ngClass]="{'active': routerLinkActive.isActive}">Gavin Sawyer</a>
         </h1>
-        <h2 style="margin-top: 0; text-align: center;">
+        <h2 style="text-align: center;">
           Boston
         </h2>
       </div>
@@ -24,10 +16,8 @@
     </div>
   </div>
 </main>
-<footer
-  fxLayout="row wrap"
-  fxLayoutAlign="end">
-  <div fxLayout="column">
+<footer>
+  <div>
     <ul>
       <li>
         <a [routerLink]="'privacy'">Privacy</a>

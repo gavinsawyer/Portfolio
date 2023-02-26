@@ -1,6 +1,5 @@
 import { NgModule }             from '@angular/core';
 import { CommonModule }         from '@angular/common';
-import { FlexLayoutModule }     from "@angular/flex-layout";
 import { Routes, RouterModule } from '@angular/router';
 import { PrivacyComponent }     from './privacy.component';
 
@@ -11,7 +10,6 @@ const routes: Routes = [{ path: '', component: PrivacyComponent }];
   declarations: [PrivacyComponent],
   imports: [
     CommonModule,
-    FlexLayoutModule,
     RouterModule.forChild(routes),
   ],
 })

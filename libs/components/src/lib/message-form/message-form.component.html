@@ -1,14 +1,8 @@
 <form
-  fxLayout="row"
-  fxLayoutAlign="start end"
-  fxLayoutGap="0.5rem"
   name="message"
   [formGroup]="formGroup"
   (ngSubmit)="submit();">
-  <div
-    fxFlex=""
-    fxLayout="column"
-    fxLayoutGap="0.5rem">
+  <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
         {{ (statusObservable | async) == "unsent" ? "Want to connect?" : ((statusObservable | async) == "sending" ? "Sending" : "We'll be in touch") + (ellipsesService.ellipsesObservable | async) }}
@@ -37,7 +31,6 @@
   </div>
   <button
     type="submit"
-    fxLayout="column"
     disabled=""
     [disabled]="(!authenticationService.userCredentialSubject.value) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'">
     <img [src]="'/assets/icons/submit.' + (authenticationService.userCredentialSubject.value && formGroup.valid && (statusObservable | async) == 'unsent' ? (responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light' : (responsivityService.foregroundAppearanceObservable | async)) + '.svg'" alt="Send message icon">

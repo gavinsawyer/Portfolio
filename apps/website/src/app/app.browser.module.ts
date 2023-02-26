@@ -5,7 +5,6 @@ import { AppCheck, initializeAppCheck, provideAppCheck }                        
 import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
 import { Functions, getFunctions, provideFunctions }                                             from "@angular/fire/functions";
-import { FlexLayoutModule }                                                                      from "@angular/flex-layout";
 import { ReactiveFormsModule }                                                                   from "@angular/forms";
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { RouterModule }                                                                          from "@angular/router";
@@ -26,7 +25,6 @@ const baseTitle: string = "Gavin Sawyer";
       appId: "serverApp",
     }),
     ComponentsModule,
-    FlexLayoutModule,
     NgxMaskModule.forRoot(),
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideAnalytics((): Analytics => getAnalytics()),

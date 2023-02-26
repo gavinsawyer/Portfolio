@@ -1,23 +1,35 @@
 \:host
   display: flex
-  flex: 1 1 17.56rem
+  flex-basis: 17.56rem
+  flex-direction: column
+  flex-grow: 1
+  flex-shrink: 1
 
   @media (max-width: 51.580078125rem)
-    flex: 1 1 0
+    flex-grow: 1
+    flex-shrink: 0
 
   &.urlNotRoot
     @media (max-width: 51.580078125rem)
       display: none !important
 
   aside
+    display: flex
+    flex-direction: column
+    gap: 2rem
     max-width: 29rem
     margin-top: 1rem
 
-    & > div > div
+    & > div
       display: flex
-      flex-direction: row !important
+      flex-direction: column
       gap: 1rem
 
-      @media (max-width: 24.4375rem)
-        flex-direction: column !important
+      & > div
+        display: flex
+        flex-direction: row !important
+        gap: 1rem
+
+        @media (max-width: 26.1875rem)
+          flex-direction: column !important
 

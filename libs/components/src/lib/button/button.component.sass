@@ -6,10 +6,15 @@
 
   a,
   button
+    align-items: center
     border: 0
     border-radius: calc(1.5rem + (14.28125px / 2))
     box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
     color: inherit
+    display: flex
+    flex-direction: row
+    flex-grow: 1
+    gap: 1.25rem
     padding: 1.25rem 1.5rem
     text-align: center
     text-decoration: none
@@ -18,9 +23,17 @@
     &:hover
       cursor: pointer
 
+    #text
+      display: flex
+      flex-direction: column
+      flex-grow: 1
+
     #spacer
+      display: none
+      flex-shrink: 1
+
       @media (max-width: 51.580078125rem)
-        display: none !important
+        display: flex !important
 
   @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     button,
