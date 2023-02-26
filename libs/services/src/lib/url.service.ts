@@ -1,32 +1,34 @@
 import { isPlatformServer }                                                                                                                                                                                                                                                                                 from "@angular/common";
-import { Inject, Injectable, OnDestroy, OnInit, PLATFORM_ID }                                                                                                                                                                                                                                               from "@angular/core";
+import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                                                                                                                                                                                                                                       from "@angular/core";
+import { makeStateKey, TransferState }                                                                                                                                                                                                                                                                      from "@angular/platform-browser";
 import { ActivationEnd, ActivationStart, ChildActivationEnd, ChildActivationStart, GuardsCheckEnd, GuardsCheckStart, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, ResolveEnd, ResolveStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterEvent, RoutesRecognized, Scroll } from "@angular/router";
-import { Subject, filter, Observable, take }                                                                                                                                                                                                                                                                from "rxjs";
+import { Subject, filter, Observable, take, BehaviorSubject }                                                                                                                                                                                                                                               from "rxjs";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UrlService implements OnDestroy, OnInit {
+export class UrlService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
     platform_id: string,
 
     Router: Router,
+    TransferState: TransferState,
   ) {
     this
       .router = Router;
     this
       .unsubscribeRouterEvents = Router
       .events
-      .pipe(
+      .pipe<NavigationEnd>(
         filter<RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd, NavigationEnd>((routerEvent: RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd): routerEvent is NavigationEnd => routerEvent instanceof NavigationEnd)
       )
-      .subscribe((navigationEnd) => this.urlSubject.next(navigationEnd.url))
+      .subscribe((navigationEnd: NavigationEnd): void => this.urlSubject.next(navigationEnd.url))
       .unsubscribe;
     this
-      .urlSubject = new Subject<string>();
+      .urlSubject = new BehaviorSubject<string>(TransferState.get<string>(makeStateKey<string>("requestPath"), "/"));
     this
       .urlObservable = this
       .urlSubject
@@ -49,12 +51,6 @@ export class UrlService implements OnDestroy, OnInit {
     this
       .unsubscribeRouterEvents
       ?.();
-  }
-
-  ngOnInit(): void {
-    this
-      .urlSubject
-      .next(this.router.url);
   }
 
 }
