@@ -6,9 +6,7 @@
     fxLayout="column"
     fxLayoutGap="1rem">
     <portfolio-message-form></portfolio-message-form>
-    <div
-      [fxLayout]="(responsivityService.getBreakpointObservable(24.4375) | async) ? 'column' : 'row'"
-      fxLayoutGap="1rem">
+    <div>
       <portfolio-button svgName="send message" text="Message" type="anchor" url="sms:+16177979041"></portfolio-button>
       <portfolio-button svgName="send mail"    text="Mail"    type="anchor" url="mailto:hello@gavinsawyer.dev"></portfolio-button>
     </div>

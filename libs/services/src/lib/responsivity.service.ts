@@ -56,14 +56,6 @@ export class ResponsivityService {
         isPlatformServer(platform_id) ? take<Appearance>(1) : filter<Appearance>((): boolean => true)
       );
     this
-      .getBreakpointObservable = (breakpoint: number): Observable<boolean> => BreakpointObserver
-      .observe("(max-width: " + breakpoint + "rem)")
-      .pipe<BreakpointState, boolean, boolean>(
-        shareReplay<BreakpointState>(),
-        map<BreakpointState, boolean>((breakpointState: BreakpointState): boolean => breakpointState.matches),
-        isPlatformServer(platform_id) ? take<boolean>(1) : filter<boolean>((): boolean => true)
-      );
-    this
       .getTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
         fontSize?: number,
         lineHeight?: number,
@@ -84,8 +76,6 @@ export class ResponsivityService {
 
   public readonly backgroundAppearanceObservable: Observable<Appearance>;
   public readonly foregroundAppearanceObservable: Observable<Appearance>;
-
-  public readonly getBreakpointObservable: (breakpoint: number) => Observable<boolean>;
 
   public readonly adjustTextAreaRows: (messageTextAreaElement: HTMLTextAreaElement, options: {
     fontSize?: number,

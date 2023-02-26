@@ -18,8 +18,9 @@
     &:hover
       cursor: pointer
 
-    > div a
-      color: inherit
+    #spacer
+      @media (max-width: 51.580078125rem)
+        display: none !important
 
   @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     button,

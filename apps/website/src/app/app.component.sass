@@ -41,8 +41,17 @@
         margin: 0 calc(-50vw + 50%)
         border-radius: 0
 
-    router-outlet
-      display: none
+    & > div
+      display: flex
+      flex-direction: row !important
+      gap: 1rem
+      justify-content: center
+
+      router-outlet
+        display: none
+
+      @media (max-width: 51.580078125rem)
+        flex-direction: column !important
 
   footer
     margin: 1rem -2rem -1rem

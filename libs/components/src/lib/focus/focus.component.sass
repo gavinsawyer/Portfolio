@@ -30,6 +30,10 @@
     p
       font-size: 0.85rem
       margin-bottom: 0
+      max-width: 12rem
+
+      @media (max-width: 51.580078125rem)
+        max-width: 100%
 
   @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     &,

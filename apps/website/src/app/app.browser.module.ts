@@ -31,7 +31,7 @@ const baseTitle: string = "Gavin Sawyer";
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideAnalytics((): Analytics => getAnalytics()),
     provideAuth((): Auth => getAuth()),
-    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions(injector))),
+    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions())),
     provideFirestore((): Firestore => getFirestore()),
     provideFunctions((): Functions => getFunctions()),
     ReactiveFormsModule,

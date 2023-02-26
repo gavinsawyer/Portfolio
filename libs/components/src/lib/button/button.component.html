@@ -5,7 +5,7 @@
     fxLayout="column">
     {{ text }}
   </div>
-  <div [fxFlex]="'0 1 ' + svg.offsetWidth + 'px'" [fxHide]="!(responsivityService.getBreakpointObservable(51.580078125) | async)" fxLayout="column"></div>
+  <div id="spacer" [fxFlex]="'0 1 ' + svg.offsetWidth + 'px'" fxLayout="column"></div>
 </ng-template>
 
 <a

@@ -14,8 +14,7 @@
   <h3>
     {{ (focusService.focusObservable | async) }}
   </h3>
-  <p
-    [ngStyle]="{'max-width': (responsivityService.getBreakpointObservable(51.580078125) | async) ? '100%' : '12rem'}">
+  <p>
     Gavin {{ (focusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
   </p>
 </div>
