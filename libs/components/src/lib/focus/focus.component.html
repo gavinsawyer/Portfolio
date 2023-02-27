@@ -1,10 +1,7 @@
 <div
-  class="indicator">
-  <img [src]="(focusService.focusObservable | async) && (responsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/focus/' + (focusService.focusObservable | async) + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg' : ''" [alt]="(focusService.focusObservable | async) ? (focusService.focusObservable | async) + ' focus icon' : 'Focus icon'">
-</div>
-<div
-  class="liveBadge">
-  <img [src]="'/assets/icons/live badge.svg'" alt="Live status">
+  class="indicator"
+  [ngStyle]="{'height': svg.offsetWidth + 'px'}">
+  <img #svg [src]="(focusService.focusObservable | async) ? '/assets/icons/focus/' + (focusService.focusObservable | async) + '.svg' : ''" [alt]="(focusService.focusObservable | async) ? (focusService.focusObservable | async) + ' focus icon' : 'Focus icon'">
 </div>
 <div
   class="description">
