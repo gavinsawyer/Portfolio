@@ -1,7 +1,7 @@
-import { BreakpointObserver, BreakpointState }                       from "@angular/cdk/layout";
-import { DOCUMENT, isPlatformServer }                                from "@angular/common";
-import { Inject, Injectable, PLATFORM_ID }                           from "@angular/core";
-import { BehaviorSubject, filter, fromEvent, map, Observable, take } from "rxjs";
+import { BreakpointObserver, BreakpointState }         from "@angular/cdk/layout";
+import { DOCUMENT, isPlatformServer }                  from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID }             from "@angular/core";
+import { BehaviorSubject, fromEvent, map, Observable } from "rxjs";
 
 
 type Appearance = "light" | "dark"
@@ -13,10 +13,10 @@ export class ResponsivityService {
 
   constructor(
     @Inject(DOCUMENT)
-    Document: Document,
+      document: Document,
 
     @Inject(PLATFORM_ID)
-    platform_id: string,
+      platformId: string,
 
     BreakpointObserver: BreakpointObserver,
   ) {
@@ -42,16 +42,14 @@ export class ResponsivityService {
     this
       .backgroundAppearanceObservable = BreakpointObserver
       .observe("(prefers-color-scheme: light)")
-      .pipe<Appearance | undefined, Appearance | undefined>(
-        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformServer(platform_id) ? undefined : (breakpointState.matches ? "light" : "dark")),
-        isPlatformServer(platform_id) ? take<Appearance | undefined>(1) : filter<Appearance | undefined>((): boolean => true)
+      .pipe<Appearance | undefined>(
+        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformServer(platformId) ? undefined : (breakpointState.matches ? "light" : "dark"))
       );
     this
       .foregroundAppearanceObservable = BreakpointObserver
       .observe("(prefers-color-scheme: dark)")
-      .pipe<Appearance | undefined, Appearance | undefined>(
-        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformServer(platform_id) ? undefined : (breakpointState.matches ? "light" : "dark")),
-        isPlatformServer(platform_id) ? take<Appearance | undefined>(1) : filter<Appearance | undefined>((): boolean => true)
+      .pipe<Appearance | undefined>(
+        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformServer(platformId) ? undefined : (breakpointState.matches ? "light" : "dark"))
       );
     this
       .getTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
@@ -61,12 +59,9 @@ export class ResponsivityService {
         max?: number,
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
     this
-      .scrollPositionObservable = (Document.defaultView ? fromEvent<Event>(Document.defaultView, "scroll").pipe<number>(
+      .scrollPositionObservable = (document.defaultView ? fromEvent<Event>(document.defaultView, "scroll").pipe<number>(
         map<Event, number>((): number => window.scrollY || 0)
-      ) : (new BehaviorSubject<number>(0)).asObservable())
-      .pipe<number>(
-        isPlatformServer(platform_id) ? take<number>(1) : filter<number>((): boolean => true)
-      );
+      ) : (new BehaviorSubject<number>(0)).asObservable());
   }
 
   public readonly scrollPositionObservable: Observable<number>;

@@ -1,6 +1,6 @@
 import { isPlatformServer }                           from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID } from "@angular/core";
-import { BehaviorSubject, filter, Observable, take }  from "rxjs";
+import { BehaviorSubject, Observable }                from "rxjs";
 
 
 @Injectable({
@@ -10,7 +10,7 @@ export class EllipsesService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-    platform_id: string,
+      platformId: string,
   ) {
     this
       .ellipsesInterval = setInterval((): void => this.ellipsesSubject.next(this.ellipsesSubject.value == "..." ? "." : this.ellipsesSubject.value + "."), 800);
@@ -19,12 +19,9 @@ export class EllipsesService implements OnDestroy {
     this
       .ellipsesObservable = this
       .ellipsesSubject
-      .asObservable()
-      .pipe<string>(
-        isPlatformServer(platform_id) ? take<string>(1) : filter<string>((): boolean => true)
-      );
+      .asObservable();
 
-    isPlatformServer(platform_id) && clearInterval(this.ellipsesInterval);
+    isPlatformServer(platformId) && clearInterval(this.ellipsesInterval);
   }
 
   private readonly ellipsesSubject: BehaviorSubject<string>;

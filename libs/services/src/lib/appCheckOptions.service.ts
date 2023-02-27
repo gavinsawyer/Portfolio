@@ -11,10 +11,10 @@ export class AppCheckOptionsService {
 
   constructor(
     @Inject(PLATFORM_ID)
-    platform_id: string,
+      platformId: string,
   ) {
     this
-      .appCheckOptions = (): AppCheckOptions => isPlatformServer(platform_id) ? {
+      .appCheckOptions = (): AppCheckOptions => isPlatformServer(platformId) ? {
         isTokenAutoRefreshEnabled: false,
         provider: new CustomProvider({
           getToken: (): Promise<AppCheckToken> => Promise.resolve({

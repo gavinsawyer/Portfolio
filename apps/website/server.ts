@@ -6,7 +6,6 @@ import * as express      from 'express';
 import {existsSync}      from 'fs';
 import {join}            from 'path';
 
-import {REQUEST_PATH}    from './src/app/app.server.module';
 import {AppServerModule} from './src/main.server';
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -39,10 +38,6 @@ export function app(): express.Express {
           provide: APP_BASE_HREF,
           useValue: req.baseUrl,
         },
-        {
-          provide: REQUEST_PATH,
-          useValue: req.path,
-        }
       ],
     });
   });

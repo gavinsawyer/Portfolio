@@ -1,8 +1,6 @@
-import { isPlatformServer }                                                                                                                                                                                                                                                                                 from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                                                                                                                                                                                                                                       from "@angular/core";
-import { makeStateKey, TransferState }                                                                                                                                                                                                                                                                      from "@angular/platform-browser";
 import { ActivationEnd, ActivationStart, ChildActivationEnd, ChildActivationStart, GuardsCheckEnd, GuardsCheckStart, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, ResolveEnd, ResolveStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterEvent, RoutesRecognized, Scroll } from "@angular/router";
-import { Subject, filter, Observable, take, BehaviorSubject }                                                                                                                                                                                                                                               from "rxjs";
+import { Subject, filter, Observable, shareReplay }                                                                                                                                                                                                                                                         from "rxjs";
 
 
 @Injectable({
@@ -12,10 +10,9 @@ export class UrlService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-    platform_id: string,
+      platformId: string,
 
     Router: Router,
-    TransferState: TransferState,
   ) {
     this
       .router = Router;
@@ -28,29 +25,25 @@ export class UrlService implements OnDestroy {
       .subscribe((navigationEnd: NavigationEnd): void => this.urlSubject.next(navigationEnd.url))
       .unsubscribe;
     this
-      .urlSubject = new BehaviorSubject<string>(TransferState.get<string>(makeStateKey<string>("requestPath"), "/"));
+      .urlSubject = new Subject<string>();
     this
       .urlObservable = this
       .urlSubject
       .asObservable()
-      .pipe<string>(
-        isPlatformServer(platform_id) ? take<string>(1) : filter<string>((): boolean => true)
+      .pipe(
+        shareReplay<string>()
       );
-
-    isPlatformServer(platform_id) && this
-      .unsubscribeRouterEvents();
   }
 
   private readonly router: Router;
-  private readonly unsubscribeRouterEvents?: () => void;
+  private readonly unsubscribeRouterEvents: () => void;
   private readonly urlSubject: Subject<string>;
 
   public readonly urlObservable: Observable<string>;
 
   ngOnDestroy(): void {
     this
-      .unsubscribeRouterEvents
-      ?.();
+      .unsubscribeRouterEvents();
   }
 
 }

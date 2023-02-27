@@ -1,9 +1,9 @@
-import { isPlatformBrowser, isPlatformServer }                                                                  from "@angular/common";
+import { isPlatformBrowser }                                                                                    from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                                           from "@angular/core";
 import { UserCredential }                                                                                       from "@angular/fire/auth";
 import { doc, DocumentReference, DocumentSnapshot, Firestore, FirestoreError, onSnapshot, setDoc, Unsubscribe } from "@angular/fire/firestore";
 import { MessageDocument }                                                                                      from "@portfolio/interfaces";
-import { BehaviorSubject, filter, firstValueFrom, map, Observable, take }                                       from "rxjs";
+import { BehaviorSubject, filter, firstValueFrom, map, Observable }                                             from "rxjs";
 import { AuthenticationService }                                                                                from "./authentication.service";
 
 
@@ -14,7 +14,7 @@ export class MessagesService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-    platform_id: string,
+      platformId: string,
 
     AuthenticationService: AuthenticationService,
     Firestore: Firestore,
@@ -32,12 +32,9 @@ export class MessagesService implements OnDestroy {
     this
       .sentMessageObservable = this
       .sentMessageSubject
-      .asObservable()
-      .pipe<MessageDocument | undefined>(
-        isPlatformServer(platform_id) ? take<MessageDocument | undefined>(1) : filter<MessageDocument | undefined>((): boolean => true)
-      );
+      .asObservable();
 
-    isPlatformBrowser(platform_id) && ((callback: (userCredential: UserCredential) => void): void => ((userCredential?: UserCredential): void => userCredential ? callback(userCredential) : ((): void => {
+    isPlatformBrowser(platformId) && ((callback: (userCredential: UserCredential) => void): void => ((userCredential?: UserCredential): void => userCredential ? callback(userCredential) : ((): void => {
       firstValueFrom(AuthenticationService.userCredentialObservable.pipe(
         filter<UserCredential | undefined>((userCredential?: UserCredential): boolean => !!userCredential),
         map<UserCredential | undefined, UserCredential>((userCredential?: UserCredential): UserCredential => userCredential as UserCredential)
@@ -54,11 +51,11 @@ export class MessagesService implements OnDestroy {
     });
   }
 
+  private readonly sentMessageSubject: BehaviorSubject<MessageDocument | undefined>;
   private unsubscribeSentMessageDocumentOnSnapshot?: Unsubscribe;
 
   public readonly createMessage: (messageDocument: MessageDocument) => void;
   public readonly sentMessageObservable: Observable<MessageDocument | undefined>;
-  public readonly sentMessageSubject: BehaviorSubject<MessageDocument | undefined>;
 
 
   ngOnDestroy(): void {

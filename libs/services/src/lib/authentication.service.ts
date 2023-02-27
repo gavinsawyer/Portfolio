@@ -1,7 +1,7 @@
-import { isPlatformBrowser, isPlatformServer }       from "@angular/common";
-import { Inject, Injectable, PLATFORM_ID }           from "@angular/core";
-import { Auth, signInAnonymously, UserCredential }   from "@angular/fire/auth";
-import { BehaviorSubject, filter, Observable, take } from "rxjs";
+import { isPlatformBrowser }                       from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID }         from "@angular/core";
+import { Auth, signInAnonymously, UserCredential } from "@angular/fire/auth";
+import { BehaviorSubject, Observable }             from "rxjs";
 
 
 @Injectable({
@@ -11,7 +11,7 @@ export class AuthenticationService {
 
   constructor(
     @Inject(PLATFORM_ID)
-    platform_id: string,
+      platformId: string,
 
     Auth: Auth,
   ) {
@@ -20,12 +20,9 @@ export class AuthenticationService {
     this
       .userCredentialObservable = this
       .userCredentialSubject
-      .asObservable()
-      .pipe<UserCredential | undefined>(
-        isPlatformServer(platform_id) ? take<UserCredential | undefined>(1) : filter<UserCredential | undefined>((): boolean => true)
-      );
+      .asObservable();
 
-    isPlatformBrowser(platform_id) && signInAnonymously(Auth)
+    isPlatformBrowser(platformId) && signInAnonymously(Auth)
       .then((userCredential: UserCredential): void => this.userCredentialSubject.next(userCredential))
       .catch((reason: any): void => console.error(reason));
   }

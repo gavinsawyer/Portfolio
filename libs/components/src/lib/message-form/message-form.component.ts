@@ -1,10 +1,9 @@
-import { isPlatformServer }                                                                from "@angular/common";
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild } from "@angular/core";
 import { Analytics, logEvent }                                                             from "@angular/fire/analytics";
 import { FormBuilder, FormGroup }                                                          from "@angular/forms";
 import { MessageDocument }                                                                 from "@portfolio/interfaces";
 import { AuthenticationService, EllipsesService, MessagesService, ResponsivityService }    from "@portfolio/services";
-import { BehaviorSubject, filter, Observable, shareReplay, Subscription, take }            from "rxjs";
+import { BehaviorSubject, Observable, Subscription }                                       from "rxjs";
 
 
 type MessageFormStatus = "unsent" | "sending" | "sent"
@@ -18,7 +17,7 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-    platform_id: string,
+      platformId: string,
 
     Analytics: Analytics,
     AuthenticationService: AuthenticationService,
@@ -46,11 +45,7 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
     this
       .statusObservable = this
       .statusSubject
-      .asObservable()
-      .pipe<MessageFormStatus, MessageFormStatus>(
-        shareReplay<MessageFormStatus>(),
-        isPlatformServer(platform_id) ? take<MessageFormStatus>(1) : filter<MessageFormStatus>((): boolean => true)
-      );
+      .asObservable();
     this
       .submit = (): void => {
         this
