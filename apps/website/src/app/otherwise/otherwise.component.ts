@@ -1,5 +1,9 @@
-import { Component }  from "@angular/core";
-import { UrlService } from "@portfolio/services";
+import { isPlatformServer }                         from "@angular/common";
+import { Component, Inject, Optional, PLATFORM_ID } from "@angular/core";
+import { UrlService }                               from "@portfolio/services";
+import { REQUEST }                                  from "@nguniversal/express-engine/tokens";
+import { Request }                                  from "express"
+
 
 @Component({
   selector: 'websiteApp-otherwise',
@@ -9,10 +13,21 @@ import { UrlService } from "@portfolio/services";
 export class OtherwiseComponent {
 
   constructor(
+    @Inject(PLATFORM_ID)
+      platformId: string,
+
+    @Optional()
+    @Inject(REQUEST)
+      request: Request,
+
     UrlService: UrlService,
   ) {
     this
       .urlService = UrlService;
+
+    isPlatformServer(platformId) && request
+      .res
+      ?.status(404);
   }
 
   public urlService: UrlService;

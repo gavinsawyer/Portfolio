@@ -1,6 +1,7 @@
+import { isPlatformServer }                                                                                                                                                                                                                                                                                 from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                                                                                                                                                                                                                                       from "@angular/core";
 import { ActivationEnd, ActivationStart, ChildActivationEnd, ChildActivationStart, GuardsCheckEnd, GuardsCheckStart, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, ResolveEnd, ResolveStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterEvent, RoutesRecognized, Scroll } from "@angular/router";
-import { Subject, filter, Observable, shareReplay }                                                                                                                                                                                                                                                         from "rxjs";
+import { Subject, filter, Observable, shareReplay, take }                                                                                                                                                                                                                                                   from "rxjs";
 
 
 @Injectable({
@@ -30,8 +31,9 @@ export class UrlService implements OnDestroy {
       .urlObservable = this
       .urlSubject
       .asObservable()
-      .pipe(
-        shareReplay<string>()
+      .pipe<string, string>(
+        shareReplay<string>(),
+        isPlatformServer(platformId) ? take<string>(1) : filter<string>((): boolean => true)
       );
   }
 

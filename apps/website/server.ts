@@ -39,7 +39,7 @@ export function app(): express.Express {
           useValue: req.baseUrl,
         },
       ],
-    });
+    }, (error: Error, html?: string) => res.send(html).end());
   });
 
   return server;
