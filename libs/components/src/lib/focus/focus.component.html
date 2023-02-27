@@ -6,7 +6,7 @@
 <div
   class="description">
   <h3>
-    {{ (focusService.focusObservable | async) }}
+    {{ (focusService.focusObservable | async) + ((focusService.focusObservable | async) !== "Do Not Disturb" ? " Focus" : "")  }}
   </h3>
   <p>
     Gavin {{ (focusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
