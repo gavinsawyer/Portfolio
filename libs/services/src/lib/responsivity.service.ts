@@ -1,5 +1,5 @@
 import { BreakpointObserver, BreakpointState }         from "@angular/cdk/layout";
-import { DOCUMENT, isPlatformServer }                  from "@angular/common";
+import { DOCUMENT, isPlatformBrowser }                 from "@angular/common";
 import { Inject, Injectable, PLATFORM_ID }             from "@angular/core";
 import { BehaviorSubject, fromEvent, map, Observable } from "rxjs";
 
@@ -43,13 +43,13 @@ export class ResponsivityService {
       .backgroundAppearanceObservable = BreakpointObserver
       .observe("(prefers-color-scheme: light)")
       .pipe<Appearance | undefined>(
-        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformServer(platformId) ? undefined : (breakpointState.matches ? "light" : "dark"))
+        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : undefined)
       );
     this
       .foregroundAppearanceObservable = BreakpointObserver
       .observe("(prefers-color-scheme: dark)")
       .pipe<Appearance | undefined>(
-        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformServer(platformId) ? undefined : (breakpointState.matches ? "light" : "dark"))
+        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : undefined)
       );
     this
       .getTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {

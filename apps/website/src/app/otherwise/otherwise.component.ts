@@ -1,8 +1,8 @@
-import { isPlatformServer }                         from "@angular/common";
+import { isPlatformBrowser }                        from "@angular/common";
 import { Component, Inject, Optional, PLATFORM_ID } from "@angular/core";
 import { UrlService }                               from "@portfolio/services";
-import { REQUEST }                                  from "@nguniversal/express-engine/tokens";
-import { Request }                                  from "express"
+import { RESPONSE }                                 from "@nguniversal/express-engine/tokens";
+import { Response }                                 from "express"
 
 
 @Component({
@@ -17,17 +17,16 @@ export class OtherwiseComponent {
       platformId: string,
 
     @Optional()
-    @Inject(REQUEST)
-      request: Request,
+    @Inject(RESPONSE)
+      response: Response,
 
     UrlService: UrlService,
   ) {
     this
       .urlService = UrlService;
 
-    isPlatformServer(platformId) && request
-      .res
-      ?.status(404);
+    isPlatformBrowser(platformId) || response
+      .status(404);
   }
 
   public urlService: UrlService;

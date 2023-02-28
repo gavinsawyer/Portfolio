@@ -41,15 +41,15 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
     this
       .responsivityService = ResponsivityService;
     this
-      .statusSubject = new BehaviorSubject<MessageFormStatus>("unsent");
+      .messageStatusSubject = new BehaviorSubject<MessageFormStatus>("unsent");
     this
-      .statusObservable = this
-      .statusSubject
+      .messageStatusObservable = this
+      .messageStatusSubject
       .asObservable();
     this
       .submit = (): void => {
         this
-          .statusSubject
+          .messageStatusSubject
           .next("sending");
 
         logEvent(Analytics, "form_submit", {
@@ -63,20 +63,18 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
       };
     this
       .unsubscribeSentMessageDocument = MessagesService
-      .sentMessageObservable
-      .subscribe((sentMessageDocument?: MessageDocument): void => sentMessageDocument && ((): void => {
+      .messageObservable
+      .subscribe((messageDocument?: MessageDocument): void => messageDocument && ((): void => {
         this
           .formGroup
-          .setValue({
-            ...sentMessageDocument,
-          });
+          .setValue(messageDocument);
 
         this
           .formGroup
           .disable();
 
         this
-          .statusSubject
+          .messageStatusSubject
           .next("sent");
       })())
       .unsubscribe;
@@ -87,14 +85,14 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
   })
   private nameInputElementRef!: ElementRef;
 
-  private readonly statusSubject: BehaviorSubject<MessageFormStatus>;
+  private readonly messageStatusSubject: BehaviorSubject<MessageFormStatus>;
   private readonly unsubscribeSentMessageDocument: Subscription["unsubscribe"];
 
   public readonly authenticationService: AuthenticationService;
   public readonly ellipsesService: EllipsesService;
   public readonly formGroup: FormGroup;
+  public readonly messageStatusObservable: Observable<MessageFormStatus>;
   public readonly responsivityService: ResponsivityService;
-  public readonly statusObservable: Observable<MessageFormStatus>;
   public readonly submit: () => void;
 
   ngAfterViewInit(): void {

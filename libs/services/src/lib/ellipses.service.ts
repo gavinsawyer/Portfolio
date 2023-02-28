@@ -1,7 +1,9 @@
-import { isPlatformServer }                           from "@angular/common";
+import { isPlatformBrowser }                          from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID } from "@angular/core";
-import { BehaviorSubject, Observable }                from "rxjs";
+import { BehaviorSubject, filter, Observable, take }  from "rxjs";
 
+
+type Ellipses = "." | ".." | "..."
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +15,24 @@ export class EllipsesService implements OnDestroy {
       platformId: string,
   ) {
     this
-      .ellipsesInterval = setInterval((): void => this.ellipsesSubject.next(this.ellipsesSubject.value == "..." ? "." : this.ellipsesSubject.value + "."), 800);
+      .ellipsesInterval = setInterval((): void => this.ellipsesSubject.next(this.ellipsesSubject.value == "..." ? "." as Ellipses : this.ellipsesSubject.value + "." as Ellipses), 800);
     this
-      .ellipsesSubject = new BehaviorSubject<string>(".");
+      .ellipsesSubject = new BehaviorSubject<Ellipses>(".");
     this
       .ellipsesObservable = this
       .ellipsesSubject
-      .asObservable();
+      .asObservable()
+      .pipe<Ellipses>(
+        isPlatformBrowser(platformId) ? filter<Ellipses>((): true => true) : take<Ellipses>(1)
+      );
 
-    isPlatformServer(platformId) && clearInterval(this.ellipsesInterval);
+    isPlatformBrowser(platformId) || clearInterval(this.ellipsesInterval);
   }
 
-  private readonly ellipsesSubject: BehaviorSubject<string>;
+  private readonly ellipsesSubject: BehaviorSubject<Ellipses>;
   private readonly ellipsesInterval: NodeJS.Timeout;
 
-  public readonly ellipsesObservable: Observable<string>;
+  public readonly ellipsesObservable: Observable<Ellipses>;
 
   ngOnDestroy(): void {
     clearInterval(this.ellipsesInterval);
