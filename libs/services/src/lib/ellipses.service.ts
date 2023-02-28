@@ -12,7 +12,7 @@ export class EllipsesService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
   ) {
     this
       .ellipsesInterval = setInterval((): void => this.ellipsesSubject.next(this.ellipsesSubject.value == "..." ? "." as Ellipses : this.ellipsesSubject.value + "." as Ellipses), 800);

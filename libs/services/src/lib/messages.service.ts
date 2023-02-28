@@ -14,16 +14,16 @@ export class MessagesService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
 
-    AuthenticationService: AuthenticationService,
-    Firestore: Firestore,
+    private readonly authenticationService: AuthenticationService,
+    private readonly firestore: Firestore,
   ) {
     this
       .createMessage = (messageDocument: MessageDocument): void => {
-        firstValueFrom(AuthenticationService.userObservable)
+        firstValueFrom(authenticationService.userObservable)
           .then<void, void>((user: User): void => {
-            setDoc<MessageDocument>(doc(Firestore, "/messages/" + user.uid) as DocumentReference<MessageDocument>, messageDocument)
+            setDoc<MessageDocument>(doc(firestore, "/messages/" + user.uid) as DocumentReference<MessageDocument>, messageDocument)
               .then<void, void>((): void => this.messageSubject.next(messageDocument))
               .catch<void>((reason: any): void => console.error(reason));
           })
@@ -40,10 +40,10 @@ export class MessagesService implements OnDestroy {
         isPlatformBrowser(platformId) ? filter<MessageDocument>((): true => true) : take<MessageDocument>(1)
       );
     this
-      .unsubscribeMessageDocumentOnSnapshot = AuthenticationService
+      .unsubscribeMessageDocumentOnSnapshot = authenticationService
       .userObservable
       .pipe<DocumentSnapshot<MessageDocument>, MessageDocument | undefined, MessageDocument | undefined>(
-        mergeMap<User, Observable<DocumentSnapshot<MessageDocument>>>((user: User): Observable<DocumentSnapshot<MessageDocument>> => docSnapshots<MessageDocument>(doc(Firestore, "/messages/" + user.uid) as DocumentReference<MessageDocument>)),
+        mergeMap<User, Observable<DocumentSnapshot<MessageDocument>>>((user: User): Observable<DocumentSnapshot<MessageDocument>> => docSnapshots<MessageDocument>(doc(firestore, "/messages/" + user.uid) as DocumentReference<MessageDocument>)),
         map<DocumentSnapshot<MessageDocument>, MessageDocument | undefined>((messageDocumentSnapshot: DocumentSnapshot<MessageDocument>): MessageDocument | undefined => messageDocumentSnapshot.data()),
         catchError<MessageDocument | undefined, Observable<MessageDocument>>(() => (new Subject<MessageDocument>()).asObservable())
       )

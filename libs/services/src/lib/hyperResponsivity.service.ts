@@ -9,16 +9,16 @@ type Appearance = "light" | "dark"
 @Injectable({
   providedIn: 'root',
 })
-export class ResponsivityService {
+export class HyperResponsivityService {
 
   constructor(
     @Inject(DOCUMENT)
-      document: Document,
+    private readonly document: Document,
 
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
 
-    BreakpointObserver: BreakpointObserver,
+    private readonly breakpointObserver: BreakpointObserver,
   ) {
     this
       .adjustTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
@@ -40,13 +40,13 @@ export class ResponsivityService {
           .height = "auto";
       };
     this
-      .backgroundAppearanceObservable = BreakpointObserver
+      .backgroundAppearanceObservable = breakpointObserver
       .observe("(prefers-color-scheme: light)")
       .pipe<Appearance | undefined>(
         map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : undefined)
       );
     this
-      .foregroundAppearanceObservable = BreakpointObserver
+      .foregroundAppearanceObservable = breakpointObserver
       .observe("(prefers-color-scheme: dark)")
       .pipe<Appearance | undefined>(
         map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : undefined)
@@ -59,9 +59,12 @@ export class ResponsivityService {
         max?: number,
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
     this
-      .scrollPositionObservable = (document.defaultView ? fromEvent<Event>(document.defaultView, "scroll").pipe<number>(
+      .scrollPositionObservable = document
+      .defaultView ? fromEvent<Event>(document.defaultView, "scroll")
+      .pipe<number>(
         map<Event, number>((): number => window.scrollY || 0)
-      ) : (new BehaviorSubject<number>(0)).asObservable());
+      ) : (new BehaviorSubject<number>(0))
+      .asObservable();
   }
 
   public readonly scrollPositionObservable: Observable<number>;

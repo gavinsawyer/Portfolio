@@ -19,7 +19,7 @@
         Message:
       </h4>
     </div>
-    <textarea #messageHTMLTextAreaElement aria-labelledby="messageInputLabel" formControlName="message"  (input)="responsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });" [required]="true" [rows]="responsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })"></textarea>
+    <textarea #messageHTMLTextAreaElement aria-labelledby="messageInputLabel" formControlName="message"  (input)="hyperResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });" [required]="true" [rows]="hyperResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })"></textarea>
     <div>
       <h4 style="margin: 0.5rem 0 0;">
         Enter one or both:
@@ -33,6 +33,6 @@
     type="submit"
     disabled=""
     [disabled]="(!(authenticationService.userObservable | async)) || (!formGroup.valid) || (messageStatusObservable | async) !== 'unsent'">
-    <img alt="Send message icon" height="14.7578px" [src]="(responsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/submit.' + ((authenticationService.userObservable | async) && formGroup.valid && (messageStatusObservable | async) == 'unsent' ? ((responsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light') : (responsivityService.foregroundAppearanceObservable | async)) + '.svg' : ''" width="11.8438px">
+    <img alt="Send message icon" height="14.7578px" [src]="(hyperResponsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/submit.' + ((authenticationService.userObservable | async) && formGroup.valid && (messageStatusObservable | async) == 'unsent' ? ((hyperResponsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light') : (hyperResponsivityService.foregroundAppearanceObservable | async)) + '.svg' : ''" width="11.8438px">
   </button>
 </form>

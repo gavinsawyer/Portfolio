@@ -1,5 +1,5 @@
-import { Component }                         from "@angular/core";
-import { FocusService, ResponsivityService } from "@portfolio/services";
+import { Component }    from "@angular/core";
+import { FocusService } from "@portfolio/services";
 
 
 @Component({
@@ -10,16 +10,7 @@ import { FocusService, ResponsivityService } from "@portfolio/services";
 export class FocusComponent {
 
   constructor(
-    FocusService: FocusService,
-    ResponsivityService: ResponsivityService,
-  ) {
-    this
-      .focusService = FocusService;
-    this
-      .responsivityService = ResponsivityService;
-  }
-
-  public readonly focusService: FocusService;
-  public readonly responsivityService: ResponsivityService;
+    public readonly focusService: FocusService,
+  ) {}
 
 }

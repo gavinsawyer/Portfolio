@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild } from "@angular/core";
-import { Analytics, logEvent }                                                             from "@angular/fire/analytics";
-import { FormBuilder, FormGroup }                                                          from "@angular/forms";
-import { MessageDocument }                                                                 from "@portfolio/interfaces";
-import { AuthenticationService, EllipsesService, MessagesService, ResponsivityService }    from "@portfolio/services";
-import { BehaviorSubject, Observable, Subscription }                                       from "rxjs";
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild }   from "@angular/core";
+import { Analytics, logEvent }                                                               from "@angular/fire/analytics";
+import { FormBuilder, FormGroup }                                                            from "@angular/forms";
+import { MessageDocument }                                                                   from "@portfolio/interfaces";
+import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService } from "@portfolio/services";
+import { BehaviorSubject, Observable, Subscription }                                         from "rxjs";
 
 
 type MessageFormStatus = "unsent" | "sending" | "sent"
@@ -17,29 +17,24 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
 
-    Analytics: Analytics,
-    AuthenticationService: AuthenticationService,
-    EllipsesService: EllipsesService,
-    FormBuilder: FormBuilder,
-    MessagesService: MessagesService,
-    ResponsivityService: ResponsivityService,
+    private readonly analytics: Analytics,
+    private readonly formBuilder: FormBuilder,
+    private readonly messagesService: MessagesService,
+
+    public readonly authenticationService: AuthenticationService,
+    public readonly ellipsesService: EllipsesService,
+    public readonly hyperResponsivityService: HyperResponsivityService,
   ) {
     this
-      .authenticationService = AuthenticationService;
-    this
-      .ellipsesService = EllipsesService;
-    this
-      .formGroup = FormBuilder
+      .formGroup = formBuilder
       .group({
         name: [""],
         message: [""],
         phone: [""],
         email: [""],
       });
-    this
-      .responsivityService = ResponsivityService;
     this
       .messageStatusSubject = new BehaviorSubject<MessageFormStatus>("unsent");
     this
@@ -52,17 +47,17 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
           .messageStatusSubject
           .next("sending");
 
-        logEvent(Analytics, "form_submit", {
+        logEvent(analytics, "form_submit", {
           "form_id": "",
           "form_name": "message",
           "form_destination": window.location.protocol + "//" + window.location.hostname + (window.location.port !== "" ? ":" + window.location.port : "") + "/",
         });
 
-        MessagesService
+      messagesService
           .createMessage(this.formGroup.value);
       };
     this
-      .unsubscribeSentMessageDocument = MessagesService
+      .unsubscribeSentMessageDocument = messagesService
       .messageObservable
       .subscribe((messageDocument?: MessageDocument): void => messageDocument && ((): void => {
         this
@@ -88,11 +83,8 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
   private readonly messageStatusSubject: BehaviorSubject<MessageFormStatus>;
   private readonly unsubscribeSentMessageDocument: Subscription["unsubscribe"];
 
-  public readonly authenticationService: AuthenticationService;
-  public readonly ellipsesService: EllipsesService;
   public readonly formGroup: FormGroup;
   public readonly messageStatusObservable: Observable<MessageFormStatus>;
-  public readonly responsivityService: ResponsivityService;
   public readonly submit: () => void;
 
   ngAfterViewInit(): void {

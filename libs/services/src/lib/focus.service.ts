@@ -14,10 +14,10 @@ export class FocusService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
 
-    AuthenticationService: AuthenticationService,
-    Firestore: Firestore,
+    private readonly authenticationService: AuthenticationService,
+    private readonly firestore: Firestore,
   ) {
     this
       .focusSubject = new Subject<string>();
@@ -30,10 +30,10 @@ export class FocusService implements OnDestroy {
         isPlatformBrowser(platformId) ? filter<string>((): true => true) : take<string>(1)
       );
     this
-      .unsubscribeShortcutsAPIPublicDocumentOnSnapshot = AuthenticationService
+      .unsubscribeShortcutsAPIPublicDocumentOnSnapshot = authenticationService
       .userObservable
       .pipe<DocumentSnapshot<ShortcutsAPIPublicDocument>, ShortcutsAPIPublicDocument | undefined, ShortcutsAPIPublicDocument | undefined>(
-        mergeMap<User, Observable<DocumentSnapshot<ShortcutsAPIPublicDocument>>>((): Observable<DocumentSnapshot<ShortcutsAPIPublicDocument>> => docSnapshots<ShortcutsAPIPublicDocument>(doc(Firestore, "environment/public") as DocumentReference<ShortcutsAPIPublicDocument>)),
+        mergeMap<User, Observable<DocumentSnapshot<ShortcutsAPIPublicDocument>>>((): Observable<DocumentSnapshot<ShortcutsAPIPublicDocument>> => docSnapshots<ShortcutsAPIPublicDocument>(doc(firestore, "environment/public") as DocumentReference<ShortcutsAPIPublicDocument>)),
         map<DocumentSnapshot<ShortcutsAPIPublicDocument>, ShortcutsAPIPublicDocument | undefined>((shortcutsAPIPublicDocumentSnapshot: DocumentSnapshot<ShortcutsAPIPublicDocument>): ShortcutsAPIPublicDocument | undefined => shortcutsAPIPublicDocumentSnapshot.data()),
         catchError<ShortcutsAPIPublicDocument | undefined, Observable<ShortcutsAPIPublicDocument>>(() => (new Subject<ShortcutsAPIPublicDocument>()).asObservable())
       )

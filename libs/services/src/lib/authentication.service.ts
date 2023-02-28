@@ -11,12 +11,12 @@ export class AuthenticationService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
 
-    Auth: Auth,
+    private readonly auth: Auth,
   ) {
     this
-      .unsubscribeAuthStateChanged = onAuthStateChanged(Auth, ((user: User | null): void => {
+      .unsubscribeAuthStateChanged = onAuthStateChanged(auth, ((user: User | null): void => {
         user && this
           .userSubject
           .next(user);
@@ -31,7 +31,7 @@ export class AuthenticationService implements OnDestroy {
         shareReplay<User>()
       );
 
-    isPlatformBrowser(platformId) ? signInAnonymously(Auth) : this
+    isPlatformBrowser(platformId) ? signInAnonymously(auth) : this
       .unsubscribeAuthStateChanged();
   }
 

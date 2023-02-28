@@ -14,21 +14,16 @@ export class OtherwiseComponent {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
 
     @Optional()
     @Inject(RESPONSE)
-      response: Response,
+    private readonly response: Response,
 
-    UrlService: UrlService,
+    public readonly urlService: UrlService,
   ) {
-    this
-      .urlService = UrlService;
-
     isPlatformBrowser(platformId) || response
       .status(404);
   }
-
-  public urlService: UrlService;
 
 }

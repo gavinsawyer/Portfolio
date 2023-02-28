@@ -1,6 +1,6 @@
-import { Component }                         from '@angular/core';
-import { Analytics, logEvent }               from "@angular/fire/analytics";
-import { FocusService, ResponsivityService } from "@portfolio/services";
+import { Component }           from '@angular/core';
+import { Analytics, logEvent } from "@angular/fire/analytics";
+import { FocusService }        from "@portfolio/services";
 
 @Component({
   selector: 'portfolio-aside',
@@ -10,20 +10,14 @@ import { FocusService, ResponsivityService } from "@portfolio/services";
 export class AsideComponent {
 
   constructor(
-    Analytics: Analytics,
-    FocusService: FocusService,
-    ResponsivityService: ResponsivityService,
+    private readonly analytics: Analytics,
+
+    public readonly focusService: FocusService,
   ) {
     this
-      .focusService = FocusService;
-    this
-      .logClickAddToContactsEvent = (): void => logEvent(Analytics, "click_addToContacts");
-    this
-      .responsivityService = ResponsivityService;
+      .logClickAddToContactsEvent = (): void => logEvent(analytics, "click_addToContacts");
   }
 
-  public readonly focusService: FocusService;
   public readonly logClickAddToContactsEvent: () => void;
-  public readonly responsivityService: ResponsivityService;
 
 }

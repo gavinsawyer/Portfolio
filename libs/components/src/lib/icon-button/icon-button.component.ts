@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { ResponsivityService }                    from "@portfolio/services";
+import { HyperResponsivityService }               from "@portfolio/services";
 
 @Component({
   selector: 'portfolio-icon-button',
@@ -9,18 +9,14 @@ import { ResponsivityService }                    from "@portfolio/services";
 export class IconButtonComponent {
 
   constructor(
-    ResponsivityService: ResponsivityService,
+    public readonly hyperResponsivityService: HyperResponsivityService,
   ) {
     this
       .click = new EventEmitter<void>();
-    this
-      .responsivityService = ResponsivityService;
   }
 
   @Output()
   click: EventEmitter<void>;
-
-  public readonly responsivityService: ResponsivityService;
 
   @Input()
   svgHeight?: string;

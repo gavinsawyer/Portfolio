@@ -1,5 +1,5 @@
 <ng-template #buttonTemplate>
-  <img alt="Icon" [attr.height]="svgHeight" [attr.width]="svgWidth" [src]="(responsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/' + svgName + '.' + (responsivityService.foregroundAppearanceObservable | async) + '.svg' : ''">
+  <img alt="Icon" [attr.height]="svgHeight" [attr.width]="svgWidth" [src]="(hyperResponsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/' + svgName + '.' + (hyperResponsivityService.foregroundAppearanceObservable | async) + '.svg' : ''">
 </ng-template>
 
 <a

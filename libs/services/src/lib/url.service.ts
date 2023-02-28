@@ -10,14 +10,12 @@ export class UrlService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
 
-    Router: Router,
+    private readonly router: Router,
   ) {
     this
-      .router = Router;
-    this
-      .unsubscribeRouterEvents = Router
+      .unsubscribeRouterEvents = router
       .events
       .pipe<NavigationEnd>(
         filter<RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd, NavigationEnd>((routerEvent: RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd): routerEvent is NavigationEnd => routerEvent instanceof NavigationEnd)
@@ -35,7 +33,6 @@ export class UrlService implements OnDestroy {
       );
   }
 
-  private readonly router: Router;
   private readonly unsubscribeRouterEvents: () => void;
   private readonly urlSubject: Subject<string>;
 

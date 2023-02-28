@@ -11,7 +11,7 @@ export class AppCheckOptionsService {
 
   constructor(
     @Inject(PLATFORM_ID)
-      platformId: string,
+    private readonly platformId: Object,
   ) {
     this
       .appCheckOptions = (): AppCheckOptions => isPlatformBrowser(platformId) ? {
