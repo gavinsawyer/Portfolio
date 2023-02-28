@@ -5,6 +5,4 @@ import { Component } from "@angular/core";
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.sass'],
 })
-export class PrivacyComponent {
-  constructor() {}
-}
+export class PrivacyComponent {}
