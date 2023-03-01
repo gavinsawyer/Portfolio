@@ -12,6 +12,7 @@ html
     padding: 1rem 2rem
 
     a
+      color: $primary
       text-decoration: none
 
       &:hover
@@ -45,15 +46,11 @@ html
         margin-top: 0
 
       a
-        color: inherit
         font-weight: bolder
 
     @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
       color: $body-foreground
       background-color: $body-background
-
-      a
-        color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
 
       h1
         color: call(get-function($degrade-foreground-function), $body-foreground,  0%)

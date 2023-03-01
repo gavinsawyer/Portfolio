@@ -91,6 +91,9 @@
       color: $footer-foreground
       background-color: $footer-background
 
+      a
+        color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+
   @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
 
   @media (prefers-color-scheme: dark)
