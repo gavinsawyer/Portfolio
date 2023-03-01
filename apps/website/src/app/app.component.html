@@ -11,7 +11,7 @@
       </div>
     </header>
     <div>
-      <portfolio-aside [ngClass]="{'urlRoot': (urlService.urlObservable | async) == '/'}"></portfolio-aside>
+      <portfolio-aside [ngClass]="{'urlRoot': (pathService.pathObservable | async) == '/'}"></portfolio-aside>
       <router-outlet></router-outlet>
     </div>
   </div>

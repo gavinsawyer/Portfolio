@@ -6,7 +6,7 @@ import { Subject, filter, Observable, shareReplay }                             
 @Injectable({
   providedIn: 'root'
 })
-export class UrlService implements OnDestroy {
+export class PathService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
@@ -20,13 +20,13 @@ export class UrlService implements OnDestroy {
       .pipe<NavigationEnd>(
         filter<RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd, NavigationEnd>((routerEvent: RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd): routerEvent is NavigationEnd => routerEvent instanceof NavigationEnd)
       )
-      .subscribe((navigationEnd: NavigationEnd): void => this.urlSubject.next(navigationEnd.url))
+      .subscribe((navigationEnd: NavigationEnd): void => this.pathSubject.next(navigationEnd.url.split("?")[0]))
       .unsubscribe;
     this
-      .urlSubject = new Subject<string>();
+      .pathSubject = new Subject<string>();
     this
-      .urlObservable = this
-      .urlSubject
+      .pathObservable = this
+      .pathSubject
       .asObservable()
       .pipe<string>(
         shareReplay<string>()
@@ -34,9 +34,9 @@ export class UrlService implements OnDestroy {
   }
 
   private readonly unsubscribeRouterEvents: () => void;
-  private readonly urlSubject: Subject<string>;
+  private readonly pathSubject: Subject<string>;
 
-  public readonly urlObservable: Observable<string>;
+  public readonly pathObservable: Observable<string>;
 
   ngOnDestroy(): void {
     this

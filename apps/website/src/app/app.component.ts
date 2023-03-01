@@ -1,5 +1,5 @@
-import { Component }                            from "@angular/core";
-import { HyperResponsivityService, UrlService } from "@portfolio/services";
+import { Component }                             from "@angular/core";
+import { HyperResponsivityService, PathService } from "@portfolio/services";
 
 
 @Component({
@@ -11,7 +11,7 @@ export class AppComponent {
 
   constructor(
     public readonly hyperResponsivityService: HyperResponsivityService,
-    public readonly urlService: UrlService,
+    public readonly pathService: PathService,
   ) {}
 
 }

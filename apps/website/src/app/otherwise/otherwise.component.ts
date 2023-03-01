@@ -1,6 +1,6 @@
 import { isPlatformBrowser }                        from "@angular/common";
 import { Component, Inject, Optional, PLATFORM_ID } from "@angular/core";
-import { UrlService }                               from "@portfolio/services";
+import { PathService }                              from "@portfolio/services";
 import { RESPONSE }                                 from "@nguniversal/express-engine/tokens";
 import { Response }                                 from "express"
 
@@ -20,7 +20,7 @@ export class OtherwiseComponent {
     @Inject(RESPONSE)
     private readonly response: Response,
 
-    public readonly urlService: UrlService,
+    public readonly pathService: PathService,
   ) {
     isPlatformBrowser(platformId) || response
       .status(404);
