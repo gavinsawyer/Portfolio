@@ -46,8 +46,6 @@
     "@angular/platform-server": "~14.2.0",
     "@angular/router": "~14.2.0",
     "@nguniversal/express-engine": "~14.2.0",
-    "base64url": "^3.0.1",
-    "fido2-lib": "^3.3.5",
     "firebase-admin": "^11.5.0",
     "ngx-mask": "^14.2.4",
     "normalize.css": "^8.0.1",
