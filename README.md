@@ -1,29 +1,21 @@
+## GavinSawyer.dev
+A simple personal website built with Firebase, Nx, and Angular 15.
+### Monorepo projects:
+> #### [@portfolio/website](apps/website) `Angular Universal` `AngularFire` `Analytics` `Auth` `AppCheck w/ reCAPTCHA` `Firestore` `Sass`
+> Online at: [gavinsawyer.dev](https://gavinsawyer.dev) \
+> A simple personal website built for extensibility and serverless operation. Shows reCAPTCHA-authenticated users a contact form and the author's live Focus mode (`Do Not Disturb`/`Driving`/etc.). Analytics are collected on user interactions like scrolling, sending messages, and following links. Users are tracked across devices where possible.
+> #### `% nx deploy` Deploy to Cloud Run
+> #### `% nx serve-ssr` Run local development server
 
+> #### [@portfolio/components](libs/components) `Sass`
+> A library of Angular components used in the website.
 
-# GavinSawyer.dev
+> #### [@portfolio/interfaces](libs/interfaces)
+> A library of TypeScript interfaces used throughout the repository.
 
-This repo is an Nx workspace and local Firebase project. The default Nx project is my personal website. The Firebase Cloud Functions enable home automations with Shortcuts, and showing my devices' Focus in real-time on the website.
-
-- [Go to Website](apps/website)
-- [Go to Cloud Functions](functions)
-
-## Clone
-
-In order to clone this project,
-
-- Clone this repo locally.
-- Create and configure a Firebase project.
-  - Structure database in Cloud Firestore.
-  - Enable AppCheck for Cloud Firestore.
-  - Enable necessary APIs in Google Cloud Platform, restrict public API keys to your domain and localhost:4200.
-- Create a reCAPTCHA v3 site.
-  - Add your domain and localhost:4200 to your reCAPTCHA registration.
-- Replace the following data with yours:
-  - my Firebase project ID `portfolio-a59e2`
-  - my Firebase project region `us-central1`
-  - my Firebase and reCAPTCHA API keys (see [apps/website/src/environments](apps/website/src/environments)).
-- Run `nx deploy`.
-
-## CI/CD
-
-This repo is configured for CI/CD with Nx, Firebase Hosting, and GitHub Actions. 
+> #### [@portfolio/services](libs/services) `Auth` `Firestore` `Angular CDK` `Router`
+> A library of Angular services 
+### Firebase Functions package:
+> #### [functions](functions)
+> #### `% firebase deploy --only functions`
+> This package consists of six Google Cloud Functions, which are used to update documents from iOS Shortcuts and Automations. When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an automation which calls [setFocus](functions/shortcuts/focus/set.js), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts). Additional functions for [location](functions/shortcuts/location) and [time](functions/shortcuts/time) enable home automations to respond to the user's state. iOS Shortcuts and HomeKit Automations both access the user's state via [getAll](functions/shortcuts/all/get.js) and set conditions accordingly. 

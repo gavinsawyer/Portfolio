@@ -1,3 +1,4 @@
-# services
+[back to Portfolio](../../)
 
-This library was generated with [Nx](https://nx.dev).
+> ## @portfolio/services
+> A library of Angular services

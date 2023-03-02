@@ -4,7 +4,6 @@ import { FirebaseApp, initializeApp, provideFirebaseApp }                       
 import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
 import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
-import { Functions, getFunctions, provideFunctions }                                             from "@angular/fire/functions";
 import { ReactiveFormsModule }                                                                   from "@angular/forms";
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { RouterModule }                                                                          from "@angular/router";
@@ -31,7 +30,6 @@ const baseTitle: string = "Gavin Sawyer";
     provideAuth((): Auth => getAuth()),
     provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions())),
     provideFirestore((): Firestore => getFirestore()),
-    provideFunctions((): Functions => getFunctions()),
     ReactiveFormsModule,
     RouterModule.forRoot(
       [

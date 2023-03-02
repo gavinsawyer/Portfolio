@@ -44,3 +44,5 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+.git-version.json

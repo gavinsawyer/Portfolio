@@ -1,3 +1,4 @@
-# components
+[back to Portfolio](../../)
 
-This library was generated with [Nx](https://nx.dev).
+> ## @portfolio/components
+> A library of Angular components used in the website.

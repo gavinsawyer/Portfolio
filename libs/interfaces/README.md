@@ -1,3 +1,4 @@
-# interfaces
+[back to Portfolio](../../)
 
-This library was generated with [Nx](https://nx.dev).
+> ## @portfolio/interfaces
+> A library of TypeScript interfaces used throughout the repository.

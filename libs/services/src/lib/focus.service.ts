@@ -1,5 +1,5 @@
 import { isPlatformBrowser }                                                                       from "@angular/common";
-import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                              from '@angular/core';
+import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                              from "@angular/core";
 import { User }                                                                                    from "@angular/fire/auth";
 import { doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore }                       from "@angular/fire/firestore";
 import { ShortcutsAPIPublicDocument }                                                              from "@portfolio/interfaces";
