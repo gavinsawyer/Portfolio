@@ -1,13 +1,13 @@
 {
+  "name": "website",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/website/src",
   "prefix": "websiteApp",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/website/browser",
         "index": "apps/website/src/index.html",
@@ -21,9 +21,7 @@
           "apps/website/src/robots.txt",
           "apps/website/src/sitemap.xml"
         ],
-        "styles": [
-          "apps/website/src/styles.sass"
-        ],
+        "styles": ["apps/website/src/styles.sass"],
         "scripts": []
       },
       "configurations": {
@@ -80,10 +78,7 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/website/**/*.ts",
-          "apps/website/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/website/**/*.ts", "apps/website/**/*.html"]
       }
     },
     "server": {
@@ -110,7 +105,21 @@
           "extractLicenses": false
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "production",
+      "production": {
+        "outputHashing": "media",
+        "fileReplacements": [
+          {
+            "replace": "apps/website/src/environments/environment.ts",
+            "with": "apps/website/src/environments/environment.prod.ts"
+          }
+        ]
+      },
+      "development": {
+        "optimization": false,
+        "sourceMap": true,
+        "extractLicenses": false
+      }
     },
     "serve-ssr": {
       "executor": "@nguniversal/builders:ssr-dev-server",
@@ -129,10 +138,7 @@
     "prerender": {
       "executor": "@nguniversal/builders:prerender",
       "options": {
-        "routes": [
-          "/",
-          "/privacy"
-        ]
+        "routesFile": "apps/website/src/app/routes.txt"
       },
       "configurations": {
         "production": {
@@ -154,7 +160,7 @@
         "firebaseProject": "portfolio-a59e2",
         "firebaseHostingSite": "portfolio-a59e2",
         "functionName": "ssr-website",
-        "functionsNodeVersion": "16.18",
+        "functionsNodeVersion": "18.14",
         "region": "us-central1",
         "browserTarget": "website:build:production",
         "serverTarget": "website:server:production",
