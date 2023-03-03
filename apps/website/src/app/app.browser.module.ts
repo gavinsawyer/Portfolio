@@ -2,9 +2,8 @@ import { Injector, NgModule }                                                   
 import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
-import { Auth, getAuth, provideAuth }                from "@angular/fire/auth";
-import { APP_VERSION, COLLECTION_ENABLED }           from "@angular/fire/compat/analytics";
-import { Firestore, getFirestore, provideFirestore } from "@angular/fire/firestore";
+import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
+import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
 import { ReactiveFormsModule }                                                                   from "@angular/forms";
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { RouterModule }                                                                          from "@angular/router";
@@ -16,8 +15,6 @@ import { environment }                                                          
 import { AppComponent }                                                                          from "./app.component";
 
 
-const { version }       = require("../../../../package.json")
-const { raw }           = require("../../../../.git-version.json");
 const baseTitle: string = "Gavin Sawyer";
 
 @NgModule({
@@ -63,14 +60,6 @@ const baseTitle: string = "Gavin Sawyer";
   providers: [
     ScreenTrackingService,
     UserTrackingService,
-    {
-      provide: APP_VERSION,
-      useValue: version + "-" + raw,
-    },
-    {
-      provide: COLLECTION_ENABLED,
-      useValue: environment.production,
-    }
   ],
   bootstrap: [AppComponent],
 })

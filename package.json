@@ -57,5 +57,5 @@
     "test": "nx test",
     "postinstall": "ngcc --properties es2020 browser module main"
   },
-  "version": "1.0.1"
+  "version": "1.0.0"
 }
