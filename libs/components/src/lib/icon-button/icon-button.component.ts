@@ -1,10 +1,18 @@
+import { CommonModule }                           from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { HyperResponsivityService }               from "@portfolio/services";
 
+
 @Component({
-  selector: 'portfolio-icon-button',
-  templateUrl: './icon-button.component.html',
-  styleUrls: ['./icon-button.component.sass'],
+  imports: [
+    CommonModule,
+  ],
+  selector: "portfolio-icon-button",
+  standalone: true,
+  styleUrls: [
+    "./icon-button.component.sass",
+  ],
+  templateUrl: "./icon-button.component.html",
 })
 export class IconButtonComponent {
 

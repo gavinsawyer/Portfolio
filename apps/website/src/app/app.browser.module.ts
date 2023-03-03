@@ -8,7 +8,7 @@ import { ReactiveFormsModule }                                                  
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { RouterModule }                                                                          from "@angular/router";
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common"
-import { ComponentsModule }                                                                      from "@portfolio/components";
+import { AsideComponent }                                                                        from "@portfolio/components";
 import { AppCheckOptionsService }                                                                from "@portfolio/services";
 import { NgxMaskModule }                                                                         from "ngx-mask";
 import { environment }                                                                           from "../environments/environment";
@@ -20,10 +20,10 @@ const baseTitle: string = "Gavin Sawyer";
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AsideComponent,
     BrowserModule.withServerTransition({
       appId: "serverApp",
     }),
-    ComponentsModule,
     NgxMaskModule.forRoot(),
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideAnalytics((): Analytics => getAnalytics()),

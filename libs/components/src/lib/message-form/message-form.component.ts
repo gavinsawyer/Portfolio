@@ -1,17 +1,27 @@
+import { CommonModule }                                                                      from "@angular/common";
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild }   from "@angular/core";
 import { Analytics, logEvent }                                                               from "@angular/fire/analytics";
-import { FormBuilder, FormGroup }                                                            from "@angular/forms";
+import { FormBuilder, FormGroup, ReactiveFormsModule }                                       from "@angular/forms";
 import { MessageDocument }                                                                   from "@portfolio/interfaces";
 import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService } from "@portfolio/services";
+import { NgxMaskModule }                                                                     from "ngx-mask";
 import { BehaviorSubject, Observable, Subscription }                                         from "rxjs";
 
 
 type MessageFormStatus = "unsent" | "sending" | "sent"
 
 @Component({
-  selector: 'portfolio-message-form',
-  templateUrl: './message-form.component.html',
-  styleUrls: ['./message-form.component.sass'],
+  imports: [
+    CommonModule,
+    NgxMaskModule,
+    ReactiveFormsModule,
+  ],
+  selector: "portfolio-message-form",
+  standalone: true,
+  styleUrls: [
+    "./message-form.component.sass",
+  ],
+  templateUrl: "./message-form.component.html",
 })
 export class MessageFormComponent implements AfterViewInit, OnDestroy {
 
