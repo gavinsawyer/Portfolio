@@ -1,9 +1,10 @@
-import { Component }                from "@angular/core";
+import { Component } from "@angular/core";
 
 
 @Component({
   selector: 'websiteApp-home',
-  templateUrl: './home.component.html',
+  standalone: true,
   styleUrls: ['./home.component.sass'],
+  templateUrl: './home.component.html',
 })
 export class HomeComponent {}

@@ -1,4 +1,4 @@
-import { isPlatformBrowser }                        from "@angular/common";
+import { CommonModule, isPlatformBrowser }          from "@angular/common";
 import { Component, Inject, Optional, PLATFORM_ID } from "@angular/core";
 import { PathService }                              from "@portfolio/services";
 import { RESPONSE }                                 from "@nguniversal/express-engine/tokens";
@@ -6,9 +6,15 @@ import { Response }                                 from "express"
 
 
 @Component({
-  selector: 'websiteApp-otherwise',
-  templateUrl: './otherwise.component.html',
-  styleUrls: ['./otherwise.component.sass'],
+  imports: [
+    CommonModule,
+  ],
+  selector: "websiteApp-otherwise",
+  standalone: true,
+  styleUrls: [
+    "./otherwise.component.sass",
+  ],
+  templateUrl: "./otherwise.component.html",
 })
 export class OtherwiseComponent {
 

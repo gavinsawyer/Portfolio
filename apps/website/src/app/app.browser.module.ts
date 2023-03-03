@@ -34,18 +34,18 @@ const baseTitle: string = "Gavin Sawyer";
     RouterModule.forRoot(
       [
         {
-          loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
+          loadComponent: () => import("./home/home.component").then((m) => m.HomeComponent),
           path: "",
           pathMatch: "full",
           title: baseTitle,
         },
         {
-          loadChildren: () => import("./privacy/privacy.module").then((m) => m.PrivacyModule),
+          loadComponent: () => import("./privacy/privacy.component").then((m) => m.PrivacyComponent),
           path: "privacy",
           title: baseTitle + " | Privacy",
         },
         {
-          loadChildren: () => import("./otherwise/otherwise.module").then((m) => m.OtherwiseModule),
+          loadComponent: () => import("./otherwise/otherwise.component").then((m) => m.OtherwiseComponent),
           path: "**",
           title: baseTitle + " | Page not found",
         },
