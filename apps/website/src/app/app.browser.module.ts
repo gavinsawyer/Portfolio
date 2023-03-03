@@ -10,7 +10,6 @@ import { RouterModule }                                                         
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common"
 import { AsideComponent }                                                                        from "@portfolio/components";
 import { AppCheckOptionsService }                                                                from "@portfolio/services";
-import { NgxMaskModule }                                                                         from "ngx-mask";
 import { environment }                                                                           from "../environments/environment";
 import { AppComponent }                                                                          from "./app.component";
 
@@ -24,12 +23,11 @@ const baseTitle: string = "Gavin Sawyer";
     BrowserModule.withServerTransition({
       appId: "serverApp",
     }),
-    NgxMaskModule.forRoot(),
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
-    provideAnalytics((): Analytics => getAnalytics()),
-    provideAuth((): Auth => getAuth()),
-    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions())),
     provideFirestore((): Firestore => getFirestore()),
+    provideAnalytics((): Analytics => getAnalytics()),
+    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions())),
+    provideAuth((): Auth => getAuth()),
     ReactiveFormsModule,
     RouterModule.forRoot(
       [

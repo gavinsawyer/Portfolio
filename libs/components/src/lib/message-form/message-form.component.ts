@@ -4,7 +4,7 @@ import { Analytics, logEvent }                                                  
 import { FormBuilder, FormGroup, ReactiveFormsModule }                                       from "@angular/forms";
 import { MessageDocument }                                                                   from "@portfolio/interfaces";
 import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService } from "@portfolio/services";
-import { NgxMaskModule }                                                                     from "ngx-mask";
+import { NgxMaskDirective, provideNgxMask }                                                  from "ngx-mask";
 import { BehaviorSubject, Observable, Subscription }                                         from "rxjs";
 
 
@@ -13,8 +13,11 @@ type MessageFormStatus = "unsent" | "sending" | "sent"
 @Component({
   imports: [
     CommonModule,
-    NgxMaskModule,
+    NgxMaskDirective,
     ReactiveFormsModule,
+  ],
+  providers: [
+    provideNgxMask(),
   ],
   selector: "portfolio-message-form",
   standalone: true,

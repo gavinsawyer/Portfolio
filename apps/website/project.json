@@ -11,7 +11,7 @@
         "command": "node git-version.js"
       }
     },
-    "build": {
+    "browser": {
       "dependsOn": ["prebuild"],
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
@@ -69,10 +69,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "website:build:production"
+          "browserTarget": "website:browser:production"
         },
         "development": {
-          "browserTarget": "website:build:development"
+          "browserTarget": "website:browser:development"
         }
       },
       "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
       "dependsOn": ["prebuild"],
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "website:build"
+        "browserTarget": "website:browser"
       }
     },
     "lint": {
@@ -136,11 +136,11 @@
       "executor": "@nguniversal/builders:ssr-dev-server",
       "configurations": {
         "development": {
-          "browserTarget": "website:build:development",
+          "browserTarget": "website:browser:development",
           "serverTarget": "website:server:development"
         },
         "production": {
-          "browserTarget": "website:build:production",
+          "browserTarget": "website:browser:production",
           "serverTarget": "website:server:production"
         }
       },
@@ -154,11 +154,11 @@
       },
       "configurations": {
         "production": {
-          "browserTarget": "website:build:production",
+          "browserTarget": "website:browser:production",
           "serverTarget": "website:server:production"
         },
         "development": {
-          "browserTarget": "website:build:development",
+          "browserTarget": "website:browser:development",
           "serverTarget": "website:server:development"
         }
       },
@@ -175,7 +175,7 @@
         "functionName": "ssr-website",
         "functionsNodeVersion": "18.14",
         "region": "us-central1",
-        "browserTarget": "website:build:production",
+        "browserTarget": "website:browser:production",
         "serverTarget": "website:server:production",
         "prerenderTarget": "website:prerender:production",
         "outputPath": "dist/apps/website/run"
