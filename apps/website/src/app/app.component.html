@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="{'foregroundAppearance': hyperResponsivityService.foregroundAppearanceObservable | async, 'path': pathService.pathObservable | async} as context">
   <div>
     <header [ngClass]="{'raised': ((hyperResponsivityService.scrollPositionObservable | async) || 0) > 16}">
       <div>
@@ -10,8 +10,8 @@
         </h2>
       </div>
     </header>
-    <div>
-      <portfolio-aside *ngIf="hyperResponsivityService.foregroundAppearanceObservable | async as foregroundAppearance" [foregroundAppearance]="foregroundAppearance" [ngClass]="{'pathRoot': (pathService.pathObservable | async) == '/'}"></portfolio-aside>
+    <div *ngIf="context.foregroundAppearance && context.path">
+      <portfolio-aside [foregroundAppearance]="context.foregroundAppearance" [ngClass]="{'pathRoot': context.path == '/'}"></portfolio-aside>
       <router-outlet></router-outlet>
     </div>
   </div>

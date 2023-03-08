@@ -1,5 +1,5 @@
-import { Component }                             from "@angular/core";
-import { HyperResponsivityService, PathService } from "@portfolio/services";
+import { Component }                                           from "@angular/core";
+import { FocusService, HyperResponsivityService, PathService } from "@portfolio/services";
 
 
 const { version } = require("../../../../package.json");
@@ -13,6 +13,7 @@ const { raw }     = require("../../../../.git-version.json");
 export class AppComponent {
 
   constructor(
+    public readonly focusService: FocusService,
     public readonly hyperResponsivityService: HyperResponsivityService,
     public readonly pathService: PathService,
   ) {}

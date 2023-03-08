@@ -6,7 +6,7 @@
       <portfolio-button [foregroundAppearance]="foregroundAppearance" svgHeight="13.4766px" svgName="send mail"    svgWidth="17.25px"   text="Mail"    type="anchor" url="mailto:hello@gavinsawyer.dev"></portfolio-button>
     </div>
     <portfolio-button [foregroundAppearance]="foregroundAppearance" svgHeight="17.3359px" svgName="add to contacts" svgWidth="22.3828px" text="Add to contacts" type="anchor" url="/assets/Gavin Sawyer.vcf" (click)="logClickAddToContactsEvent();"></portfolio-button>
-    <portfolio-focus *ngIf="(focusService.focusObservable | async) as focus" [focus]="focus"></portfolio-focus>
+    <portfolio-focus *ngIf="focusService.focusObservable | async as focus" [focus]="focus"></portfolio-focus>
   </div>
   <portfolio-photo></portfolio-photo>
 </aside>
