@@ -1,14 +1,13 @@
-import { CommonModule }                                                                      from "@angular/common";
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild }   from "@angular/core";
-import { Analytics, logEvent }                                                               from "@angular/fire/analytics";
-import { FormBuilder, FormGroup, ReactiveFormsModule }                                       from "@angular/forms";
-import { MessageDocument }                                                                   from "@portfolio/interfaces";
-import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService } from "@portfolio/services";
-import { NgxMaskDirective, provideNgxMask }                                                  from "ngx-mask";
-import { BehaviorSubject, Observable, Subscription }                                         from "rxjs";
+import { CommonModule }                                                                     from "@angular/common";
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild }  from "@angular/core";
+import { Analytics, logEvent }                                                              from "@angular/fire/analytics";
+import { FormBuilder, FormGroup, ReactiveFormsModule }                                      from "@angular/forms";
+import { MessageDocument }                                                                  from "@portfolio/interfaces";
+import { AuthenticationService, EllipsesService, HyperResponsivityService, MessageService } from "@portfolio/services";
+import { MessageFormStatus }                                                                from "@portfolio/types";
+import { NgxMaskDirective, provideNgxMask }                                                 from "ngx-mask";
+import { BehaviorSubject, Observable, Subscription }                                        from "rxjs";
 
-
-type MessageFormStatus = "unsent" | "sending" | "sent"
 
 @Component({
   imports: [
@@ -34,7 +33,7 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
 
     private readonly analytics: Analytics,
     private readonly formBuilder: FormBuilder,
-    private readonly messagesService: MessagesService,
+    private readonly messagesService: MessageService,
 
     public readonly authenticationService: AuthenticationService,
     public readonly ellipsesService: EllipsesService,
@@ -66,12 +65,12 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
           "form_destination": window.location.protocol + "//" + window.location.hostname + (window.location.port !== "" ? ":" + window.location.port : "") + "/",
         });
 
-      messagesService
-          .createMessage(this.formGroup.value);
+        messagesService
+          .createMessageDocument(this.formGroup.value);
       };
     this
       .unsubscribeSentMessageDocument = messagesService
-      .messageObservable
+      .messageDocumentObservable
       .subscribe((messageDocument?: MessageDocument): void => messageDocument && ((): void => {
         this
           .formGroup

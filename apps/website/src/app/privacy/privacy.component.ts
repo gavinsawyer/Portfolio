@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: 'websiteApp-privacy',
+  selector: "websiteApp-privacy",
   standalone: true,
-  styleUrls: ['./privacy.component.sass'],
-  templateUrl: './privacy.component.html',
+  styleUrls: [
+    "./privacy.component.sass",
+  ],
+  templateUrl: "./privacy.component.html",
 })
 export class PrivacyComponent {}

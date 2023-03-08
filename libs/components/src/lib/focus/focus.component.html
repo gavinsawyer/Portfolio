@@ -1,14 +1,14 @@
 <div
   class="indicator"
   [ngStyle]="{'height': svg.offsetWidth + 'px'}">
-  <img #svg [src]="(focusService.focusObservable | async) ? '/assets/icons/focus/' + (focusService.focusObservable | async) + '.svg' : ''" [alt]="(focusService.focusObservable | async) ? (focusService.focusObservable | async) + ' focus icon' : 'Focus icon'">
+  <img #svg [src]="focus ? '/assets/icons/focus/' + focus + '.svg' : ''" [alt]="focus + (focus == 'Do Not Disturb' ? '' : ' Focus') + ' icon'">
 </div>
 <div
   class="description">
   <h3>
-    {{ (focusService.focusObservable | async) + ((focusService.focusObservable | async) !== "Do Not Disturb" ? " Focus" : "")  }}
+    {{ focus + (focus == "Do Not Disturb" ? "" : " Focus") }}
   </h3>
   <p>
-    Gavin {{ (focusService.focusObservable | async) == "Personal" ? "will" : "won't"  }} see your message right away.
+    Gavin {{ focus == "Personal" ? "will" : "won't"  }} see your message right away.
   </p>
 </div>

@@ -1,11 +1,11 @@
 import { isPlatformBrowser }                                              from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID }                     from "@angular/core";
 import { Auth, onAuthStateChanged, signInAnonymously, Unsubscribe, User } from "@angular/fire/auth";
-import { Observable, shareReplay, Subject }                               from "rxjs";
+import { identity, Observable, shareReplay, startWith, Subject }          from "rxjs";
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthenticationService implements OnDestroy {
 
@@ -27,7 +27,8 @@ export class AuthenticationService implements OnDestroy {
       .userObservable = this
       .userSubject
       .asObservable()
-      .pipe<User>(
+      .pipe<User, User>(
+        auth.currentUser ? startWith(auth.currentUser) : identity,
         shareReplay<User>()
       );
 

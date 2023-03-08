@@ -17,7 +17,7 @@ export class AppComponent {
     public readonly pathService: PathService,
   ) {}
 
-  public readonly version = version;
-  public readonly raw = raw;
+  public readonly version: string = version;
+  public readonly raw: string = raw;
 
 }

@@ -24,24 +24,27 @@ export class ButtonComponent {
   }
 
   @Output()
-  click: EventEmitter<void>;
+  public readonly click: EventEmitter<void>;
 
   @Input()
-  svgHeight?: string;
+  public foregroundAppearance?: string;
 
   @Input()
-  svgName?: string;
+  public svgHeight?: string;
 
   @Input()
-  svgWidth?: string;
+  public svgName?: string;
 
   @Input()
-  text?: string;
+  public svgWidth?: string;
 
   @Input()
-  type?: string;
+  public text?: string;
 
   @Input()
-  url?: string;
+  public type?: string;
+
+  @Input()
+  public url?: string;
 
 }

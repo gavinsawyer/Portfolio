@@ -1,6 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component }    from "@angular/core";
-import { FocusService } from "@portfolio/services";
+import { Component, Input }    from "@angular/core";
 
 
 @Component({
@@ -16,8 +15,7 @@ import { FocusService } from "@portfolio/services";
 })
 export class FocusComponent {
 
-  constructor(
-    public readonly focusService: FocusService,
-  ) {}
+  @Input("focus")
+  public focus?: string;
 
 }

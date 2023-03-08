@@ -26,7 +26,7 @@ const baseTitle: string = "Gavin Sawyer";
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideFirestore((): Firestore => getFirestore()),
     provideAnalytics((): Analytics => getAnalytics()),
-    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions())),
+    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions)),
     provideAuth((): Auth => getAuth()),
     ReactiveFormsModule,
     RouterModule.forRoot(

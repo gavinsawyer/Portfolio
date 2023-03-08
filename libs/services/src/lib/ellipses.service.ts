@@ -1,12 +1,11 @@
 import { isPlatformBrowser }                          from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID } from "@angular/core";
-import { BehaviorSubject, filter, Observable, take }  from "rxjs";
+import { BehaviorSubject, Observable }                from "rxjs";
+import { Ellipses }                                   from "../../../types/src/ellipses";
 
-
-type Ellipses = "." | ".." | "..."
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class EllipsesService implements OnDestroy {
 
@@ -21,10 +20,7 @@ export class EllipsesService implements OnDestroy {
     this
       .ellipsesObservable = this
       .ellipsesSubject
-      .asObservable()
-      .pipe<Ellipses>(
-        isPlatformBrowser(platformId) ? filter<Ellipses>((): true => true) : take<Ellipses>(1)
-      );
+      .asObservable();
 
     isPlatformBrowser(platformId) || clearInterval(this.ellipsesInterval);
   }

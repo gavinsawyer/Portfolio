@@ -5,7 +5,7 @@ import { environment }                                                         f
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AppCheckOptionsService {
 
@@ -14,7 +14,7 @@ export class AppCheckOptionsService {
     private readonly platformId: Object,
   ) {
     this
-      .appCheckOptions = (): AppCheckOptions => isPlatformBrowser(platformId) ? {
+      .appCheckOptions =  isPlatformBrowser(platformId) ? {
         isTokenAutoRefreshEnabled: true,
         provider: new ReCaptchaV3Provider(environment.recaptcha),
       } : {
@@ -28,6 +28,6 @@ export class AppCheckOptionsService {
       };
   }
 
-  public readonly appCheckOptions: () => AppCheckOptions
+  public readonly appCheckOptions: AppCheckOptions
 
 }
