@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+
+    strategy:
+      matrix:
+        node-version: [ 18.15.0 ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+  prerender:
+    needs: [ setup ]
+
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+
+    strategy:
+      matrix:
+        node-version: [ 18.5.0 ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Prerender
+        uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.11.3
+        with:
+          number-of-agents: 1
+          init-commands: |
+            npx nx-cloud start-ci-run --stop-agents-after="prerender" --agent-count=1
+          parallel-commands: |
+            npx nx-cloud record -- npx nx format:check
+          parallel-commands-on-agents: |
+            npx nx affected --target=prerender --parallel=1
+
+  deploy:
+    needs: [ prerender ]
+
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+
+    steps:
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIO_A59E2 }}'
+          channelId: live
+          projectId: portfolio-a59e2
+
+  agents:
+    name: Nx Cloud - Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.11.3
+    with:
+      number-of-agents: 1
