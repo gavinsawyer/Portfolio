@@ -1,4 +1,3 @@
-[back to Portfolio](../../)
+[back to Portfolio](../../README.md)
 
-> ## @portfolio/interfaces
-> A library of TypeScript interfaces used throughout the repository.
+> #### @portfolio/interfaces `TypeScript`

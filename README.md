@@ -1,21 +1,40 @@
 ## GavinSawyer.dev
 A simple personal website built with Firebase, Nx, and Angular 15.
-### Monorepo projects:
-> #### [@portfolio/website](apps/website) `Angular Universal` `AngularFire` `Analytics` `Auth` `AppCheck w/ reCAPTCHA` `Firestore` `Sass`
-> Online at: [gavinsawyer.dev](https://gavinsawyer.dev) \
-> A simple personal website built for extensibility and serverless operation. Shows reCAPTCHA-authenticated users a contact form and the author's live Focus mode (`Do Not Disturb`/`Driving`/etc.). Analytics are collected on user interactions like scrolling, sending messages, and following links. Users are tracked across devices where possible.
-> #### `% nx deploy` Deploy to Cloud Run
-> #### `% nx serve-ssr` Run local development server
-
+### Apps
+> #### [@portfolio/website](apps/website)
+> 
+> Online at: [gavinsawyer.dev](https://gavinsawyer.dev)
+> 
+> A simple personal website built for extensibility and serverless operation. Shows reCAPTCHA-authenticated users a contact form and the author's live Focus mode (`Do Not Disturb`/`Driving`/etc.). Analytics are collected on user interactions like scrolling, sending messages, and following links.
+> 
+> Pages:
+> - [Home](apps/website/src/app/home)
+> - [Otherwise](apps/website/src/app/otherwise)
+> - [Privacy](apps/website/src/app/privacy)
+> 
+> `% nx deploy` Deploy to Cloud Run \
+> `% nx serve-ssr` Run local development server
+### Libraries
 > #### [@portfolio/components](libs/components) `Sass`
-> A library of Angular components used in the website.
+> 
+> Angular components used in the app:
+> - [Aside](libs/components/src/lib/aside)
+> - [Button](libs/components/src/lib/button)
+> - [Focus](libs/components/src/lib/focus)
+> - [Icon Button](libs/components/src/lib/icon-button)
+> - [Message Form](libs/components/src/lib/message-form)
+> - [Photo](libs/components/src/lib/photo)
 
-> #### [@portfolio/interfaces](libs/interfaces)
-> A library of TypeScript interfaces used throughout the repository.
+> #### [@portfolio/interfaces](libs/interfaces) `TypeScript`
 
-> #### [@portfolio/services](libs/services) `Auth` `Firestore` `Angular CDK` `Router`
-> A library of Angular services 
+> #### [@portfolio/types](libs/types) `TypeScript`
+
+> #### [@portfolio/services](libs/services) `Firebase Authentication` `Firestore` `Angular CDK` `Router`
+> 
+> Angular services used in the app and components library. Services provide anonymous authentication, live data, and responsive design features. 
 ### Firebase Functions package:
 > #### [functions](functions)
-> #### `% firebase deploy --only functions`
-> This package consists of six Google Cloud Functions, which are used to update documents from iOS Shortcuts and Automations. When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an automation which calls [setFocus](functions/shortcuts/focus/set.js), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts). Additional functions for [location](functions/shortcuts/location) and [time](functions/shortcuts/time) enable home automations to respond to the user's state. iOS Shortcuts and HomeKit Automations both access the user's state via [getAll](functions/shortcuts/all/get.js) and set conditions accordingly. 
+> 
+> `% firebase deploy --only functions`
+> 
+> This package consists of six Google Cloud Functions, which are used to update documents from iOS Shortcuts and Automations. When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an automation which calls [setFocus](functions/shortcuts/focus/set.js), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts). Additional functions for [location](functions/shortcuts/location) and [time](functions/shortcuts/time) enable home automations to respond to the user's state. iOS Shortcuts and HomeKit Automations both access the user's state via [getAll](functions/shortcuts/all/get.js) and set conditions accordingly.
