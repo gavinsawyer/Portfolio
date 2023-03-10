@@ -11,9 +11,11 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - [Home](apps/website/src/app/home)
 > - [Otherwise](apps/website/src/app/otherwise)
 > - [Privacy](apps/website/src/app/privacy)
-> 
-> `% nx deploy` Deploy to Cloud Run \
-> `% nx serve-ssr` Run local development server
+>
+> `% npm run build` Create both browser and server bundles and prerender routes. \
+> `% npm run deploy` Deploy to Cloud Run \
+> `% npm run serve` Run local development server \
+> `% npm run serve-ssr` Run local development server with SSR
 ### Libraries
 > #### [@portfolio/components](libs/components) `Sass`
 > 

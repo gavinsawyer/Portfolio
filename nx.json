@@ -11,7 +11,7 @@
         "cacheableOperations": [
           "browser",
           "server",
-          "prerender"
+          "build"
         ],
         "accessToken": "MGZjYWU3ODYtODRjNi00ODRlLWE1ZWUtOTI5NWRkNzM2MTc0fHJlYWQtd3JpdGU="
       }
@@ -28,9 +28,9 @@
         "^server"
       ]
     },
-    "prerender": {
+    "build": {
       "dependsOn": [
-        "^prerender"
+        "^build"
       ]
     }
   },

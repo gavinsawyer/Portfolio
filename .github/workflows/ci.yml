@@ -22,7 +22,7 @@ jobs:
             node-modules-cache-
       - if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
-      - run: npm run prerender
+      - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

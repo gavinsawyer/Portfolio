@@ -11,5 +11,7 @@
 > - [Otherwise](src/app/otherwise)
 > - [Privacy](src/app/privacy)
 >
-> `% nx deploy` Deploy to Cloud Run \
-> `% nx serve-ssr` Run local development server
+> `% npm run build` Create both browser and server bundles and prerender routes. \
+> `% npm run deploy` Deploy to Cloud Run \
+> `% npm run serve` Run local development server \
+> `% npm run serve-ssr` Run local development server with SSR
