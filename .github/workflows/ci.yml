@@ -20,13 +20,6 @@ jobs:
           key: node-modules-cache-${{ hashFiles('package-lock.json') }}
       - if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
-      - name: Cache Nx
-        uses: actions/cache@v3
-        with:
-          path: node_modules/.cache/nx
-          key: nx-cache-${{ github.sha }}
-          restore-keys: |
-            nx-cache-
       - run: npm run prerender
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
