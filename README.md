@@ -21,7 +21,7 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > 
 > Angular components used in the app:
 > - [Aside](libs/components/src/lib/aside)
-> - [Banner](src/lib/banner)
+> - [Banner](libs/components/src/lib/banner)
 > - [Button](libs/components/src/lib/button)
 > - [Focus](libs/components/src/lib/focus)
 > - [Icon Button](libs/components/src/lib/icon-button)
