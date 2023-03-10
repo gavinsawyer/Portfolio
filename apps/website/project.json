@@ -149,8 +149,8 @@
     "prerender": {
       "dependsOn": [
         "prebuild",
-        "browser",
-        "server"
+        "^browser",
+        "^server"
       ],
       "executor": "@nguniversal/builders:prerender",
       "options": {

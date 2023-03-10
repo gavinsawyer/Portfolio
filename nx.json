@@ -10,8 +10,7 @@
       "options": {
         "cacheableOperations": [
           "browser",
-          "server",
-          "prerender"
+          "server"
         ]
       }
     }
@@ -22,10 +21,14 @@
         "^browser"
       ]
     },
-    "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
+    "server": {
+      "dependsOn": [
+        "^server"
+      ]
+    },
+    "prerender": {
+      "dependsOn": [
+        "^prerender"
       ]
     }
   },
