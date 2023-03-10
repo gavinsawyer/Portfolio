@@ -7,10 +7,10 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > 
 > A simple personal website built for extensibility and serverless operation. Shows reCAPTCHA-authenticated users a contact form and the author's live Focus mode (`Do Not Disturb`/`Driving`/etc.). Analytics are collected on user interactions like scrolling, sending messages, and following links.
 > 
-> Pages:
-> - [Home](apps/website/src/app/home)
-> - [Otherwise](apps/website/src/app/otherwise)
-> - [Privacy](apps/website/src/app/privacy)
+> Route Components:
+> - [Home](apps/website/src/app/routeComponents/home)
+> - [Otherwise](apps/website/src/app/routeComponents/otherwise)
+> - [Privacy](apps/website/src/app/routeComponents/privacy)
 >
 > `% npm run build` Create both browser and server bundles and prerender routes. \
 > `% npm run deploy` Deploy to Cloud Run \

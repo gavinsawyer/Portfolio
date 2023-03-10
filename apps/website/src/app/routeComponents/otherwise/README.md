@@ -2,4 +2,4 @@
 
 > ### Otherwise `Angular Universal` `HTML` `Sass`
 > 
-> Delivered on page not found by router. Server responds with 404 error. 
+> Delivered on route not found. Server responds with 404 error. 

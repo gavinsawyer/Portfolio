@@ -36,16 +36,24 @@
   },
   "generators": {
     "@nrwl/angular:application": {
-      "style": "sass",
+      "e2eTestRunner": "none",
       "linter": "eslint",
-      "unitTestRunner": "none",
-      "e2eTestRunner": "none"
+      "routing": true,
+      "skipTests": true,
+      "standalone": true,
+      "style": "sass",
+      "unitTestRunner": "none"
     },
     "@nrwl/angular:library": {
       "linter": "eslint",
+      "skipModule": true,
       "unitTestRunner": "none"
     },
     "@nrwl/angular:component": {
+      "displayBlock": true,
+      "export": true,
+      "skipTests": true,
+      "standalone": true,
       "style": "sass"
     }
   },

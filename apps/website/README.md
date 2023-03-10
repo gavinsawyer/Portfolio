@@ -6,10 +6,10 @@
 >
 > A simple personal website built for extensibility and serverless operation. Shows reCAPTCHA-authenticated users a contact form and the author's live Focus mode (`Do Not Disturb`/`Driving`/etc.). Analytics are collected on user interactions like scrolling, sending messages, and following links.
 >
-> Pages
-> - [Home](src/app/home)
-> - [Otherwise](src/app/otherwise)
-> - [Privacy](src/app/privacy)
+> Route Components:
+> - [Home](src/app/routeComponents/home)
+> - [Otherwise](src/app/routeComponents/otherwise)
+> - [Privacy](src/app/routeComponents/privacy)
 >
 > `% npm run build` Create both browser and server bundles and prerender routes. \
 > `% npm run deploy` Deploy to Cloud Run \
