@@ -10,7 +10,8 @@
       "options": {
         "cacheableOperations": [
           "browser",
-          "server"
+          "server",
+          "prerender"
         ],
         "accessToken": "MGZjYWU3ODYtODRjNi00ODRlLWE1ZWUtOTI5NWRkNzM2MTc0fHJlYWQtd3JpdGU="
       }
