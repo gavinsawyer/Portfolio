@@ -3,4 +3,3 @@ export * from './lib/button/button.component';
 export * from './lib/focus/focus.component';
 export * from './lib/icon-button/icon-button.component';
 export * from './lib/message-form/message-form.component';
-export * from './lib/photo/photo.component';

@@ -1,3 +1,5 @@
+@import '../../../../../apps/website/src/colors'
+
 \:host
   display: flex
   flex-basis: 17.580078125rem
@@ -36,6 +38,14 @@
 
         @media (max-width: 24.080078125rem)
           flex-direction: column
+
+    img
+      border-radius: calc(1.5rem + (14.28125px / 2))
+      box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
+      display: flex
+      flex-direction: column
+      height: auto
+      width: auto
 
     @media (max-width: 51.580078125rem)
       flex-basis: calc(100vw - 4rem)

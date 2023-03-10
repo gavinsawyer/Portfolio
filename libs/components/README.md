@@ -8,4 +8,3 @@
 > - [Focus](src/lib/focus)
 > - [Icon Button](src/lib/icon-button)
 > - [Message Form](src/lib/message-form)
-> - [Photo](src/lib/photo)

@@ -1,11 +1,10 @@
-import { CommonModule }         from "@angular/common";
-import { Component, Input }     from "@angular/core";
-import { Analytics, logEvent }  from "@angular/fire/analytics";
-import { FocusService }         from "@portfolio/services";
-import { ButtonComponent }      from "../button/button.component";
-import { FocusComponent }       from "../focus/focus.component";
-import { MessageFormComponent } from "../message-form/message-form.component";
-import { PhotoComponent }       from "../photo/photo.component";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { Component, Input }               from "@angular/core";
+import { Analytics, logEvent }            from "@angular/fire/analytics";
+import { FocusService }                   from "@portfolio/services";
+import { ButtonComponent }                from "../button/button.component";
+import { FocusComponent }                 from "../focus/focus.component";
+import { MessageFormComponent }           from "../message-form/message-form.component";
 
 
 @Component({
@@ -14,7 +13,7 @@ import { PhotoComponent }       from "../photo/photo.component";
     ButtonComponent,
     FocusComponent,
     MessageFormComponent,
-    PhotoComponent,
+    NgOptimizedImage,
   ],
   selector: "portfolio-aside",
   standalone: true,

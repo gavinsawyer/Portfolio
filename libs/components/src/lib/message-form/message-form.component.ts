@@ -41,11 +41,11 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
   ) {
     this
       .formGroup = formBuilder
-      .group({
-        name: [""],
-        message: [""],
-        phone: [""],
-        email: [""],
+      .group<MessageDocument>({
+        email: undefined,
+        message: "",
+        name: "",
+        phone: undefined,
       });
     this
       .messageStatusSubject = new BehaviorSubject<MessageFormStatus>("unsent");

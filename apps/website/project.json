@@ -140,7 +140,7 @@
         "region": "us-central1",
         "browserTarget": "website:browser:production",
         "serverTarget": "website:server:production",
-        "prerenderTarget": "website:prerender:production",
+        "prerenderTarget": "website:build:production",
         "outputPath": "dist/apps/website/run"
       }
     },

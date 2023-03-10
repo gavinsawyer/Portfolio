@@ -25,8 +25,8 @@
         Enter one or both:
       </h4>
     </div>
-    <input aria-label="U.S. Phone number" autocomplete="tel-national" formControlName="phone" mask="(000) 000-0000" placeholder="Phone number" [required]="formGroup.value['email'] == ''" type="tel" [validation]="true">
-    <input aria-label="Email address" autocomplete="email" [email]="true" formControlName="email" placeholder="Email" [required]="formGroup.value['phone'] == ''" type="email">
+    <input aria-label="U.S. Phone number" autocomplete="tel-national" formControlName="phone" mask="(000) 000-0000" placeholder="Phone number" [required]="!formGroup.value['email']" type="tel" [validation]="true">
+    <input aria-label="Email address" autocomplete="email" [email]="true" formControlName="email" placeholder="Email" [required]="!formGroup.value['phone']" type="email">
     <div></div>
   </div>
   <button
