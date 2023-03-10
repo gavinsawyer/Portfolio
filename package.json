@@ -54,7 +54,6 @@
   "private": true,
   "scripts": {
     "serve": "npx nx serve",
-    "prebuild": "npx nx prebuild",
     "prerender": "npx nx run-many --targets=browser,server,prerender",
     "postinstall": "ngcc --properties es2020 browser module main"
   },

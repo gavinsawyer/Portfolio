@@ -6,24 +6,20 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": [
           "browser",
-          "server"
-        ],
-        "accessToken": "MTY3MDQ4ZjktZjhhYy00ZDcyLTk4NDUtMGJkYzkyMTFjOWY1fHJlYWQtd3JpdGU="
+          "server",
+          "prerender"
+        ]
       }
     }
   },
   "targetDefaults": {
     "browser": {
       "dependsOn": [
-        "prebuild"
-      ],
-      "inputs": [
-        "production",
-        "^production"
+        "^browser"
       ]
     },
     "lint": {
