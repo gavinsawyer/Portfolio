@@ -3,8 +3,7 @@
   [ngStyle]="{'height': svg.offsetWidth + 'px'}">
   <img #svg [src]="focus ? '/assets/icons/focus/' + focus + '.svg' : ''" [alt]="focus + (focus == 'Do Not Disturb' ? '' : ' Focus') + ' icon'">
 </div>
-<div
-  class="description">
+<div class="description">
   <h3>
     {{ focus + (focus == "Do Not Disturb" ? "" : " Focus") }}
   </h3>
