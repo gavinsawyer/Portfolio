@@ -1,5 +1,5 @@
 <main *ngIf="{'foregroundAppearance': hyperResponsivityService.foregroundAppearanceObservable | async, 'path': pathService.pathObservable | async} as context">
-  <div>
+  <div *ngIf="context.foregroundAppearance && context.path">
     <header [ngClass]="{'raised': ((hyperResponsivityService.scrollPositionObservable | async) || 0) > 16}">
       <div>
         <h1 style="margin-bottom: 0; text-align: center;">
@@ -10,7 +10,8 @@
         </h2>
       </div>
     </header>
-    <div *ngIf="context.foregroundAppearance && context.path">
+    <portfolio-banner [ngClass]="{'pathRoot': context.path == '/'}"></portfolio-banner>
+    <div>
       <portfolio-aside [foregroundAppearance]="context.foregroundAppearance" [ngClass]="{'pathRoot': context.path == '/'}"></portfolio-aside>
       <router-outlet></router-outlet>
     </div>
