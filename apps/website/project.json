@@ -136,7 +136,7 @@
         "firebaseProject": "portfolio-a59e2",
         "firebaseHostingSite": "portfolio-a59e2",
         "functionName": "ssr-website",
-        "functionsNodeVersion": "18.14",
+        "functionsNodeVersion": "18.15",
         "region": "us-central1",
         "browserTarget": "website:browser:production",
         "serverTarget": "website:server:production",
