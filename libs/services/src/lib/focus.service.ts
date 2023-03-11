@@ -1,9 +1,9 @@
 import { Injectable }                                                        from "@angular/core";
-import { User } from "@angular/fire/auth";
+import { User }                                                              from "@angular/fire/auth";
 import { doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore } from "@angular/fire/firestore";
-import { ShortcutsAPIPublicDocument }                             from "@portfolio/interfaces";
-import { catchError, filter, map, mergeMap, Observable, Subject } from "rxjs";
-import { AuthenticationService }                                  from "./authentication.service";
+import { ShortcutsAPIPublicDocument }                                        from "@portfolio/interfaces";
+import { catchError, filter, map, mergeMap, Observable, Subject }            from "rxjs";
+import { AuthenticationService }                                             from "./authentication.service";
 
 
 @Injectable({

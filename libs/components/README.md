@@ -1,11 +1,12 @@
 [back to Portfolio](../../README.md)
 
-> #### @portfolio/components `Sass`
+> #### @portfolio/components `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 >
 > Angular components used in the app.
-> - [Aside](src/lib/aside)
-> - [Banner](src/lib/banner)
-> - [Button](src/lib/button)
-> - [Focus](src/lib/focus)
-> - [Icon Button](src/lib/icon-button)
-> - [Message Form](src/lib/message-form)
+> - [Aside](src/lib/aside) `Firebase Analytics` `HTML` `Sass`
+> - [Banner](src/lib/banner) `HTML` `Sass`
+> - [Button](src/lib/button) `HTML` `Sass`
+> - [Focus](src/lib/focus) `HTML` `Sass`
+> - [Icon Button](src/lib/icon-button) `HTML` `Sass`
+> - [Message Form](src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
+

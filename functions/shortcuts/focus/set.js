@@ -23,15 +23,15 @@ exports
             .then(() => ((_response) => ((_promise) => {})(environmentCollectionReference
               .doc("public")
               .update({
-                "focus": request.body["focus"], // Public document new data
+                "focus": request.body["focus"],
               })))(response
                 .json({
                   ...privateDocumentSnapshot.data(),
                   ...updateData,
                 })
                 .end())))({
-                  "focus": request.body["focus"],                        // Private document new data
-                  "focusPrior": privateDocumentSnapshot.data()["focus"], // Private document new data
+                  "focus": request.body["focus"],
+                  "focusPrior": privateDocumentSnapshot.data()["focus"],
                 })))(environmentCollectionReference
                   .doc("private")))(firestore
                     .collection("environment")))(firestore

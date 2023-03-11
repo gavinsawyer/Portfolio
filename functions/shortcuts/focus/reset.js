@@ -17,15 +17,15 @@ exports
         .then(() => ((_response) => ((_promise) => {})(environmentCollectionReference
           .doc("public")
           .update({
-            "focus": privateDocumentSnapshot.data()["focusPrior"], // Public document new data
+            "focus": privateDocumentSnapshot.data()["focusPrior"],
           })))(response
             .json({
               ...privateDocumentSnapshot.data(),
               ...updateData,
             })
             .end())))({
-              "focus": privateDocumentSnapshot.data()["focusPrior"], // Private document new data
-              "focusPrior": privateDocumentSnapshot.data()["focus"], // Private document new data
+              "focus": privateDocumentSnapshot.data()["focusPrior"],
+              "focusPrior": privateDocumentSnapshot.data()["focus"],
             })))(environmentCollectionReference
               .doc("private")))(firestore
                 .collection("environment")))(firestore
