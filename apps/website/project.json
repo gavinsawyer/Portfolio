@@ -157,21 +157,6 @@
       },
       "defaultConfiguration": "development"
     },
-    "serve-ssr": {
-      "dependsOn": ["prebuild"],
-      "executor": "@nguniversal/builders:ssr-dev-server",
-      "configurations": {
-        "development": {
-          "browserTarget": "website:browser:development",
-          "serverTarget": "website:server:development"
-        },
-        "production": {
-          "browserTarget": "website:browser:production",
-          "serverTarget": "website:server:production"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
     "extract-i18n": {
       "dependsOn": ["prebuild"],
       "executor": "@angular-devkit/build-angular:extract-i18n",

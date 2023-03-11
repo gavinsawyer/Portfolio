@@ -56,8 +56,7 @@
     "build": "npx nx build",
     "deploy": "npx nx deploy",
     "postinstall": "ngcc --properties es2020 browser module main",
-    "serve": "npx nx serve",
-    "serve-ssr": "npx nx serve-ssr"
+    "serve": "npx nx serve"
   },
   "version": "15.1.3"
 }
