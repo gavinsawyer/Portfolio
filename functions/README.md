@@ -10,4 +10,4 @@
 > 
 > Additional functions for [location](shortcuts/location) and [time](shortcuts/time) enable home automations. iOS Shortcuts and HomeKit Automations both access the user's state via [getAll](shortcuts/all/get.js) and adjust device and home settings accordingly.
 >
-> > An example automation I've implemented turns off the Sleep Focus, and turns on my apartment lights and espresso machine if I am at home.
+> > An example automation I've implemented turns off the Sleep Focus and turns on my apartment lights and espresso machine if I am at home when my wake-up alarm is stopped.
