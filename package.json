@@ -58,5 +58,5 @@
     "postinstall": "ngcc --properties es2020 browser module main",
     "serve": "npx nx serve"
   },
-  "version": "15.1.3"
+  "version": "15.2.0"
 }

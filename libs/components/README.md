@@ -7,6 +7,5 @@
 > - [Banner](src/lib/banner) `HTML` `Sass`
 > - [Button](src/lib/button) `HTML` `Sass`
 > - [Focus](src/lib/focus) `HTML` `Sass`
-> - [Icon Button](src/lib/icon-button) `HTML` `Sass`
 > - [Message Form](src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 

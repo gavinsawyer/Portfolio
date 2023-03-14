@@ -41,14 +41,14 @@ export class HyperResponsivityService {
     this
       .backgroundAppearanceObservable = breakpointObserver
       .observe("(prefers-color-scheme: light)")
-      .pipe<Appearance | undefined>(
-        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : undefined)
+      .pipe<Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : "light")
       );
     this
       .foregroundAppearanceObservable = breakpointObserver
-      .observe("(prefers-color-scheme: dark)")
-      .pipe<Appearance | undefined>(
-        map<BreakpointState, Appearance | undefined>((breakpointState: BreakpointState): Appearance | undefined => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : undefined)
+      .observe("(prefers-color-scheme: light)")
+      .pipe<Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "dark" : "light") : "dark")
       );
     this
       .getTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
@@ -68,8 +68,8 @@ export class HyperResponsivityService {
 
   public readonly scrollPositionObservable: Observable<number>;
 
-  public readonly backgroundAppearanceObservable: Observable<Appearance | undefined>;
-  public readonly foregroundAppearanceObservable: Observable<Appearance | undefined>;
+  public readonly backgroundAppearanceObservable: Observable<Appearance>;
+  public readonly foregroundAppearanceObservable: Observable<Appearance>;
 
   public readonly adjustTextAreaRows: (messageTextAreaElement: HTMLTextAreaElement, options: {
     fontSize?: number,

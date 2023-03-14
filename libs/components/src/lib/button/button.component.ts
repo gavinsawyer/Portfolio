@@ -27,9 +27,6 @@ export class ButtonComponent {
   public readonly click: EventEmitter<void>;
 
   @Input()
-  public foregroundAppearance?: string;
-
-  @Input()
   public svgHeight?: string;
 
   @Input()

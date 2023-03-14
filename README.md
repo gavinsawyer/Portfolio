@@ -23,7 +23,6 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - [Banner](libs/components/src/lib/banner) `HTML` `Sass`
 > - [Button](libs/components/src/lib/button) `HTML` `Sass`
 > - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
-> - [Icon Button](libs/components/src/lib/icon-button) `HTML` `Sass`
 > - [Message Form](libs/components/src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 
 > #### [@portfolio/interfaces](libs/interfaces) `TypeScript`

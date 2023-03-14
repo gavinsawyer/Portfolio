@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from "@angular/common";
-import { Component, Input }               from "@angular/core";
+import { Component }                      from "@angular/core";
 import { Analytics, logEvent }            from "@angular/fire/analytics";
 import { FocusService }                   from "@portfolio/services";
 import { ButtonComponent }                from "../button/button.component";
@@ -32,9 +32,6 @@ export class AsideComponent {
     this
       .logClickAddToContactsEvent = (): void => logEvent(analytics, "click_addToContacts");
   }
-
-  @Input()
-  public foregroundAppearance?: string;
 
   public readonly logClickAddToContactsEvent: () => void;
 
