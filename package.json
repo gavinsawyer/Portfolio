@@ -53,10 +53,10 @@
   "name": "portfolio",
   "private": true,
   "scripts": {
-    "build": "npx nx build",
-    "deploy": "npx nx deploy",
+    "build": "npx nx run-many --all --target=build",
+    "deploy": "npx nx run-many --all --target=deploy",
     "postinstall": "ngcc --properties es2020 browser module main",
     "serve": "npx nx serve"
   },
-  "version": "15.2.0"
+  "version": "15.3.0"
 }

@@ -1,0 +1,67 @@
+@import '~normalize.css'
+@import 'colors'
+
+html
+  overflow-x: hidden
+
+  body
+    display: flex
+    flex-direction: row
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif
+    font-size: 16px
+    padding: 1rem 2rem
+
+    a
+      color: $primary
+      text-decoration: none
+
+      &:hover
+        text-decoration: underline
+
+    ul
+      padding-inline-start: 0
+
+      li
+        margin: 0.25rem 0
+        list-style: none
+
+    h1
+      font-size: 2.8rem
+    h2
+      font-size: 2rem
+    h3
+      font-size: 1.2rem
+    h4
+      font-size: 0.8rem
+
+    h1,
+    h2,
+    h3,
+    h4
+      margin: 1rem 0 0.5em
+
+      & + h2,
+      & + h3,
+      & + h4
+        margin-top: 0
+
+      a
+        font-weight: bolder
+
+    @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
+      color: $body-foreground
+      background-color: $body-background
+
+      h1
+        color: call(get-function($degrade-foreground-function), $body-foreground,  0%)
+      h2
+        color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
+      h3
+        color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
+      h4
+        color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+
+    @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
+
+    @media (prefers-color-scheme: dark)
+      @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)

@@ -5,6 +5,9 @@
   "targets": {
     "portfolio-a59e2": {
       "hosting": {
+        "console": [
+          "portfolio-a59e2-console"
+        ],
         "website": [
           "portfolio-a59e2"
         ]
