@@ -1,6 +1,11 @@
-import { Component } from "@angular/core";
+import { CommonModule }                           from "@angular/common";
+import { Component }                              from "@angular/core";
+import { AuthenticationService, WebAuthnService } from "@portfolio/services";
 
 @Component({
+  imports: [
+    CommonModule,
+  ],
   selector: "websiteApp-home",
   standalone: true,
   styleUrls: [
@@ -8,4 +13,11 @@ import { Component } from "@angular/core";
   ],
   templateUrl: "./home.component.html",
 })
-export class HomeComponent {}
+export class HomeComponent {
+
+  constructor(
+    public readonly authenticationService: AuthenticationService,
+    public readonly webAuthnService: WebAuthnService,
+  ) {}
+
+}

@@ -13,6 +13,7 @@
     "@angular/platform-server": "~15.1.0",
     "@angular/router": "~15.1.0",
     "@nguniversal/express-engine": "~15.1.0",
+    "@simplewebauthn/browser": "^7",
     "firebase-admin": "^11",
     "ngx-mask": "^15",
     "normalize.css": "^8",
@@ -38,6 +39,7 @@
     "@nrwl/nx-cloud": "^15",
     "@nrwl/workspace": "^15",
     "@schematics/angular": "~15.1.0",
+    "@simplewebauthn/typescript-types": "^7.0.0",
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
@@ -58,5 +60,5 @@
     "postinstall": "ngcc --properties es2020 browser module main",
     "serve": "npx nx serve"
   },
-  "version": "15.3.0"
+  "version": "15.4.0"
 }

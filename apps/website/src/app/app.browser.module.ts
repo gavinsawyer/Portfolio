@@ -24,11 +24,11 @@ const baseTitle: string = "Gavin Sawyer";
     BrowserModule.withServerTransition({
       appId: "serverApp",
     }),
+    provideAnalytics((): Analytics => getAnalytics()),
+    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions(environment.recaptchaSiteKey))),
+    provideAuth((): Auth => getAuth()),
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideFirestore((): Firestore => getFirestore()),
-    provideAnalytics((): Analytics => getAnalytics()),
-    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions)),
-    provideAuth((): Auth => getAuth()),
     ReactiveFormsModule,
     RouterModule.forRoot(
       [

@@ -1,7 +1,9 @@
 <article>
   <section>
-    <h2>
-      ...
-    </h2>
+    <p>
+      {{ (authenticationService.userObservable | async)?.uid }}
+    </p>
+
+    <button (click)="webAuthnService.authenticate();">Authenticate</button>
   </section>
 </article>

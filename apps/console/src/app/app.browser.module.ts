@@ -1,17 +1,18 @@
-import { Injector, NgModule }                                                                    from "@angular/core";
-import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
-import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
-import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
-import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
-import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
-import { ReactiveFormsModule }                                                                   from "@angular/forms";
-import { BrowserModule }                                                                         from "@angular/platform-browser";
-import { RouterModule }                                                                          from "@angular/router";
-import { TransferHttpCacheModule }                                                               from "@nguniversal/common"
-import { AsideComponent, BannerComponent }                                                       from "@portfolio/components";
-import { AppCheckOptionsService }                                                                from "@portfolio/services";
-import { environment }                                                                           from "../environments/environment";
-import { AppComponent }                                                                          from "./app.component";
+import { Injector, NgModule }                             from "@angular/core";
+import { ScreenTrackingService, UserTrackingService }     from "@angular/fire/analytics";
+import { FirebaseApp, initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { AppCheck, initializeAppCheck, provideAppCheck }  from "@angular/fire/app-check";
+import { Auth, getAuth, provideAuth }                     from "@angular/fire/auth";
+import { Firestore, getFirestore, provideFirestore }      from "@angular/fire/firestore";
+import { Functions, getFunctions, provideFunctions }      from "@angular/fire/functions";
+import { ReactiveFormsModule }                            from "@angular/forms";
+import { BrowserModule }                                  from "@angular/platform-browser";
+import { RouterModule }                                   from "@angular/router";
+import { TransferHttpCacheModule }                        from "@nguniversal/common";
+import { AsideComponent, BannerComponent }                from "@portfolio/components";
+import { AppCheckOptionsService }                         from "@portfolio/services";
+import { environment }                                    from "../environments/environment";
+import { AppComponent }                                   from "./app.component";
 
 
 const baseTitle: string = "Console";
@@ -24,11 +25,11 @@ const baseTitle: string = "Console";
     BrowserModule.withServerTransition({
       appId: "serverApp",
     }),
+    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions(environment.recaptchaSiteKey))),
+    provideAuth((): Auth => getAuth()),
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
     provideFirestore((): Firestore => getFirestore()),
-    provideAnalytics((): Analytics => getAnalytics()),
-    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions)),
-    provideAuth((): Auth => getAuth()),
+    provideFunctions((): Functions => getFunctions()),
     ReactiveFormsModule,
     RouterModule.forRoot(
       [

@@ -1,7 +1,7 @@
 import { isPlatformBrowser }                                              from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID }                     from "@angular/core";
 import { Auth, onAuthStateChanged, signInAnonymously, Unsubscribe, User } from "@angular/fire/auth";
-import { identity, Observable, shareReplay, startWith, Subject }          from "rxjs";
+import { Observable, shareReplay, Subject }                               from "rxjs";
 
 
 @Injectable({
@@ -17,9 +17,10 @@ export class AuthenticationService implements OnDestroy {
   ) {
     this
       .unsubscribeAuthStateChanged = onAuthStateChanged(auth, ((user: User | null): void => {
-        user && this
+        user ? this
           .userSubject
-          .next(user);
+          .next(user) : isPlatformBrowser(platformId) && signInAnonymously(auth)
+          .catch((reason: any): void => console.error(reason));
       }));
     this
       .userSubject = new Subject<User>();
@@ -27,12 +28,11 @@ export class AuthenticationService implements OnDestroy {
       .userObservable = this
       .userSubject
       .asObservable()
-      .pipe<User, User>(
-        auth.currentUser ? startWith(auth.currentUser) : identity,
+      .pipe<User>(
         shareReplay<User>()
       );
 
-    isPlatformBrowser(platformId) ? signInAnonymously(auth) : this
+    isPlatformBrowser(platformId) || this
       .unsubscribeAuthStateChanged();
   }
 

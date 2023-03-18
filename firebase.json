@@ -28,6 +28,22 @@
       ],
       "rewrites": [
         {
+          "source": "/functions/generateAuthenticationOptions",
+          "function": "generateAuthenticationOptions"
+        },
+        {
+          "source": "/functions/verifyAuthenticationResponse",
+          "function": "verifyAuthenticationResponse"
+        },
+        {
+          "source": "/functions/generateRegistrationOptions",
+          "function": "generateRegistrationOptions"
+        },
+        {
+          "source": "/functions/verifyRegistrationResponse",
+          "function": "verifyRegistrationResponse"
+        },
+        {
           "source": "**",
           "run": {
             "serviceId": "ssr-console"
