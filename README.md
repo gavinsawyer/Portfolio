@@ -39,9 +39,9 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 
 > #### [@portfolio/types](libs/types) `TypeScript`
 
-> #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firestore`
+> #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firebase Functions` `Firestore` `SimpleWebAuthn`
 > 
-> Angular services used in the app and components library. Services provide anonymous authentication, live data, and responsive design features. 
+> Angular services used in the app and components library. Services provide anonymous and passkey authentication, live data, and responsive design features. 
 ### Firebase Functions package:
 > #### [functions](functions)
 > 
