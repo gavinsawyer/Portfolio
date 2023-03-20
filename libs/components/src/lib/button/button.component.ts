@@ -20,11 +20,11 @@ export class ButtonComponent {
     public readonly hyperResponsivityService: HyperResponsivityService,
   ) {
     this
-      .click = new EventEmitter<void>();
+      .action = new EventEmitter<void>();
   }
 
   @Output()
-  public readonly click: EventEmitter<void>;
+  public readonly action: EventEmitter<void>;
 
   @Input()
   public svgHeight?: string;
@@ -37,9 +37,6 @@ export class ButtonComponent {
 
   @Input()
   public text?: string;
-
-  @Input()
-  public type?: string;
 
   @Input()
   public url?: string;

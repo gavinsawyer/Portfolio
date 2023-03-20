@@ -5,7 +5,7 @@
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ (messageStatusObservable | async) == "unsent" ? "Want to connect?" : ((messageStatusObservable | async) == "sending" ? "Sending" : "We'll be in touch") + (ellipsesService.ellipsesObservable | async) }}
+        {{ (statusObservable | async) == "unsent" ? "Want to connect?" : ((statusObservable | async) == "sending" ? "Sending" : "We'll be in touch") + (ellipsesService.ellipsesObservable | async) }}
       </h3>
     </div>
     <div>
@@ -32,7 +32,7 @@
   <button
     type="submit"
     disabled=""
-    [disabled]="(!(authenticationService.userObservable | async)) || (!formGroup.valid) || (messageStatusObservable | async) !== 'unsent'">
-    <img alt="Send message icon" height="14.7578px" [src]="(hyperResponsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/submit.' + ((authenticationService.userObservable | async) && formGroup.valid && (messageStatusObservable | async) == 'unsent' ? ((hyperResponsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light') : (hyperResponsivityService.foregroundAppearanceObservable | async)) + '.svg' : ''" width="11.8438px">
+    [disabled]="(!(authenticationService.userObservable | async)) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'">
+    <img alt="Send message icon" height="14.7578px" [src]="(hyperResponsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/submit.' + ((authenticationService.userObservable | async) && formGroup.valid && (statusObservable | async) == 'unsent' ? ((hyperResponsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light') : (hyperResponsivityService.foregroundAppearanceObservable | async)) + '.svg' : ''" width="11.8438px">
   </button>
 </form>

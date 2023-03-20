@@ -1,19 +1,19 @@
 <ng-template #buttonTemplate>
-  <img alt="Icon" [attr.height]="svgHeight" [attr.width]="svgWidth" [src]="'/assets/icons/' + svgName + '.' + (hyperResponsivityService.foregroundAppearanceObservable | async) + '.svg'">
+  <img alt="Icon" [attr.height]="svgHeight" [attr.width]="svgWidth" [src]="'/assets/icons/' + svgName + '.' + (hyperResponsivityService.foregroundAppearanceObservable | async) + '.svg'" *ngIf="svgWidth && svgHeight && svgName">
   <div id="text">
     {{ text }}
   </div>
-  <div id="spacer" [ngStyle]="{'flex-basis': svgWidth, 'max-width': svgWidth}"></div>
+  <div id="spacer" *ngIf="svgWidth && svgHeight && svgName" [ngStyle]="{'flex-basis': svgWidth, 'max-width': svgWidth}"></div>
 </ng-template>
 
 <a
   [href]="url"
-  (click)="click.emit();"
-  *ngIf="type == 'anchor'">
+  (click)="action.emit();"
+  *ngIf="url">
   <ng-container *ngTemplateOutlet="buttonTemplate; context: this"></ng-container>
 </a>
 <button
-  (click)="click.emit();"
-  *ngIf="type == 'button'">
+  (click)="action.emit();"
+  *ngIf="!url">
   <ng-container *ngTemplateOutlet="buttonTemplate; context: this"></ng-container>
 </button>

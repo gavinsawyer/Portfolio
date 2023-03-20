@@ -10,14 +10,15 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore) => (async (challengeDocumentSnapshot) => challengeDocumentSnapshot.exists && (async (verifiedRegistrationResponse) => verifiedRegistrationResponse.verified && (async (_writeResult) => true)(await firestore.collection("credentials").doc(data["id"]).set({
-    "counter": verifiedRegistrationResponse.registrationInfo.counter,
-    "publicKey": verifiedRegistrationResponse.registrationInfo.credentialPublicKey,
-    "uid": callableContext.auth.uid,
+  .onCall((data, callableContext) => (async (auth, firestore) => (async (userDocumentSnapshot) => userDocumentSnapshot.exists && (async (verifiedRegistrationResponse) => verifiedRegistrationResponse.verified && (async (_writeResult) => true)(await firestore.collection("users").doc(callableContext.auth.uid).set({
+    "credentialCounter": verifiedRegistrationResponse.registrationInfo.counter,
+    "credentialId": verifiedRegistrationResponse.registrationInfo.credentialID,
+    "credentialPublicKey": verifiedRegistrationResponse.registrationInfo.credentialPublicKey,
+    "displayName": data["displayName"],
   })))(await simpleWebAuthnServer.verifyRegistrationResponse({
-    expectedChallenge: challengeDocumentSnapshot.data()["value"],
+    expectedChallenge: userDocumentSnapshot.data()["challenge"],
     expectedOrigin: "https://console.gavinsawyer.dev",
     expectedRPID: "console.gavinsawyer.dev",
     requireUserVerification: true,
-    response: data,
-  })))(await firestore.collection("challenges").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));
+    response: data["response"],
+  })))(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));

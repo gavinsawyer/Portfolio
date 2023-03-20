@@ -10,8 +10,10 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((_data, callableContext) => (async (auth, firestore) => (async (publicKeyCredentialRequestOptions) => ((_writeResult) => publicKeyCredentialRequestOptions)(await firestore.collection("challenges").doc(callableContext.auth.uid).set({
-    "value": publicKeyCredentialRequestOptions.challenge,
+  .onCall((_data, callableContext) => (async (auth, firestore) => (async (publicKeyCredentialRequestOptions) => ((_writeResult) => publicKeyCredentialRequestOptions)(await firestore.collection("users").doc(callableContext.auth.uid).set({
+    "challenge": publicKeyCredentialRequestOptions.challenge,
+  }, {
+    merge: true,
   })))(simpleWebAuthnServer.generateAuthenticationOptions({
     userVerification: "required",
     rpID: "console.gavinsawyer.dev",

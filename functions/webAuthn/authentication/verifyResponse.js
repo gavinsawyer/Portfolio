@@ -10,17 +10,20 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore) => (async (challengeDocumentSnapshot, credentialDocumentSnapshot) => challengeDocumentSnapshot.exists && credentialDocumentSnapshot.exists && (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified && (async (_writeResult) => await auth.createCustomToken(credentialDocumentSnapshot.data()["uid"]))(await firestore.collection("credentials").doc(data["id"]).update({
-    "counter": verifiedAuthenticationResponse.authenticationInfo.newCounter,
+  .onCall((data, callableContext) => data["response"]["userHandle"] !== callableContext.auth.uid && (async (auth, firestore) => await (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists && (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified && (async (_writeResult) => await auth.createCustomToken(data["response"]["userHandle"]))(await firestore.collection("users").doc(data["response"]["userHandle"]).set({
+    "credentialCounter": verifiedAuthenticationResponse.authenticationInfo.newCounter,
+    "credentialId": verifiedAuthenticationResponse.authenticationInfo.credentialID,
+    "credentialPublicKey": userDocumentSnapshot.data()["credentialPublicKey"],
+    "displayName": userDocumentSnapshot.data()["displayName"],
   })))(await simpleWebAuthnServer.verifyAuthenticationResponse({
     authenticator: {
-      counter: credentialDocumentSnapshot.data()["counter"],
-      credentialID: new TextEncoder().encode(credentialDocumentSnapshot.id),
-      credentialPublicKey: credentialDocumentSnapshot.data()["publicKey"],
+      counter: userDocumentSnapshot.data()["credentialCounter"],
+      credentialID: userDocumentSnapshot.data()["credentialId"],
+      credentialPublicKey: userDocumentSnapshot.data()["credentialPublicKey"],
     },
-    expectedChallenge: challengeDocumentSnapshot.data()["value"],
+    expectedChallenge: anonymousUserDocumentSnapshot.data()["challenge"],
     expectedOrigin: "https://console.gavinsawyer.dev",
     expectedRPID: "console.gavinsawyer.dev",
     requireUserVerification: true,
     response: data,
-  })))(await firestore.collection("challenges").doc(callableContext.auth.uid).get(), await firestore.collection("credentials").doc(data["id"]).get()))(auth.getAuth(), firestore.getFirestore()));
+  })))(await firestore.collection("users").doc(data["response"]["userHandle"]).get(), await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));

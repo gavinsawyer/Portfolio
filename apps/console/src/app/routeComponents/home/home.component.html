@@ -1,9 +1,10 @@
 <article>
   <section>
     <p>
-      {{ (authenticationService.userObservable | async)?.uid }}
+      {{ (messagesService.messageDocumentsObservable | async)?.length }}
     </p>
 
-    <button (click)="webAuthnService.authenticate();">Authenticate</button>
+    <portfolio-button (action)="webAuthnService.register('gavinsawyer');" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Register"></portfolio-button>
+    <portfolio-button (action)="webAuthnService.authenticate();" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Authenticate"></portfolio-button>
   </section>
 </article>
