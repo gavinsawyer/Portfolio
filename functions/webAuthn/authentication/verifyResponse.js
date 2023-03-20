@@ -10,11 +10,10 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => data["response"]["userHandle"] !== callableContext.auth.uid && (async (auth, firestore) => await (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists && (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified && (async (_writeResult) => await auth.createCustomToken(data["response"]["userHandle"]))(await firestore.collection("users").doc(data["response"]["userHandle"]).set({
+  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => data["response"]["userHandle"] !== callableContext.auth.uid ? (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists && (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified && (async (_writeResult) => (async (token) => (async (_writeResult) => token)(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await auth.createCustomToken(data["response"]["userHandle"])))(await firestore.collection("users").doc(data["response"]["userHandle"]).update({
+    "challenge": FieldValue.delete(),
     "credentialCounter": verifiedAuthenticationResponse.authenticationInfo.newCounter,
     "credentialId": verifiedAuthenticationResponse.authenticationInfo.credentialID,
-    "credentialPublicKey": userDocumentSnapshot.data()["credentialPublicKey"],
-    "displayName": userDocumentSnapshot.data()["displayName"],
   })))(await simpleWebAuthnServer.verifyAuthenticationResponse({
     authenticator: {
       counter: userDocumentSnapshot.data()["credentialCounter"],
@@ -26,4 +25,6 @@ exports
     expectedRPID: "console.gavinsawyer.dev",
     requireUserVerification: true,
     response: data,
-  })))(await firestore.collection("users").doc(data["response"]["userHandle"]).get(), await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));
+  })))(await firestore.collection("users").doc(data["response"]["userHandle"]).get(), await firestore.collection("users").doc(callableContext.auth.uid).get()) : ((_writeResult) => false)(await firestore.collection("users").doc(callableContext.auth.uid).update({
+    "challenge": FieldValue.delete(),
+  })))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));

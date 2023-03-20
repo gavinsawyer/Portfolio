@@ -10,8 +10,9 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore) => await (async (userDocumentSnapshot) => !userDocumentSnapshot.exists && await (async (publicKeyCredentialCreationOptions) => ((_writeResult) => publicKeyCredentialCreationOptions)(await firestore.collection("users").doc(callableContext.auth.uid).set({
+  .onCall((data, callableContext) => (async (auth, firestore) => ((userDocumentSnapshot) => !userDocumentSnapshot.data()["credentialPublicKey"] && (async (publicKeyCredentialCreationOptions) => ((_writeResult) => publicKeyCredentialCreationOptions)(await firestore.collection("users").doc(callableContext.auth.uid).set({
     "challenge": publicKeyCredentialCreationOptions.challenge,
+    "displayName": data,
   })))(simpleWebAuthnServer.generateRegistrationOptions({
     authenticatorSelection: {
       residentKey: "required",
