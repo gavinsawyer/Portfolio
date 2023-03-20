@@ -13,4 +13,4 @@
 >
 > `% npm run build` Create both browser and server bundles, prerender routes. \
 > `% npm run deploy` Deploy to Cloud Run \
-> `% npm run serve` Run local development server \
+> `% npm run serve` Run local development server

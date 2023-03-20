@@ -15,6 +15,6 @@ exports
   }, {
     merge: true,
   })))(simpleWebAuthnServer.generateAuthenticationOptions({
-    userVerification: "required",
     rpID: "console.gavinsawyer.dev",
+    userVerification: "required",
   })))(auth.getAuth(), firestore.getFirestore()));
