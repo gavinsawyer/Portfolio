@@ -15,7 +15,8 @@ exports.setTime        = require("./shortcuts/time/set").default;
 
 // WebAuthn API endpoints
 
-exports.generateRegistrationOptions   = require("./webAuthn/registration/generateOptions").default;
-exports.verifyRegistrationResponse    = require("./webAuthn/registration/verifyResponse").default;
+exports.clearChallenge                = require("./webAuthn/clearChallenge").default;
 exports.generateAuthenticationOptions = require("./webAuthn/authentication/generateOptions").default;
 exports.verifyAuthenticationResponse  = require("./webAuthn/authentication/verifyResponse").default;
+exports.generateRegistrationOptions   = require("./webAuthn/registration/generateOptions").default;
+exports.verifyRegistrationResponse    = require("./webAuthn/registration/verifyResponse").default;

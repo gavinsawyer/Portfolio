@@ -15,7 +15,7 @@ export class WebAuthnService {
     private readonly functions: Functions
   ) {
     this
-      .authenticate = async (): Promise<boolean> => await (async (httpsCallableResult: HttpsCallableResult<string | false>): Promise<boolean> => httpsCallableResult.data ? await (async (_userCredential: UserCredential): Promise<true> => true)(await signInWithCustomToken(auth, httpsCallableResult.data)) : false)(await httpsCallableFromURL<AuthenticationResponseJSON, string | false>(functions, "/functions/verifyAuthenticationResponse")(await startAuthentication((await httpsCallableFromURL<null, PublicKeyCredentialRequestOptionsJSON>(functions, "/functions/generateAuthenticationOptions")()).data)))
+      .authenticate = async (): Promise<boolean> => await (async (result: string | false): Promise<boolean> => result ? await (async (_userCredential: UserCredential): Promise<true> => true)(await signInWithCustomToken(auth, result)) : false)(await (async (authenticationResponseJSON: AuthenticationResponseJSON | false) => authenticationResponseJSON && (await httpsCallableFromURL<AuthenticationResponseJSON, string | false>(functions, "/functions/verifyAuthenticationResponse")(authenticationResponseJSON)).data)(await startAuthentication((await httpsCallableFromURL<null, PublicKeyCredentialRequestOptionsJSON>(functions, "/functions/generateAuthenticationOptions")()).data).catch(async (_reason: any): Promise<false> => (await httpsCallableFromURL<null, false>(functions, "/functions/clearChallenge")()).data)))
       .catch<false>((reason: any): false => {
         console
           .error(reason);
@@ -29,7 +29,7 @@ export class WebAuthnService {
       }, boolean>(functions, "/functions/verifyRegistrationResponse")({
         displayName: displayName,
         response: registrationResponse,
-      })).data : false)(await (async (httpsCallableResult: HttpsCallableResult<PublicKeyCredentialCreationOptionsJSON | false>) => httpsCallableResult.data ? await startRegistration(httpsCallableResult.data) : false)(await httpsCallableFromURL<string, PublicKeyCredentialCreationOptionsJSON | false>(functions, "/functions/generateRegistrationOptions")(displayName)))
+      })).data : false)(await (async (httpsCallableResult: HttpsCallableResult<PublicKeyCredentialCreationOptionsJSON | false>) => httpsCallableResult.data ? await startRegistration(httpsCallableResult.data).catch(async (_reason: any): Promise<false> => (await httpsCallableFromURL<null, false>(functions, "/functions/clearChallenge")()).data) : false)(await httpsCallableFromURL<string, PublicKeyCredentialCreationOptionsJSON | false>(functions, "/functions/generateRegistrationOptions")(displayName)))
       .catch<false>((reason: any): false => {
         console
           .error(reason);

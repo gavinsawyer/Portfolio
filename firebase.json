@@ -28,6 +28,10 @@
       ],
       "rewrites": [
         {
+          "source": "/functions/clearChallenge",
+          "function": "clearChallenge"
+        },
+        {
           "source": "/functions/generateAuthenticationOptions",
           "function": "generateAuthenticationOptions"
         },
