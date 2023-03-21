@@ -17,10 +17,10 @@ exports
     "challenge": FieldValue.delete(),
     "credentialCounter": verifiedAuthenticationResponse.authenticationInfo.newCounter,
     "credentialId": verifiedAuthenticationResponse.authenticationInfo.credentialID,
-  })) : {
+  })) : ((_writeResult) => ({
     "success": false,
     "message": "Authentication response not verified.",
-  })(await simpleWebAuthnServer.verifyAuthenticationResponse({
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await simpleWebAuthnServer.verifyAuthenticationResponse({
     authenticator: {
       counter: userDocumentSnapshot.data()["credentialCounter"],
       credentialID: userDocumentSnapshot.data()["credentialId"],
@@ -31,10 +31,10 @@ exports
     expectedRPID: "console.gavinsawyer.dev",
     requireUserVerification: true,
     response: data["authenticationResponse"],
-  })) : {
+  })) : ((_writeResult) => ({
     "success": false,
     "message": "This user doesn't exist.",
-  })(await firestore.collection("users").doc(data["authenticationResponse"]["response"]["userHandle"]).get(), await firestore.collection("users").doc(callableContext.auth.uid).get()) : ((_writeResult) => ({
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await firestore.collection("users").doc(data["authenticationResponse"]["response"]["userHandle"]).get(), await firestore.collection("users").doc(callableContext.auth.uid).get()) : ((_writeResult) => ({
     "success": false,
     "message": "This user is already signed in.",
   }))(await firestore.collection("users").doc(callableContext.auth.uid).update({
