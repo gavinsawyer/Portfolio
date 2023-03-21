@@ -10,7 +10,7 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => data["authenticationResponse"]["response"]["userHandle"] !== callableContext.auth.uid ? (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists ? (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified ? (async (_writeResult) => (async (_writeResult) => (async (customToken) => ({
+  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => data["authenticationResponse"]["response"]["userHandle"] !== callableContext.auth.uid ? (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists ? (async (userDocument) => userDocument["credentialPublicKey"] ? (async (anonymousUserDocument) => anonymousUserDocument["challenge"] ? (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified ? (async (_writeResult) => (async (_writeResult) => (async (customToken) => ({
     "success": true,
     "customToken": customToken,
   }))(await auth.createCustomToken(data["authenticationResponse"]["response"]["userHandle"])))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await firestore.collection("users").doc(data["authenticationResponse"]["response"]["userHandle"]).update({
@@ -22,16 +22,22 @@ exports
     "message": "Authentication response not verified.",
   }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await simpleWebAuthnServer.verifyAuthenticationResponse({
     authenticator: {
-      counter: userDocumentSnapshot.data()["credentialCounter"],
-      credentialID: userDocumentSnapshot.data()["credentialId"],
-      credentialPublicKey: userDocumentSnapshot.data()["credentialPublicKey"],
+      counter: userDocument["credentialCounter"],
+      credentialID: userDocument["credentialId"],
+      credentialPublicKey: userDocument["credentialPublicKey"],
     },
-    expectedChallenge: anonymousUserDocumentSnapshot.data()["challenge"],
+    expectedChallenge: anonymousUserDocument["challenge"],
     expectedOrigin: "https://console.gavinsawyer.dev",
     expectedRPID: "console.gavinsawyer.dev",
     requireUserVerification: true,
     response: data["authenticationResponse"],
   })) : ((_writeResult) => ({
+    "success": false,
+    "message": "Please create an authentication challenge first.",
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(anonymousUserDocumentSnapshot.data()) : ((_writeResult) => ({
+    "success": false,
+    "message": "A passkey doesn't exist for this user.",
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(userDocumentSnapshot.data()) : ((_writeResult) => ({
     "success": false,
     "message": "This user doesn't exist.",
   }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await firestore.collection("users").doc(data["authenticationResponse"]["response"]["userHandle"]).get(), await firestore.collection("users").doc(callableContext.auth.uid).get()) : ((_writeResult) => ({

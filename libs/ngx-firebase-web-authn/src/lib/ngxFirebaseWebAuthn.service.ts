@@ -34,7 +34,7 @@ interface VerifyAuthenticationFunctionResponseSuccessful extends FunctionRespons
   "customToken": string,
 }
 interface VerifyAuthenticationFunctionResponseUnsuccessful extends FunctionResponseUnsuccessful {
-  "message": "Authentication response not verified." | "This user doesn't exist." | "This user is already signed in.",
+  "message": "A passkey doesn't exist for this user." | "Authentication response not verified." | "Please create an authentication challenge first." | "This user doesn't exist." | "This user is already signed in.",
 }
 interface VerifyAuthenticationFunctionRequest {
   "authenticationResponse": AuthenticationResponseJSON,
@@ -43,7 +43,7 @@ interface VerifyRegistrationFunctionResponseSuccessful extends FunctionResponseS
   "customToken": string,
 }
 interface VerifyRegistrationFunctionResponseUnsuccessful extends FunctionResponseUnsuccessful {
-  "message": "Registration response not verified." | "This user doesn't exist.",
+  "message":  "Please create a registration challenge first." | "Registration response not verified." | "This user doesn't exist.",
 }
 interface VerifyRegistrationFunctionRequest {
   "registrationResponse": RegistrationResponseJSON,
