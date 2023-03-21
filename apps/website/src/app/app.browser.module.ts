@@ -8,7 +8,7 @@ import { ReactiveFormsModule }                                                  
 import { BrowserModule }                                                                         from "@angular/platform-browser";
 import { RouterModule }                                                                          from "@angular/router";
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common"
-import { AsideComponent, BannerComponent }                                                       from "@portfolio/components";
+import { AsideWebsiteComponent, BannerComponent }                                                from "@portfolio/components";
 import { AppCheckOptionsService }                                                                from "@portfolio/services";
 import { environment }                                                                           from "../environments/environment";
 import { AppComponent }                                                                          from "./app.component";
@@ -19,7 +19,7 @@ const baseTitle: string = "Gavin Sawyer";
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    AsideComponent,
+    AsideWebsiteComponent,
     BannerComponent,
     BrowserModule.withServerTransition({
       appId: "serverApp",

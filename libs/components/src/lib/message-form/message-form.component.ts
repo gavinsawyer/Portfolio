@@ -4,10 +4,11 @@ import { Analytics, logEvent }                                                  
 import { FormBuilder, FormGroup, ReactiveFormsModule }                                       from "@angular/forms";
 import { MessageDocument }                                                                   from "@portfolio/interfaces";
 import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService } from "@portfolio/services";
-import { MessageFormStatus }                                                                 from "@portfolio/types";
 import { NgxMaskDirective, provideNgxMask }                                                  from "ngx-mask";
 import { BehaviorSubject, Observable, Subscription }                                         from "rxjs";
 
+
+type MessageFormStatus = "unsent" | "sending" | "sent";
 
 @Component({
   imports: [
@@ -54,7 +55,7 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
       .statusSubject
       .asObservable();
     this
-      .submit = (): void => {
+      .submit = async (): Promise<void> => {
         this
           .statusSubject
           .next("sending");
@@ -65,7 +66,7 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
           "form_destination": window.location.protocol + "//" + window.location.hostname + (window.location.port !== "" ? ":" + window.location.port : "") + "/",
         });
 
-        messagesService
+        return await messagesService
           .createMessageDocument(this.formGroup.value);
       };
     this

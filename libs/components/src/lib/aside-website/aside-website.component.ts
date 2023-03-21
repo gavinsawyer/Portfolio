@@ -15,14 +15,14 @@ import { MessageFormComponent }           from "../message-form/message-form.com
     MessageFormComponent,
     NgOptimizedImage,
   ],
-  selector: "portfolio-aside",
+  selector: "portfolio-aside-website",
   standalone: true,
   styleUrls: [
-    "./aside.component.sass",
+    "./aside-website.component.sass",
   ],
-  templateUrl: "./aside.component.html",
+  templateUrl: "./aside-website.component.html",
 })
-export class AsideComponent {
+export class AsideWebsiteComponent {
 
   constructor(
     private readonly analytics: Analytics,

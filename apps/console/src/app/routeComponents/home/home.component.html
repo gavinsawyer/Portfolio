@@ -1,10 +1,13 @@
 <article>
   <section>
-    <p>
-      {{ (messagesService.messageDocumentsObservable | async)?.length }}
+    <p *ngIf="(authenticationService.userObservable | async)?.isAnonymous">
+      You're anonymous.
     </p>
-
-    <portfolio-button (action)="ngxFirebaseWebAuthnService.createUserWithPasskey('gavinsawyer');" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Create passkey"></portfolio-button>
-    <portfolio-button (action)="ngxFirebaseWebAuthnService.signInWithPasskey();" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Sign in with passkey"></portfolio-button>
+    <p *ngIf="(authenticationService.userObservable | async)?.isAnonymous == false">
+      You're signed in. {{ (messagesService.messageDocumentsObservable | async)?.length }}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat hic libero quasi quis quos. Accusamus ad asperiores aut consectetur cum deserunt dolor doloribus enim facere illum inventore iusto natus nulla odio officia omnis praesentium quas reprehenderit sequi similique soluta, tenetur ullam ut vitae voluptatem? Ab, architecto atque beatae consectetur, deleniti et excepturi facere facilis natus nihil quae quibusdam vero voluptatibus?
+    </p>
   </section>
 </article>

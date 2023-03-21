@@ -42,11 +42,13 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > `signInWithPasskey: () => Promise<UserCredential>`
 
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
-> 
-> Angular components used in the app:
-> - [Aside](libs/components/src/lib/aside) `Firebase Analytics` `HTML` `Sass`
+>
+> Angular components used in apps.
+> - [Aside (Console)](libs/components/src/lib/aside-console) `HTML` `Sass`
+> - [Aside (Website)](libs/components/src/lib/aside-website) `Firebase Analytics` `HTML` `Sass`
 > - [Banner](libs/components/src/lib/banner) `HTML` `Sass`
 > - [Button](libs/components/src/lib/button) `HTML` `Sass`
+> - [Create Account Form](libs/components/src/lib/create-account-form) `Angular Forms` `HTML` `Sass`
 > - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
 > - [Message Form](libs/components/src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 
