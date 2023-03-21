@@ -19,6 +19,7 @@ exports
     "credentialPublicKey": verifiedRegistrationResponse.registrationInfo.credentialPublicKey,
   })) : {
     "success": false,
+    "message": "Registration response not verified.",
   })(await simpleWebAuthnServer.verifyRegistrationResponse({
     expectedChallenge: userDocumentSnapshot.data()["challenge"],
     expectedOrigin: "https://console.gavinsawyer.dev",
@@ -27,4 +28,5 @@ exports
     response: data["registrationResponse"],
   })) : {
     "success": false,
+    "message": "This user doesn't exist.",
   })(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));

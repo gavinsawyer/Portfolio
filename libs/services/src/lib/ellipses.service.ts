@@ -1,7 +1,7 @@
 import { isPlatformBrowser }                          from "@angular/common";
 import { Inject, Injectable, OnDestroy, PLATFORM_ID } from "@angular/core";
-import { BehaviorSubject, Observable }                from "rxjs";
-import { Ellipses }                                   from "../../../types/src/ellipses";
+import { BehaviorSubject, Observable } from "rxjs";
+import { Ellipses }                    from "../../../types/src/lib/ellipses";
 
 
 @Injectable({

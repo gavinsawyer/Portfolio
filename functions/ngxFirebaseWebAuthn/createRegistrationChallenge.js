@@ -27,4 +27,5 @@ exports
     userName: data["displayName"],
   })) : {
     "success": false,
+    "message": "A passkey already exists for this user.",
   })(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));

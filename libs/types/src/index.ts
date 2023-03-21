@@ -1,2 +1,2 @@
-export * from './appearance';
-export * from './messageFormStatus';
+export * from './lib/appearance';
+export * from './lib/messageFormStatus';

@@ -19,6 +19,7 @@ exports
     "credentialId": verifiedAuthenticationResponse.authenticationInfo.credentialID,
   })) : {
     "success": false,
+    "message": "Authentication response not verified.",
   })(await simpleWebAuthnServer.verifyAuthenticationResponse({
     authenticator: {
       counter: userDocumentSnapshot.data()["credentialCounter"],
@@ -32,8 +33,10 @@ exports
     response: data["authenticationResponse"],
   })) : {
     "success": false,
+    "message": "This user doesn't exist.",
   })(await firestore.collection("users").doc(data["authenticationResponse"]["response"]["userHandle"]).get(), await firestore.collection("users").doc(callableContext.auth.uid).get()) : ((_writeResult) => ({
     "success": false,
+    "message": "This user is already signed in.",
   }))(await firestore.collection("users").doc(callableContext.auth.uid).update({
     "challenge": FieldValue.delete(),
   })))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));

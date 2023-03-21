@@ -14,6 +14,7 @@ exports
     "challenge": FieldValue.delete(),
   })) : ((_writeResult) => ({
     "success": true,
-  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()) )(userDocumentSnapshot.data()) : {
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(userDocumentSnapshot.data()) : {
     "success": false,
+    "message": "This user doesn't exist.",
   })(await firestore.collection("users").doc(callableContext.auth.uid).get()))(firestore.getFirestore(), firestore.FieldValue));
