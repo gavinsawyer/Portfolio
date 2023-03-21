@@ -10,7 +10,10 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((_data, callableContext) => (async (auth, firestore) => (async (publicKeyCredentialRequestOptions) => ((_writeResult) => publicKeyCredentialRequestOptions)(await firestore.collection("users").doc(callableContext.auth.uid).set({
+  .onCall((_data, callableContext) => (async (auth, firestore) => (async (publicKeyCredentialRequestOptions) => ((_writeResult) => ({
+    "success": true,
+    "requestOptions": publicKeyCredentialRequestOptions,
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).set({
     "challenge": publicKeyCredentialRequestOptions.challenge,
   }, {
     merge: true,

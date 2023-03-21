@@ -39,7 +39,7 @@
     "@nrwl/nx-cloud": "^15",
     "@nrwl/workspace": "^15",
     "@schematics/angular": "~15.1.0",
-    "@simplewebauthn/typescript-types": "^7.0.0",
+    "@simplewebauthn/typescript-types": "^7",
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
@@ -60,5 +60,5 @@
     "postinstall": "ngcc --properties es2020 browser module main",
     "serve": "npx nx serve"
   },
-  "version": "15.6.0"
+  "version": "15.7.0"
 }

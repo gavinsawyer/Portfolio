@@ -17,6 +17,9 @@
     "paths": {
       "@portfolio/components": ["libs/components/src/index.ts"],
       "@portfolio/interfaces": ["libs/interfaces/src/index.ts"],
+      "@portfolio/ngx-firebase-web-authn": [
+        "libs/ngx-firebase-web-authn/src/index.ts"
+      ],
       "@portfolio/services": ["libs/services/src/index.ts"],
       "@portfolio/types": ["libs/types/src/index.ts"]
     }

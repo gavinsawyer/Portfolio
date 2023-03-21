@@ -1,8 +1,8 @@
 {
-  "name": "services",
+  "name": "ngx-firebase-web-authn",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/services/src",
+  "sourceRoot": "libs/ngx-firebase-web-authn/src",
   "prefix": "portfolio",
   "targets": {
     "lint": {
@@ -10,8 +10,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/services/**/*.ts",
-          "libs/services/**/*.html"
+          "libs/ngx-firebase-web-authn/**/*.ts",
+          "libs/ngx-firebase-web-authn/**/*.html"
         ]
       }
     }

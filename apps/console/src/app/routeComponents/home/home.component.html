@@ -4,7 +4,7 @@
       {{ (messagesService.messageDocumentsObservable | async)?.length }}
     </p>
 
-    <portfolio-button (action)="webAuthnService.register('gavinsawyer');" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Register"></portfolio-button>
-    <portfolio-button (action)="webAuthnService.authenticate();" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Authenticate"></portfolio-button>
+    <portfolio-button (action)="ngxFirebaseWebAuthnService.createPasskey('gavinsawyer');" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Create passkey"></portfolio-button>
+    <portfolio-button (action)="ngxFirebaseWebAuthnService.signInWithPasskey();" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Sign in with passkey"></portfolio-button>
   </section>
 </article>

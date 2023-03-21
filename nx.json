@@ -8,65 +8,49 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "browser",
-          "server",
-          "build"
-        ],
+        "cacheableOperations": ["browser", "server", "build"],
         "accessToken": "MGZjYWU3ODYtODRjNi00ODRlLWE1ZWUtOTI5NWRkNzM2MTc0fHJlYWQtd3JpdGU="
       }
     }
   },
   "targetDefaults": {
     "browser": {
-      "dependsOn": [
-        "^browser"
-      ]
+      "dependsOn": ["^browser"]
     },
     "server": {
-      "dependsOn": [
-        "^server"
-      ]
+      "dependsOn": ["^server"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     }
   },
   "generators": {
     "@nrwl/angular:application": {
-      "e2eTestRunner": "none",
+      "style": "sass",
       "linter": "eslint",
+      "unitTestRunner": "none",
+      "e2eTestRunner": "none",
       "routing": true,
       "skipTests": true,
-      "standalone": true,
-      "style": "sass",
-      "unitTestRunner": "none"
+      "standalone": true
     },
     "@nrwl/angular:library": {
       "linter": "eslint",
-      "skipModule": true,
-      "unitTestRunner": "none"
+      "unitTestRunner": "none",
+      "skipModule": true
     },
     "@nrwl/angular:component": {
+      "style": "sass",
       "displayBlock": true,
       "export": true,
       "skipTests": true,
-      "standalone": true,
-      "style": "sass"
+      "standalone": true
     }
   },
   "defaultProject": "website",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [],
-    "production": [
-      "default",
-      "!{projectRoot}/.eslintrc.json"
-    ]
+    "production": ["default", "!{projectRoot}/.eslintrc.json"]
   }
 }

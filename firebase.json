@@ -28,24 +28,24 @@
       ],
       "rewrites": [
         {
-          "source": "/functions/clearChallenge",
+          "source": "/ngxFirebaseWebAuthn/clearChallenge",
           "function": "clearChallenge"
         },
         {
-          "source": "/functions/generateAuthenticationOptions",
-          "function": "generateAuthenticationOptions"
+          "source": "/ngxFirebaseWebAuthn/createAuthenticationChallenge",
+          "function": "createAuthenticationChallenge"
         },
         {
-          "source": "/functions/verifyAuthenticationResponse",
-          "function": "verifyAuthenticationResponse"
+          "source": "/ngxFirebaseWebAuthn/createRegistrationChallenge",
+          "function": "createRegistrationChallenge"
         },
         {
-          "source": "/functions/generateRegistrationOptions",
-          "function": "generateRegistrationOptions"
+          "source": "/ngxFirebaseWebAuthn/verifyAuthentication",
+          "function": "verifyAuthentication"
         },
         {
-          "source": "/functions/verifyRegistrationResponse",
-          "function": "verifyRegistrationResponse"
+          "source": "/ngxFirebaseWebAuthn/verifyRegistration",
+          "function": "verifyRegistration"
         },
         {
           "source": "**",

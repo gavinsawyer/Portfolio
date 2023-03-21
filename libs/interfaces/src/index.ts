@@ -1,2 +1,3 @@
-export * from './messageDocument';
-export * from './shortcutsAPIPublicDocument';
+
+export * from './lib/messageDocument';
+export * from './lib/shortcutsAPIPublicDocument';

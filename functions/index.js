@@ -13,10 +13,10 @@ exports.toggleLocation = require("./shortcuts/location/toggle").default;
 exports.setTime        = require("./shortcuts/time/set").default;
 
 
-// WebAuthn API endpoints
+// ngxFirebaseWebAuthn API endpoints
 
-exports.clearChallenge                = require("./webAuthn/clearChallenge").default;
-exports.generateAuthenticationOptions = require("./webAuthn/authentication/generateOptions").default;
-exports.verifyAuthenticationResponse  = require("./webAuthn/authentication/verifyResponse").default;
-exports.generateRegistrationOptions   = require("./webAuthn/registration/generateOptions").default;
-exports.verifyRegistrationResponse    = require("./webAuthn/registration/verifyResponse").default;
+exports.clearChallenge                = require("./ngxFirebaseWebAuthn/clearChallenge").default;
+exports.createAuthenticationChallenge = require("./ngxFirebaseWebAuthn/createAuthenticationChallenge").default;
+exports.createRegistrationChallenge   = require("./ngxFirebaseWebAuthn/createRegistrationChallenge").default;
+exports.verifyAuthentication          = require("./ngxFirebaseWebAuthn/verifyAuthentication").default;
+exports.verifyRegistration            = require("./ngxFirebaseWebAuthn/verifyRegistration").default;

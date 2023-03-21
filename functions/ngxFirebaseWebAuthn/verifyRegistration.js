@@ -10,15 +10,21 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => (async (userDocumentSnapshot) => userDocumentSnapshot.exists && (async (verifiedRegistrationResponse) => verifiedRegistrationResponse.verified && (async (_writeResult) => true)(await firestore.collection("users").doc(callableContext.auth.uid).update({
+  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => (async (userDocumentSnapshot) => userDocumentSnapshot.exists ? (async (verifiedRegistrationResponse) => verifiedRegistrationResponse.verified ? (async (_writeResult) => ({
+    "success": true,
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).update({
     "challenge": FieldValue.delete(),
     "credentialCounter": verifiedRegistrationResponse.registrationInfo.counter,
     "credentialId": verifiedRegistrationResponse.registrationInfo.credentialID,
     "credentialPublicKey": verifiedRegistrationResponse.registrationInfo.credentialPublicKey,
-  })))(await simpleWebAuthnServer.verifyRegistrationResponse({
+  })) : {
+    "success": false,
+  })(await simpleWebAuthnServer.verifyRegistrationResponse({
     expectedChallenge: userDocumentSnapshot.data()["challenge"],
     expectedOrigin: "https://console.gavinsawyer.dev",
     expectedRPID: "console.gavinsawyer.dev",
     requireUserVerification: true,
-    response: data["response"],
-  })))(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));
+    response: data["registrationResponse"],
+  })) : {
+    "success": false,
+  })(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));

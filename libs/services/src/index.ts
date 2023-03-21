@@ -5,4 +5,3 @@ export * from "./lib/focus.service";
 export * from "./lib/hyperResponsivity.service";
 export * from "./lib/messages.service";
 export * from "./lib/path.service";
-export * from "./lib/webAuthn.service";

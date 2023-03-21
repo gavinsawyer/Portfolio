@@ -26,6 +26,20 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > `% npm run deploy` Deploy to Cloud Run \
 > `% npm run serve` Run local development server
 ### Libraries
+> #### [@portfolio/ngx-firebase-web-authn](libs/ngx-firebase-web-authn) `Firebase Authentication` `Firebase Functions` `SimpleWebAuthn`
+>
+> An Angular Firebase extension for authentication with WebAuthn passkeys.
+> - Used with the anonymous provider as default (See [@portfolio/services/AuthenticationService](libs/services/src/lib/authentication.service.ts)).
+> - Requires some [firebase functions](/functions/ngxFirebaseWebAuthn/README.md), which must have the Service Account Token Creator role in [GCP IAM Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
+> - Public keys and challenges are stored in the `users` collection in Firestore, where the user document ID and current signed-in user's uid are the same.
+>
+>
+> ### NgxWebAuthnService
+> #### Methods
+>
+> `createPasskey: (displayName: string) => Promise<void>`
+> 
+> `signInWithPasskey: () => Promise<UserCredential>`
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 > 
 > Angular components used in the app:
@@ -39,18 +53,22 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 
 > #### [@portfolio/types](libs/types) `TypeScript`
 
-> #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firebase Functions` `Firestore` `SimpleWebAuthn`
-> 
-> Angular services used in the app and components library. Services provide anonymous and passkey authentication, live data, and responsive design features. 
+> #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firestore`
+>
+> Angular services used in the app and components library. Provides anonymous authentication, live data, and responsive design features.
 ### Firebase Functions package:
-> #### [functions](functions)
-> 
 > `% firebase deploy --only functions`
+> 
+> ### [functions/ngxFirebaseWebAuthn](functions/ngxFirebaseWebAuthn)
+> Four Cloud Functions used to facilitate registering and authenticating WebAuthn passkeys.
 >
-> This package consists of six Google Cloud Functions, which are used to update Firestore from iOS Shortcuts and Automations.
+> An [additional function](functions/ngxFirebaseWebAuthn/clearChallenge.js) clears challenges if the user cancels either registration or authentication.
+> ### [functions/shortcuts](functions/shortcuts)
 >
-> When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an automation which calls [setFocus](functions/shortcuts/focus/set.js), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts).
+> Six Cloud Functions used to read and update Firestore from iOS and tvOS Automations.
 >
-> Additional functions for [location](functions/shortcuts/location) and [time](functions/shortcuts/time) enable automations. iOS Shortcuts and HomeKit Automations both access the user's state via [getAll](functions/shortcuts/all/get.js) and adjust device and home settings accordingly.
+> When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an Automation which calls [setFocus](functions/shortcuts/focus/set.js), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts).
+>
+> Additional functions for [location](functions/shortcuts/location) and [time](functions/shortcuts/time) enable home automation. iOS and tvOS (running on Apple TV and HomePods) Automations set device and home conditions according to the user's state.
 >
 > > An example automation I've implemented turns off the Sleep Focus and turns on my apartment lights and espresso machine if I am at home when my wake-up alarm is stopped.

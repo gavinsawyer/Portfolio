@@ -10,9 +10,12 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore) => ((userDocumentSnapshot) => !userDocumentSnapshot.data()?.["credentialPublicKey"] && (async (publicKeyCredentialCreationOptions) => ((_writeResult) => publicKeyCredentialCreationOptions)(await firestore.collection("users").doc(callableContext.auth.uid).set({
+  .onCall((data, callableContext) => (async (auth, firestore) => ((userDocumentSnapshot) => !userDocumentSnapshot.data()?.["credentialPublicKey"] ? (async (publicKeyCredentialCreationOptions) => ((_writeResult) => ({
+    "success": true,
+    "creationOptions": publicKeyCredentialCreationOptions,
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).set({
     "challenge": publicKeyCredentialCreationOptions.challenge,
-    "displayName": data,
+    "displayName": data["displayName"],
   })))(simpleWebAuthnServer.generateRegistrationOptions({
     authenticatorSelection: {
       residentKey: "required",
@@ -21,5 +24,7 @@ exports
     rpID: "console.gavinsawyer.dev",
     rpName: "GavinSawyer.dev Console",
     userID: callableContext.auth.uid,
-    userName: data,
-  })))(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));
+    userName: data["displayName"],
+  })) : {
+    "success": false,
+  })(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));
