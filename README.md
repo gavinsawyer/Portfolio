@@ -37,9 +37,10 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > ### NgxWebAuthnService
 > #### Methods
 >
-> `createPasskey: (displayName: string) => Promise<void>`
+> `createUserWithPasskey: (displayName: string) => Promise<UserCredential>`
 > 
 > `signInWithPasskey: () => Promise<UserCredential>`
+
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 > 
 > Angular components used in the app:

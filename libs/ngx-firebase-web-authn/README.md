@@ -11,7 +11,7 @@
 > ### NgxWebAuthnService
 > #### Methods
 >
-> > `createPasskey: (displayName: string) => Promise<void>`
+> > `createUserWithPasskey: (displayName: string) => Promise<UserCredential>`
 > 
 > > `signInWithPasskey: () => Promise<UserCredential>`
 
