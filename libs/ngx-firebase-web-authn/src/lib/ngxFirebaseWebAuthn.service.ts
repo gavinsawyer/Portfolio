@@ -1,6 +1,6 @@
-import { Injectable }                                                     from "@angular/core";
-import { Auth, signInAnonymously, signInWithCustomToken, UserCredential } from "@angular/fire/auth";
-import { Functions, httpsCallableFromURL }                                from "@angular/fire/functions";
+import { Injectable }                                                                                                                          from "@angular/core";
+import { Auth, signInAnonymously, signInWithCustomToken, UserCredential }                                                                      from "@angular/fire/auth";
+import { Functions, httpsCallableFromURL }                                                                                                     from "@angular/fire/functions";
 import { startAuthentication, startRegistration }                                                                                              from "@simplewebauthn/browser";
 import { AuthenticationResponseJSON, PublicKeyCredentialCreationOptionsJSON, PublicKeyCredentialRequestOptionsJSON, RegistrationResponseJSON } from "@simplewebauthn/typescript-types";
 
