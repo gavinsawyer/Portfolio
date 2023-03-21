@@ -10,10 +10,10 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => data["authenticationResponse"]["response"]["userHandle"] !== callableContext.auth.uid ? (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists ? (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified ? (async (_writeResult) => (async (customToken) => (async (_writeResult) => ({
+  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => data["authenticationResponse"]["response"]["userHandle"] !== callableContext.auth.uid ? (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists ? (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified ? (async (_writeResult) => (async (_writeResult) => (async (customToken) => ({
     "success": true,
     "customToken": customToken,
-  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await auth.createCustomToken(data["authenticationResponse"]["response"]["userHandle"])))(await firestore.collection("users").doc(data["authenticationResponse"]["response"]["userHandle"]).update({
+  }))(await auth.createCustomToken(data["authenticationResponse"]["response"]["userHandle"])))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await firestore.collection("users").doc(data["authenticationResponse"]["response"]["userHandle"]).update({
     "challenge": FieldValue.delete(),
     "credentialCounter": verifiedAuthenticationResponse.authenticationInfo.newCounter,
     "credentialId": verifiedAuthenticationResponse.authenticationInfo.credentialID,

@@ -10,17 +10,18 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => (async (userDocumentSnapshot) => userDocumentSnapshot.exists ? (async (verifiedRegistrationResponse) => verifiedRegistrationResponse.verified ? (async (_writeResult) => ({
+  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => (async (userDocumentSnapshot) => userDocumentSnapshot.exists ? (async (verifiedRegistrationResponse) => verifiedRegistrationResponse.verified ? (async (_writeResult) => (async (customToken) => ({
     "success": true,
-  }))(await firestore.collection("users").doc(callableContext.auth.uid).update({
+    "customToken": customToken,
+  }))(await auth.createCustomToken(callableContext.auth.uid)))(await firestore.collection("users").doc(callableContext.auth.uid).update({
     "challenge": FieldValue.delete(),
     "credentialCounter": verifiedRegistrationResponse.registrationInfo.counter,
     "credentialId": verifiedRegistrationResponse.registrationInfo.credentialID,
     "credentialPublicKey": verifiedRegistrationResponse.registrationInfo.credentialPublicKey,
-  })) : {
+  })) : ((_writeResult) => ({
     "success": false,
     "message": "Registration response not verified.",
-  })(await simpleWebAuthnServer.verifyRegistrationResponse({
+  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await simpleWebAuthnServer.verifyRegistrationResponse({
     expectedChallenge: userDocumentSnapshot.data()["challenge"],
     expectedOrigin: "https://console.gavinsawyer.dev",
     expectedRPID: "console.gavinsawyer.dev",

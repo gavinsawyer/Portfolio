@@ -1,6 +1,6 @@
-import { Injectable }                                                                                                                          from "@angular/core";
-import { Auth, signInWithCustomToken, UserCredential }                                                                                         from "@angular/fire/auth";
-import { Functions, httpsCallableFromURL }                                                                                                     from "@angular/fire/functions";
+import { Injectable }                                                     from "@angular/core";
+import { Auth, signInAnonymously, signInWithCustomToken, UserCredential } from "@angular/fire/auth";
+import { Functions, httpsCallableFromURL }                                from "@angular/fire/functions";
 import { startAuthentication, startRegistration }                                                                                              from "@simplewebauthn/browser";
 import { AuthenticationResponseJSON, PublicKeyCredentialCreationOptionsJSON, PublicKeyCredentialRequestOptionsJSON, RegistrationResponseJSON } from "@simplewebauthn/typescript-types";
 
@@ -39,7 +39,9 @@ interface VerifyAuthenticationFunctionResponseUnsuccessful extends FunctionRespo
 interface VerifyAuthenticationFunctionRequest {
   "authenticationResponse": AuthenticationResponseJSON,
 }
-interface VerifyRegistrationFunctionResponseSuccessful extends FunctionResponseSuccessful {}
+interface VerifyRegistrationFunctionResponseSuccessful extends FunctionResponseSuccessful {
+  "customToken": string,
+}
 interface VerifyRegistrationFunctionResponseUnsuccessful extends FunctionResponseUnsuccessful {
   "message": "Registration response not verified." | "This user doesn't exist.",
 }
@@ -62,7 +64,7 @@ export class NgxFirebaseWebAuthnService {
     private readonly functions: Functions
   ) {
     this
-      .createPasskey = async (displayName: string) => (async (createRegistrationChallengeFunctionResponse: CreateRegistrationChallengeFunctionResponse): Promise<void> => createRegistrationChallengeFunctionResponse.success ? (async (registrationResponse: RegistrationResponseJSON): Promise<void> => ((verifyRegistrationFunctionResponse: VerifyRegistrationFunctionResponse): void => verifyRegistrationFunctionResponse.success ? void (0) : ((): never => {
+      .createUserWithPasskey = async (displayName: string): Promise<UserCredential> => (async (_userCredential: UserCredential): Promise<UserCredential> => (async (createRegistrationChallengeFunctionResponse: CreateRegistrationChallengeFunctionResponse): Promise<UserCredential> => createRegistrationChallengeFunctionResponse.success ? (async (registrationResponse: RegistrationResponseJSON): Promise<UserCredential> => (async (verifyRegistrationFunctionResponse: VerifyRegistrationFunctionResponse): Promise<UserCredential> => verifyRegistrationFunctionResponse.success ? await signInWithCustomToken(auth, verifyRegistrationFunctionResponse.customToken) : ((): never => {
         throw new Error("ngxFirebaseWebAuthn/verifyRegistrationFunction: " + verifyRegistrationFunctionResponse.message);
       })())((await httpsCallableFromURL<VerifyRegistrationFunctionRequest, VerifyRegistrationFunctionResponse>(functions, "/ngxFirebaseWebAuthn/verifyRegistration")({
         registrationResponse: registrationResponse,
@@ -74,9 +76,9 @@ export class NgxFirebaseWebAuthnService {
         throw new Error("ngxFirebaseWebAuthn/createRegistrationChallengeFunction: " + createRegistrationChallengeFunctionResponse.message);
       })())((await httpsCallableFromURL<CreateRegistrationChallengeFunctionRequest, CreateRegistrationChallengeFunctionResponse>(functions, "/ngxFirebaseWebAuthn/createRegistrationChallenge")({
         displayName: displayName,
-      })).data);
+      })).data))(await signInAnonymously(auth));
     this
-      .signInWithPasskey = async (): Promise<UserCredential> => (async (createAuthenticationChallengeFunctionResponse: CreateAuthenticationChallengeFunctionResponse): Promise<UserCredential | never> => await (async (authenticationResponse: AuthenticationResponseJSON): Promise<UserCredential> => await (async (verifyAuthenticationFunctionResponse: VerifyAuthenticationFunctionResponse): Promise<UserCredential> => verifyAuthenticationFunctionResponse.success ? await signInWithCustomToken(auth, verifyAuthenticationFunctionResponse.customToken) : ((): never => {
+      .signInWithPasskey = async (): Promise<UserCredential> => (async (createAuthenticationChallengeFunctionResponse: CreateAuthenticationChallengeFunctionResponse): Promise<UserCredential | never> => (async (authenticationResponse: AuthenticationResponseJSON): Promise<UserCredential> => (async (verifyAuthenticationFunctionResponse: VerifyAuthenticationFunctionResponse): Promise<UserCredential> => verifyAuthenticationFunctionResponse.success ? await signInWithCustomToken(auth, verifyAuthenticationFunctionResponse.customToken) : ((): never => {
         throw new Error("ngxFirebaseWebAuthn/verifyAuthenticationFunction: " + verifyAuthenticationFunctionResponse.message);
       })())((await httpsCallableFromURL<VerifyAuthenticationFunctionRequest, VerifyAuthenticationFunctionResponse>(functions, "/ngxFirebaseWebAuthn/verifyAuthentication")({
         authenticationResponse: authenticationResponse,
@@ -87,7 +89,7 @@ export class NgxFirebaseWebAuthnService {
       })())((await httpsCallableFromURL<ClearChallengeFunctionRequest, ClearChallengeFunctionResponse>(functions, "/ngxFirebaseWebAuthn/clearChallenge")()).data))))((await httpsCallableFromURL<CreateAuthenticationChallengeFunctionRequest, CreateAuthenticationChallengeFunctionResponse>(functions, "/ngxFirebaseWebAuthn/createAuthenticationChallenge")()).data);
   }
 
-  public readonly createPasskey: (displayName: string) => Promise<void>;
+  public readonly createUserWithPasskey: (displayName: string) => Promise<UserCredential>;
   public readonly signInWithPasskey: () => Promise<UserCredential>;
 
 }
