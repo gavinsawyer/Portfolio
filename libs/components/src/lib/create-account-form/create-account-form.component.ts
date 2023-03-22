@@ -64,7 +64,16 @@ export class CreateAccountFormComponent implements AfterViewInit {
           .value
           .displayName ? await ngxFirebaseWebAuthnService
           .createUserWithPasskey(this.formGroup.value.displayName)
-          .then<void>((_userCredential: UserCredential): void => this.statusSubject.next("complete")) : this
+          .then<void, void>((_userCredential: UserCredential): void => {
+            this
+              .formGroup
+              .disable();
+
+            this
+              .statusSubject
+              .next("complete");
+          })
+          .catch<void>((_reason: any): void => this.statusSubject.next("unsent")): this
           .statusSubject
           .next("unsent");
       };
