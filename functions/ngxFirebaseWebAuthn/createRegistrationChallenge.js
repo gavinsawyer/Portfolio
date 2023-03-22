@@ -13,9 +13,8 @@ exports
   .onCall((data, callableContext) => (async (auth, firestore) => ((userDocumentSnapshot) => !userDocumentSnapshot.data()?.["credentialPublicKey"] ? (async (publicKeyCredentialCreationOptions) => ((_writeResult) => ({
     "success": true,
     "creationOptions": publicKeyCredentialCreationOptions,
-  }))(await firestore.collection("users").doc(callableContext.auth.uid).set({
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).set({
     "challenge": publicKeyCredentialCreationOptions.challenge,
-    "displayName": data["displayName"],
   })))(simpleWebAuthnServer.generateRegistrationOptions({
     authenticatorSelection: {
       residentKey: "required",
@@ -28,4 +27,4 @@ exports
   })) : {
     "success": false,
     "message": "A passkey already exists for this user.",
-  })(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));
+  })(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore()));

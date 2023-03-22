@@ -13,7 +13,7 @@ exports
   .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => (async (userDocumentSnapshot) => userDocumentSnapshot.exists ? (async (userDocument) => userDocument["challenge"] ? (async (verifiedRegistrationResponse) => verifiedRegistrationResponse.verified ? (async (_writeResult) => (async (customToken) => ({
     "success": true,
     "customToken": customToken,
-  }))(await auth.createCustomToken(callableContext.auth.uid)))(await firestore.collection("users").doc(callableContext.auth.uid).update({
+  }))(await auth.createCustomToken(callableContext.auth.uid)))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).update({
     "challenge": FieldValue.delete(),
     "credentialCounter": verifiedRegistrationResponse.registrationInfo.counter,
     "credentialId": verifiedRegistrationResponse.registrationInfo.credentialID,
@@ -21,7 +21,7 @@ exports
   })) : ((_writeResult) => ({
     "success": false,
     "message": "Registration response not verified.",
-  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(await simpleWebAuthnServer.verifyRegistrationResponse({
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).delete()))(await simpleWebAuthnServer.verifyRegistrationResponse({
     expectedChallenge: userDocument["challenge"],
     expectedOrigin: "https://console.gavinsawyer.dev",
     expectedRPID: "console.gavinsawyer.dev",
@@ -30,7 +30,7 @@ exports
   })) : ((_writeResult) => ({
     "success": false,
     "message": "Please create a registration challenge first.",
-  }))(await firestore.collection("users").doc(callableContext.auth.uid).delete()))(userDocumentSnapshot.data()) : {
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).delete()))(userDocumentSnapshot.data()) : {
     "success": false,
     "message": "This user doesn't exist.",
-  })(await firestore.collection("users").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));
+  })(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).get()))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));

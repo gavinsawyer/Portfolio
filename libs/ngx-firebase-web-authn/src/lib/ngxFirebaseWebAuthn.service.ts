@@ -78,7 +78,7 @@ export class NgxFirebaseWebAuthnService {
         displayName: displayName,
       })).data))(await signInAnonymously(auth));
     this
-      .signInWithPasskey = async (): Promise<UserCredential> => (async (createAuthenticationChallengeFunctionResponse: CreateAuthenticationChallengeFunctionResponse): Promise<UserCredential | never> => (async (authenticationResponse: AuthenticationResponseJSON): Promise<UserCredential> => (async (verifyAuthenticationFunctionResponse: VerifyAuthenticationFunctionResponse): Promise<UserCredential> => verifyAuthenticationFunctionResponse.success ? await signInWithCustomToken(auth, verifyAuthenticationFunctionResponse.customToken) : ((): never => {
+      .signInWithPasskey = async (): Promise<UserCredential> => (async (_userCredential: UserCredential): Promise<UserCredential> => (async (createAuthenticationChallengeFunctionResponse: CreateAuthenticationChallengeFunctionResponse): Promise<UserCredential | never> => (async (authenticationResponse: AuthenticationResponseJSON): Promise<UserCredential> => (async (verifyAuthenticationFunctionResponse: VerifyAuthenticationFunctionResponse): Promise<UserCredential> => verifyAuthenticationFunctionResponse.success ? await signInWithCustomToken(auth, verifyAuthenticationFunctionResponse.customToken) : ((): never => {
         throw new Error("ngxFirebaseWebAuthn/verifyAuthenticationFunction: " + verifyAuthenticationFunctionResponse.message);
       })())((await httpsCallableFromURL<VerifyAuthenticationFunctionRequest, VerifyAuthenticationFunctionResponse>(functions, "/ngxFirebaseWebAuthn/verifyAuthentication")({
         authenticationResponse: authenticationResponse,
@@ -86,7 +86,7 @@ export class NgxFirebaseWebAuthnService {
         throw new Error("ngxFirebaseWebAuthn/signInWithPasskey: Cancelled by user.");
       })() : ((): never => {
         throw new Error("ngxFirebaseWebAuthn/clearChallengeFunction: " + clearChallengeFunctionResponse.message);
-      })())((await httpsCallableFromURL<ClearChallengeFunctionRequest, ClearChallengeFunctionResponse>(functions, "/ngxFirebaseWebAuthn/clearChallenge")()).data))))((await httpsCallableFromURL<CreateAuthenticationChallengeFunctionRequest, CreateAuthenticationChallengeFunctionResponse>(functions, "/ngxFirebaseWebAuthn/createAuthenticationChallenge")()).data);
+      })())((await httpsCallableFromURL<ClearChallengeFunctionRequest, ClearChallengeFunctionResponse>(functions, "/ngxFirebaseWebAuthn/clearChallenge")()).data))))((await httpsCallableFromURL<CreateAuthenticationChallengeFunctionRequest, CreateAuthenticationChallengeFunctionResponse>(functions, "/ngxFirebaseWebAuthn/createAuthenticationChallenge")()).data))(await signInAnonymously(auth));
   }
 
   public readonly createUserWithPasskey: (displayName: string) => Promise<UserCredential>;

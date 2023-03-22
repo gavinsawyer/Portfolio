@@ -13,7 +13,7 @@ exports
   .onCall((_data, callableContext) => (async (auth, firestore) => (async (publicKeyCredentialRequestOptions) => ((_writeResult) => ({
     "success": true,
     "requestOptions": publicKeyCredentialRequestOptions,
-  }))(await firestore.collection("users").doc(callableContext.auth.uid).set({
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).set({
     "challenge": publicKeyCredentialRequestOptions.challenge,
   }, {
     merge: true,
