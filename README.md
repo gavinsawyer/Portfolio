@@ -33,12 +33,11 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - Users signing in or creating an account with a passkey are signed in anonymously first.
 > - Public keys and challenges are stored in the `ngxFirebaseWebAuthnUsers` collection in Firestore. Display names are not stored aside from in the passkey, so apps should use a separate `Users` collection. Stale challenges are automatically cleaned up.
 >
-> ### NgxWebAuthnService
-> #### Methods
+> #### Exported methods
 >
-> `createUserWithPasskey: (displayName: string) => Promise<UserCredential>`
+> `createUserWithPasskey: (auth, functions, displayName: string) => Promise<UserCredential>`
 > 
-> `signInWithPasskey: () => Promise<UserCredential>`
+> `signInWithPasskey: (auth, functions) => Promise<UserCredential>`
 
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 >

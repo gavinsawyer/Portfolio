@@ -1,8 +1,9 @@
 import { CommonModule }                                                         from "@angular/common";
 import { AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from "@angular/core";
-import { UserCredential }                                                       from "@angular/fire/auth";
+import { Auth, UserCredential }                                                 from "@angular/fire/auth";
+import { Functions }                                                            from "@angular/fire/functions";
 import { FormControl, FormGroup, ReactiveFormsModule }                          from "@angular/forms";
-import { NgxFirebaseWebAuthnService }                                           from "@portfolio/ngx-firebase-web-authn";
+import { createUserWithPasskey }                                                from "@portfolio/ngx-firebase-web-authn";
 import { AuthenticationService, EllipsesService, HyperResponsivityService }     from "@portfolio/services";
 import { NgxMaskDirective, provideNgxMask }                                     from "ngx-mask";
 import { BehaviorSubject, Observable }                                          from "rxjs";
@@ -36,10 +37,12 @@ export class CreateAccountFormComponent implements AfterViewInit {
     @Inject(PLATFORM_ID)
     private readonly platformId: Object,
 
+    private readonly auth: Auth,
+    private readonly functions: Functions,
+
     public readonly authenticationService: AuthenticationService,
     public readonly ellipsesService: EllipsesService,
     public readonly hyperResponsivityService: HyperResponsivityService,
-    public readonly ngxFirebaseWebAuthnService: NgxFirebaseWebAuthnService,
   ) {
     this
       .formGroup = new FormGroup<LoginForm>({
@@ -62,8 +65,7 @@ export class CreateAccountFormComponent implements AfterViewInit {
         return this
           .formGroup
           .value
-          .displayName ? await ngxFirebaseWebAuthnService
-          .createUserWithPasskey(this.formGroup.value.displayName)
+          .displayName ? await createUserWithPasskey(auth, functions, this.formGroup.value.displayName)
           .then<void, void>((_userCredential: UserCredential): void => {
             this
               .formGroup

@@ -10,7 +10,12 @@ exports
     enforceAppCheck: true,
   })
   .https
-  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => data["authenticationResponse"]["response"]["userHandle"] !== callableContext.auth.uid ? (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists ? (async (userDocument) => userDocument["credentialPublicKey"] ? (async (anonymousUserDocument) => anonymousUserDocument["challenge"] ? (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified ? (async (_writeResult) => (async (_writeResult) => (async (customToken) => ({
+  .onCall((data, callableContext) => (async (auth, firestore, FieldValue) => data["authenticationResponse"]["response"]["userHandle"] === callableContext.auth.uid ? ((_writeResult) => ({
+    "success": false,
+    "message": "This user is already signed in.",
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).update({
+    "challenge": FieldValue.delete(),
+  })) : (async (userDocumentSnapshot, anonymousUserDocumentSnapshot) => userDocumentSnapshot.exists ? (async (userDocument) => userDocument["credentialPublicKey"] ? (async (anonymousUserDocument) => anonymousUserDocument["challenge"] ? (async (verifiedAuthenticationResponse) => verifiedAuthenticationResponse.verified ? (async (_writeResult) => (async (_writeResult) => (async (customToken) => ({
     "success": true,
     "customToken": customToken,
   }))(await auth.createCustomToken(data["authenticationResponse"]["response"]["userHandle"])))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).delete()))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(data["authenticationResponse"]["response"]["userHandle"]).update({
@@ -40,9 +45,4 @@ exports
   }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).delete()))(userDocumentSnapshot.data()) : ((_writeResult) => ({
     "success": false,
     "message": "This user doesn't exist.",
-  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).delete()))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(data["authenticationResponse"]["response"]["userHandle"]).get(), await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).get()) : ((_writeResult) => ({
-    "success": false,
-    "message": "This user is already signed in.",
-  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).update({
-    "challenge": FieldValue.delete(),
-  })))(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).delete()))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(data["authenticationResponse"]["response"]["userHandle"]).get(), await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth.uid).get()) )(auth.getAuth(), firestore.getFirestore(), firestore.FieldValue));

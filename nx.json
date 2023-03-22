@@ -45,6 +45,9 @@
       "export": true,
       "skipTests": true,
       "standalone": true
+    },
+    "@nrwl/js:library" : {
+      "unitTestRunner": "none"
     }
   },
   "defaultProject": "website",

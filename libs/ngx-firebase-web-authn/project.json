@@ -1,18 +1,24 @@
 {
   "name": "ngx-firebase-web-authn",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "library",
   "sourceRoot": "libs/ngx-firebase-web-authn/src",
-  "prefix": "portfolio",
+  "projectType": "library",
   "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/ngx-firebase-web-authn",
+        "main": "libs/ngx-firebase-web-authn/src/index.ts",
+        "tsConfig": "libs/ngx-firebase-web-authn/tsconfig.lib.json",
+        "assets": ["libs/ngx-firebase-web-authn/*.md"]
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/ngx-firebase-web-authn/**/*.ts",
-          "libs/ngx-firebase-web-authn/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/ngx-firebase-web-authn/**/*.ts"]
       }
     }
   },
