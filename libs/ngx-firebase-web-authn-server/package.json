@@ -9,7 +9,7 @@
     "node": "18"
   },
   "main": "server.js",
-  "dependencies": {
+  "devDependencies": {
     "@simplewebauthn/server": "^7",
     "firebase-admin": "^11",
     "firebase-functions": "^4"
