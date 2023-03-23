@@ -2,7 +2,7 @@ import { VerifiedAuthenticationResponse, verifyAuthenticationResponse } from "@s
 import { AuthenticationResponseJSON }                                   from "@simplewebauthn/typescript-types";
 import { getAuth }                                                      from "firebase-admin/auth";
 import { DocumentReference, FieldValue, getFirestore }                  from "firebase-admin/firestore";
-import { runWith }                                                      from "firebase-functions";
+import { HttpsFunction, runWith }                                       from "firebase-functions";
 import { FunctionResponseSuccessful }                                   from "./function-response-successful";
 import { FunctionResponseUnsuccessful }                                 from "./function-response-unsuccessful";
 import { UserDocument }                                                 from "./user-document";
@@ -20,7 +20,7 @@ export interface VerifyAuthenticationFunctionRequest {
 }
 export type VerifyAuthenticationFunctionResponse = VerifyAuthenticationFunctionResponseSuccessful | VerifyAuthenticationFunctionResponseUnsuccessful;
 
-export const ngxFirebaseWebAuthnVerifyAuthentication = runWith({
+export const ngxFirebaseWebAuthnVerifyAuthentication: HttpsFunction = runWith({
   enforceAppCheck: true,
 })
   .https

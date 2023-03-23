@@ -1,5 +1,5 @@
 import { DocumentReference, FieldValue, getFirestore } from "firebase-admin/firestore";
-import { runWith }                                     from "firebase-functions";
+import { HttpsFunction, runWith }                      from "firebase-functions";
 import { FunctionResponseSuccessful }                  from "./function-response-successful";
 import { FunctionResponseUnsuccessful }                from "./function-response-unsuccessful";
 import { UserDocument }                                from "./user-document";
@@ -13,7 +13,7 @@ interface ClearChallengeFunctionResponseUnsuccessful extends FunctionResponseUns
 export interface ClearChallengeFunctionRequest {}
 export type ClearChallengeFunctionResponse = ClearChallengeFunctionResponseSuccessful | ClearChallengeFunctionResponseUnsuccessful;
 
-export const ngxFirebaseWebAuthnClearChallenge = runWith({
+export const ngxFirebaseWebAuthnClearChallenge: HttpsFunction = runWith({
   enforceAppCheck: true,
 })
   .https
