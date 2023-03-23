@@ -100,6 +100,7 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
+      "runtime": "nodejs18",
       "source": "functions"
     },
     {
@@ -111,7 +112,7 @@
         "firebase-debug.*.log"
       ],
       "runtime": "nodejs18",
-      "source": "dist/libs/ngx-firebase-web-authn-server"
+      "source": "dist/libs/ngx-firebase-web-authn-functions"
     }
   ]
 }

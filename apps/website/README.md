@@ -11,6 +11,6 @@
 > - [Otherwise](src/app/routeComponents/otherwise) `Angular Universal` `HTML` `Sass`
 > - [Privacy](src/app/routeComponents/privacy) `HTML` `Sass`
 >
-> `% npm run build` Create both browser and server bundles, prerender routes. \
+> `% npm run build` Build browser and server, prerender routes. \
 > `% npm run deploy` Deploy to Cloud Run \
 > `% npm run serve` Run local development server

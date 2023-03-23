@@ -12,7 +12,7 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - [Otherwise](apps/website/src/app/routeComponents/otherwise) `Angular Universal` `HTML` `Sass`
 > - [Privacy](apps/website/src/app/routeComponents/privacy) `HTML` `Sass`
 >
-> `% npm run build` Create both browser and server bundles, prerender routes. \
+> `% npm run build` Build browser and server, prerender routes. \
 > `% npm run deploy` Deploy to Cloud Run \
 > `% npm run serve` Run local development server
 
@@ -20,9 +20,9 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 >
 > Online at: [console.gavinsawyer.dev](https://console.gavinsawyer.dev)
 >
-> An admin-only console for seeing incoming messages.
+> An admin console for seeing incoming messages.
 >
-> `% npm run build` Create both browser and server bundles, prerender routes. \
+> `% npm run build` Build browser and server, prerender routes. \
 > `% npm run deploy` Deploy to Cloud Run \
 > `% npm run serve` Run local development server
 ### Libraries
@@ -36,7 +36,7 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > 
 > `signInWithPasskey: (auth, functions) => Promise<UserCredential>`
 
-> #### [@portfolio/ngx-firebase-web-authn-server](libs/ngx-firebase-web-authn-server) `Firebase Admin SDK` `Firebase Functions` `SimpleWebAuthn`
+> #### [@portfolio/ngx-firebase-web-authn-functions](libs/ngx-firebase-web-authn-functions) `Firebase Admin SDK` `Firebase Functions` `SimpleWebAuthn`
 > Four Firebase Functions used to facilitate registering and authenticating WebAuthn passkeys. An additional function clears challenges if the user cancels the process.
 > ##### Setup
 > Add the following objects to the `rewrites` array in your `firebase.json`. They should be inside the `hosting` object of each app where you'd like to use ngxFirebaseWebAuthn.
@@ -76,16 +76,17 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 >       "firebase-debug.*.log"
 >     ],
 >     "runtime": "nodejs18",
->     "source": "dist/libs/ngx-firebase-web-authn-server"
+>     "source": "dist/libs/ngx-firebase-web-authn-functions"
 >   }
 > ]
 > ```
 > Assign the Default Compute Service Account the `Service Account Token Creator` role in [GCP IAM Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
 > 
 > You may also need to assign the `allUsers` principal the `Cloud Function Invoker` role on each Cloud Function created by the `deploy` script. 
-> 
-> `% npm run build` Build `ngxFirebaseWebAuthn` codebase\
-> `% npm run deploy` Deploy `ngxFirebaseWebAuthn` codebase
+>
+> `% npm run deploy`
+> - Builds library with Nx and tsc, outputs to `dist/libs/ngx-firebase-web-authn-functions`.
+> - Deploys `ngx-firebase-web-authn` codebase using the Firebase CLI.
 
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 >

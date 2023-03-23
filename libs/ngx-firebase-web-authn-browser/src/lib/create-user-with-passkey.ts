@@ -1,6 +1,6 @@
 import { Auth, signInAnonymously, signInWithCustomToken, UserCredential }                                                                                                                                 from "@angular/fire/auth";
 import { Functions, httpsCallableFromURL }                                                                                                                                                                from "@angular/fire/functions";
-import { ClearChallengeFunctionResponse, CreateRegistrationChallengeFunctionRequest, CreateRegistrationChallengeFunctionResponse, VerifyRegistrationFunctionRequest, VerifyRegistrationFunctionResponse } from "@portfolio/ngx-firebase-web-authn-server";
+import { ClearChallengeFunctionResponse, CreateRegistrationChallengeFunctionRequest, CreateRegistrationChallengeFunctionResponse, VerifyRegistrationFunctionRequest, VerifyRegistrationFunctionResponse } from "@portfolio/ngx-firebase-web-authn-functions";
 import { startRegistration }                                                                                                                                                                              from "@simplewebauthn/browser";
 import { RegistrationResponseJSON }                                                                                                                                                                       from "@simplewebauthn/typescript-types";
 

@@ -1,6 +1,6 @@
 [back to Portfolio](../../README.md)
 
-> #### @portfolio/ngx-firebase-web-authn-server `Firebase Admin SDK` `Firebase Functions` `SimpleWebAuthn`
+> #### @portfolio/ngx-firebase-web-authn-functions `Firebase Admin SDK` `Firebase Functions` `SimpleWebAuthn`
 > Four Firebase Functions used to facilitate registering and authenticating WebAuthn passkeys. An additional function clears challenges if the user cancels the process.
 > ##### Setup
 > Add the following objects to the `rewrites` array in your `firebase.json`. They should be inside the `hosting` object of each app where you'd like to use ngxFirebaseWebAuthn.
@@ -40,7 +40,7 @@
 >       "firebase-debug.*.log"
 >     ],
 >     "runtime": "nodejs18",
->     "source": "dist/libs/ngx-firebase-web-authn-server"
+>     "source": "dist/libs/ngx-firebase-web-authn-functions"
 >   }
 > ]
 > ```
@@ -48,5 +48,6 @@
 > 
 > You may also need to assign the `allUsers` principal the `Cloud Function Invoker` role on each Cloud Function created by the `deploy` script.
 >
-> `% npm run build` Build `ngxFirebaseWebAuthn` codebase\
-> `% npm run deploy` Deploy `ngxFirebaseWebAuthn` codebase
+> `% npm run deploy`
+> - Builds library with Nx and tsc, outputs to `dist/libs/ngx-firebase-web-authn-functions`.
+> - Deploys `ngx-firebase-web-authn` codebase using the Firebase CLI.
