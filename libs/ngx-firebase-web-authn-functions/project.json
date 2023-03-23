@@ -1,7 +1,7 @@
 {
   "name": "ngx-firebase-web-authn-functions",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "/src",
+  "sourceRoot": "libs/ngx-firebase-web-authn-functions/src",
   "projectType": "library",
   "targets": {
     "build": {

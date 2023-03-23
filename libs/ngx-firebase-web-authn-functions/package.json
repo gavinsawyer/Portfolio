@@ -5,17 +5,13 @@
     "email": "hello@gavinsawyer.dev",
     "url": "https://github.com/gavinsawyer"
   },
-  "scripts": {
-    "build": "npx nx run build --project ngx-firebase-web-authn-functions",
-    "deploy": "npx nx run deploy --project ngx-firebase-web-authn-functions"
-  },
   "license": "MIT",
   "private": true,
   "main": "index.js",
   "engines": {
     "node": "18"
   },
-  "devDependencies": {
+  "dependencies": {
     "@simplewebauthn/server": "^7",
     "firebase-admin": "^11",
     "firebase-functions": "^4"

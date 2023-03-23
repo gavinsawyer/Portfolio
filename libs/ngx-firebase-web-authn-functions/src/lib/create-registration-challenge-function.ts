@@ -5,7 +5,7 @@ import { DocumentReference, getFirestore }        from "firebase-admin/firestore
 import { runWith }                                from "firebase-functions";
 import { FunctionResponseSuccessful }             from "./function-response-successful";
 import { FunctionResponseUnsuccessful }           from "./function-response-unsuccessful";
-import { UserDocument }                           from "./userDocument";
+import { UserDocument }                           from "./user-document";
 
 
 interface CreateRegistrationChallengeFunctionResponseSuccessful extends FunctionResponseSuccessful {
@@ -24,7 +24,7 @@ export const ngxFirebaseWebAuthnCreateRegistrationChallenge = runWith({
   enforceAppCheck: true,
 })
   .https
-  .onCall(async (createRegistrationChallengeFunctionRequest: CreateRegistrationChallengeFunctionRequest, callableContext): Promise<CreateRegistrationChallengeFunctionResponse> => callableContext.auth ? (async (auth, firestore): Promise<CreateRegistrationChallengeFunctionResponse> => (async (userDocument: UserDocument | undefined): Promise<CreateRegistrationChallengeFunctionResponse> => userDocument && !userDocument.credentialPublicKey ? (async (publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptionsJSON): Promise<CreateRegistrationChallengeFunctionResponse> => ((_writeResult): CreateRegistrationChallengeFunctionResponse => ({
+  .onCall(async (createRegistrationChallengeFunctionRequest: CreateRegistrationChallengeFunctionRequest, callableContext): Promise<CreateRegistrationChallengeFunctionResponse> => callableContext.auth ? (async (auth, firestore): Promise<CreateRegistrationChallengeFunctionResponse> => (async (userDocument: UserDocument | undefined): Promise<CreateRegistrationChallengeFunctionResponse> => !userDocument?.credentialPublicKey ? (async (publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptionsJSON): Promise<CreateRegistrationChallengeFunctionResponse> => ((_writeResult): CreateRegistrationChallengeFunctionResponse => ({
     success: true,
     creationOptions: publicKeyCredentialCreationOptions,
   }))(await (firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid) as DocumentReference<UserDocument>).set({

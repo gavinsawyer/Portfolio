@@ -5,7 +5,7 @@ import { DocumentReference, FieldValue, getFirestore } from "firebase-admin/fire
 import { runWith }                                     from "firebase-functions";
 import { FunctionResponseSuccessful }                  from "./function-response-successful";
 import { FunctionResponseUnsuccessful }                from "./function-response-unsuccessful";
-import { UserDocument }                                from "./userDocument";
+import { UserDocument }                                from "./user-document";
 
 
 interface VerifyRegistrationFunctionResponseSuccessful extends FunctionResponseSuccessful {

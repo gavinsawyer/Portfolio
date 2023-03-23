@@ -5,7 +5,7 @@ import { DocumentReference, FieldValue, getFirestore }                  from "fi
 import { runWith }                                                      from "firebase-functions";
 import { FunctionResponseSuccessful }                                   from "./function-response-successful";
 import { FunctionResponseUnsuccessful }                                 from "./function-response-unsuccessful";
-import { UserDocument }                                                 from "./userDocument";
+import { UserDocument }                                                 from "./user-document";
 
 
 interface VerifyAuthenticationFunctionResponseSuccessful extends FunctionResponseSuccessful {
@@ -24,7 +24,7 @@ export const ngxFirebaseWebAuthnVerifyAuthentication = runWith({
   enforceAppCheck: true,
 })
   .https
-  .onCall(async (verifyAuthenticationFunctionRequest: VerifyAuthenticationFunctionRequest, callableContext): Promise<VerifyAuthenticationFunctionResponse> => callableContext.auth ? (async (auth, firestore): Promise<VerifyAuthenticationFunctionResponse> => verifyAuthenticationFunctionRequest.authenticationResponse.response.userHandle === callableContext.auth!.uid ? (async (userDocument: UserDocument | undefined, anonymousUserDocument: UserDocument | undefined): Promise<VerifyAuthenticationFunctionResponse> => userDocument ? (async () => userDocument.credentialCounter && userDocument.credentialId && userDocument.credentialPublicKey ? (async () => anonymousUserDocument && anonymousUserDocument.challenge ? (async (verifiedAuthenticationResponse: VerifiedAuthenticationResponse): Promise<VerifyAuthenticationFunctionResponse> => verifiedAuthenticationResponse.verified ? (async (_writeResult): Promise<VerifyAuthenticationFunctionResponse> => (async (_writeResult): Promise<VerifyAuthenticationFunctionResponse> => (async (customToken): Promise<VerifyAuthenticationFunctionResponse> => ({
+  .onCall(async (verifyAuthenticationFunctionRequest: VerifyAuthenticationFunctionRequest, callableContext): Promise<VerifyAuthenticationFunctionResponse> => callableContext.auth ? (async (auth, firestore): Promise<VerifyAuthenticationFunctionResponse> => verifyAuthenticationFunctionRequest.authenticationResponse.response.userHandle !== callableContext.auth!.uid ? (async (userDocument: UserDocument | undefined): Promise<VerifyAuthenticationFunctionResponse> => userDocument ? (async () => userDocument.credentialPublicKey ? (async (anonymousUserDocument: UserDocument | undefined) => anonymousUserDocument && anonymousUserDocument.challenge ? (async (verifiedAuthenticationResponse: VerifiedAuthenticationResponse): Promise<VerifyAuthenticationFunctionResponse> => verifiedAuthenticationResponse.verified ? (async (_writeResult): Promise<VerifyAuthenticationFunctionResponse> => (async (_writeResult): Promise<VerifyAuthenticationFunctionResponse> => (async (customToken): Promise<VerifyAuthenticationFunctionResponse> => ({
     success: true,
     customToken: customToken,
   }))(await auth.createCustomToken(verifyAuthenticationFunctionRequest.authenticationResponse.response.userHandle!)))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).delete()))(await (firestore.collection("ngxFirebaseWebAuthnUsers").doc(verifyAuthenticationFunctionRequest.authenticationResponse.response.userHandle!) as DocumentReference<UserDocument>).update({
@@ -40,7 +40,7 @@ export const ngxFirebaseWebAuthnVerifyAuthentication = runWith({
       credentialID: userDocument.credentialId!,
       credentialPublicKey: userDocument.credentialPublicKey!,
     },
-    expectedChallenge: anonymousUserDocument["challenge"],
+    expectedChallenge: anonymousUserDocument.challenge,
     expectedOrigin: "https://console.gavinsawyer.dev",
     expectedRPID: "console.gavinsawyer.dev",
     requireUserVerification: true,
@@ -48,13 +48,13 @@ export const ngxFirebaseWebAuthnVerifyAuthentication = runWith({
   })) : ((_writeResult): VerifyAuthenticationFunctionResponse => ({
     success: false,
     message: "Please create an authentication challenge first.",
-  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).delete()))() : ((_writeResult): VerifyAuthenticationFunctionResponse => ({
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).delete()))((await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).get()).data()) : ((_writeResult): VerifyAuthenticationFunctionResponse => ({
     success: false,
     message: "A passkey doesn't exist for this user.",
   }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).delete()))() : ((_writeResult): VerifyAuthenticationFunctionResponse => ({
     success: false,
     message: "This user doesn't exist.",
-  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).delete()))((await firestore.collection("ngxFirebaseWebAuthnUsers").doc(verifyAuthenticationFunctionRequest.authenticationResponse.response.userHandle!).get()).data(), (await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).get()).data()) : ((_writeResult): VerifyAuthenticationFunctionResponse => ({
+  }))(await firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid).delete()))((await firestore.collection("ngxFirebaseWebAuthnUsers").doc(verifyAuthenticationFunctionRequest.authenticationResponse.response.userHandle!).get()).data()) : ((_writeResult): VerifyAuthenticationFunctionResponse => ({
     success: false,
     message: "This user is already signed in.",
   }))(await (firestore.collection("ngxFirebaseWebAuthnUsers").doc(callableContext.auth!.uid) as DocumentReference<UserDocument>).update({

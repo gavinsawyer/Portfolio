@@ -46,8 +46,8 @@
 > ```
 > Assign the Default Compute Service Account the `Service Account Token Creator` role in [GCP IAM Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
 > 
-> You may also need to assign the `allUsers` principal the `Cloud Function Invoker` role on each Cloud Function created by the `deploy` script.
->
-> `% npm run deploy`
-> - Builds library with Nx and tsc, outputs to `dist/libs/ngx-firebase-web-authn-functions`.
+> You may also need to assign the `allUsers` principal the `Cloud Function Invoker` role on each Cloud Function created by the `deploy` target.
+> 
+> `% npx nx run ngx-firebase-web-authn-functions:deploy`
+> - Builds library with tsc, outputs to `dist/libs/ngx-firebase-web-authn-functions`.
 > - Deploys `ngx-firebase-web-authn` codebase using the Firebase CLI.
