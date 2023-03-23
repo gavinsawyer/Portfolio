@@ -29,23 +29,23 @@
       "rewrites": [
         {
           "source": "/ngxFirebaseWebAuthn/clearChallenge",
-          "function": "clearChallenge"
+          "function": "ngxFirebaseWebAuthnClearChallenge"
         },
         {
           "source": "/ngxFirebaseWebAuthn/createAuthenticationChallenge",
-          "function": "createAuthenticationChallenge"
+          "function": "ngxFirebaseWebAuthnCreateAuthenticationChallenge"
         },
         {
           "source": "/ngxFirebaseWebAuthn/createRegistrationChallenge",
-          "function": "createRegistrationChallenge"
+          "function": "ngxFirebaseWebAuthnCreateRegistrationChallenge"
         },
         {
           "source": "/ngxFirebaseWebAuthn/verifyAuthentication",
-          "function": "verifyAuthentication"
+          "function": "ngxFirebaseWebAuthnVerifyAuthentication"
         },
         {
           "source": "/ngxFirebaseWebAuthn/verifyRegistration",
-          "function": "verifyRegistration"
+          "function": "ngxFirebaseWebAuthnVerifyRegistration"
         },
         {
           "source": "**",
@@ -93,14 +93,25 @@
   ],
   "functions": [
     {
-      "source": "functions",
       "codebase": "default",
       "ignore": [
         "node_modules",
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log"
-      ]
+      ],
+      "source": "functions"
+    },
+    {
+      "codebase": "ngx-firebase-web-authn",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "runtime": "nodejs18",
+      "source": "dist/libs/ngx-firebase-web-authn-server"
     }
   ]
 }

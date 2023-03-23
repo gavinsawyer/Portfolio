@@ -2,7 +2,7 @@ import { CommonModule }               from "@angular/common";
 import { Component }                  from "@angular/core";
 import { Auth, UserCredential }       from "@angular/fire/auth";
 import { Functions }                  from "@angular/fire/functions";
-import { signInWithPasskey }          from "@portfolio/ngx-firebase-web-authn";
+import { signInWithPasskey }          from "@portfolio/ngx-firebase-web-authn-browser";
 import { ButtonComponent }            from "../button/button.component";
 import { CreateAccountFormComponent } from "../create-account-form/create-account-form.component";
 

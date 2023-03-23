@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, Inject, PLATFORM_ID, ViewChild } 
 import { Auth, UserCredential }                                                 from "@angular/fire/auth";
 import { Functions }                                                            from "@angular/fire/functions";
 import { FormControl, FormGroup, ReactiveFormsModule }                          from "@angular/forms";
-import { createUserWithPasskey }                                                from "@portfolio/ngx-firebase-web-authn";
+import { createUserWithPasskey }                                                from "@portfolio/ngx-firebase-web-authn-browser";
 import { AuthenticationService, EllipsesService, HyperResponsivityService }     from "@portfolio/services";
 import { NgxMaskDirective, provideNgxMask }                                     from "ngx-mask";
 import { BehaviorSubject, Observable }                                          from "rxjs";

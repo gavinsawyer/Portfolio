@@ -26,18 +26,66 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > `% npm run deploy` Deploy to Cloud Run \
 > `% npm run serve` Run local development server
 ### Libraries
-> #### [@portfolio/ngx-firebase-web-authn](libs/ngx-firebase-web-authn) `Firebase Authentication` `Firebase Functions` `SimpleWebAuthn`
+> #### [@portfolio/ngx-firebase-web-authn-browser](libs/ngx-firebase-web-authn-browser) `Firebase Authentication` `Firebase Functions` `SimpleWebAuthn`
 >
 > An Angular Firebase extension for authentication with WebAuthn passkeys.
-> - Requires some [firebase functions](/functions/ngxFirebaseWebAuthn/README.md), which must have the Service Account Token Creator role in [GCP IAM Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
-> - Users signing in or creating an account with a passkey are signed in anonymously first.
-> - Public keys and challenges are stored in the `ngxFirebaseWebAuthnUsers` collection in Firestore. Display names are not stored aside from in the passkey, so apps should use a separate `Users` collection. Stale challenges are automatically cleaned up.
->
-> #### Exported methods
+> 
+> ##### Exported methods
 >
 > `createUserWithPasskey: (auth, functions, displayName: string) => Promise<UserCredential>`
 > 
 > `signInWithPasskey: (auth, functions) => Promise<UserCredential>`
+
+> #### [@portfolio/ngx-firebase-web-authn-server](libs/ngx-firebase-web-authn-server) `Firebase Admin SDK` `Firebase Functions` `SimpleWebAuthn`
+> Four Firebase Functions used to facilitate registering and authenticating WebAuthn passkeys. An additional function clears challenges if the user cancels the process.
+> ##### Setup
+> Add the following objects to the `rewrites` array in your `firebase.json`. They should be inside the `hosting` object of each app where you'd like to use ngxFirebaseWebAuthn.
+> ```
+> "rewrites": [
+>   {
+>     "source": "/ngxFirebaseWebAuthn/clearChallenge",
+>     "function": "ngxFirebaseWebAuthnClearChallenge"
+>   },
+>   {
+>     "source": "/ngxFirebaseWebAuthn/createAuthenticationChallenge",
+>     "function": "ngxFirebaseWebAuthnCreateAuthenticationChallenge"
+>   },
+>   {
+>     "source": "/ngxFirebaseWebAuthn/createRegistrationChallenge",
+>     "function": "ngxFirebaseWebAuthnCreateRegistrationChallenge"
+>   },
+>   {
+>     "source": "/ngxFirebaseWebAuthn/verifyAuthentication",
+>     "function": "ngxFirebaseWebAuthnVerifyAuthentication"
+>   },
+>   {
+>     "source": "/ngxFirebaseWebAuthn/verifyRegistration",
+>     "function": "ngxFirebaseWebAuthnVerifyRegistration"
+>   }
+> ]
+> ```
+> Also add the following object to the `functions` array in your `firebase.json`.
+> ```
+> "functions": [
+>   {
+>     "codebase": "ngx-firebase-web-authn",
+>     "ignore": [
+>       "node_modules",
+>       ".git",
+>       "firebase-debug.log",
+>       "firebase-debug.*.log"
+>     ],
+>     "runtime": "nodejs18",
+>     "source": "dist/libs/ngx-firebase-web-authn-server"
+>   }
+> ]
+> ```
+> Assign the Default Compute Service Account the `Service Account Token Creator` role in [GCP IAM Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
+> 
+> You may also need to assign the `allUsers` principal the `Cloud Function Invoker` role on each Cloud Function created by the `deploy` script. 
+> 
+> `% npm run build` Build `ngxFirebaseWebAuthn` codebase\
+> `% npm run deploy` Deploy `ngxFirebaseWebAuthn` codebase
 
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 >
@@ -58,14 +106,7 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 >
 > Angular services used in the app and components library. Provides anonymous authentication, live data, and responsive design features.
 ### Firebase Functions package:
-> `% firebase deploy --only functions`
-> 
-> ### [functions/ngxFirebaseWebAuthn](functions/ngxFirebaseWebAuthn)
-> Four Cloud Functions used to facilitate registering and authenticating WebAuthn passkeys.
->
-> An [additional function](functions/ngxFirebaseWebAuthn/clearChallenge.js) clears challenges if the user cancels either registration or authentication.
 > ### [functions/shortcuts](functions/shortcuts)
->
 > Six Cloud Functions used to read and update Firestore from iOS and tvOS Automations.
 >
 > When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an Automation which calls [setFocus](functions/shortcuts/focus/set.js), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts).
