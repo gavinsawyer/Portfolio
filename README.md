@@ -26,81 +26,6 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > `% npm run deploy` Deploy to Cloud Run \
 > `% npm run serve` Run local development server
 ### Libraries
-> #### [@portfolio/ngx-firebase-web-authn-browser](libs/ngx-firebase-web-authn-browser) `Firebase Authentication` `Firebase Functions` `SimpleWebAuthn`
-> An Angular Firebase extension for authentication with WebAuthn passkeys.
-> ##### Exported methods
-> `createUserWithPasskey: (auth, functions, displayName: string) => Promise<UserCredential>`
-> 
-> `signInWithPasskey: (auth, functions) => Promise<UserCredential>`
-
-> #### [@portfolio/ngx-firebase-web-authn-functions](libs/ngx-firebase-web-authn-functions) `Firebase Admin SDK` `Firebase Functions` `SimpleWebAuthn`
-> Four Firebase Functions used to facilitate registering and authenticating WebAuthn passkeys. An additional function clears challenges if the user cancels the process.
-> ##### Deploying functions w/ Nx
-> Copy this library to your Nx workspace. Add the following object to the `functions` array in your `firebase.json`.
-> ```
-> "functions": [
->   {
->     "codebase": "ngx-firebase-web-authn",
->     "ignore": [
->       "node_modules",
->       ".git",
->       "firebase-debug.log",
->       "firebase-debug.*.log"
->     ],
->     "runtime": "nodejs18",
->     "source": "dist/libs/ngx-firebase-web-authn-functions"
->   }
-> ]
-> ```
-> Run the `deploy` target
-> > `% npx nx run ngx-firebase-web-authn-functions:deploy`
-> - Builds library with tsc, outputs to `dist/libs/ngx-firebase-web-authn-functions`.
-> - Deploys `ngx-firebase-web-authn` codebase using the Firebase CLI.
-> ##### Deploying functions w/ existing Firebase Functions directory
-> This library exports [HttpsFunction](https://firebase.google.com/docs/reference/functions/firebase-functions.httpsfunction) objects, which can be re-exported in your existing `functions/index.js`.
-> ```
-> const app = require("firebase-admin/app");
-> 
-> 
-> app.initializeApp();
-> 
-> // ngxFirebaseWebAuthn Functions
->
-> module.exports = require(ngxFirebaseWebAuthnFunctionsDist)
-> 
-> // Other functions...
-> ```
-> ##### Using functions
-> For the browser to reach your functions, add the following objects to the `rewrites` array in your `firebase.json`. They should be inside the `hosting` object of each app where you'd like to use ngxFirebaseWebAuthn.
-> ```
-> "rewrites": [
->   {
->     "source": "/ngxFirebaseWebAuthn/clearChallenge",
->     "function": "ngxFirebaseWebAuthnClearChallenge"
->   },
->   {
->     "source": "/ngxFirebaseWebAuthn/createAuthenticationChallenge",
->     "function": "ngxFirebaseWebAuthnCreateAuthenticationChallenge"
->   },
->   {
->     "source": "/ngxFirebaseWebAuthn/createRegistrationChallenge",
->     "function": "ngxFirebaseWebAuthnCreateRegistrationChallenge"
->   },
->   {
->     "source": "/ngxFirebaseWebAuthn/verifyAuthentication",
->     "function": "ngxFirebaseWebAuthnVerifyAuthentication"
->   },
->   {
->     "source": "/ngxFirebaseWebAuthn/verifyRegistration",
->     "function": "ngxFirebaseWebAuthnVerifyRegistration"
->   }
-> ]
-> ```
-> ##### Google Cloud setup
-> Assign the Default Compute Service Account the `Service Account Token Creator` role in [GCP IAM Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts).
->
-> You may also need to assign the `allUsers` principal the `Cloud Function Invoker` role on each Cloud Function.
-
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 >
 > Angular components used in apps.
@@ -112,15 +37,7 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
 > - [Message Form](libs/components/src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 
-> #### [@portfolio/interfaces](libs/interfaces) `TypeScript`
-
-> #### [@portfolio/types](libs/types) `TypeScript`
-
-> #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firestore`
->
-> Angular services used in the app and components library. Provides anonymous authentication, live data, and responsive design features.
-### Firebase Functions package:
-> ### [functions/shortcuts](functions/shortcuts)
+> #### [@portfolio/functions](libs/functions) `Firebase Admin SDK` `Firebase Functions` `ngxFirebaseWebAuthn`
 > Six Cloud Functions used to read and update Firestore from iOS and tvOS Automations.
 >
 > When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an Automation which calls [setFocus](functions/shortcuts/focus/set.js), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts).
@@ -128,3 +45,11 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > Additional functions for [location](functions/shortcuts/location) and [time](functions/shortcuts/time) enable home automation. iOS and tvOS (running on Apple TV and HomePods) Automations set device and home conditions according to the user's state.
 >
 > > An example automation I've implemented turns off the Sleep Focus and turns on my apartment lights and espresso machine if I am at home when my wake-up alarm is stopped.
+
+> #### [@portfolio/interfaces](libs/interfaces) `TypeScript`
+
+> #### [@portfolio/types](libs/types) `TypeScript`
+
+> #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firestore`
+>
+> Angular services used in the app and components library. Provides anonymous authentication, live data, and responsive design features.

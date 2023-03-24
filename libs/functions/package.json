@@ -1,0 +1,19 @@
+{
+  "name": "functions",
+  "author": {
+    "name": "Gavin Sawyer",
+    "email": "hello@gavinsawyer.dev",
+    "url": "https://github.com/gavinsawyer"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "18"
+  },
+  "main": "./index.js",
+  "dependencies": {
+    "@ngx-firebase-web-authn/functions": "^15",
+    "firebase-admin": "^11",
+    "firebase-functions": "^4"
+  },
+  "private": false
+}
