@@ -15,7 +15,7 @@ import { environment }                                    from "../environments/
 import { AppComponent }                                   from "./app.component";
 
 
-const baseTitle: string = "Console";
+const baseTitle = "Console";
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,13 +33,13 @@ const baseTitle: string = "Console";
     RouterModule.forRoot(
       [
         {
-          loadComponent: () => import("./routeComponents/home/home.component").then((m) => m.HomeComponent),
+          loadComponent: () => import("./components/home").then((m) => m.HomeComponent),
           path: "",
           pathMatch: "full",
           title: baseTitle,
         },
         {
-          loadComponent: () => import("./routeComponents/otherwise/otherwise.component").then((m) => m.OtherwiseComponent),
+          loadComponent: () => import("./components/otherwise").then((m) => m.OtherwiseComponent),
           path: "**",
           title: baseTitle + " | Page not found",
         },

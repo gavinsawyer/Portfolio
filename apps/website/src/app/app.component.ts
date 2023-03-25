@@ -6,9 +6,11 @@ const { version } = require("../../../../package.json");
 const { raw }     = require("../../../../.git-version.json");
 
 @Component({
-  selector: 'websiteApp-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass'],
+  selector: "website-app-root",
+  styleUrls: [
+    "./app.component.sass"
+  ],
+  templateUrl: "./app.component.html",
 })
 export class AppComponent {
 

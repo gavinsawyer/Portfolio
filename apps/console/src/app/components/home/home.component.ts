@@ -7,7 +7,7 @@ import { AuthenticationService, MessagesService } from "@portfolio/services";
   imports: [
     CommonModule,
   ],
-  selector: "websiteApp-home",
+  selector: "console-app-home",
   standalone: true,
   styleUrls: [
     "./home.component.sass",

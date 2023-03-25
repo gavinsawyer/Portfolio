@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "websiteApp-privacy",
+  selector: "website-app-privacy",
   standalone: true,
   styleUrls: [
     "./privacy.component.sass",

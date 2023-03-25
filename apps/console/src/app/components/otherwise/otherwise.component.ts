@@ -9,7 +9,7 @@ import { Response }                                 from "express"
   imports: [
     CommonModule,
   ],
-  selector: "websiteApp-otherwise",
+  selector: "console-app-otherwise",
   standalone: true,
   styleUrls: [
     "./otherwise.component.sass",

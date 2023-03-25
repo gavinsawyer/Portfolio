@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/console/src",
-  "prefix": "consoleApp",
+  "prefix": "console-app",
   "targets": {
     "prebuild": {
       "executor": "nx:run-commands",

@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	match /environment/{document} {
+      allow read: if resource.id == "public";
+    }
+    match /messages/{document} {
+      allow create: if request.auth.uid == request.resource.id;
+      allow read: if request.auth.uid == resource.id || request.auth.uid == "hybZTS92cdUGykaw4XpKwSx4vR53";
+    }
+  }
+}

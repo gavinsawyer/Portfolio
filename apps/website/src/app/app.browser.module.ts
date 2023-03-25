@@ -14,7 +14,7 @@ import { environment }                                                          
 import { AppComponent }                                                                          from "./app.component";
 
 
-const baseTitle: string = "Gavin Sawyer";
+const baseTitle = "Gavin Sawyer";
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,18 +33,18 @@ const baseTitle: string = "Gavin Sawyer";
     RouterModule.forRoot(
       [
         {
-          loadComponent: () => import("./routeComponents/home/home.component").then((m) => m.HomeComponent),
+          loadComponent: () => import("./components/home").then((m) => m.HomeComponent),
           path: "",
           pathMatch: "full",
           title: baseTitle,
         },
         {
-          loadComponent: () => import("./routeComponents/privacy/privacy.component").then((m) => m.PrivacyComponent),
+          loadComponent: () => import("./components/privacy").then((m) => m.PrivacyComponent),
           path: "privacy",
           title: baseTitle + " | Privacy",
         },
         {
-          loadComponent: () => import("./routeComponents/otherwise/otherwise.component").then((m) => m.OtherwiseComponent),
+          loadComponent: () => import("./components/otherwise").then((m) => m.OtherwiseComponent),
           path: "**",
           title: baseTitle + " | Page not found",
         },

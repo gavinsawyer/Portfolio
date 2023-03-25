@@ -111,5 +111,9 @@
       "runtime": "nodejs18",
       "source": "dist/libs/functions"
     }
-  ]
+  ],
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
 }

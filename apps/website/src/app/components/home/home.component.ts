@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "websiteApp-home",
+  selector: "website-app-home",
   standalone: true,
   styleUrls: [
     "./home.component.sass",

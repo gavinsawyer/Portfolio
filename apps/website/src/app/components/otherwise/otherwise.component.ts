@@ -9,7 +9,7 @@ import { Response }                                 from "express"
   imports: [
     CommonModule,
   ],
-  selector: "websiteApp-otherwise",
+  selector: "website-app-otherwise",
   standalone: true,
   styleUrls: [
     "./otherwise.component.sass",
@@ -20,7 +20,7 @@ export class OtherwiseComponent {
 
   constructor(
     @Inject(PLATFORM_ID)
-    private readonly platformId: Object,
+    private readonly platformId: object,
 
     @Optional()
     @Inject(RESPONSE)
