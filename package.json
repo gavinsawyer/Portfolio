@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "15.11.1",
+  "version": "15.11.2",
   "author": {
     "name": "Gavin Sawyer",
     "email": "hello@gavinsawyer.dev",
@@ -45,7 +45,6 @@
     "@angular/compiler-cli": "~15.1.0",
     "@angular/language-service": "~15.1.0",
     "@nguniversal/builders": "~15.1.0",
-    "@ngx-firebase-web-authn/functions": "^15",
     "@nrwl/angular": "^15",
     "@nrwl/cli": "^15",
     "@nrwl/eslint-plugin-nx": "^15",

@@ -36,12 +36,20 @@
           "function": "ngxFirebaseWebAuthnCreateAuthenticationChallenge"
         },
         {
+          "source": "/ngxFirebaseWebAuthn/createReauthenticationChallenge",
+          "function": "ngxFirebaseWebAuthnCreateReauthenticationChallenge"
+        },
+        {
           "source": "/ngxFirebaseWebAuthn/createRegistrationChallenge",
           "function": "ngxFirebaseWebAuthnCreateRegistrationChallenge"
         },
         {
           "source": "/ngxFirebaseWebAuthn/verifyAuthentication",
           "function": "ngxFirebaseWebAuthnVerifyAuthentication"
+        },
+        {
+          "source": "/ngxFirebaseWebAuthn/verifyReauthentication",
+          "function": "ngxFirebaseWebAuthnVerifyReauthentication"
         },
         {
           "source": "/ngxFirebaseWebAuthn/verifyRegistration",
