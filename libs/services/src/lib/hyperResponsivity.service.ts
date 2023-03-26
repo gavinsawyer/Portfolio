@@ -15,7 +15,7 @@ export class HyperResponsivityService {
     private readonly document: Document,
 
     @Inject(PLATFORM_ID)
-    private readonly platformId: Object,
+    private readonly platformId: object,
 
     private readonly breakpointObserver: BreakpointObserver,
   ) {

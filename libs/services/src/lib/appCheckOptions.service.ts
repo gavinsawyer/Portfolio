@@ -10,7 +10,7 @@ export class AppCheckOptionsService {
 
   constructor(
     @Inject(PLATFORM_ID)
-    private readonly platformId: Object,
+    private readonly platformId: object,
   ) {
     this
       .appCheckOptions = (recaptchaSiteKey: string) => isPlatformBrowser(platformId) ? {

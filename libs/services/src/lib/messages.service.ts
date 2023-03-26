@@ -18,7 +18,7 @@ export class MessagesService implements OnDestroy {
     this
       .createMessageDocument = async (messageDocument: MessageDocument): Promise<void> => this
       .sentMessageDocumentSubject
-      .next(((_: void): MessageDocument => messageDocument)(await setDoc<MessageDocument>(doc(firestore, "/messages/" + (await firstValueFrom(authenticationService.userObservable)).uid) as DocumentReference<MessageDocument>, messageDocument)));
+      .next(((_void: void): MessageDocument => messageDocument)(await setDoc<MessageDocument>(doc(firestore, "/messages/" + (await firstValueFrom(authenticationService.userObservable)).uid) as DocumentReference<MessageDocument>, messageDocument)));
     this
       .sentMessageDocumentSubject = new Subject<MessageDocument>();
     this

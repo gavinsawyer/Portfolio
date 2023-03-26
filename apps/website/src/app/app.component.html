@@ -10,9 +10,9 @@
         </h2>
       </div>
     </header>
-    <portfolio-banner [ngClass]="{'pathRoot': (pathService.pathObservable | async) == '/'}"></portfolio-banner>
+    <portfolio-banner [ngClass]="{'pathRoot': (pathService.pathObservable | async) === '/'}"></portfolio-banner>
     <div>
-      <portfolio-aside-website [ngClass]="{'pathRoot': (pathService.pathObservable | async) == '/'}"></portfolio-aside-website>
+      <portfolio-aside-website [ngClass]="{'pathRoot': (pathService.pathObservable | async) === '/'}"></portfolio-aside-website>
       <router-outlet></router-outlet>
     </div>
   </div>

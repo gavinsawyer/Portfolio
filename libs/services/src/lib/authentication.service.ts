@@ -1,7 +1,7 @@
-import { isPlatformBrowser }                                              from "@angular/common";
-import { Inject, Injectable, OnDestroy, PLATFORM_ID }                     from "@angular/core";
-import { Auth, onAuthStateChanged, signInAnonymously, Unsubscribe, User } from "@angular/fire/auth";
-import { Observable, shareReplay, Subject }                               from "rxjs";
+import { isPlatformBrowser }                                                            from "@angular/common";
+import { Inject, Injectable, OnDestroy, PLATFORM_ID }                                   from "@angular/core";
+import { Auth, onIdTokenChanged, signInAnonymously, Unsubscribe, User, UserCredential } from "@angular/fire/auth";
+import { Observable, shareReplay, Subject }                                             from "rxjs";
 
 
 @Injectable({
@@ -11,17 +11,12 @@ export class AuthenticationService implements OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID)
-    private readonly platformId: Object,
+    private readonly platformId: object,
 
     private readonly auth: Auth,
   ) {
     this
-      .unsubscribeAuthStateChanged = onAuthStateChanged(auth, ((user: User | null): void => {
-        user ? this
-          .userSubject
-          .next(user) : isPlatformBrowser(platformId) && signInAnonymously(auth)
-          .catch((reason: any): void => console.error(reason));
-      }));
+      .unsubscribeIdTokenChanged = onIdTokenChanged(auth, (async (user: User | null): Promise<void> => user ? this.userSubject.next(user) : isPlatformBrowser(platformId) ? signInAnonymously(auth).then<void>((_userCredential: UserCredential): void => void (0)).catch<void>((reason: any): void => console.error(reason)) : void(0)));
     this
       .userSubject = new Subject<User>();
     this
@@ -33,17 +28,17 @@ export class AuthenticationService implements OnDestroy {
       );
 
     isPlatformBrowser(platformId) || this
-      .unsubscribeAuthStateChanged();
+      .unsubscribeIdTokenChanged();
   }
 
-  private readonly unsubscribeAuthStateChanged: Unsubscribe;
+  private readonly unsubscribeIdTokenChanged: Unsubscribe;
   private readonly userSubject: Subject<User>;
 
   public readonly userObservable: Observable<User>;
 
   ngOnDestroy(): void {
     this
-      .unsubscribeAuthStateChanged();
+      .unsubscribeIdTokenChanged();
   }
 
 }

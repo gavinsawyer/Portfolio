@@ -10,7 +10,7 @@ export class PathService {
 
   constructor(
     @Inject(PLATFORM_ID)
-    private readonly platformId: Object,
+    private readonly platformId: object,
 
     private readonly router: Router,
   ) {
