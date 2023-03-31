@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "15.11.4",
+  "version": "15.11.5",
   "author": {
     "name": "Gavin Sawyer",
     "email": "hello@gavinsawyer.dev",
@@ -9,8 +9,7 @@
   "scripts": {
     "build": "npx nx run-many --target build --all",
     "deploy": "npx nx run-many --target deploy --all",
-    "postinstall": "ngcc --properties es2020 browser module main",
-    "serve": "npx nx serve"
+    "postinstall": "ngcc --properties es2020 browser module main"
   },
   "license": "MIT",
   "private": true,

@@ -1,6 +1,6 @@
 import { CommonModule }                                                     from "@angular/common";
 import { Component }                                                        from "@angular/core";
-import { Auth, UserCredential }                                             from "@angular/fire/auth";
+import { Auth }                                                             from "@angular/fire/auth";
 import { Functions }                                                        from "@angular/fire/functions";
 import { FormControl, FormGroup, ReactiveFormsModule }                      from "@angular/forms";
 import { createUserWithPasskey }                                            from "@ngx-firebase-web-authn/browser";
@@ -58,7 +58,7 @@ export class CreateAccountFormComponent {
           .formGroup
           .value
           .displayName ? await createUserWithPasskey(auth, functions, this.formGroup.value.displayName)
-          .then<void, void>((_userCredential: UserCredential): void => {
+          .then<void, void>((): void => {
             this
               .formGroup
               .disable();
@@ -67,7 +67,7 @@ export class CreateAccountFormComponent {
               .statusSubject
               .next("complete");
           })
-          .catch<void>((_reason: any): void => this.statusSubject.next("unsent")): this
+          .catch<void>((): void => this.statusSubject.next("unsent")): this
           .statusSubject
           .next("unsent");
       };
