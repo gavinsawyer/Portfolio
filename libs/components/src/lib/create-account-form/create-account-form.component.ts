@@ -3,7 +3,7 @@ import { Component }                                                        from
 import { Auth }                                                             from "@angular/fire/auth";
 import { Functions }                                                        from "@angular/fire/functions";
 import { FormControl, FormGroup, ReactiveFormsModule }                      from "@angular/forms";
-import { createUserWithPasskey }                                            from "@ngx-firebase-web-authn/browser";
+import { createUserWithPasskey }                                            from "@firebase-web-authn/browser";
 import { AuthenticationService, EllipsesService, HyperResponsivityService } from "@portfolio/services";
 import { BehaviorSubject, Observable }                                      from "rxjs";
 

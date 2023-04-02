@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "15.11.5",
+  "version": "15.11.6",
   "author": {
     "name": "Gavin Sawyer",
     "email": "hello@gavinsawyer.dev",
@@ -26,7 +26,7 @@
     "@angular/platform-server": "^15",
     "@angular/router": "^15",
     "@nguniversal/express-engine": "^15",
-    "@ngx-firebase-web-authn/browser": "^15",
+    "@firebase-web-authn/browser": "^9",
     "ngx-mask": "^15",
     "normalize.css": "^8",
     "rxjs": "^7",

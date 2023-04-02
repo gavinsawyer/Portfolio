@@ -1,4 +1,5 @@
 export const environment = {
+  app: "console",
   firebase: {
     apiKey: "AIzaSyBKxktCiPashHRRjwXg2bI38TFpKMZWUzk",
     authDomain: "portfolio-a59e2.firebaseapp.com",
