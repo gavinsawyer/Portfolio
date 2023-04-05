@@ -27,8 +27,7 @@ export class AsideConsoleComponent {
     private readonly functions: Functions,
   ) {
     this
-      .verifyUserWithPasskey = (): Promise<void> => verifyUserWithPasskey(auth, functions)
-      .then<void>((): void => void(0));
+      .verifyUserWithPasskey = (): Promise<void> => verifyUserWithPasskey(auth, functions);
     this
       .signInWithPasskey = (): Promise<void> => signInWithPasskey(auth, functions)
       .then<void>((): void => void(0));

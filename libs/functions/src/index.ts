@@ -1,2 +1,2 @@
-export * from './shortcuts';
-export * from '@firebase-web-authn/functions';
+export * from './lib/shortcuts';
+export * from './lib/firebase-web-authn';

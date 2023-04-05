@@ -22,9 +22,9 @@ jobs:
       - run: npm i @nrwl/nx-linux-x64-gnu@^15
       - run: npx nx run-many --target build --projects website,console
         env:
-          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
-          APP_CHECK_TOKEN_CONSOLE: ${{ secrets.APP_CHECK_TOKEN_CONSOLE }}
-          APP_CHECK_TOKEN_WEBSITE: ${{ secrets.APP_CHECK_TOKEN_WEBSITE }}
+          APP_CHECK_TOKEN_CONSOLE: '${{ secrets.APP_CHECK_TOKEN_CONSOLE }}'
+          APP_CHECK_TOKEN_WEBSITE: '${{ secrets.APP_CHECK_TOKEN_WEBSITE }}'
+          NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
