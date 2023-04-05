@@ -1,8 +1,8 @@
-import { getFirestore } from "firebase-admin/firestore";
-import { runWith }      from "firebase-functions";
+import { getFirestore }           from "firebase-admin/firestore";
+import { HttpsFunction, runWith } from "firebase-functions";
 
 
-export const toggleLocation = runWith({
+export const toggleLocation: HttpsFunction = runWith({
     enforceAppCheck: true,
   })
   .https

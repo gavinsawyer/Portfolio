@@ -20,14 +20,11 @@ jobs:
       - if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
       - run: npm i @nrwl/nx-linux-x64-gnu@^15
-      - run: npx nx run-many --target build --projects website,console
+      - uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIO_A59E2 }}
+      - run: npx nx run-many --target deploy --all
         env:
           APP_CHECK_TOKEN_CONSOLE: '${{ secrets.APP_CHECK_TOKEN_CONSOLE }}'
           APP_CHECK_TOKEN_WEBSITE: '${{ secrets.APP_CHECK_TOKEN_WEBSITE }}'
           NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}'
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIO_A59E2 }}'
-          channelId: live
-          projectId: portfolio-a59e2

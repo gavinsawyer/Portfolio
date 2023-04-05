@@ -106,7 +106,7 @@
       }
     },
     "build": {
-      "dependsOn": ["prebuild", "^browser", "^server"],
+      "dependsOn": ["browser", "server"],
       "executor": "@nguniversal/builders:prerender",
       "options": {
         "routesFile": "apps/console/src/app/routes.txt"
@@ -124,20 +124,10 @@
       "defaultConfiguration": "production"
     },
     "deploy": {
-      "dependsOn": ["prebuild", "^browser", "^server"],
-      "executor": "@angular/fire:deploy",
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
       "options": {
-        "ssr": "cloud-run",
-        "prerender": true,
-        "firebaseProject": "portfolio-a59e2",
-        "firebaseHostingSite": "portfolio-a59e2-console",
-        "functionName": "ssr-console",
-        "functionsNodeVersion": "18.15",
-        "region": "us-central1",
-        "browserTarget": "console:browser:production",
-        "serverTarget": "console:server:production",
-        "prerenderTarget": "console:build:production",
-        "outputPath": "dist/apps/console/run"
+        "command": "firebase deploy --only hosting:console"
       }
     },
     "serve": {
