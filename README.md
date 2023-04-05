@@ -24,7 +24,7 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `FirebaseWebAuthn` `HTML` `NgxMask` `Sass`
 >
 > Angular components used in apps.
-> - [Aside (Console)](libs/components/src/lib/aside-console) `HTML` `FirebaseWebAuthn` `Sass`
+> - [Aside (Console)](libs/components/src/lib/aside-console) `FirebaseWebAuthn` `HTML` `Sass`
 > - [Aside (Website)](libs/components/src/lib/aside-website) `Firebase Analytics` `HTML` `Sass`
 > - [Banner](libs/components/src/lib/banner) `HTML` `Sass`
 > - [Button](libs/components/src/lib/button) `HTML` `Sass`

@@ -3,7 +3,7 @@
 > #### @portfolio/components `Angular Forms` `Firebase Analytics` `FirebaseWebAuthn` `HTML` `NgxMask` `Sass`
 >
 > Angular components used in apps.
-> - [Aside (Console)](src/lib/aside-console) `HTML` `FirebaseWebAuthn` `Sass`
+> - [Aside (Console)](src/lib/aside-console) `FirebaseWebAuthn` `HTML` `Sass`
 > - [Aside (Website)](src/lib/aside-website) `Firebase Analytics` `HTML` `Sass`
 > - [Banner](src/lib/banner) `HTML` `Sass`
 > - [Button](src/lib/button) `HTML` `Sass`

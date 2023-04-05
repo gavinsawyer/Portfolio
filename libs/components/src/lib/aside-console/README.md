@@ -1,3 +1,3 @@
 [back to @portfolio/components](../../../)
 
-> ### Aside (Console) `HTML` `Sass`
+> ### Aside (Console) `FirebaseWebAuthn` `HTML` `Sass`
