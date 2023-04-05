@@ -28,8 +28,8 @@
       ],
       "rewrites": [
         {
-          "source": "/ngxFirebaseWebAuthn",
-          "function": "ngxFirebaseWebAuthn"
+          "source": "/firebaseWebAuthn",
+          "function": "firebaseWebAuthn"
         },
         {
           "source": "**",
