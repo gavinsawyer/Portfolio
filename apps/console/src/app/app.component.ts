@@ -1,9 +1,9 @@
 import { Component }                             from "@angular/core";
 import { HyperResponsivityService, PathService } from "@portfolio/services";
+import { GitInfo }                               from "git-describe";
+import { gitInfo }                               from "../git-info";
+import { packageVersion }                        from "../package-version";
 
-
-const { version } = require("../../../../package.json");
-const { raw }     = require("../../../../.git-version.json");
 
 @Component({
   selector: "console-app-root",
@@ -19,7 +19,7 @@ export class AppComponent {
     public readonly pathService: PathService,
   ) {}
 
-  public readonly version: string = version;
-  public readonly raw: string = raw;
+  public readonly gitInfo: Partial<GitInfo> = gitInfo;
+  public readonly packageVersion: string = packageVersion;
 
 }

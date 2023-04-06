@@ -20,7 +20,7 @@
   <div>
     <ul>
       <li>
-        v{{ version + (raw.includes("-") ? "-next" : "") }}+<a [href]="'https://github.com/gavinsawyer/Portfolio/commit/' + raw.split('-')[0]">{{ raw.split("-")[0] }}</a>
+        v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/gavinsawyer/Portfolio/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
       </li>
     </ul>
   </div>

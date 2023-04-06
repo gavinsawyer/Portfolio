@@ -1,4 +1,4 @@
-import { DocumentReference, DocumentSnapshot, Firestore, getFirestore } from "firebase-admin/lib/firestore";
+import { DocumentReference, DocumentSnapshot, Firestore, getFirestore } from "firebase-admin/firestore";
 import { HttpsFunction, Request, Response, runWith }                    from "firebase-functions";
 import { PrivateEnvironmentDocument }                                   from "./private-environment-document";
 
