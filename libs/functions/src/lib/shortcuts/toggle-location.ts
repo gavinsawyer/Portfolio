@@ -1,14 +1,15 @@
-import { getFirestore }           from "firebase-admin/firestore";
-import { HttpsFunction, runWith } from "firebase-functions";
+import { DocumentReference, DocumentSnapshot, Firestore, getFirestore } from "firebase-admin/firestore";
+import { HttpsFunction, Request, Response, runWith }                    from "firebase-functions";
+import { PrivateEnvironmentDocument }                                   from "./private-environment-document";
 
 
 export const toggleLocation: HttpsFunction = runWith({
-    enforceAppCheck: true,
-  })
+  enforceAppCheck: true,
+})
   .https
-  .onRequest((request, response) => request.body["ShortcutsAPIKey"] === process.env["ShortcutsAPIKey"] ? ((firestore) => ((privateDocumentReference) => privateDocumentReference.get().then((privateDocumentSnapshot) => ((updateData) => privateDocumentReference.update(updateData).then(() => ((_response) => {})(response.json({
-    ...privateDocumentSnapshot.data(),
-    ...updateData,
-  }).end())))({
-    "location": privateDocumentSnapshot.data()?.["location"] === "away" ? process.env["ShortcutsAPIHomeName"] : "away",
-  })))(firestore.collection("environment").doc("private")))(getFirestore()) : ((_response) => {})(response.status(403).end()));
+  .onRequest(async (request: Request, response: Response): Promise<void> => request.body["ShortcutsAPIKey"] === process.env["SHORTCUTS_API_KEY"] ? ((firestore: Firestore): Promise<void> => (firestore.collection("environment").doc("private") as DocumentReference<PrivateEnvironmentDocument>).get().then<void>((privateEnvironmentDocumentSnapshot: DocumentSnapshot<PrivateEnvironmentDocument>) => (async (privateEnvironmentDocument: PrivateEnvironmentDocument | undefined): Promise<void> => privateEnvironmentDocument ? (firestore.collection("environment").doc("private") as DocumentReference<PrivateEnvironmentDocument>).update({
+    "location": privateEnvironmentDocument.location === "away" ? process.env["SHORTCUTS_API_HOME_NAME"] : "away",
+  }).then<void>((): void => response.json({
+    ...privateEnvironmentDocumentSnapshot.data(),
+    "location": privateEnvironmentDocument.location === "away" ? process.env["SHORTCUTS_API_HOME_NAME"] : "away",
+  }).end() && void(0)) : response.status(404).end() && void(0))(privateEnvironmentDocumentSnapshot.data())))(getFirestore()) : response.status(403).end() && void(0));

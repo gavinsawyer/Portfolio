@@ -1,15 +1,15 @@
-import { getFirestore }           from "firebase-admin/firestore";
-import { HttpsFunction, runWith } from "firebase-functions";
+import { DocumentReference, DocumentSnapshot, Firestore, getFirestore } from "firebase-admin/lib/firestore";
+import { HttpsFunction, Request, Response, runWith }                    from "firebase-functions";
+import { PrivateEnvironmentDocument }                                   from "./private-environment-document";
 
 
 export const setTime: HttpsFunction = runWith({
-    enforceAppCheck: true,
-  })
+  enforceAppCheck: true,
+})
   .https
-  .onRequest((request, response) => request.body["ShortcutsAPIKey"] === process.env["ShortcutsAPIKey"] && typeof request.body["time"] === "string" ? ((firestore) => ((privateDocumentReference) => privateDocumentReference.get().then((privateDocumentSnapshot) => privateDocumentSnapshot.data()?.["time"] === request.body["time"] ? ((_response) => {})(response.json(privateDocumentSnapshot.data()).end()) : ((updateData) => privateDocumentReference.update(updateData).then(() => ((_response) => {})(response.json({
-    ...privateDocumentSnapshot.data(),
-    ...updateData,
-  })
-  .end())))({
+  .onRequest(async (request: Request, response: Response): Promise<void> => request.body["ShortcutsAPIKey"] === process.env["SHORTCUTS_API_KEY"] && request.body["time"] ? ((firestore: Firestore): Promise<void> => (firestore.collection("environment").doc("private") as DocumentReference<PrivateEnvironmentDocument>).get().then<void>((privateEnvironmentDocumentSnapshot: DocumentSnapshot<PrivateEnvironmentDocument>): Promise<void> => (async (privateEnvironmentDocument: PrivateEnvironmentDocument | undefined): Promise<void> => privateEnvironmentDocument ? privateEnvironmentDocument.time === request.body["time"] ? response.json(privateEnvironmentDocument).end() && void(0) : (firestore.collection("environment").doc("private") as DocumentReference<PrivateEnvironmentDocument>).update({
     "time": request.body["time"],
-  })))(firestore.collection("environment").doc("private")))(getFirestore()) : ((_response) => {})(response.status(403).end()));
+  }).then<void>((): void => response.json({
+    ...privateEnvironmentDocument,
+    "time": request.body["time"],
+  }).end() && void(0)) : response.status(404).end() && void(0))(privateEnvironmentDocumentSnapshot.data())))(getFirestore()) : response.status(403).end() && void(0));

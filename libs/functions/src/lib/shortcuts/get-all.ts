@@ -1,9 +1,10 @@
-import { getFirestore }           from "firebase-admin/firestore";
-import { HttpsFunction, runWith } from "firebase-functions";
+import { DocumentReference, DocumentSnapshot, Firestore, getFirestore } from "firebase-admin/firestore";
+import { HttpsFunction, Request, Response, runWith }                    from "firebase-functions";
+import { PrivateEnvironmentDocument }                                   from "./private-environment-document";
 
 
 export const getAll: HttpsFunction = runWith({
-    enforceAppCheck: true,
-  })
+  enforceAppCheck: true,
+})
   .https
-  .onRequest((request, response) => request.body["ShortcutsAPIKey"] === process.env["ShortcutsAPIKey"] && request.secure ? ((firestore) => firestore.collection("environment").doc("private").get().then((privateDocumentSnapshot) => ((_response) => {})(response.json(privateDocumentSnapshot.data()).end())))(getFirestore()) : ((_response) => {})(response.status(403).end()));
+  .onRequest(async (request: Request, response: Response): Promise<void> => request.body["ShortcutsAPIKey"] === process.env["SHORTCUTS_API_KEY"] && request.secure ? ((firestore: Firestore): Promise<void> => (firestore.collection("environment").doc("private") as DocumentReference<PrivateEnvironmentDocument>).get().then<void>((privateEnvironmentDocumentSnapshot: DocumentSnapshot<PrivateEnvironmentDocument>): void => response.json(privateEnvironmentDocumentSnapshot.data()).end() && void(0)))(getFirestore()) : response.status(403).end() && void(0));

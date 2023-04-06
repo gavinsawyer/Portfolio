@@ -1,17 +1,16 @@
-import { getFirestore }           from "firebase-admin/firestore";
-import { HttpsFunction, runWith } from "firebase-functions";
+import { DocumentReference, DocumentSnapshot, Firestore, getFirestore } from "firebase-admin/firestore";
+import { HttpsFunction, Request, Response, runWith }                    from "firebase-functions";
+import { PrivateEnvironmentDocument }                                   from "./private-environment-document";
+import { PublicEnvironmentDocument }                                    from "./public-environment-document";
 
 
 export const setFocus: HttpsFunction = runWith({
-    enforceAppCheck: true,
-  })
+  enforceAppCheck: true,
+})
   .https
-  .onRequest((request, response) => request.body["ShortcutsAPIKey"] === process.env["ShortcutsAPIKey"] && typeof request.body["focus"] === "string" ? ((firestore) => ((environmentCollectionReference) => ((privateDocumentReference) => privateDocumentReference.get().then((privateDocumentSnapshot) => privateDocumentSnapshot.data()?.["focus"] === request.body["focus"] ? ((_response) => {})(response.json(privateDocumentSnapshot.data()).end()) : ((updateData) => privateDocumentReference.update(updateData).then(() => ((_response) => ((_promise) => {})(environmentCollectionReference.doc("public").update({
+  .onRequest(async (request: Request, response: Response): Promise<void> => request.body["ShortcutsAPIKey"] === process.env["SHORTCUTS_API_KEY"] && request.body["focus"] ? ((firestore: Firestore): Promise<void> => (firestore.collection("environment").doc("private") as DocumentReference<PrivateEnvironmentDocument>).get().then<void>((privateEnvironmentDocumentSnapshot: DocumentSnapshot<PrivateEnvironmentDocument>): Promise<void> => (async (privateEnvironmentDocument: PrivateEnvironmentDocument | undefined): Promise<void> => privateEnvironmentDocument ? privateEnvironmentDocument["focus"] === request.body["focus"] ? response.json(privateEnvironmentDocument).end() && void(0) : (firestore.collection("environment").doc("private") as DocumentReference<PrivateEnvironmentDocument>).update({
     "focus": request.body["focus"],
-  })))(response.json({
-    ...privateDocumentSnapshot.data(),
-    ...updateData,
-  }).end())))({
+    "focusPrior": privateEnvironmentDocument.focus,
+  }).then<void>((): Promise<void> => (firestore.collection("environment").doc("public") as DocumentReference<PublicEnvironmentDocument>).update({
     "focus": request.body["focus"],
-    "focusPrior": privateDocumentSnapshot.data()?.["focus"],
-  })))(environmentCollectionReference.doc("private")))(firestore.collection("environment")))(getFirestore()) : ((_response) => {})(response.status(403).end()));
+  }).then<void>((): void => void(0))) : response.status(404).end() && void(0))(privateEnvironmentDocumentSnapshot.data())))(getFirestore()) : response.status(403).end() && void(0));
