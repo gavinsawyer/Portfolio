@@ -1,7 +1,7 @@
 import { Injectable }                                                        from "@angular/core";
 import { User }                                                              from "@angular/fire/auth";
 import { doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore } from "@angular/fire/firestore";
-import { ShortcutsAPIPublicDocument }                                        from "@portfolio/interfaces";
+import { PublicEnvironmentDocument }                                         from "@gavinsawyer/shortcuts-api";
 import { catchError, filter, map, mergeMap, Observable, Subject }            from "rxjs";
 import { AuthenticationService }                                             from "./authentication.service";
 
@@ -18,11 +18,11 @@ export class FocusService {
     this
       .focusObservable = authenticationService
       .userObservable
-      .pipe<DocumentSnapshot<ShortcutsAPIPublicDocument>, ShortcutsAPIPublicDocument | undefined, ShortcutsAPIPublicDocument, string, string>(
-        mergeMap<User, Observable<DocumentSnapshot<ShortcutsAPIPublicDocument>>>((): Observable<DocumentSnapshot<ShortcutsAPIPublicDocument>> => docSnapshots<ShortcutsAPIPublicDocument>(doc(firestore, "environment/public") as DocumentReference<ShortcutsAPIPublicDocument>)),
-        map<DocumentSnapshot<ShortcutsAPIPublicDocument>, ShortcutsAPIPublicDocument | undefined>((shortcutsAPIPublicDocumentSnapshot: DocumentSnapshot<ShortcutsAPIPublicDocument>): ShortcutsAPIPublicDocument | undefined => shortcutsAPIPublicDocumentSnapshot.data()),
-        filter<ShortcutsAPIPublicDocument | undefined, ShortcutsAPIPublicDocument>((shortcutsAPIPublicDocument: ShortcutsAPIPublicDocument | undefined): shortcutsAPIPublicDocument is ShortcutsAPIPublicDocument => !!shortcutsAPIPublicDocument),
-        map<ShortcutsAPIPublicDocument, string>((shortcutsAPIPublicDocument: ShortcutsAPIPublicDocument): string => shortcutsAPIPublicDocument.focus),
+      .pipe<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined, PublicEnvironmentDocument, string, string>(
+        mergeMap<User, Observable<DocumentSnapshot<PublicEnvironmentDocument>>>((): Observable<DocumentSnapshot<PublicEnvironmentDocument>> => docSnapshots<PublicEnvironmentDocument>(doc(firestore, "environment/public") as DocumentReference<PublicEnvironmentDocument>)),
+        map<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined>((shortcutsAPIPublicDocumentSnapshot: DocumentSnapshot<PublicEnvironmentDocument>): PublicEnvironmentDocument | undefined => shortcutsAPIPublicDocumentSnapshot.data()),
+        filter<PublicEnvironmentDocument | undefined, PublicEnvironmentDocument>((shortcutsAPIPublicDocument: PublicEnvironmentDocument | undefined): shortcutsAPIPublicDocument is PublicEnvironmentDocument => !!shortcutsAPIPublicDocument),
+        map<PublicEnvironmentDocument, string>((shortcutsAPIPublicDocument: PublicEnvironmentDocument): string => shortcutsAPIPublicDocument.focus),
         catchError<string, Observable<string>>((): Observable<string> => new Subject<string>().asObservable())
       );
   }
