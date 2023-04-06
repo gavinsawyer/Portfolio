@@ -109,7 +109,7 @@
       "dependsOn": ["browser", "server"],
       "executor": "@nguniversal/builders:prerender",
       "options": {
-        "routesFile": "apps/console/src/app/routes.txt"
+        "routesFile": "apps/console/src/routes.txt"
       },
       "configurations": {
         "production": {
