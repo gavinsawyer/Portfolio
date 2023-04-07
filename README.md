@@ -1,5 +1,7 @@
 ## GavinSawyer.dev
 A simple personal website built with Firebase, Nx, and Angular 15.
+
+![GitHub workflow status](https://img.shields.io/github/actions/workflow/status/gavinsawyer/portfolio/ci.yml)
 ### Apps
 > #### [@portfolio/website](apps/website)
 > 
@@ -32,14 +34,10 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
 > - [Message Form](libs/components/src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 
-> #### [@portfolio/functions](libs/functions) `Firebase Admin SDK` `Firebase Functions` `FirebaseWebAuthn`
-> Six Cloud Functions used to read and update Firestore from iOS and tvOS Automations.
+> #### @portfolio/functions `Firebase Admin SDK` `Firebase Functions` `FirebaseWebAuthn` `ShortcutsAPI`
 >
-> When updating the Focus mode (`Do Not Disturb`/`Driving`/etc.) on any device, the iPhone triggers an Automation which calls [setFocus](libs/functions/src/lib/shortcuts/set-focus.ts), for example. This allows the user's live Focus to appear on the website via [FocusService](libs/services/src/lib/focus.service.ts).
->
-> Additional functions for location and time enable home automation. iOS and tvOS (running on Apple TV and HomePods) Automations set device and home conditions according to the user's state.
->
-> > An example automation I've implemented turns off the Sleep Focus and turns on my apartment lights and espresso machine if I am at home when my wake-up alarm is stopped.
+> - [FirebaseWebAuthn](https://github.com/gavinsawyer/firebase-web-authn)
+> - [ShortcutsAPI](https://github.com/gavinsawyer/shortcuts-api)
 
 > #### [@portfolio/interfaces](libs/interfaces) `TypeScript`
 
