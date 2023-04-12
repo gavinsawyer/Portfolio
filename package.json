@@ -8,8 +8,7 @@
   },
   "scripts": {
     "build": "npx nx run-many --target build --all",
-    "deploy": "npx nx run-many --target deploy --all",
-    "postinstall": "ngcc --properties es2020 browser module main"
+    "deploy": "npx nx run-many --target deploy --all"
   },
   "license": "MIT",
   "private": true,
