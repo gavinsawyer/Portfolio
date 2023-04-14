@@ -1,1 +1,1 @@
-export * from './lib/messageDocument';
+export * from "./lib/message-document";

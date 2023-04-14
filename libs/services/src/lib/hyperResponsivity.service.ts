@@ -1,9 +1,10 @@
 import { BreakpointObserver, BreakpointState }         from "@angular/cdk/layout";
 import { DOCUMENT, isPlatformBrowser }                 from "@angular/common";
 import { Inject, Injectable, PLATFORM_ID }             from "@angular/core";
-import { Appearance }                                  from "@portfolio/types";
 import { BehaviorSubject, fromEvent, map, Observable } from "rxjs";
 
+
+type Appearance = "light" | "dark";
 
 @Injectable({
   providedIn: "root",

@@ -1,7 +1,7 @@
 ## GavinSawyer.dev
 A simple personal website built with Firebase, Nx, and Angular 15.
 
-![GitHub workflow status](https://img.shields.io/github/actions/workflow/status/gavinsawyer/portfolio/ci.yml)
+[![GitHub workflow status](https://img.shields.io/github/actions/workflow/status/gavinsawyer/portfolio/ci.yml)](https://github.com/gavinsawyer/shortcuts-api/actions/workflows/ci.yml)
 ### Apps
 > #### [@portfolio/website](apps/website)
 > 
@@ -26,8 +26,6 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `FirebaseWebAuthn` `HTML` `NgxMask` `Sass`
 >
 > Angular components used in apps.
-> - [Aside (Console)](libs/components/src/lib/aside-console) `FirebaseWebAuthn` `HTML` `Sass`
-> - [Aside (Website)](libs/components/src/lib/aside-website) `Firebase Analytics` `HTML` `Sass`
 > - [Banner](libs/components/src/lib/banner) `HTML` `Sass`
 > - [Button](libs/components/src/lib/button) `HTML` `Sass`
 > - [Create Account Form](libs/components/src/lib/create-account-form) `Angular Forms` `FirebaseWebAuthn` `HTML` `Sass`
@@ -40,8 +38,6 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - [ShortcutsAPI](https://github.com/gavinsawyer/shortcuts-api)
 
 > #### [@portfolio/interfaces](libs/interfaces) `TypeScript`
-
-> #### [@portfolio/types](libs/types) `TypeScript`
 
 > #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firestore`
 >

@@ -9,10 +9,10 @@ import { ReactiveFormsModule }                            from "@angular/forms";
 import { BrowserModule }                                  from "@angular/platform-browser";
 import { RouterModule }                                   from "@angular/router";
 import { TransferHttpCacheModule }                        from "@nguniversal/common";
-import { AsideConsoleComponent }                          from "@portfolio/components";
 import { AppCheckOptionsService }                         from "@portfolio/services";
 import { environment }                                    from "../environments/environment";
 import { AppComponent }                                   from "./app.component";
+import { AsideComponent }                                 from "./components";
 
 
 const baseTitle = "Console";
@@ -20,7 +20,7 @@ const baseTitle = "Console";
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    AsideConsoleComponent,
+    AsideComponent,
     BrowserModule.withServerTransition({
       appId: "serverApp",
     }),

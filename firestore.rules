@@ -6,7 +6,7 @@ service cloud.firestore {
     }
     match /messages/{document} {
       allow create: if request.auth.uid == request.resource.id;
-      allow read: if request.auth.uid == resource.id || request.auth.uid == "hybZTS92cdUGykaw4XpKwSx4vR53";
+      allow read: if request.auth.uid == resource.id || request.auth.uid == "RdSDripB9NS2pSyt3YYIWewGESK2";
     }
   }
 }

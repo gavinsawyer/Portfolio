@@ -12,7 +12,7 @@
     </header>
     <portfolio-banner [ngClass]="{'pathRoot': (pathService.pathObservable | async) === '/'}"></portfolio-banner>
     <div>
-      <portfolio-aside-website [ngClass]="{'pathRoot': (pathService.pathObservable | async) === '/'}"></portfolio-aside-website>
+      <portfolio-aside [ngClass]="{'pathRoot': (pathService.pathObservable | async) === '/'}"></portfolio-aside>
       <router-outlet></router-outlet>
     </div>
   </div>
