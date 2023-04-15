@@ -18,11 +18,12 @@ export class FocusService {
     this
       .focusObservable = authenticationService
       .userObservable
-      .pipe<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined, PublicEnvironmentDocument, string, string>(
-        mergeMap<User, Observable<DocumentSnapshot<PublicEnvironmentDocument>>>((): Observable<DocumentSnapshot<PublicEnvironmentDocument>> => docSnapshots<PublicEnvironmentDocument>(doc(firestore, "environment/public") as DocumentReference<PublicEnvironmentDocument>)),
+      .pipe<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined, PublicEnvironmentDocument, string | undefined, string, string>(
+        mergeMap<User, Observable<DocumentSnapshot<PublicEnvironmentDocument>>>((): Observable<DocumentSnapshot<PublicEnvironmentDocument>> => docSnapshots<PublicEnvironmentDocument>(doc(firestore, "shortcutsEnvironment/public") as DocumentReference<PublicEnvironmentDocument>)),
         map<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined>((shortcutsAPIPublicDocumentSnapshot: DocumentSnapshot<PublicEnvironmentDocument>): PublicEnvironmentDocument | undefined => shortcutsAPIPublicDocumentSnapshot.data()),
         filter<PublicEnvironmentDocument | undefined, PublicEnvironmentDocument>((shortcutsAPIPublicDocument: PublicEnvironmentDocument | undefined): shortcutsAPIPublicDocument is PublicEnvironmentDocument => !!shortcutsAPIPublicDocument),
-        map<PublicEnvironmentDocument, string>((shortcutsAPIPublicDocument: PublicEnvironmentDocument): string => shortcutsAPIPublicDocument.focus),
+        map<PublicEnvironmentDocument, string | undefined>((shortcutsAPIPublicDocument: PublicEnvironmentDocument): string | undefined => shortcutsAPIPublicDocument.focus),
+        filter<string | undefined, string>((focus: string | undefined): focus is string => !!focus),
         catchError<string, Observable<string>>((): Observable<string> => new Subject<string>().asObservable())
       );
   }
