@@ -4,6 +4,7 @@ import { Auth }                                        from "@angular/fire/auth"
 import { Functions }                                   from "@angular/fire/functions";
 import { signInWithPasskey, verifyUserWithPasskey }    from "@firebase-web-authn/browser";
 import { ButtonComponent, CreateAccountFormComponent } from "@portfolio/components";
+import { AuthenticationService }                       from "@portfolio/services";
 
 
 @Component({
@@ -24,6 +25,8 @@ export class AsideComponent {
   constructor(
     private readonly auth: Auth,
     private readonly functions: Functions,
+
+    public readonly authenticationService: AuthenticationService,
   ) {
     this
       .verifyUserWithPasskey = (): Promise<void> => verifyUserWithPasskey(auth, functions);

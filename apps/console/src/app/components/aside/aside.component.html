@@ -1,5 +1,5 @@
 <aside>
   <div>
-    <portfolio-button (action)="signInWithPasskey();" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Sign in with passkey"></portfolio-button>
+    <portfolio-button (action)="signInWithPasskey();" *ngIf="!(authenticationService.userObservable | async) || (authenticationService.userObservable | async)?.isAnonymous" svgHeight="15.9141px" svgName="use passkey" svgWidth="14.9317px" text="Sign in with passkey"></portfolio-button>
   </div>
 </aside>

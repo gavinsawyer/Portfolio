@@ -4,7 +4,7 @@
       You're not signed in.
     </p>
     <p *ngIf="(authenticationService.userObservable | async)?.isAnonymous == false">
-      {{ (messagesService.messageDocumentsObservable | async)?.length + " message" + ((messagesService.messageDocumentsObservable | async)?.length === 1 ? "." : "s.") }}
+      {{ ((messagesService.messageDocumentsObservable | async)?.length || "Loading") + " message" + ((messagesService.messageDocumentsObservable | async)?.length === 1 ? "." : "s.") }}
     </p>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid aut, consectetur cupiditate dicta dolor eaque error ex excepturi exercitationem libero mollitia, nihil obcaecati officia pariatur placeat provident quis quod repellendus rerum sequi sunt veniam veritatis. Animi aspernatur, aut corporis cum exercitationem fugit harum impedit magni maxime odit officia sint, suscipit temporibus vitae voluptatem. Ad aliquam at, autem culpa deserunt, dolore et ex ipsum labore nisi obcaecati odio provident reprehenderit, sit sunt unde voluptates. Aliquid id mollitia optio sed voluptatem.
