@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "15.13.1",
+  "version": "15.13.2",
   "author": {
     "name": "Gavin Sawyer",
     "email": "hello@gavinsawyer.dev",
@@ -42,7 +42,7 @@
     "@angular/compiler-cli": "^15.2.8",
     "@angular/language-service": "^15.2.8",
     "@firebase-web-authn/functions": "^9.2.3",
-    "@gavinsawyer/shortcuts-api": "^1.4.0",
+    "@gavinsawyer/shortcuts-api": "^1.4.1",
     "@nguniversal/builders": "^15.2.1",
     "@nrwl/angular": "^15.9.2",
     "@nrwl/cli": "^15",

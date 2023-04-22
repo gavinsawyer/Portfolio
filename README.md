@@ -10,29 +10,24 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > A simple personal website built for extensibility and serverless operation. Shows reCAPTCHA-authenticated users a contact form and the author's live Focus mode (`Do Not Disturb`/`Driving`/etc.). Analytics are collected on user interactions like scrolling, sending messages, and following links.
 >
 > `% npm run build` Build browser and server, prerender routes. \
-> `% npm run deploy` Deploy to Cloud Run \
-> `% npm run serve` Run local development server
+> `% npm run deploy` Deploy to Cloud Run
 
 > #### [@portfolio/console](apps/console)
->
-> Online at: [console.gavinsawyer.dev](https://console.gavinsawyer.dev)
 >
 > An admin console for seeing incoming messages.
 >
 > `% npm run build` Build browser and server, prerender routes. \
-> `% npm run deploy` Deploy to Cloud Run \
-> `% npm run serve` Run local development server
+> `% npm run deploy` Deploy to Cloud Run
 ### Libraries
-> #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `FirebaseWebAuthn` `HTML` `NgxMask` `Sass`
+> #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 >
 > Angular components used in apps.
 > - [Banner](libs/components/src/lib/banner) `HTML` `Sass`
 > - [Button](libs/components/src/lib/button) `HTML` `Sass`
-> - [Create Account Form](libs/components/src/lib/create-account-form) `Angular Forms` `FirebaseWebAuthn` `HTML` `Sass`
 > - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
 > - [Message Form](libs/components/src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 
-> #### @portfolio/functions `Firebase Admin SDK` `Firebase Functions` `FirebaseWebAuthn` `ShortcutsAPI`
+> #### [@portfolio/functions](libs/functions) `Firebase Admin SDK` `Firebase Functions` `FirebaseWebAuthn` `ShortcutsAPI`
 >
 > - [FirebaseWebAuthn](https://github.com/gavinsawyer/firebase-web-authn)
 > - [ShortcutsAPI](https://github.com/gavinsawyer/shortcuts-api)

@@ -1,17 +1,16 @@
-import { CommonModule }                                from "@angular/common";
-import { Component }                                   from "@angular/core";
-import { Auth }                                        from "@angular/fire/auth";
-import { Functions }                                   from "@angular/fire/functions";
-import { signInWithPasskey, verifyUserWithPasskey }    from "@firebase-web-authn/browser";
-import { ButtonComponent, CreateAccountFormComponent } from "@portfolio/components";
-import { AuthenticationService }                       from "@portfolio/services";
+import { CommonModule }                             from "@angular/common";
+import { Component }                                from "@angular/core";
+import { Auth }                                     from "@angular/fire/auth";
+import { Functions }                                from "@angular/fire/functions";
+import { signInWithPasskey, verifyUserWithPasskey } from "@firebase-web-authn/browser";
+import { ButtonComponent }                          from "@portfolio/components";
+import { AuthenticationService }                    from "@portfolio/services";
 
 
 @Component({
   imports: [
     ButtonComponent,
     CommonModule,
-    CreateAccountFormComponent,
   ],
   selector: "portfolio-aside",
   standalone: true,
