@@ -2,10 +2,11 @@
   <div>
     <portfolio-message-form></portfolio-message-form>
     <div>
-      <portfolio-button svgHeight="17.2578px" svgName="send message" svgWidth="17.2188px" text="Message" url="sms:+16177979041"></portfolio-button>
-      <portfolio-button svgHeight="13.4766px" svgName="send mail"    svgWidth="17.25px"   text="Mail"    url="mailto:hello@gavinsawyer.dev"></portfolio-button>
+      <portfolio-button class="merge-right" svgHeight="17.2578px" svgName="send message" svgWidth="22.3828px" text="Message" url="sms:+16177979041"></portfolio-button>
+      <portfolio-button class="merge-left"  svgHeight="13.4766px" svgName="send mail"    svgWidth="22.3828px" text="Mail"    url="mailto:hello@gavinsawyer.dev"></portfolio-button>
     </div>
-    <portfolio-button (action)="logClickAddToContactsEvent();" svgHeight="17.3359px" svgName="add to contacts" svgWidth="22.3828px" text="Add to contacts" url="/assets/Gavin Sawyer.vcf"></portfolio-button>
+    <portfolio-button (action)="logClickOpenResumeEvent();" svgHeight="16.7578px" svgName="document" svgWidth="22.3828px" text="Open résumé" url="/assets/Gavin Sawyer - Resume.pdf"></portfolio-button>
+    <portfolio-button (action)="logClickAddToContactsEvent();" svgHeight="17.3359px" svgName="add to contacts" svgWidth="22.3828px" text="Add to contacts" url="/assets/Gavin Sawyer - Contact.vcf"></portfolio-button>
     <portfolio-focus [focus]="focus" *ngIf="focusService.focusObservable | async as focus"></portfolio-focus>
   </div>
   <img alt="" height="1024" ngSrc="/assets/photo.jpeg" width="768">

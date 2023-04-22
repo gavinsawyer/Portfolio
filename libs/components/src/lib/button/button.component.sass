@@ -32,8 +32,31 @@
       display: none
       flex-shrink: 1
 
-      @media (max-width: 51.580078125rem)
+      @media (max-width: 52.22265625rem)
         display: flex
+
+  &.merge-left
+    a,
+    button
+      border-radius: 1rem calc(1.5rem + (14.28125px / 2)) calc(1.5rem + (14.28125px / 2)) 1rem
+
+  &.merge-right
+    a,
+    button
+      border-radius: calc(1.5rem + (14.28125px / 2)) 1rem 1rem calc(1.5rem + (14.28125px / 2))
+
+  &.merge-left,
+  &.merge-right
+    a,
+    button
+      #spacer
+        display: none
+
+      @media (max-width: 22.22265625rem)
+        border-radius: calc(1.5rem + (14.28125px / 2))
+
+        #spacer
+          display: flex
 
   @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     button,

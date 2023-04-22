@@ -29,8 +29,11 @@ export class AsideComponent {
   ) {
     this
       .logClickAddToContactsEvent = (): void => logEvent(analytics, "click_addToContacts");
+    this
+      .logClickOpenResumeEvent = (): void => logEvent(analytics, "click_openResume");
   }
 
   public readonly logClickAddToContactsEvent: () => void;
+  public readonly logClickOpenResumeEvent: () => void;
 
 }
