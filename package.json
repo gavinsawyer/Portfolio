@@ -1,9 +1,9 @@
 {
   "name": "portfolio",
-  "version": "15.14.0",
+  "version": "15.14.1",
   "author": {
     "name": "Gavin Sawyer",
-    "email": "hello@gavinsawyer.dev",
+    "email": "g@vinsawyer.dev",
     "url": "https://github.com/gavinsawyer"
   },
   "scripts": {
@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "^15",
     "@angular/platform-server": "^15.2.8",
     "@angular/router": "^15.2.8",
-    "@firebase-web-authn/browser": "^9.4.7",
+    "@firebase-web-authn/browser": "^9.4.8",
     "@nguniversal/express-engine": "^15.2.1",
     "ngx-mask": "^15.1.1",
     "normalize.css": "^8.0.1",
@@ -41,8 +41,8 @@
     "@angular/cli": "^15.2.6",
     "@angular/compiler-cli": "^15.2.8",
     "@angular/language-service": "^15.2.8",
-    "@firebase-web-authn/extension": "^9.4.7",
-    "@gavinsawyer/shortcuts-api": "^1.4.2",
+    "@firebase-web-authn/extension": "^9.4.8",
+    "@gavinsawyer/shortcuts-api": "^1.4.3",
     "@nguniversal/builders": "^15.2.1",
     "@nrwl/angular": "^15.9.2",
     "@nrwl/cli": "^15",
@@ -52,8 +52,8 @@
     "@nrwl/nx-cloud": "^15.3.5",
     "@nrwl/workspace": "^15",
     "@schematics/angular": "^15",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "firebase-functions": "^4.3.1",
