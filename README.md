@@ -27,9 +27,8 @@ A simple personal website built with Firebase, Nx, and Angular 15.
 > - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
 > - [Message Form](libs/components/src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 
-> #### [@portfolio/functions](libs/functions) `Firebase Admin SDK` `Firebase Functions` `FirebaseWebAuthn` `ShortcutsAPI`
+> #### [@portfolio/functions](libs/functions) `Firebase Admin SDK` `Firebase Functions` `ShortcutsAPI`
 >
-> - [FirebaseWebAuthn](https://github.com/gavinsawyer/firebase-web-authn)
 > - [ShortcutsAPI](https://github.com/gavinsawyer/shortcuts-api)
 
 > #### [@portfolio/interfaces](libs/interfaces) `TypeScript`

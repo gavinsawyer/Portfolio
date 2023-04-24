@@ -28,8 +28,8 @@
       ],
       "rewrites": [
         {
-          "source": "/firebaseWebAuthn",
-          "function": "firebaseWebAuthn"
+          "source": "/firebase-web-authn-api",
+          "function": "ext-firebase-web-authn-api"
         },
         {
           "source": "**",
@@ -91,5 +91,8 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "extensions": {
+    "firebase-web-authn": "./node_modules/@firebase-web-authn/extension"
   }
 }

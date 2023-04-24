@@ -13,5 +13,12 @@
         ]
       }
     }
+  },
+  "etags": {
+    "portfolio-a59e2": {
+      "extensionInstances": {
+        "firebase-web-authn": "947991ab6ddd40c94a0423a1ae3452b3e92394cd51a04f71e64ea356371eb156"
+      }
+    }
   }
 }

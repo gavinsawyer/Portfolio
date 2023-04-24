@@ -1,7 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-  	match /environment/{document} {
+  	match /shortcutsEnvironment/{document} {
       allow read: if resource.id == "public";
     }
     match /messages/{document} {

@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "15.13.2",
+  "version": "15.14.0",
   "author": {
     "name": "Gavin Sawyer",
     "email": "hello@gavinsawyer.dev",
@@ -24,9 +24,9 @@
     "@angular/platform-browser-dynamic": "^15",
     "@angular/platform-server": "^15.2.8",
     "@angular/router": "^15.2.8",
-    "@firebase-web-authn/browser": "^9.2.3",
+    "@firebase-web-authn/browser": "^9.4.7",
     "@nguniversal/express-engine": "^15.2.1",
-    "ngx-mask": "^15.1.0",
+    "ngx-mask": "^15.1.1",
     "normalize.css": "^8.0.1",
     "rxjs": "^7.8.0",
     "tslib": "^2"
@@ -41,8 +41,8 @@
     "@angular/cli": "^15.2.6",
     "@angular/compiler-cli": "^15.2.8",
     "@angular/language-service": "^15.2.8",
-    "@firebase-web-authn/functions": "^9.2.3",
-    "@gavinsawyer/shortcuts-api": "^1.4.1",
+    "@firebase-web-authn/extension": "^9.4.7",
+    "@gavinsawyer/shortcuts-api": "^1.4.2",
     "@nguniversal/builders": "^15.2.1",
     "@nrwl/angular": "^15.9.2",
     "@nrwl/cli": "^15",
@@ -60,7 +60,7 @@
     "firebase-tools": "^11.28.0",
     "git-describe": "^4.1.1",
     "nx": "^15",
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "typescript": "^4.9.5"
   }
 }
