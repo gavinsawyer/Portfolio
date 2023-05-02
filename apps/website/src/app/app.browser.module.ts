@@ -1,18 +1,18 @@
 import { Injector, NgModule }                                                                    from "@angular/core";
 import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
-import { AppCheck, initializeAppCheck, provideAppCheck } from "@angular/fire/app-check";
-import { Auth, getAuth, provideAuth }                    from "@angular/fire/auth";
-import { Firestore, getFirestore, provideFirestore }     from "@angular/fire/firestore";
-import { ReactiveFormsModule }                           from "@angular/forms";
-import { BrowserModule }                                 from "@angular/platform-browser";
-import { RouterModule }                                  from "@angular/router";
-import { TransferHttpCacheModule }                       from "@nguniversal/common"
-import { BannerComponent }                               from "@portfolio/components";
-import { AppCheckOptionsService }                        from "@portfolio/services";
-import { environment }                                   from "../environments/environment";
-import { AppComponent }                                  from "./app.component";
-import { AsideComponent }                                from "./components";
+import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
+import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
+import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
+import { ReactiveFormsModule }                                                                   from "@angular/forms";
+import { BrowserModule }                                                                         from "@angular/platform-browser";
+import { RouterModule }                                                                          from "@angular/router";
+import { TransferHttpCacheModule }                                                               from "@nguniversal/common"
+import { BannerComponent }                                                                       from "@portfolio/components";
+import { AppCheckOptionsService }                                                                from "@portfolio/services";
+import { environment }                                                                           from "../environments/environment";
+import { AppComponent }                                                                          from "./app.component";
+import { AsideComponent }                                                                        from "./components";
 
 
 const baseTitle = "Gavin Sawyer";
