@@ -1,7 +1,7 @@
 ## GavinSawyer.dev
-A simple personal website built with Firebase, Nx, and Angular 15.
+A simple personal website built with Firebase, Nx, and Angular 16.
 
-[![GitHub workflow status](https://img.shields.io/github/actions/workflow/status/gavinsawyer/portfolio/ci.yml)](https://github.com/gavinsawyer/shortcuts-api/actions/workflows/ci.yml)
+[![GitHub workflow status](https://img.shields.io/github/actions/workflow/status/gavinsawyer/Portfolio/ci.yml)](https://github.com/gavinsawyer/Portfolio/actions/workflows/ci.yml)
 ### Apps
 > #### [@portfolio/website](apps/website)
 > 
