@@ -1,14 +1,13 @@
-import { CommonModule }                                                                      from "@angular/common";
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild }   from "@angular/core";
-import { Analytics, logEvent }                                                               from "@angular/fire/analytics";
-import { FormBuilder, FormGroup, ReactiveFormsModule }                                       from "@angular/forms";
-import { MessageDocument }                                                                   from "@portfolio/interfaces";
-import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService } from "@portfolio/services";
-import { NgxMaskDirective, provideNgxMask }                                                  from "ngx-mask";
-import { BehaviorSubject, Observable, Subscription }                                         from "rxjs";
+import { CommonModule }                                                                                                           from "@angular/common";
+import { AfterViewInit, Component, computed, effect, ElementRef, Inject, PLATFORM_ID, Signal, signal, ViewChild, WritableSignal } from "@angular/core";
+import { Analytics, logEvent }                                                                                                    from "@angular/fire/analytics";
+import { FormBuilder, FormGroup, ReactiveFormsModule }                                                                     from "@angular/forms";
+import { MessageDocument }                                                                                                 from "@portfolio/interfaces";
+import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService }                               from "@portfolio/services";
+import { NgxMaskDirective, provideNgxMask }                                                                                from "ngx-mask";
 
 
-type MessageFormStatus = "unsent" | "sending" | "sent";
+type MessageStatus = "unsent" | "sending" | "sent";
 
 @Component({
   imports: [
@@ -26,7 +25,18 @@ type MessageFormStatus = "unsent" | "sending" | "sent";
   ],
   templateUrl: "./message-form.component.html",
 })
-export class MessageFormComponent implements AfterViewInit, OnDestroy {
+export class MessageFormComponent implements AfterViewInit {
+
+  public readonly formGroup: FormGroup;
+  public readonly messageStatus: Signal<MessageStatus>;
+  public readonly submit: () => void;
+
+  @ViewChild("nameHTMLInputElement", {
+    read: ElementRef,
+  })
+  private nameInputElementRef!: ElementRef;
+
+  private readonly formSubmitted: WritableSignal<boolean>;
 
   constructor(
     @Inject(PLATFORM_ID)
@@ -49,16 +59,14 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
         phone: undefined,
       });
     this
-      .statusSubject = new BehaviorSubject<MessageFormStatus>("unsent");
+      .formSubmitted = signal<boolean>(false);
     this
-      .statusObservable = this
-      .statusSubject
-      .asObservable();
+      .messageStatus = computed<MessageStatus>((): MessageStatus => messagesService.messageDocuments().length > 0 ? "sent" : this.formSubmitted() ? "sending" : "unsent");
     this
       .submit = async (): Promise<void> => {
         this
-          .statusSubject
-          .next("sending");
+          .formSubmitted
+          .set(true);
 
         logEvent(analytics, "form_submit", {
           "form_id": "",
@@ -69,47 +77,23 @@ export class MessageFormComponent implements AfterViewInit, OnDestroy {
         return await messagesService
           .createMessageDocument(this.formGroup.value);
       };
-    this
-      .unsubscribeSentMessageDocument = messagesService
-      .sentMessageDocumentObservable
-      .subscribe((messageDocument?: MessageDocument): void => messageDocument && ((): void => {
-        this
-          .formGroup
-          .setValue(messageDocument);
 
-        this
-          .formGroup
-          .disable();
+    effect((): void => messagesService.messageDocuments().length > 0 ? ((): void => {
+      this
+        .formGroup
+        .setValue(messagesService.messageDocuments()[0]);
 
-        this
-          .statusSubject
-          .next("sent");
-      })())
-      .unsubscribe;
+      this
+        .formGroup
+        .disable();
+    })() : void (0));
   }
-
-  @ViewChild("nameHTMLInputElement", {
-    read: ElementRef
-  })
-  private nameInputElementRef!: ElementRef;
-
-  private readonly statusSubject: BehaviorSubject<MessageFormStatus>;
-  private readonly unsubscribeSentMessageDocument: Subscription["unsubscribe"];
-
-  public readonly formGroup: FormGroup;
-  public readonly statusObservable: Observable<MessageFormStatus>;
-  public readonly submit: () => void;
 
   ngAfterViewInit(): void {
     this
       .nameInputElementRef
       .nativeElement
       .focus();
-  }
-
-  ngOnDestroy(): void {
-    this
-      .unsubscribeSentMessageDocument();
   }
 
 }

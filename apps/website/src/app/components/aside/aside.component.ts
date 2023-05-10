@@ -22,6 +22,9 @@ import { FocusService }                                          from "@portfoli
 })
 export class AsideComponent {
 
+  public readonly logClickAddToContactsEvent: () => void;
+  public readonly logClickOpenResumeEvent: () => void;
+
   constructor(
     private readonly analytics: Analytics,
 
@@ -32,8 +35,5 @@ export class AsideComponent {
     this
       .logClickOpenResumeEvent = (): void => logEvent(analytics, "click_openResume");
   }
-
-  public readonly logClickAddToContactsEvent: () => void;
-  public readonly logClickOpenResumeEvent: () => void;
 
 }

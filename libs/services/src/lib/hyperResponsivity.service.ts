@@ -1,7 +1,8 @@
-import { BreakpointObserver, BreakpointState }         from "@angular/cdk/layout";
-import { DOCUMENT, isPlatformBrowser }                 from "@angular/common";
-import { Inject, Injectable, PLATFORM_ID }             from "@angular/core";
-import { BehaviorSubject, fromEvent, map, Observable } from "rxjs";
+import { BreakpointObserver, BreakpointState }             from "@angular/cdk/layout";
+import { DOCUMENT, isPlatformBrowser }                     from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID, signal, Signal } from "@angular/core";
+import { takeUntilDestroyed, toSignal }                    from "@angular/core/rxjs-interop";
+import { fromEvent, map, shareReplay, startWith }          from "rxjs";
 
 
 type Appearance = "light" | "dark";
@@ -10,6 +11,22 @@ type Appearance = "light" | "dark";
   providedIn: "root",
 })
 export class HyperResponsivityService {
+
+  public readonly scrollPosition: Signal<number>;
+  public readonly backgroundAppearance: Signal<Appearance>;
+  public readonly foregroundAppearance: Signal<Appearance>;
+  public readonly adjustTextAreaRows: (messageTextAreaElement: HTMLTextAreaElement, options: {
+    fontSize?: number,
+    lineHeight?: number,
+    min?: number,
+    max?: number,
+  }) => void;
+  public readonly getTextAreaRows: (messageTextAreaElement: HTMLTextAreaElement, options: {
+    fontSize?: number,
+    lineHeight?: number,
+    min?: number,
+    max?: number,
+  }) => number;
 
   constructor(
     @Inject(DOCUMENT)
@@ -40,17 +57,19 @@ export class HyperResponsivityService {
           .height = "auto";
       };
     this
-      .backgroundAppearanceObservable = breakpointObserver
-      .observe("(prefers-color-scheme: light)")
-      .pipe<Appearance>(
-        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : "light")
-      );
+      .backgroundAppearance = toSignal<Appearance>(breakpointObserver.observe("(prefers-color-scheme: light)").pipe<Appearance, Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : "light"),
+        takeUntilDestroyed<Appearance>(),
+      ), {
+        requireSync: true,
+      });
     this
-      .foregroundAppearanceObservable = breakpointObserver
-      .observe("(prefers-color-scheme: light)")
-      .pipe<Appearance>(
-        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "dark" : "light") : "dark")
-      );
+      .foregroundAppearance = toSignal<Appearance>(breakpointObserver.observe("(prefers-color-scheme: light)").pipe<Appearance, Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "dark" : "light") : "dark"),
+        takeUntilDestroyed<Appearance>(),
+      ), {
+        requireSync: true,
+      });
     this
       .getTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
         fontSize?: number,
@@ -59,30 +78,16 @@ export class HyperResponsivityService {
         max?: number,
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
     this
-      .scrollPositionObservable = document
-      .defaultView ? fromEvent<Event>(document.defaultView, "scroll")
-      .pipe<number>(
-        map<Event, number>((): number => window.scrollY || 0)
-      ) : (new BehaviorSubject<number>(0))
-      .asObservable();
+      .scrollPosition = document
+      .defaultView ? toSignal<number>(fromEvent<Event>(document.defaultView, "scroll")
+      .pipe<number, number, number, number>(
+        map<Event, number>((): number => window.scrollY || 0),
+        startWith<number>(0),
+        shareReplay<number>(),
+        takeUntilDestroyed<number>(),
+      ), {
+        requireSync: true,
+      }) : signal<number>(0);
   }
-
-  public readonly scrollPositionObservable: Observable<number>;
-
-  public readonly backgroundAppearanceObservable: Observable<Appearance>;
-  public readonly foregroundAppearanceObservable: Observable<Appearance>;
-
-  public readonly adjustTextAreaRows: (messageTextAreaElement: HTMLTextAreaElement, options: {
-    fontSize?: number,
-    lineHeight?: number,
-    min?: number,
-    max?: number,
-  }) => void;
-  public readonly getTextAreaRows: (messageTextAreaElement: HTMLTextAreaElement, options: {
-    fontSize?: number,
-    lineHeight?: number,
-    min?: number,
-    max?: number,
-  }) => number;
 
 }

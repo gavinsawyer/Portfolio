@@ -16,13 +16,6 @@ import { HyperResponsivityService }               from "@portfolio/services";
 })
 export class ButtonComponent {
 
-  constructor(
-    public readonly hyperResponsivityService: HyperResponsivityService,
-  ) {
-    this
-      .action = new EventEmitter<void>();
-  }
-
   @Output()
   public readonly action: EventEmitter<void>;
 
@@ -35,10 +28,19 @@ export class ButtonComponent {
   @Input()
   public svgWidth?: string;
 
-  @Input()
+  @Input({
+    required: true,
+  })
   public text?: string;
 
   @Input()
   public url?: string;
+
+  constructor(
+    public readonly hyperResponsivityService: HyperResponsivityService,
+  ) {
+    this
+      .action = new EventEmitter<void>();
+  }
 
 }

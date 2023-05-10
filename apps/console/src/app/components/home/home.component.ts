@@ -19,6 +19,7 @@ export class HomeComponent {
   constructor(
     public readonly authenticationService: AuthenticationService,
     public readonly messagesService: MessagesService,
-  ) {}
+  ) {
+  }
 
 }

@@ -1,13 +1,43 @@
 <aside>
   <div>
-    <portfolio-message-form></portfolio-message-form>
+    <portfolio-message-form />
     <div>
-      <portfolio-button class="merge-right" svgHeight="17.2578px" svgName="send message" svgWidth="22.3828px" text="Message" url="sms:+16177979041"></portfolio-button>
-      <portfolio-button class="merge-left"  svgHeight="13.4766px" svgName="send mail"    svgWidth="22.3828px" text="Mail"    url="mailto:g@vinsawyer.dev"></portfolio-button>
+      <portfolio-button
+        class="merge-right"
+        svgHeight="17.2578px"
+        svgName="send message"
+        svgWidth="22.3828px"
+        text="Message"
+        url="sms:+16177979041" />
+      <portfolio-button
+        class="merge-left"
+        svgHeight="13.4766px"
+        svgName="send mail"
+        svgWidth="22.3828px"
+        text="Mail"
+        url="mailto:g@vinsawyer.dev" />
     </div>
-    <portfolio-button (action)="logClickOpenResumeEvent();" svgHeight="16.7578px" svgName="document" svgWidth="22.3828px" text="Open résumé" url="/assets/Gavin Sawyer - Resume.pdf"></portfolio-button>
-    <portfolio-button (action)="logClickAddToContactsEvent();" svgHeight="17.3359px" svgName="add to contacts" svgWidth="22.3828px" text="Add to contacts" url="/assets/Gavin Sawyer - Contact.vcf"></portfolio-button>
-    <portfolio-focus [focus]="focus" *ngIf="focusService.focusObservable | async as focus"></portfolio-focus>
+    <portfolio-button
+      (action)="logClickOpenResumeEvent();"
+      svgHeight="16.7578px"
+      svgName="document"
+      svgWidth="22.3828px"
+      text="Open résumé"
+      url="/assets/Gavin Sawyer - Resume.pdf" />
+    <portfolio-button
+      (action)="logClickAddToContactsEvent();"
+      svgHeight="17.3359px"
+      svgName="add to contacts"
+      svgWidth="22.3828px"
+      text="Add to contacts"
+      url="/assets/Gavin Sawyer - Contact.vcf" />
+    <portfolio-focus
+      *ngIf="focusService.focus() as focus"
+      [focus]="focus" />
   </div>
-  <img alt="" height="1024" ngSrc="/assets/photo.jpeg" width="768">
+  <img
+    alt=""
+    height="1024"
+    ngSrc="/assets/photo.jpeg"
+    width="768">
 </aside>

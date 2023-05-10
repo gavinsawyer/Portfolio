@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 
+
 @Component({
   selector: "website-app-privacy",
   standalone: true,
@@ -8,4 +9,5 @@ import { Component } from "@angular/core";
   ],
   templateUrl: "./privacy.component.html",
 })
-export class PrivacyComponent {}
+export class PrivacyComponent {
+}

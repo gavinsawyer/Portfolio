@@ -4,10 +4,10 @@ import { FirebaseApp, initializeApp, provideFirebaseApp }                       
 import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
 import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
-import { ReactiveFormsModule }                                                                   from "@angular/forms";
-import { BrowserModule }                                                                         from "@angular/platform-browser";
-import { RouterModule }                                                                          from "@angular/router";
-import { TransferHttpCacheModule }                                                               from "@nguniversal/common"
+import { ReactiveFormsModule }                   from "@angular/forms";
+import { BrowserModule, provideClientHydration } from "@angular/platform-browser";
+import { RouterModule }                          from "@angular/router";
+import { TransferHttpCacheModule }                                                               from "@nguniversal/common";
 import { BannerComponent }                                                                       from "@portfolio/components";
 import { AppCheckOptionsService }                                                                from "@portfolio/services";
 import { environment }                                                                           from "../environments/environment";
@@ -18,7 +18,7 @@ import { AsideComponent }                                                       
 const baseTitle = "Gavin Sawyer";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [ AppComponent ],
   imports: [
     AsideComponent,
     BannerComponent,
@@ -58,9 +58,13 @@ const baseTitle = "Gavin Sawyer";
     TransferHttpCacheModule,
   ],
   providers: [
+    provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent,
+  ],
 })
-export class AppBrowserModule {}
+export class AppBrowserModule {
+}

@@ -1,9 +1,14 @@
 <main>
   <div>
-    <header [ngClass]="{'raised': ((hyperResponsivityService.scrollPositionObservable | async) || 0) > 16}">
+    <header [ngClass]="{'raised': (hyperResponsivityService.scrollPosition() || 0) > 16}">
       <div>
         <h1 style="margin-bottom: 0; text-align: center;">
-          <a routerLink="" routerLinkActive="" #routerLinkActive="routerLinkActive" [routerLinkActiveOptions]="{'exact': true}" [ngClass]="{'active': routerLinkActive.isActive}">Gavin Sawyer</a>
+          <a
+            #routerLinkActive="routerLinkActive"
+            [ngClass]="{'active': routerLinkActive.isActive}"
+            [routerLinkActiveOptions]="{'exact': true}"
+            routerLink=""
+            routerLinkActive="">Gavin Sawyer</a>
         </h1>
         <h2 style="text-align: center;">
           Boston
@@ -11,7 +16,7 @@
       </div>
     </header>
     <div>
-      <portfolio-aside [ngClass]="{'pathRoot': (pathService.pathObservable | async) === '/'}"></portfolio-aside>
+      <portfolio-aside [ngClass]="{'pathRoot': pathService.path() === '/'}"></portfolio-aside>
       <router-outlet></router-outlet>
     </div>
   </div>

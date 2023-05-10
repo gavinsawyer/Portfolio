@@ -28,6 +28,12 @@ type LoginFormStatus = "unsent" | "pending" | "complete";
 })
 export class CreateAccountFormComponent {
 
+  public readonly formGroup: FormGroup<LoginForm>;
+  public readonly statusObservable: Observable<LoginFormStatus>;
+  public readonly submit: () => void;
+
+  private readonly statusSubject: BehaviorSubject<LoginFormStatus>;
+
   constructor(
     private readonly auth: Auth,
     private readonly functions: Functions,
@@ -67,16 +73,10 @@ export class CreateAccountFormComponent {
               .statusSubject
               .next("complete");
           })
-          .catch<void>((): void => this.statusSubject.next("unsent")): this
+          .catch<void>((): void => this.statusSubject.next("unsent")) : this
           .statusSubject
           .next("unsent");
       };
   }
-
-  private readonly statusSubject: BehaviorSubject<LoginFormStatus>;
-
-  public readonly formGroup: FormGroup<LoginForm>;
-  public readonly statusObservable: Observable<LoginFormStatus>;
-  public readonly submit: () => void;
 
 }

@@ -1,6 +1,7 @@
-import { isPlatformBrowser }                          from "@angular/common";
-import { Inject, Injectable, OnDestroy, PLATFORM_ID } from "@angular/core";
-import { BehaviorSubject, Observable }                from "rxjs";
+import { isPlatformBrowser }                               from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID, signal, Signal } from "@angular/core";
+import { takeUntilDestroyed, toSignal }                    from "@angular/core/rxjs-interop";
+import { interval, map, shareReplay, startWith }           from "rxjs";
 
 
 type Ellipses = "." | ".." | "...";
@@ -8,31 +9,22 @@ type Ellipses = "." | ".." | "...";
 @Injectable({
   providedIn: "root",
 })
-export class EllipsesService implements OnDestroy {
+export class EllipsesService {
+
+  public readonly ellipses: Signal<Ellipses>;
 
   constructor(
     @Inject(PLATFORM_ID)
     private readonly platformId: object,
   ) {
     this
-      .ellipsesInterval = setInterval((): void => this.ellipsesSubject.next(this.ellipsesSubject.value == "..." ? "." as Ellipses : this.ellipsesSubject.value + "." as Ellipses), 800);
-    this
-      .ellipsesSubject = new BehaviorSubject<Ellipses>(".");
-    this
-      .ellipsesObservable = this
-      .ellipsesSubject
-      .asObservable();
-
-    isPlatformBrowser(platformId) || clearInterval(this.ellipsesInterval);
+      .ellipses = isPlatformBrowser(platformId) ? toSignal<Ellipses>(interval(800).pipe<Ellipses, Ellipses, Ellipses, Ellipses>(
+        map<number, Ellipses>((n: number): Ellipses => ".".repeat(((n + 1) % 3) + 1) as Ellipses),
+        startWith<Ellipses>("."),
+        shareReplay<Ellipses>(),
+        takeUntilDestroyed<Ellipses>(),
+      ), {
+        requireSync: true,
+      }) : signal<Ellipses>(".");
   }
-
-  private readonly ellipsesSubject: BehaviorSubject<Ellipses>;
-  private readonly ellipsesInterval: NodeJS.Timeout;
-
-  public readonly ellipsesObservable: Observable<Ellipses>;
-
-  ngOnDestroy(): void {
-    clearInterval(this.ellipsesInterval);
-  }
-
 }

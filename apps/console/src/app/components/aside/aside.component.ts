@@ -21,6 +21,9 @@ import { AuthenticationService }                    from "@portfolio/services";
 })
 export class AsideComponent {
 
+  public readonly verifyUserWithPasskey: () => Promise<void>;
+  public readonly signInWithPasskey: () => Promise<void>;
+
   constructor(
     private readonly auth: Auth,
     private readonly functions: Functions,
@@ -31,10 +34,7 @@ export class AsideComponent {
       .verifyUserWithPasskey = (): Promise<void> => verifyUserWithPasskey(auth, functions);
     this
       .signInWithPasskey = (): Promise<void> => signInWithPasskey(auth, functions)
-      .then<void>((): void => void(0));
+      .then<void>((): void => void (0));
   }
-
-  public readonly verifyUserWithPasskey: () => Promise<void>;
-  public readonly signInWithPasskey: () => Promise<void>;
 
 }

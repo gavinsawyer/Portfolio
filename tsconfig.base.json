@@ -10,16 +10,31 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@portfolio/components": ["libs/components/src/index.ts"],
-      "@portfolio/functions": ["libs/functions/src/index.ts"],
-      "@portfolio/interfaces": ["libs/interfaces/src/index.ts"],
-      "@portfolio/services": ["libs/services/src/index.ts"]
+      "@portfolio/components": [
+        "libs/components/src/index.ts"
+      ],
+      "@portfolio/functions": [
+        "libs/functions/src/index.ts"
+      ],
+      "@portfolio/interfaces": [
+        "libs/interfaces/src/index.ts"
+      ],
+      "@portfolio/services": [
+        "libs/services/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp", "**/README.md"]
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "**/README.md"
+  ]
 }

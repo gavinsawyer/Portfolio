@@ -12,9 +12,13 @@
       }
     },
     "browser": {
-      "dependsOn": ["prebuild"],
+      "dependsOn": [
+        "prebuild"
+      ],
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/website/browser",
         "index": "apps/website/src/index.html",
@@ -28,7 +32,9 @@
           "apps/website/src/robots.txt",
           "apps/website/src/sitemap.xml"
         ],
-        "styles": ["apps/website/src/styles.sass"],
+        "styles": [
+          "apps/website/src/styles.sass"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -65,7 +71,9 @@
       "defaultConfiguration": "production"
     },
     "server": {
-      "dependsOn": ["prebuild"],
+      "dependsOn": [
+        "prebuild"
+      ],
       "executor": "@angular-devkit/build-angular:server",
       "options": {
         "outputPath": "dist/apps/website/server",
@@ -106,7 +114,10 @@
       }
     },
     "build": {
-      "dependsOn": ["browser", "server"],
+      "dependsOn": [
+        "browser",
+        "server"
+      ],
       "executor": "@nguniversal/builders:prerender",
       "options": {
         "routesFile": "apps/website/src/routes.txt"
@@ -124,27 +135,35 @@
       "defaultConfiguration": "production"
     },
     "deploy": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "executor": "nx:run-commands",
       "options": {
         "command": "firebase deploy --only hosting:website"
       }
     },
     "serve": {
-      "dependsOn": ["prebuild"],
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "dependsOn": [
+        "prebuild"
+      ],
+      "executor": "@nguniversal/builders:ssr-dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "website:browser:production"
+          "browserTarget": "website:browser:production",
+          "serverTarget": "website:server:production"
         },
         "development": {
-          "browserTarget": "website:browser:development"
+          "browserTarget": "website:browser:development",
+          "serverTarget": "website:server:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "production"
     },
     "extract-i18n": {
-      "dependsOn": ["prebuild"],
+      "dependsOn": [
+        "prebuild"
+      ],
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
         "browserTarget": "website:browser"
@@ -153,7 +172,10 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/website/**/*.ts", "apps/website/**/*.html"]
+        "lintFilePatterns": [
+          "apps/website/**/*.ts",
+          "apps/website/**/*.html"
+        ]
       }
     }
   },

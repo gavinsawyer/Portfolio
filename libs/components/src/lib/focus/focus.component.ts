@@ -1,5 +1,5 @@
-import { CommonModule } from "@angular/common";
-import { Component, Input }    from "@angular/core";
+import { CommonModule }     from "@angular/common";
+import { Component, Input } from "@angular/core";
 
 
 @Component({
@@ -15,7 +15,9 @@ import { Component, Input }    from "@angular/core";
 })
 export class FocusComponent {
 
-  @Input("focus")
+  @Input({
+    required: true,
+  })
   public focus?: string;
 
 }

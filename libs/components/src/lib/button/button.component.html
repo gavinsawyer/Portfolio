@@ -1,15 +1,23 @@
 <ng-template #buttonTemplate>
-  <img alt="Icon" [attr.height]="svgHeight" [attr.width]="svgWidth" [src]="'/assets/icons/' + svgName + '.' + (hyperResponsivityService.foregroundAppearanceObservable | async) + '.svg'" *ngIf="svgWidth && svgHeight && svgName">
+  <img
+    *ngIf="svgWidth && svgHeight && svgName"
+    [attr.height]="svgHeight"
+    [attr.width]="svgWidth"
+    [src]="'/assets/icons/' + svgName + '.' + hyperResponsivityService.foregroundAppearance() + '.svg'"
+    alt="Icon">
   <div id="text">
     {{ text }}
   </div>
-  <div id="spacer" *ngIf="svgWidth && svgHeight && svgName" [ngStyle]="{'flex-basis': svgWidth, 'max-width': svgWidth}"></div>
+  <div
+    *ngIf="svgWidth && svgHeight && svgName"
+    [ngStyle]="{'flex-basis': svgWidth, 'max-width': svgWidth}"
+    id="spacer"></div>
 </ng-template>
 
 <a
-  [href]="url"
   (click)="action.emit();"
-  *ngIf="url">
+  *ngIf="url"
+  [href]="url">
   <ng-container *ngTemplateOutlet="buttonTemplate; context: this"></ng-container>
 </a>
 <button

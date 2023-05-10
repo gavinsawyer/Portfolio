@@ -14,12 +14,13 @@ import { packageVersion }                        from "../package-version";
 })
 export class AppComponent {
 
+  public readonly gitInfo: Partial<GitInfo> = gitInfo;
+  public readonly packageVersion: string = packageVersion;
+
   constructor(
     public readonly hyperResponsivityService: HyperResponsivityService,
     public readonly pathService: PathService,
-  ) {}
-
-  public readonly gitInfo: Partial<GitInfo> = gitInfo;
-  public readonly packageVersion: string = packageVersion;
+  ) {
+  }
 
 }

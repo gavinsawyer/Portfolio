@@ -13,4 +13,5 @@ import { Component }    from "@angular/core";
   ],
   templateUrl: "./banner.component.html",
 })
-export class BannerComponent {}
+export class BannerComponent {
+}

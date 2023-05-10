@@ -8,20 +8,30 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["browser", "server", "build"],
+        "cacheableOperations": [
+          "browser",
+          "server",
+          "build"
+        ],
         "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
       }
     }
   },
   "targetDefaults": {
     "browser": {
-      "dependsOn": ["^browser"]
+      "dependsOn": [
+        "^browser"
+      ]
     },
     "server": {
-      "dependsOn": ["^server"]
+      "dependsOn": [
+        "^server"
+      ]
     },
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     }
   },
   "generators": {
@@ -46,14 +56,20 @@
       "skipTests": true,
       "standalone": true
     },
-    "@nrwl/js:library" : {
+    "@nrwl/js:library": {
       "unitTestRunner": "none"
     }
   },
   "defaultProject": "website",
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "sharedGlobals": [],
-    "production": ["default", "!{projectRoot}/.eslintrc.json"]
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json"
+    ]
   }
 }

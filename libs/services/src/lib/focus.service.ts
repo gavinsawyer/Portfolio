@@ -1,8 +1,8 @@
-import { Injectable }                                                        from "@angular/core";
-import { User }                                                              from "@angular/fire/auth";
+import { Injectable, Signal }                                                from "@angular/core";
+import { takeUntilDestroyed, toSignal }                                      from "@angular/core/rxjs-interop";
 import { doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore } from "@angular/fire/firestore";
 import { PublicEnvironmentDocument }                                         from "@gavinsawyer/shortcuts-api";
-import { catchError, filter, map, mergeMap, Observable, Subject }            from "rxjs";
+import { catchError, filter, map, Observable, shareReplay, Subject }         from "rxjs";
 import { AuthenticationService }                                             from "./authentication.service";
 
 
@@ -11,23 +11,21 @@ import { AuthenticationService }                                             fro
 })
 export class FocusService {
 
+  public readonly focus: Signal<PublicEnvironmentDocument["focus"]>;
+
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly firestore: Firestore,
   ) {
     this
-      .focusObservable = authenticationService
-      .userObservable
-      .pipe<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined, PublicEnvironmentDocument, string | undefined, string, string>(
-        mergeMap<User, Observable<DocumentSnapshot<PublicEnvironmentDocument>>>((): Observable<DocumentSnapshot<PublicEnvironmentDocument>> => docSnapshots<PublicEnvironmentDocument>(doc(firestore, "shortcutsEnvironment/public") as DocumentReference<PublicEnvironmentDocument>)),
+      .focus = toSignal<PublicEnvironmentDocument["focus"]>(docSnapshots<PublicEnvironmentDocument>(doc(firestore, "shortcutsEnvironment/public") as DocumentReference<PublicEnvironmentDocument>).pipe<PublicEnvironmentDocument | undefined, PublicEnvironmentDocument, PublicEnvironmentDocument["focus"], PublicEnvironmentDocument["focus"], PublicEnvironmentDocument["focus"], PublicEnvironmentDocument["focus"]>(
         map<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined>((shortcutsAPIPublicDocumentSnapshot: DocumentSnapshot<PublicEnvironmentDocument>): PublicEnvironmentDocument | undefined => shortcutsAPIPublicDocumentSnapshot.data()),
         filter<PublicEnvironmentDocument | undefined, PublicEnvironmentDocument>((shortcutsAPIPublicDocument: PublicEnvironmentDocument | undefined): shortcutsAPIPublicDocument is PublicEnvironmentDocument => !!shortcutsAPIPublicDocument),
-        map<PublicEnvironmentDocument, string | undefined>((shortcutsAPIPublicDocument: PublicEnvironmentDocument): string | undefined => shortcutsAPIPublicDocument.focus),
-        filter<string | undefined, string>((focus: string | undefined): focus is string => !!focus),
-        catchError<string, Observable<string>>((): Observable<string> => new Subject<string>().asObservable())
-      );
+        map<PublicEnvironmentDocument, PublicEnvironmentDocument["focus"]>((publicEnvironmentDocument: PublicEnvironmentDocument): PublicEnvironmentDocument["focus"] => publicEnvironmentDocument.focus),
+        catchError<PublicEnvironmentDocument["focus"], Observable<PublicEnvironmentDocument["focus"]>>((): Observable<PublicEnvironmentDocument["focus"]> => new Subject<PublicEnvironmentDocument["focus"]>().asObservable()),
+        shareReplay<PublicEnvironmentDocument["focus"]>(),
+        takeUntilDestroyed<PublicEnvironmentDocument["focus"]>(),
+      ));
   }
-
-  public readonly focusObservable: Observable<string>;
 
 }

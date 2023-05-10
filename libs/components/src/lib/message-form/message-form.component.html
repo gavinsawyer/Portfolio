@@ -1,38 +1,75 @@
 <form
-  name="message"
+  (ngSubmit)="submit();"
   [formGroup]="formGroup"
-  (ngSubmit)="submit();">
+  name="message">
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ (statusObservable | async) == "unsent" ? "Want to connect?" : ((statusObservable | async) == "sending" ? "Sending" : "We'll be in touch") + (ellipsesService.ellipsesObservable | async) }}
+        {{ messageStatus() == "unsent" ? "Want to connect?" : (messageStatus() == "sending" ? "Sending" : "We'll be in touch") + ellipsesService.ellipses() }}
       </h3>
     </div>
     <div>
-      <h4 id="nameInputLabel" style="margin: 0.5rem 0 0;">
+      <h4
+        id="nameInputLabel"
+        style="margin: 0.5rem 0 0;">
         Name:
       </h4>
     </div>
-    <input #nameHTMLInputElement aria-labelledby="nameInputLabel" autofocus autocapitalize="words" autocomplete="name" formControlName="name" [required]="true" type="text">
+    <input
+      #nameHTMLInputElement
+      [required]="true"
+      aria-labelledby="nameInputLabel"
+      autocapitalize="words"
+      autocomplete="name"
+      autofocus
+      formControlName="name"
+      type="text">
     <div>
-      <h4 id="messageInputLabel" style="margin: 0.5rem 0 0;">
+      <h4
+        id="messageInputLabel"
+        style="margin: 0.5rem 0 0;">
         Message:
       </h4>
     </div>
-    <textarea #messageHTMLTextAreaElement aria-labelledby="messageInputLabel" formControlName="message"  (input)="hyperResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });" [required]="true" [rows]="hyperResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })"></textarea>
+    <textarea
+      #messageHTMLTextAreaElement
+      (input)="hyperResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"
+      [required]="true"
+      [rows]="hyperResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })"
+      aria-labelledby="messageInputLabel"
+      formControlName="message"></textarea>
     <div>
       <h4 style="margin: 0.5rem 0 0;">
         Enter one or both:
       </h4>
     </div>
-    <input aria-label="U.S. Phone number" autocomplete="tel-national" formControlName="phone" mask="(000) 000-0000" placeholder="Phone number" [required]="!formGroup.value['email']" type="tel" [validation]="true">
-    <input aria-label="Email address" autocomplete="email" [email]="true" formControlName="email" placeholder="Email" [required]="!formGroup.value['phone']" type="email">
+    <input
+      [required]="!formGroup.value['email']"
+      [validation]="true"
+      aria-label="U.S. Phone number"
+      autocomplete="tel-national"
+      formControlName="phone"
+      mask="(000) 000-0000"
+      placeholder="Phone number"
+      type="tel">
+    <input
+      [email]="true"
+      [required]="!formGroup.value['phone']"
+      aria-label="Email address"
+      autocomplete="email"
+      formControlName="email"
+      placeholder="Email"
+      type="email">
     <div></div>
   </div>
   <button
-    type="submit"
+    [disabled]="(!authenticationService.user()) || (!formGroup.valid) || messageStatus() !== 'unsent'"
     disabled=""
-    [disabled]="(!(authenticationService.userObservable | async)) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'">
-    <img alt="Send message icon" height="14.7578px" [src]="(hyperResponsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/submit.' + ((authenticationService.userObservable | async) && formGroup.valid && (statusObservable | async) == 'unsent' ? ((hyperResponsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light') : (hyperResponsivityService.foregroundAppearanceObservable | async)) + '.svg' : ''" width="11.8438px">
+    type="submit">
+    <img
+      [src]="hyperResponsivityService.foregroundAppearance() ? '/assets/icons/submit.' + (authenticationService.user() && formGroup.valid && messageStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()) + '.svg' : ''"
+      alt="Send message icon"
+      height="14.7578px"
+      width="11.8438px">
   </button>
 </form>

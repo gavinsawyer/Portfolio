@@ -5,9 +5,9 @@ import { AppCheck, initializeAppCheck, provideAppCheck }  from "@angular/fire/ap
 import { Auth, getAuth, provideAuth }                     from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }      from "@angular/fire/firestore";
 import { Functions, getFunctions, provideFunctions }      from "@angular/fire/functions";
-import { ReactiveFormsModule }                            from "@angular/forms";
-import { BrowserModule }                                  from "@angular/platform-browser";
-import { RouterModule }                                   from "@angular/router";
+import { ReactiveFormsModule }                   from "@angular/forms";
+import { BrowserModule, provideClientHydration } from "@angular/platform-browser";
+import { RouterModule }                          from "@angular/router";
 import { TransferHttpCacheModule }                        from "@nguniversal/common";
 import { AppCheckOptionsService }                         from "@portfolio/services";
 import { environment }                                    from "../environments/environment";
@@ -18,7 +18,7 @@ import { AsideComponent }                                 from "./components";
 const baseTitle = "Console";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [ AppComponent ],
   imports: [
     AsideComponent,
     BrowserModule.withServerTransition({
@@ -52,9 +52,13 @@ const baseTitle = "Console";
     TransferHttpCacheModule,
   ],
   providers: [
+    provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent,
+  ],
 })
-export class AppBrowserModule {}
+export class AppBrowserModule {
+}

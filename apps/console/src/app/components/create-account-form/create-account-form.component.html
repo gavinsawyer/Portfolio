@@ -1,24 +1,37 @@
 <form
-  name="message"
+  (ngSubmit)="submit();"
   [formGroup]="formGroup"
-  (ngSubmit)="submit();">
+  name="message">
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ (statusObservable | async) == "unsent" ? "Create an account" : ((statusObservable | async) == "pending" ? "Pending" + (ellipsesService.ellipsesObservable | async) : "Complete") }}
+        {{ (statusObservable | async) == "unsent" ? "Create an account" : ((statusObservable | async) == "pending" ? "Pending" + ellipsesService.ellipses() : "Complete") }}
       </h3>
     </div>
     <div>
-      <h4 id="nameInputLabel" style="margin: 0.5rem 0 0;">
+      <h4
+        id="nameInputLabel"
+        style="margin: 0.5rem 0 0;">
         Name:
       </h4>
     </div>
-    <input #nameHTMLInputElement aria-labelledby="nameInputLabel" autofocus autocapitalize="words" autocomplete="name" formControlName="displayName" [required]="true" type="text">
+    <input
+      [required]="true"
+      aria-labelledby="nameInputLabel"
+      autocapitalize="words"
+      autocomplete="name"
+      autofocus
+      formControlName="displayName"
+      type="text">
   </div>
   <button
-    type="submit"
+    [disabled]="(!authenticationService.user()) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'"
     disabled=""
-    [disabled]="(!(authenticationService.userObservable | async)) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'">
-    <img alt="Send message icon" height="14.9317px" [src]="(hyperResponsivityService.foregroundAppearanceObservable | async) ? '/assets/icons/submit.' + ((authenticationService.userObservable | async) && formGroup.valid && (statusObservable | async) == 'unsent' ? ((hyperResponsivityService.foregroundAppearanceObservable | async) == 'light' ? 'dark' : 'light') : (hyperResponsivityService.foregroundAppearanceObservable | async)) + '.svg' : ''" width="15.9141px">
+    type="submit">
+    <img
+      [src]="hyperResponsivityService.foregroundAppearance() ? '/assets/icons/submit.' + (authenticationService.user() && formGroup.valid && (statusObservable | async) == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()) + '.svg' : ''"
+      alt="Send message icon"
+      height="14.9317px"
+      width="15.9141px">
   </button>
 </form>
