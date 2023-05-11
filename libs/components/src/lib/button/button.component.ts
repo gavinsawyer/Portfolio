@@ -1,4 +1,4 @@
-import { CommonModule }                           from "@angular/common";
+import { CommonModule, NgOptimizedImage }         from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { HyperResponsivityService }               from "@portfolio/services";
 
@@ -6,6 +6,7 @@ import { HyperResponsivityService }               from "@portfolio/services";
 @Component({
   imports: [
     CommonModule,
+    NgOptimizedImage,
   ],
   selector: "portfolio-button",
   standalone: true,

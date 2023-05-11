@@ -24,8 +24,8 @@ A simple personal website built with Firebase, Nx, and Angular 16.
 > Angular components used in apps.
 > - [Banner](libs/components/src/lib/banner) `HTML` `Sass`
 > - [Button](libs/components/src/lib/button) `HTML` `Sass`
+> - [Create Message Form](libs/components/src/lib/create-message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 > - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
-> - [Message Form](libs/components/src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 
 > #### [@portfolio/functions](libs/functions) `Firebase Admin SDK` `Firebase Functions` `ShortcutsAPI`
 >

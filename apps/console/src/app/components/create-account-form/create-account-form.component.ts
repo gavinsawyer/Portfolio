@@ -1,23 +1,23 @@
-import { CommonModule }                                                     from "@angular/common";
-import { Component }                                                        from "@angular/core";
+import { CommonModule, NgOptimizedImage }                                   from "@angular/common";
+import { Component, computed, signal, Signal, WritableSignal }              from "@angular/core";
 import { Auth }                                                             from "@angular/fire/auth";
 import { Functions }                                                        from "@angular/fire/functions";
 import { FormControl, FormGroup, ReactiveFormsModule }                      from "@angular/forms";
 import { createUserWithPasskey }                                            from "@firebase-web-authn/browser";
 import { AuthenticationService, EllipsesService, HyperResponsivityService } from "@portfolio/services";
-import { BehaviorSubject, Observable }                                      from "rxjs";
 
 
-interface LoginForm {
-  "displayName"?: FormControl<string>,
+interface CreateAccountForm {
+  "displayName": FormControl<string>,
 }
 
-type LoginFormStatus = "unsent" | "pending" | "complete";
+type CreateAccountFormStatus = "unsent" | "pending" | "complete";
 
 @Component({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    NgOptimizedImage,
   ],
   selector: "portfolio-create-account-form",
   standalone: true,
@@ -28,11 +28,12 @@ type LoginFormStatus = "unsent" | "pending" | "complete";
 })
 export class CreateAccountFormComponent {
 
-  public readonly formGroup: FormGroup<LoginForm>;
-  public readonly statusObservable: Observable<LoginFormStatus>;
+  public readonly createAccountFormGroup: FormGroup<CreateAccountForm>;
+  public readonly createAccountFormStatus: Signal<CreateAccountFormStatus>;
   public readonly submit: () => void;
 
-  private readonly statusSubject: BehaviorSubject<LoginFormStatus>;
+  private readonly createAccountFormCompleted: WritableSignal<boolean>;
+  private readonly createAccountFormSubmitted: WritableSignal<boolean>;
 
   constructor(
     private readonly auth: Auth,
@@ -43,39 +44,39 @@ export class CreateAccountFormComponent {
     public readonly hyperResponsivityService: HyperResponsivityService,
   ) {
     this
-      .formGroup = new FormGroup<LoginForm>({
-        displayName: new FormControl("", {
+      .createAccountFormGroup = new FormGroup<CreateAccountForm>({
+        displayName: new FormControl<string>("", {
           nonNullable: true,
         }),
       });
     this
-      .statusSubject = new BehaviorSubject<LoginFormStatus>("unsent");
+      .createAccountFormStatus = computed<CreateAccountFormStatus>((): CreateAccountFormStatus => this.createAccountFormCompleted() ? "complete" : this.createAccountFormSubmitted() ? "pending" : "unsent");
     this
-      .statusObservable = this
-      .statusSubject
-      .asObservable();
+      .createAccountFormCompleted = signal<boolean>(false);
+    this
+      .createAccountFormSubmitted = signal<boolean>(false);
     this
       .submit = async (): Promise<void> => {
         this
-          .statusSubject
-          .next("pending");
+          .createAccountFormSubmitted
+          .set(true);
 
         return this
-          .formGroup
+          .createAccountFormGroup
           .value
-          .displayName ? await createUserWithPasskey(auth, functions, this.formGroup.value.displayName)
+          .displayName ? await createUserWithPasskey(auth, functions, this.createAccountFormGroup.getRawValue().displayName)
           .then<void, void>((): void => {
             this
-              .formGroup
+              .createAccountFormGroup
               .disable();
 
             this
-              .statusSubject
-              .next("complete");
+              .createAccountFormCompleted
+              .set(true);
           })
-          .catch<void>((): void => this.statusSubject.next("unsent")) : this
-          .statusSubject
-          .next("unsent");
+          .catch<void>((): void => this.createAccountFormSubmitted.set(false)) : this
+          .createAccountFormSubmitted
+          .set(false);
       };
   }
 

@@ -1,9 +1,9 @@
 <ng-template #buttonTemplate>
   <img
     *ngIf="svgWidth && svgHeight && svgName"
-    [attr.height]="svgHeight"
-    [attr.width]="svgWidth"
-    [src]="'/assets/icons/' + svgName + '.' + hyperResponsivityService.foregroundAppearance() + '.svg'"
+    [height]="svgHeight"
+    [width]="svgWidth"
+    [ngSrc]="'/assets/icons/' + svgName + '.' + hyperResponsivityService.foregroundAppearance() + '.svg'"
     alt="Icon">
   <div id="text">
     {{ text }}

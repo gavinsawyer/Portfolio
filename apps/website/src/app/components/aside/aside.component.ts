@@ -1,16 +1,16 @@
-import { CommonModule, NgOptimizedImage }                        from "@angular/common";
-import { Component }                                             from "@angular/core";
-import { Analytics, logEvent }                                   from "@angular/fire/analytics";
-import { ButtonComponent, FocusComponent, MessageFormComponent } from "@portfolio/components";
-import { FocusService }                                          from "@portfolio/services";
+import { CommonModule, NgOptimizedImage }                              from "@angular/common";
+import { Component }                                                   from "@angular/core";
+import { Analytics, logEvent }                                         from "@angular/fire/analytics";
+import { ButtonComponent, CreateMessageFormComponent, FocusComponent } from "@portfolio/components";
+import { FocusService }                                                from "@portfolio/services";
 
 
 @Component({
   imports: [
     CommonModule,
     ButtonComponent,
+    CreateMessageFormComponent,
     FocusComponent,
-    MessageFormComponent,
     NgOptimizedImage,
   ],
   selector: "portfolio-aside",
@@ -31,9 +31,9 @@ export class AsideComponent {
     public readonly focusService: FocusService,
   ) {
     this
-      .logClickAddToContactsEvent = (): void => logEvent(analytics, "click_addToContacts");
+      .logClickAddToContactsEvent = (): void => logEvent<"click_addToContacts">(analytics, "click_addToContacts");
     this
-      .logClickOpenResumeEvent = (): void => logEvent(analytics, "click_openResume");
+      .logClickOpenResumeEvent = (): void => logEvent<"click_openResume">(analytics, "click_openResume");
   }
 
 }

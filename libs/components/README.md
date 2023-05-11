@@ -5,6 +5,6 @@
 > Angular components used in apps.
 > - [Banner](src/lib/banner) `HTML` `Sass`
 > - [Button](src/lib/button) `HTML` `Sass`
+> - [Create Message Form](src/lib/create-message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 > - [Focus](src/lib/focus) `HTML` `Sass`
-> - [Message Form](src/lib/message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 

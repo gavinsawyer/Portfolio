@@ -1,11 +1,11 @@
 <form
   (ngSubmit)="submit();"
-  [formGroup]="formGroup"
+  [formGroup]="createAccountFormGroup"
   name="message">
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ (statusObservable | async) == "unsent" ? "Create an account" : ((statusObservable | async) == "pending" ? "Pending" + ellipsesService.ellipses() : "Complete") }}
+        {{ createAccountFormStatus() == "unsent" ? "Create an account" : (createAccountFormStatus() == "pending" ? "Pending" + ellipsesService.ellipses() : "Complete") }}
       </h3>
     </div>
     <div>
@@ -25,11 +25,11 @@
       type="text">
   </div>
   <button
-    [disabled]="(!authenticationService.user()) || (!formGroup.valid) || (statusObservable | async) !== 'unsent'"
+    [disabled]="(!authenticationService.user()) || (!createAccountFormGroup.valid) || createAccountFormStatus() !== 'unsent'"
     disabled=""
     type="submit">
     <img
-      [src]="hyperResponsivityService.foregroundAppearance() ? '/assets/icons/submit.' + (authenticationService.user() && formGroup.valid && (statusObservable | async) == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()) + '.svg' : ''"
+      [ngSrc]="hyperResponsivityService.foregroundAppearance() ? '/assets/icons/submit.' + (authenticationService.user() && createAccountFormGroup.valid && createAccountFormStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()) + '.svg' : ''"
       alt="Send message icon"
       height="14.9317px"
       width="15.9141px">

@@ -2,7 +2,7 @@ import { BreakpointObserver, BreakpointState }             from "@angular/cdk/la
 import { DOCUMENT, isPlatformBrowser }                     from "@angular/common";
 import { Inject, Injectable, PLATFORM_ID, signal, Signal } from "@angular/core";
 import { takeUntilDestroyed, toSignal }                    from "@angular/core/rxjs-interop";
-import { fromEvent, map, shareReplay, startWith }          from "rxjs";
+import { fromEvent, map, startWith }                       from "rxjs";
 
 
 type Appearance = "light" | "dark";
@@ -79,15 +79,13 @@ export class HyperResponsivityService {
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
     this
       .scrollPosition = document
-      .defaultView ? toSignal<number>(fromEvent<Event>(document.defaultView, "scroll")
-      .pipe<number, number, number, number>(
-        map<Event, number>((): number => window.scrollY || 0),
+      .defaultView ? ((defaultView: Window & typeof globalThis): Signal<number> => toSignal<number>(fromEvent<Event>(document.defaultView, "scroll").pipe<number, number, number>(
+        map<Event, number>((): number => defaultView.scrollY || 0),
         startWith<number>(0),
-        shareReplay<number>(),
         takeUntilDestroyed<number>(),
       ), {
         requireSync: true,
-      }) : signal<number>(0);
+      }))(document.defaultView) : signal<number>(0);
   }
 
 }

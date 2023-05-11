@@ -1,11 +1,11 @@
 <form
   (ngSubmit)="submit();"
-  [formGroup]="formGroup"
+  [formGroup]="createMessageFormGroup"
   name="message">
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ messageStatus() == "unsent" ? "Want to connect?" : (messageStatus() == "sending" ? "Sending" : "We'll be in touch") + ellipsesService.ellipses() }}
+        {{ createMessageFormStatus() == "unsent" ? "Want to connect?" : (createMessageFormStatus() == "pending" ? "Sending" : "We'll be in touch") + ellipsesService.ellipses() }}
       </h3>
     </div>
     <div>
@@ -44,7 +44,7 @@
       </h4>
     </div>
     <input
-      [required]="!formGroup.value['email']"
+      [required]="!createMessageFormGroup.value.email"
       [validation]="true"
       aria-label="U.S. Phone number"
       autocomplete="tel-national"
@@ -54,7 +54,7 @@
       type="tel">
     <input
       [email]="true"
-      [required]="!formGroup.value['phone']"
+      [required]="!createMessageFormGroup.value.phone"
       aria-label="Email address"
       autocomplete="email"
       formControlName="email"
@@ -63,11 +63,11 @@
     <div></div>
   </div>
   <button
-    [disabled]="(!authenticationService.user()) || (!formGroup.valid) || messageStatus() !== 'unsent'"
+    [disabled]="!authenticationService.user() || !createMessageFormGroup.valid || createMessageFormStatus() !== 'unsent'"
     disabled=""
     type="submit">
     <img
-      [src]="hyperResponsivityService.foregroundAppearance() ? '/assets/icons/submit.' + (authenticationService.user() && formGroup.valid && messageStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()) + '.svg' : ''"
+      [ngSrc]="hyperResponsivityService.foregroundAppearance() ? '/assets/icons/submit.' + (authenticationService.user() && createMessageFormGroup.valid && createMessageFormStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()) + '.svg' : ''"
       alt="Send message icon"
       height="14.7578px"
       width="11.8438px">
