@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "16.1.1",
+  "version": "16.1.2",
   "author": {
     "name": "Gavin Sawyer",
     "email": "g@vinsawyer.dev",
@@ -14,7 +14,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16",
-    "@angular/cdk": "^16.0.0",
+    "@angular/cdk": "^16.0.1",
     "@angular/common": "^16",
     "@angular/compiler": "^16",
     "@angular/core": "^16",
@@ -25,7 +25,7 @@
     "@angular/platform-server": "^16.0.1",
     "@angular/router": "^16.0.1",
     "@firebase-web-authn/browser": "^9.4.9",
-    "@nguniversal/express-engine": "^16.0.0",
+    "@nguniversal/express-engine": "^16.0.1",
     "ngx-mask": "^15.1.4",
     "normalize.css": "^8.0.1",
     "rxjs": "^7",
@@ -43,7 +43,7 @@
     "@angular/language-service": "^16.0.1",
     "@firebase-web-authn/extension": "^9.4.9",
     "@gavinsawyer/shortcuts-api": "^1.4.3",
-    "@nguniversal/builders": "^16.0.0",
+    "@nguniversal/builders": "^16.0.1",
     "@nrwl/angular": "^16",
     "@nrwl/eslint-plugin-nx": "^16",
     "@nrwl/js": "^16",

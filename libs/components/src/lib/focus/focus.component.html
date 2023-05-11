@@ -1,10 +1,16 @@
 <div
+  *ngIf="focus"
   [ngStyle]="{'height': svg.offsetWidth + 'px'}"
   class="indicator">
   <img
     #svg
     [alt]="focus + (focus == 'Do Not Disturb' ? '' : ' Focus') + ' icon'"
-    [src]="focus ? '/assets/icons/focus/' + focus + '.svg' : ''">
+    [height]="focusIconSizes[focus].height"
+    [loaderParams]="{type: 'Focus Icon'}"
+    [ngSrc]="focus"
+    ngSrcset="1x"
+    [sizes]="focusIconSizes[focus].width + ''"
+    [width]="focusIconSizes[focus].width">
 </div>
 <div class="description">
   <h3>

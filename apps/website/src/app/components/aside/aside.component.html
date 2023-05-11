@@ -4,31 +4,31 @@
     <div>
       <portfolio-button
         class="merge-right"
-        svgHeight="17.2578px"
-        svgName="send message"
-        svgWidth="22.3828px"
+        [iconHeight]="17.2578"
+        iconName="send message"
+        [iconWidth]="22.3828"
         text="Message"
         url="sms:+16177979041" />
       <portfolio-button
         class="merge-left"
-        svgHeight="13.4766px"
-        svgName="send mail"
-        svgWidth="22.3828px"
+        [iconHeight]="13.4766"
+        iconName="send mail"
+        [iconWidth]="22.3828"
         text="Mail"
         url="mailto:g@vinsawyer.dev" />
     </div>
     <portfolio-button
       (action)="logClickOpenResumeEvent();"
-      svgHeight="16.7578px"
-      svgName="document"
-      svgWidth="22.3828px"
+      [iconHeight]="16.7578"
+      iconName="document"
+      [iconWidth]="22.3828"
       text="Open résumé"
       url="/assets/Gavin Sawyer - Resume.pdf" />
     <portfolio-button
       (action)="logClickAddToContactsEvent();"
-      svgHeight="17.3359px"
-      svgName="add to contacts"
-      svgWidth="22.3828px"
+      [iconHeight]="17.3359"
+      iconName="add to contacts"
+      [iconWidth]="22.3828"
       text="Add to contacts"
       url="/assets/Gavin Sawyer - Contact.vcf" />
     <portfolio-focus
@@ -37,7 +37,10 @@
   </div>
   <img
     alt=""
-    height="1024"
-    ngSrc="/assets/photo.jpeg"
-    width="768">
+    height="2703"
+    [loaderParams]="{type: 'Photo', maxWidth: 464}"
+    ngSrc="gavin.webp"
+    ngSrcset="256w, 292w, 464w"
+    sizes="(max-width: 20em) 16rem, ((min-width: 33em) and (max-width: 52.22265625em)) 29rem, 18.22265625rem"
+    width="2024">
 </aside>

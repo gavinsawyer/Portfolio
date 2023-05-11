@@ -1,16 +1,19 @@
 <ng-template #buttonTemplate>
   <img
-    *ngIf="svgWidth && svgHeight && svgName"
-    [height]="svgHeight"
-    [width]="svgWidth"
-    [ngSrc]="'/assets/icons/' + svgName + '.' + hyperResponsivityService.foregroundAppearance() + '.svg'"
-    alt="Icon">
+    alt="Icon"
+    [height]="iconHeight"
+    [loaderParams]="{type: 'Icon', foregroundAppearance: hyperResponsivityService.foregroundAppearance()}"
+    *ngIf="iconWidth && iconHeight && iconName"
+    [ngSrc]="iconName"
+    ngSrcset="1x"
+    [sizes]="iconWidth + 'px'"
+    [width]="iconWidth">
   <div id="text">
     {{ text }}
   </div>
   <div
-    *ngIf="svgWidth && svgHeight && svgName"
-    [ngStyle]="{'flex-basis': svgWidth, 'max-width': svgWidth}"
+    *ngIf="iconWidth && iconHeight && iconName"
+    [ngStyle]="{'flex-basis': iconWidth + 'px', 'max-width': iconWidth + 'px'}"
     id="spacer"></div>
 </ng-template>
 

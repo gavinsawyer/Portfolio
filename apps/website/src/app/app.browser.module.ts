@@ -1,12 +1,13 @@
-import { Injector, NgModule }                                                                    from "@angular/core";
+import { IMAGE_LOADER, ImageLoaderConfig } from "@angular/common";
+import { Injector, NgModule }              from "@angular/core";
 import { Analytics, getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp }                                        from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck }                                         from "@angular/fire/app-check";
 import { Auth, getAuth, provideAuth }                                                            from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }                                             from "@angular/fire/firestore";
-import { ReactiveFormsModule }                   from "@angular/forms";
-import { BrowserModule, provideClientHydration } from "@angular/platform-browser";
-import { RouterModule }                          from "@angular/router";
+import { ReactiveFormsModule }                                                                   from "@angular/forms";
+import { BrowserModule, provideClientHydration }                                                 from "@angular/platform-browser";
+import { RouterModule }                                                                          from "@angular/router";
 import { TransferHttpCacheModule }                                                               from "@nguniversal/common";
 import { BannerComponent }                                                                       from "@portfolio/components";
 import { AppCheckOptionsService }                                                                from "@portfolio/services";
@@ -61,6 +62,10 @@ const baseTitle = "Gavin Sawyer";
     provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
+    {
+      provide: IMAGE_LOADER,
+      useValue: (imageLoaderConfig: ImageLoaderConfig): string => "/assets/" + (imageLoaderConfig.loaderParams?.["type"] === "Focus Icon" ? "icons/focus/" + imageLoaderConfig.src + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Icon" ? "icons/" + imageLoaderConfig.src + "." + imageLoaderConfig.loaderParams?.["foregroundAppearance"] + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Photo" ? "photos/" + [imageLoaderConfig.src.split(".")[0], (imageLoaderConfig.width || imageLoaderConfig.loaderParams?.["maxWidth"]) + "px", imageLoaderConfig.src.split(".")[1]].join(".") : ""),
+    },
   ],
   bootstrap: [
     AppComponent,

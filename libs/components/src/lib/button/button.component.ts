@@ -21,13 +21,13 @@ export class ButtonComponent {
   public readonly action: EventEmitter<void>;
 
   @Input()
-  public svgHeight?: string;
+  public iconHeight?: number;
 
   @Input()
-  public svgName?: string;
+  public iconName?: string;
 
   @Input()
-  public svgWidth?: string;
+  public iconWidth?: number;
 
   @Input({
     required: true,

@@ -29,9 +29,12 @@
     disabled=""
     type="submit">
     <img
-      [ngSrc]="hyperResponsivityService.foregroundAppearance() ? '/assets/icons/submit.' + (authenticationService.user() && createAccountFormGroup.valid && createAccountFormStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()) + '.svg' : ''"
-      alt="Send message icon"
+      alt="Submit icon"
       height="14.9317px"
+      [loaderParams]="{type: 'Icon', foregroundAppearance: authenticationService.user() && createAccountFormGroup.valid && createAccountFormStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()}"
+      ngSrc="submit"
+      ngSrcset="1x"
+      sizes="15.9141px"
       width="15.9141px">
   </button>
 </form>

@@ -2,10 +2,10 @@
   <div>
     <portfolio-button
       (action)="signInWithPasskey();"
+      [iconHeight]="15.9141"
+      iconName="use passkey"
+      [iconWidth]="14.9317"
       *ngIf="!authenticationService.user() || authenticationService.user()?.isAnonymous"
-      svgHeight="15.9141px"
-      svgName="use passkey"
-      svgWidth="14.9317px"
       text="Sign in with passkey" />
   </div>
 </aside>
