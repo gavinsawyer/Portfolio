@@ -93,6 +93,6 @@
     "indexes": "firestore.indexes.json"
   },
   "extensions": {
-    "firebase-web-authn": "./node_modules/@firebase-web-authn/extension"
+    "firebase-web-authn": "gavinsawyer/firebase-web-authn@9.4.15-rc.0"
   }
 }
