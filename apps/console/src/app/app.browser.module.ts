@@ -1,3 +1,4 @@
+import { IMAGE_LOADER, ImageLoaderConfig }                from "@angular/common";
 import { Injector, NgModule }                             from "@angular/core";
 import { ScreenTrackingService, UserTrackingService }     from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp } from "@angular/fire/app";
@@ -5,9 +6,9 @@ import { AppCheck, initializeAppCheck, provideAppCheck }  from "@angular/fire/ap
 import { Auth, getAuth, provideAuth }                     from "@angular/fire/auth";
 import { Firestore, getFirestore, provideFirestore }      from "@angular/fire/firestore";
 import { Functions, getFunctions, provideFunctions }      from "@angular/fire/functions";
-import { ReactiveFormsModule }                   from "@angular/forms";
-import { BrowserModule, provideClientHydration } from "@angular/platform-browser";
-import { RouterModule }                          from "@angular/router";
+import { ReactiveFormsModule }                            from "@angular/forms";
+import { BrowserModule, provideClientHydration }          from "@angular/platform-browser";
+import { RouterModule }                                   from "@angular/router";
 import { TransferHttpCacheModule }                        from "@nguniversal/common";
 import { AppCheckOptionsService }                         from "@portfolio/services";
 import { environment }                                    from "../environments/environment";
@@ -55,6 +56,10 @@ const baseTitle = "Console";
     provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
+    {
+      provide: IMAGE_LOADER,
+      useValue: (imageLoaderConfig: ImageLoaderConfig): string => "/assets/" + (imageLoaderConfig.loaderParams?.["type"] === "Focus Icon" ? "icons/focus/" + imageLoaderConfig.src.replace(/\s+/g, '-') + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Icon" ? "icons/" + imageLoaderConfig.src.replace(/\s+/g, '-') + "." + imageLoaderConfig.loaderParams?.["foregroundAppearance"] + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Photo" ? "photos/" + [imageLoaderConfig.src.replace(/\s+/g, '-'), (imageLoaderConfig.width || imageLoaderConfig.loaderParams?.["maxWidth"]) + "px", "webp"].join(".") : ""),
+    },
   ],
   bootstrap: [
     AppComponent,

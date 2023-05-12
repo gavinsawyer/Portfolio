@@ -64,7 +64,7 @@ const baseTitle = "Gavin Sawyer";
     UserTrackingService,
     {
       provide: IMAGE_LOADER,
-      useValue: (imageLoaderConfig: ImageLoaderConfig): string => "/assets/" + (imageLoaderConfig.loaderParams?.["type"] === "Focus Icon" ? "icons/focus/" + imageLoaderConfig.src + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Icon" ? "icons/" + imageLoaderConfig.src + "." + imageLoaderConfig.loaderParams?.["foregroundAppearance"] + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Photo" ? "photos/" + [imageLoaderConfig.src.split(".")[0], (imageLoaderConfig.width || imageLoaderConfig.loaderParams?.["maxWidth"]) + "px", imageLoaderConfig.src.split(".")[1]].join(".") : ""),
+      useValue: (imageLoaderConfig: ImageLoaderConfig): string => "/assets/" + (imageLoaderConfig.loaderParams?.["type"] === "Focus Icon" ? "icons/focus/" + imageLoaderConfig.src.replace(/\s+/g, '-') + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Icon" ? "icons/" + imageLoaderConfig.src.replace(/\s+/g, '-') + "." + imageLoaderConfig.loaderParams?.["foregroundAppearance"] + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Photo" ? "photos/" + [imageLoaderConfig.src.replace(/\s+/g, '-'), (imageLoaderConfig.width || imageLoaderConfig.loaderParams?.["maxWidth"]) + "px", "webp"].join(".") : ""),
     },
   ],
   bootstrap: [
