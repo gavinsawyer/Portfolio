@@ -1,9 +1,9 @@
 import { isPlatformBrowser }                                                                                                                                      from "@angular/common";
-import { Inject, Injectable, PLATFORM_ID, Signal }                                                                                                                from "@angular/core";
-import { toSignal }                                                                                                                                               from "@angular/core/rxjs-interop";
+import { Inject, Injectable, PLATFORM_ID, signal, Signal }                                                                                                        from "@angular/core";
+import { takeUntilDestroyed, toSignal }                                                                                                                           from "@angular/core/rxjs-interop";
 import { collection, CollectionReference, collectionSnapshots, doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore, QueryDocumentSnapshot, setDoc } from "@angular/fire/firestore";
 import { MessageDocument }                                                                                                                                        from "@portfolio/interfaces";
-import { BehaviorSubject, catchError, filter, map, Observable, shareReplay, startWith, Subject, switchMap }                                                       from "rxjs";
+import { catchError, filter, map, Observable, startWith, Subject, switchMap }                                                                                     from "rxjs";
 import { AuthenticationService }                                                                                                                                  from "./authentication.service";
 
 
@@ -41,12 +41,10 @@ export class MessagesService {
           map<MessageDocument, MessageDocument[]>((messageDocument: MessageDocument): MessageDocument[] => [messageDocument]),
         )),
         startWith<MessageDocument[]>([]),
-        shareReplay<MessageDocument[]>(),
+        takeUntilDestroyed<MessageDocument[]>(),
       ), {
         requireSync: true,
-      }) : toSignal<MessageDocument[]>(new BehaviorSubject<MessageDocument[]>([]).asObservable(), {
-        requireSync: true,
-      });
+      }) : signal<MessageDocument[]>([]);
   }
 
 }

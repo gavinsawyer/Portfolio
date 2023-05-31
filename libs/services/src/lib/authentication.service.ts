@@ -1,16 +1,16 @@
-import { isPlatformBrowser }                                                  from "@angular/common";
-import { Inject, Injectable, OnDestroy, PLATFORM_ID, signal, WritableSignal } from "@angular/core";
-import { Auth, onIdTokenChanged, signInAnonymously, Unsubscribe, User }       from "@angular/fire/auth";
+import { isPlatformBrowser }                                   from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID, signal, Signal }     from "@angular/core";
+import { takeUntilDestroyed, toSignal }                        from "@angular/core/rxjs-interop";
+import { Auth, onIdTokenChanged, signInAnonymously, User }     from "@angular/fire/auth";
+import { Observable, Observer, startWith, tap, TeardownLogic } from "rxjs";
 
 
 @Injectable({
   providedIn: "root",
 })
-export class AuthenticationService implements OnDestroy {
+export class AuthenticationService {
 
-  public readonly user: WritableSignal<User | null>;
-
-  private readonly unsubscribeIdTokenChanged: Unsubscribe;
+  public readonly user: Signal<User | null>;
 
   constructor(
     @Inject(PLATFORM_ID)
@@ -19,17 +19,13 @@ export class AuthenticationService implements OnDestroy {
     private readonly auth: Auth,
   ) {
     this
-      .unsubscribeIdTokenChanged = onIdTokenChanged(auth, (async (user: User | null): Promise<void> => user ? this.user.update((): User | null => user) : isPlatformBrowser(platformId) ? signInAnonymously(auth).then<void>((): void => void (0)).catch<void>((reason: any): void => console.error(reason)) : void (0)));
-    this
-      .user = signal<User | null>(auth.currentUser);
-
-    isPlatformBrowser(platformId) || this
-      .unsubscribeIdTokenChanged();
-  }
-
-  ngOnDestroy(): void {
-    this
-      .unsubscribeIdTokenChanged();
+      .user = isPlatformBrowser(platformId) ? toSignal<User | null>(new Observable<User | null>((userObserver: Observer<User | null>): TeardownLogic => onIdTokenChanged(auth, (user: User | null) => userObserver.next(user))).pipe<User | null, User | null, User | null>(
+        tap<User | null>(async (user: User | null): Promise<void> => user === null ? signInAnonymously(auth).then<void>((): void => void (0)).catch<void>((reason: any): void => console.error(reason)) : void(0)),
+        startWith<User | null>(auth.currentUser),
+        takeUntilDestroyed<User | null>(),
+      ), {
+        requireSync: true
+      }) : signal<User | null>(null);
   }
 
 }

@@ -1,6 +1,6 @@
-import { IMAGE_LOADER, ImageLoaderConfig }                from "@angular/common";
-import { Injector, NgModule }                             from "@angular/core";
-import { ScreenTrackingService, UserTrackingService }     from "@angular/fire/analytics";
+import { IMAGE_LOADER, ImageLoaderConfig }            from "@angular/common";
+import { APP_ID, Injector, NgModule }                 from "@angular/core";
+import { ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { FirebaseApp, initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { AppCheck, initializeAppCheck, provideAppCheck }  from "@angular/fire/app-check";
 import { Auth, getAuth, provideAuth }                     from "@angular/fire/auth";
@@ -22,9 +22,7 @@ const baseTitle = "Console";
   declarations: [ AppComponent ],
   imports: [
     AsideComponent,
-    BrowserModule.withServerTransition({
-      appId: "serverApp",
-    }),
+    BrowserModule,
     provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions(environment.app, environment.recaptchaSiteKey))),
     provideAuth((): Auth => getAuth()),
     provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
@@ -56,6 +54,10 @@ const baseTitle = "Console";
     provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
+    {
+      provide: APP_ID,
+      useValue: "console",
+    },
     {
       provide: IMAGE_LOADER,
       useValue: (imageLoaderConfig: ImageLoaderConfig): string => "/assets/" + (imageLoaderConfig.loaderParams?.["type"] === "Focus Icon" ? "icons/focus/" + imageLoaderConfig.src.replace(/\s+/g, '-') + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Icon" ? "icons/" + imageLoaderConfig.src.replace(/\s+/g, '-') + "." + imageLoaderConfig.loaderParams?.["foregroundAppearance"] + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Photo" ? "photos/" + [imageLoaderConfig.src.replace(/\s+/g, '-'), (imageLoaderConfig.width || imageLoaderConfig.loaderParams?.["maxWidth"]) + "px", "webp"].join(".") : ""),

@@ -57,19 +57,19 @@ export class HyperResponsivityService {
           .height = "auto";
       };
     this
-      .backgroundAppearance = toSignal<Appearance>(breakpointObserver.observe("(prefers-color-scheme: light)").pipe<Appearance, Appearance>(
-        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "light" : "dark") : "light"),
+      .backgroundAppearance = isPlatformBrowser(platformId) ? toSignal<Appearance>(breakpointObserver.observe("(prefers-color-scheme: light)").pipe<Appearance, Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "light" : "dark"),
         takeUntilDestroyed<Appearance>(),
       ), {
         requireSync: true,
-      });
+      }) : signal<Appearance>("light");
     this
-      .foregroundAppearance = toSignal<Appearance>(breakpointObserver.observe("(prefers-color-scheme: light)").pipe<Appearance, Appearance>(
-        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => isPlatformBrowser(platformId) ? (breakpointState.matches ? "dark" : "light") : "dark"),
+      .foregroundAppearance = isPlatformBrowser(platformId) ? toSignal<Appearance>(breakpointObserver.observe("(prefers-color-scheme: light)").pipe<Appearance, Appearance>(
+        map<BreakpointState, Appearance>((breakpointState: BreakpointState): Appearance => breakpointState.matches ? "dark" : "light"),
         takeUntilDestroyed<Appearance>(),
       ), {
         requireSync: true,
-      });
+      }) : signal<Appearance>("dark");
     this
       .getTextAreaRows = (textAreaElement: HTMLTextAreaElement, options: {
         fontSize?: number,
@@ -78,14 +78,13 @@ export class HyperResponsivityService {
         max?: number,
       }): number => Math.min(Math.max(Math.round(textAreaElement.scrollHeight / ((options.lineHeight || 1.15) * (options.fontSize || 1) * 16)), options.min || 1), options.max || 256);
     this
-      .scrollPosition = document
-      .defaultView ? ((defaultView: Window & typeof globalThis): Signal<number> => toSignal<number>(fromEvent<Event>(document.defaultView, "scroll").pipe<number, number, number>(
-        map<Event, number>((): number => defaultView.scrollY || 0),
-        startWith<number>(0),
+      .scrollPosition = isPlatformBrowser(platformId) ? toSignal<number>(fromEvent<Event>(document, "scroll").pipe<number, number, number>(
+        map<Event, number>((): number => document.defaultView?.scrollY || 0),
+        startWith<number>(document.defaultView?.scrollY || 0),
         takeUntilDestroyed<number>(),
       ), {
         requireSync: true,
-      }))(document.defaultView) : signal<number>(0);
+      }) : signal<number>(0);
   }
 
 }
