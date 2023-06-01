@@ -1,9 +1,10 @@
-import { CommonModule, NgOptimizedImage }                                                                                         from "@angular/common";
-import { AfterViewInit, Component, computed, effect, ElementRef, Inject, PLATFORM_ID, Signal, signal, ViewChild, WritableSignal } from "@angular/core";
-import { Analytics, logEvent }                                                                                                    from "@angular/fire/analytics";
-import { FormControl, FormGroup, ReactiveFormsModule }                                                                            from "@angular/forms";
-import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService }                                      from "@portfolio/services";
-import { NgxMaskDirective, provideNgxMask }                                                                                       from "ngx-mask";
+import { CommonModule, NgOptimizedImage }                                                                                                from "@angular/common";
+import { AfterViewInit, Component, ElementRef, Inject, Input, OnChanges, PLATFORM_ID, signal, SimpleChanges, ViewChild, WritableSignal } from "@angular/core";
+import { Analytics, logEvent }                                                                                                           from "@angular/fire/analytics";
+import { FormControl, FormGroup, ReactiveFormsModule }                                                                                   from "@angular/forms";
+import { MessageDocument }                                                                                                               from "@portfolio/interfaces";
+import { AuthenticationService, EllipsesService, HyperResponsivityService, MessagesService }                                             from "@portfolio/services";
+import { NgxMaskDirective, provideNgxMask }                                                                                              from "ngx-mask";
 
 
 interface CreateMessageForm {
@@ -13,7 +14,7 @@ interface CreateMessageForm {
   "phone"?: FormControl<string>,
 }
 
-type CreateMessageFormStatus = "unsent" | "pending" | "complete";
+type Status = "unsent" | "pending" | "complete";
 
 @Component({
   imports: [
@@ -32,18 +33,22 @@ type CreateMessageFormStatus = "unsent" | "pending" | "complete";
   ],
   templateUrl: "./create-message-form.component.html",
 })
-export class CreateMessageFormComponent implements AfterViewInit {
+export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
 
-  public readonly createMessageFormGroup: FormGroup<CreateMessageForm>;
-  public readonly createMessageFormStatus: Signal<CreateMessageFormStatus>;
+  public readonly formGroup: FormGroup<CreateMessageForm>;
+
+  @Input({
+    required: true,
+  })
+  public messageDocuments?: MessageDocument[];
+
+  public readonly status: WritableSignal<Status>;
   public readonly submit: () => void;
 
   @ViewChild("nameHTMLInputElement", {
     read: ElementRef,
   })
   private nameInputElementRef!: ElementRef;
-
-  private readonly createMessageFormSubmitted: WritableSignal<boolean>;
 
   constructor(
     @Inject(PLATFORM_ID)
@@ -57,7 +62,7 @@ export class CreateMessageFormComponent implements AfterViewInit {
     public readonly hyperResponsivityService: HyperResponsivityService,
   ) {
     this
-      .createMessageFormGroup = new FormGroup<CreateMessageForm>({
+      .formGroup = new FormGroup<CreateMessageForm>({
         email: new FormControl<string>("", {
           nonNullable: true,
         }),
@@ -72,14 +77,12 @@ export class CreateMessageFormComponent implements AfterViewInit {
         }),
       });
     this
-      .createMessageFormStatus = computed<CreateMessageFormStatus>((): CreateMessageFormStatus => messagesService.messageDocuments().length > 0 ? "complete" : this.createMessageFormSubmitted() ? "pending" : "unsent");
-    this
-      .createMessageFormSubmitted = signal<boolean>(false);
+      .status = signal<Status>("unsent");
     this
       .submit = async (): Promise<void> => {
         this
-          .createMessageFormSubmitted
-          .set(true);
+          .status
+          .set("pending");
 
         logEvent(analytics, "form_submit", {
           "form_id": "",
@@ -88,18 +91,9 @@ export class CreateMessageFormComponent implements AfterViewInit {
         });
 
         return await messagesService
-          .createMessageDocument(this.createMessageFormGroup.getRawValue());
+          .createMessageDocument(this.formGroup.getRawValue())
+          .then<void>((): void => this.status.set("complete"));
       };
-
-    effect((): void => messagesService.messageDocuments().length > 0 ? ((): void => {
-      this
-        .createMessageFormGroup
-        .setValue(messagesService.messageDocuments()[0]);
-
-      this
-        .createMessageFormGroup
-        .disable();
-    })() : void (0));
   }
 
   ngAfterViewInit(): void {
@@ -107,6 +101,22 @@ export class CreateMessageFormComponent implements AfterViewInit {
       .nameInputElementRef
       .nativeElement
       .focus();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    (changes["messageDocuments"].currentValue as MessageDocument[]).length > 0 && ((): void => {
+      this
+        .formGroup
+        .setValue(this.messageDocuments![0]);
+
+      this
+        .formGroup
+        .disable();
+
+      this
+        .status
+        .set("complete");
+    })();
   }
 
 }

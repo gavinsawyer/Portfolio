@@ -1,11 +1,11 @@
 <form
   (ngSubmit)="submit();"
-  [formGroup]="createMessageFormGroup"
+  [formGroup]="formGroup"
   name="message">
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ createMessageFormStatus() == "unsent" ? "Want to connect?" : (createMessageFormStatus() == "pending" ? "Sending" : "We'll be in touch") + ellipsesService.ellipses() }}
+        {{ status() == "unsent" ? "Want to connect?" : (status() == "pending" ? "Sending" : "We'll be in touch") + ellipsesService.ellipses() }}
       </h3>
     </div>
     <div>
@@ -44,7 +44,7 @@
       </h4>
     </div>
     <input
-      [required]="!createMessageFormGroup.value.email"
+      [required]="!formGroup.value.email"
       [validation]="true"
       aria-label="U.S. Phone number"
       autocomplete="tel-national"
@@ -54,7 +54,7 @@
       type="tel">
     <input
       [email]="true"
-      [required]="!createMessageFormGroup.value.phone"
+      [required]="!formGroup.value.phone"
       aria-label="Email address"
       autocomplete="email"
       formControlName="email"
@@ -63,14 +63,14 @@
     <div></div>
   </div>
   <button
-    [disabled]="!authenticationService.user() || !createMessageFormGroup.valid || createMessageFormStatus() !== 'unsent'"
+    [disabled]="!authenticationService.user() || !formGroup.valid || status() !== 'unsent'"
     disabled=""
     type="submit">
     <!--suppress HtmlUnknownTarget -->
     <img
       alt="Submit icon"
       height="14.7578px"
-      [loaderParams]="{type: 'Icon', foregroundAppearance: authenticationService.user() && createMessageFormGroup.valid && createMessageFormStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()}"
+      [loaderParams]="{type: 'Icon', foregroundAppearance: authenticationService.user() && formGroup.valid && status() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()}"
       ngSrc="submit"
       ngSrcset="1x"
       sizes="11.8438px"

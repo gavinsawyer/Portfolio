@@ -1,6 +1,8 @@
 <aside>
   <div>
-    <portfolio-create-message-form />
+    <portfolio-create-message-form
+      *ngIf="messagesService.messageDocuments() as messageDocuments"
+      [messageDocuments]="messageDocuments" />
     <div>
       <portfolio-button
         class="merge-right"

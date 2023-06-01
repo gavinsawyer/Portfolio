@@ -2,7 +2,7 @@ import { CommonModule, NgOptimizedImage }                              from "@an
 import { Component }                                                   from "@angular/core";
 import { Analytics, logEvent }                                         from "@angular/fire/analytics";
 import { ButtonComponent, CreateMessageFormComponent, FocusComponent } from "@portfolio/components";
-import { FocusService }                                                from "@portfolio/services";
+import { FocusService, MessagesService }                               from "@portfolio/services";
 
 
 @Component({
@@ -29,6 +29,7 @@ export class AsideComponent {
     private readonly analytics: Analytics,
 
     public readonly focusService: FocusService,
+    public readonly messagesService: MessagesService,
   ) {
     this
       .logClickAddToContactsEvent = (): void => logEvent<"click_addToContacts">(analytics, "click_addToContacts");
