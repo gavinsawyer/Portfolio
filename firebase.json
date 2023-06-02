@@ -34,7 +34,8 @@
         {
           "source": "**",
           "run": {
-            "serviceId": "ssr-console"
+            "serviceId": "ssr-console",
+            "pinTag": true
           }
         }
       ]
@@ -69,7 +70,8 @@
         {
           "source": "**",
           "run": {
-            "serviceId": "ssr-website"
+            "serviceId": "ssr-website",
+            "pinTag": true
           }
         }
       ]
