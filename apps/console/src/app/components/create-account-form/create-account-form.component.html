@@ -1,11 +1,11 @@
 <form
   (ngSubmit)="submit();"
-  [formGroup]="createAccountFormGroup"
+  [formGroup]="formGroup"
   name="message">
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ createAccountFormStatus() == "unsent" ? "Create an account" : (createAccountFormStatus() == "pending" ? "Pending" + ellipsesService.ellipses() : "Complete") }}
+        {{ status() == "unsent" ? "Create an account" : (status() == "pending" ? "Pending" + ellipsesService.ellipses() : "Complete") }}
       </h3>
     </div>
     <div>
@@ -25,14 +25,14 @@
       type="text">
   </div>
   <button
-    [disabled]="(!authenticationService.user()) || (!createAccountFormGroup.valid) || createAccountFormStatus() !== 'unsent'"
+    [disabled]="!authenticationService.user() || !formGroup.valid || status() !== 'unsent'"
     disabled=""
     type="submit">
     <!--suppress HtmlUnknownTarget -->
     <img
       alt="Submit icon"
       height="14.9317px"
-      [loaderParams]="{type: 'Icon', foregroundAppearance: authenticationService.user() && createAccountFormGroup.valid && createAccountFormStatus() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()}"
+      [loaderParams]="{type: 'Icon', foregroundAppearance: authenticationService.user() && formGroup.valid && status() == 'unsent' ? (hyperResponsivityService.foregroundAppearance() == 'light' ? 'dark' : 'light') : hyperResponsivityService.foregroundAppearance()}"
       ngSrc="submit"
       ngSrcset="1x"
       sizes="15.9141px"

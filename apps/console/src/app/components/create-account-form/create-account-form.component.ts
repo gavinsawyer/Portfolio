@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage }                                   from "@angular/common";
-import { Component, computed, signal, Signal, WritableSignal }              from "@angular/core";
+import { Component, signal, WritableSignal }                                from "@angular/core";
 import { Auth }                                                             from "@angular/fire/auth";
 import { Functions }                                                        from "@angular/fire/functions";
 import { FormControl, FormGroup, ReactiveFormsModule }                      from "@angular/forms";
@@ -11,7 +11,7 @@ interface CreateAccountForm {
   "displayName": FormControl<string>,
 }
 
-type CreateAccountFormStatus = "unsent" | "pending" | "complete";
+type Status = "unsent" | "pending" | "complete";
 
 @Component({
   imports: [
@@ -28,12 +28,9 @@ type CreateAccountFormStatus = "unsent" | "pending" | "complete";
 })
 export class CreateAccountFormComponent {
 
-  public readonly createAccountFormGroup: FormGroup<CreateAccountForm>;
-  public readonly createAccountFormStatus: Signal<CreateAccountFormStatus>;
+  public readonly formGroup: FormGroup<CreateAccountForm>;
+  public readonly status: WritableSignal<Status>;
   public readonly submit: () => void;
-
-  private readonly createAccountFormCompleted: WritableSignal<boolean>;
-  private readonly createAccountFormSubmitted: WritableSignal<boolean>;
 
   constructor(
     private readonly auth: Auth,
@@ -44,40 +41,38 @@ export class CreateAccountFormComponent {
     public readonly hyperResponsivityService: HyperResponsivityService,
   ) {
     this
-      .createAccountFormGroup = new FormGroup<CreateAccountForm>({
+      .formGroup = new FormGroup<CreateAccountForm>({
         displayName: new FormControl<string>("", {
           nonNullable: true,
         }),
       });
     this
-      .createAccountFormStatus = computed<CreateAccountFormStatus>((): CreateAccountFormStatus => this.createAccountFormCompleted() ? "complete" : this.createAccountFormSubmitted() ? "pending" : "unsent");
+      .status = signal<Status>("unsent");
     this
-      .createAccountFormCompleted = signal<boolean>(false);
-    this
-      .createAccountFormSubmitted = signal<boolean>(false);
-    this
-      .submit = async (): Promise<void> => {
+      .submit = async (): Promise<void> => this
+      .formGroup
+      .value
+      .displayName ? ((): Promise<void> => {
         this
-          .createAccountFormSubmitted
-          .set(true);
+          .formGroup
+          .disable();
 
-        return this
-          .createAccountFormGroup
-          .value
-          .displayName ? await createUserWithPasskey(auth, functions, this.createAccountFormGroup.getRawValue().displayName)
-          .then<void, void>((): void => {
+        this
+          .status
+          .set("pending");
+
+        return createUserWithPasskey(auth, functions, this.formGroup.getRawValue().displayName)
+          .then<void, void>((): void => this.status.set("complete"))
+          .catch<void>((): void => {
             this
-              .createAccountFormGroup
-              .disable();
+              .formGroup
+              .enable();
 
             this
-              .createAccountFormCompleted
-              .set(true);
-          })
-          .catch<void>((): void => this.createAccountFormSubmitted.set(false)) : this
-          .createAccountFormSubmitted
-          .set(false);
-      };
+              .status
+              .set("unsent");
+          });
+      })() : void(0);
   }
 
 }

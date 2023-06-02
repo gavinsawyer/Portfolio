@@ -79,7 +79,17 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
     this
       .status = signal<Status>("unsent");
     this
-      .submit = async (): Promise<void> => {
+      .submit = async (): Promise<void> => (this.formGroup.value.email || this.formGroup.value.phone) && this
+      .formGroup
+      .value
+      .message && this
+      .formGroup
+      .value
+      .name ? ((): Promise<void> => {
+        this
+          .formGroup
+          .disable();
+
         this
           .status
           .set("pending");
@@ -90,10 +100,19 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
           "form_destination": window.location.protocol + "//" + window.location.hostname + (window.location.port !== "" ? ":" + window.location.port : "") + "/",
         });
 
-        return await messagesService
+        return messagesService
           .createMessageDocument(this.formGroup.getRawValue())
-          .then<void>((): void => this.status.set("complete"));
-      };
+          .then<void>((): void => this.status.set("complete"))
+          .catch<void>((): void => {
+            this
+              .formGroup
+              .enable();
+
+            this
+              .status
+              .set("unsent");
+          });
+      })() : void(0);
   }
 
   ngAfterViewInit(): void {
@@ -104,19 +123,19 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    (changes["messageDocuments"].currentValue as MessageDocument[]).length > 0 && ((): void => {
-      this
-        .formGroup
-        .setValue(this.messageDocuments![0]);
+    (changes["messageDocuments"].currentValue as MessageDocument[])
+      .length > 0 && ((): void => {
+        this
+          .formGroup
+          .disable();
+        this
+          .formGroup
+          .setValue(this.messageDocuments![0]);
 
-      this
-        .formGroup
-        .disable();
-
-      this
-        .status
-        .set("complete");
-    })();
+        this
+          .status
+          .set("complete");
+      })();
   }
 
 }
