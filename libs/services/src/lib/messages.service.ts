@@ -1,9 +1,10 @@
 import { isPlatformBrowser }                                                                                                                                      from "@angular/common";
 import { Inject, Injectable, PLATFORM_ID, signal, Signal }                                                                                                        from "@angular/core";
 import { takeUntilDestroyed, toSignal }                                                                                                                           from "@angular/core/rxjs-interop";
+import { Auth, onIdTokenChanged, User }                                                                                                                           from "@angular/fire/auth";
 import { collection, CollectionReference, collectionSnapshots, doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore, QueryDocumentSnapshot, setDoc } from "@angular/fire/firestore";
 import { MessageDocument }                                                                                                                                        from "@portfolio/interfaces";
-import { catchError, filter, map, Observable, startWith, Subject, switchMap }                                                                                     from "rxjs";
+import { catchError, filter, map, Observable, Observer, startWith, Subject, switchMap, TeardownLogic }                                                            from "rxjs";
 import { AuthenticationService }                                                                                                                                  from "./authentication.service";
 
 
@@ -21,6 +22,7 @@ export class MessagesService {
     @Inject(PLATFORM_ID)
     private readonly platformId: object,
 
+    private readonly auth: Auth,
     private readonly authenticationService: AuthenticationService,
     private readonly firestore: Firestore,
   ) {
@@ -32,13 +34,17 @@ export class MessagesService {
     this
       .messageDocuments = isPlatformBrowser(platformId) ? toSignal<MessageDocument[]>(collectionSnapshots<MessageDocument>(collection(firestore, "messages") as CollectionReference<MessageDocument>).pipe<MessageDocument[], MessageDocument[], MessageDocument[], MessageDocument[]>(
         map<QueryDocumentSnapshot<MessageDocument>[], MessageDocument[]>((messageDocumentSnapshots: QueryDocumentSnapshot<MessageDocument>[]): MessageDocument[] => messageDocumentSnapshots.map<MessageDocument>((messageDocumentSnapshot: QueryDocumentSnapshot<MessageDocument>): MessageDocument => messageDocumentSnapshot.data())),
-        catchError<MessageDocument[], Observable<MessageDocument[]>>((): Observable<MessageDocument[]> => docSnapshots<MessageDocument>(doc(firestore, "/messages/" + authenticationService.user()?.uid) as DocumentReference<MessageDocument>).pipe<DocumentSnapshot<MessageDocument>, MessageDocument | undefined, MessageDocument, MessageDocument[]>(
-          catchError<DocumentSnapshot<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>((): Observable<DocumentSnapshot<MessageDocument>> => this.createdMessageDocumentReference.asObservable().pipe<DocumentSnapshot<MessageDocument>>(
-            switchMap<DocumentReference<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>((messageDocumentReference: DocumentReference<MessageDocument>): Observable<DocumentSnapshot<MessageDocument>> => docSnapshots<MessageDocument>(messageDocumentReference)),
+        catchError<MessageDocument[], Observable<MessageDocument[]>>((): Observable<MessageDocument[]> => new Observable<User | null>((userObserver: Observer<User | null>): TeardownLogic => onIdTokenChanged(auth, (user: User | null) => userObserver.next(user))).pipe<User | null, User, MessageDocument[]>(
+          startWith<User | null>(auth.currentUser),
+          filter<User | null, User>((user: User | null): user is User => !!user),
+          switchMap<User, Observable<MessageDocument[]>>((user: User): Observable<MessageDocument[]> => docSnapshots<MessageDocument>(doc(firestore, "/messages/" + user.uid) as DocumentReference<MessageDocument>).pipe<DocumentSnapshot<MessageDocument>, MessageDocument | undefined, MessageDocument, MessageDocument[]>(
+            catchError<DocumentSnapshot<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>((): Observable<DocumentSnapshot<MessageDocument>> => this.createdMessageDocumentReference.asObservable().pipe<DocumentSnapshot<MessageDocument>>(
+              switchMap<DocumentReference<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>((messageDocumentReference: DocumentReference<MessageDocument>): Observable<DocumentSnapshot<MessageDocument>> => docSnapshots<MessageDocument>(messageDocumentReference)),
+            )),
+            map<DocumentSnapshot<MessageDocument>, MessageDocument | undefined>((messageDocumentSnapshot: DocumentSnapshot<MessageDocument>): MessageDocument | undefined => messageDocumentSnapshot.data()),
+            filter<MessageDocument | undefined, MessageDocument>((messageDocument: MessageDocument | undefined): messageDocument is MessageDocument => !!messageDocument),
+            map<MessageDocument, MessageDocument[]>((messageDocument: MessageDocument): MessageDocument[] => [messageDocument]),
           )),
-          map<DocumentSnapshot<MessageDocument>, MessageDocument | undefined>((messageDocumentSnapshot: DocumentSnapshot<MessageDocument>): MessageDocument | undefined => messageDocumentSnapshot.data()),
-          filter<MessageDocument | undefined, MessageDocument>((messageDocument: MessageDocument | undefined): messageDocument is MessageDocument => !!messageDocument),
-          map<MessageDocument, MessageDocument[]>((messageDocument: MessageDocument): MessageDocument[] => [messageDocument]),
         )),
         startWith<MessageDocument[]>([]),
         takeUntilDestroyed<MessageDocument[]>(),

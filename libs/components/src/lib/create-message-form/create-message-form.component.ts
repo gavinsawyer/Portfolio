@@ -40,7 +40,7 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
   @Input({
     required: true,
   })
-  public messageDocuments?: MessageDocument[];
+  public messageDocuments!: MessageDocument[];
 
   public readonly status: WritableSignal<Status>;
   public readonly submit: () => void;
@@ -130,7 +130,7 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
           .disable();
         this
           .formGroup
-          .setValue(this.messageDocuments![0]);
+          .setValue(this.messageDocuments[0]);
 
         this
           .status

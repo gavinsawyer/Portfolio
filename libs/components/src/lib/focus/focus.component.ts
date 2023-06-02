@@ -27,7 +27,7 @@ export class FocusComponent {
   @Input({
     required: true,
   })
-  public focus?: PublicEnvironmentDocument["focus"];
+  public focus!: PublicEnvironmentDocument["focus"];
 
   public readonly focusIconSizes: FocusIconSizes;
 

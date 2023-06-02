@@ -32,7 +32,7 @@ export class ButtonComponent {
   @Input({
     required: true,
   })
-  public text?: string;
+  public text!: string;
 
   @Input()
   public url?: string;
