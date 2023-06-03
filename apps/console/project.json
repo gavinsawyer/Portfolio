@@ -140,17 +140,17 @@
       ],
       "executor": "@angular/fire:deploy",
       "options": {
-        "ssr": "cloud-run",
-        "prerender": true,
-        "firebaseProject": "portfolio-a59e2",
-        "firebaseHostingSite": "portfolio-a59e2-console",
-        "functionName": "ssr-console",
-        "functionsNodeVersion": "18.15",
-        "region": "us-central1",
         "browserTarget": "console:browser:production",
         "serverTarget": "console:server:production",
         "prerenderTarget": "console:build:production",
-        "outputPath": "dist/apps/console/run"
+        "firebaseHostingSite": "portfolio-a59e2-console",
+        "firebaseProject": "portfolio-a59e2",
+        "functionName": "ssr-console",
+        "functionsNodeVersion": "18.16",
+        "outputPath": "dist/apps/console/run",
+        "prerender": true,
+        "region": "us-central1",
+        "ssr": "cloud-run"
       }
     },
     "serve": {

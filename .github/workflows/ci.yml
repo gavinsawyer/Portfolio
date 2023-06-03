@@ -19,11 +19,14 @@ jobs:
           key:  node-modules-cache-${{ hashFiles('package-lock.json') }}
       - if:  steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
-      - uses: google-github-actions/auth@v0
+      - id:   auth
+        uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIO_A59E2 }}
+          token_format:     access_token
       - run: npx nx run-many --target deploy --all
         env:
           APP_CHECK_TOKEN_CONSOLE: ${{ secrets.APP_CHECK_TOKEN_CONSOLE }}
           APP_CHECK_TOKEN_WEBSITE: ${{ secrets.APP_CHECK_TOKEN_WEBSITE }}
+          FIREBASE_TOKEN:          ${{ steps.auth.outputs.access_token }}
           NX_CLOUD_ACCESS_TOKEN:   ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
