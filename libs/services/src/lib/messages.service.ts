@@ -32,14 +32,16 @@ export class MessagesService {
     this
       .createdMessageDocumentReference = new Subject<DocumentReference<MessageDocument>>();
     this
-      .messageDocuments = isPlatformBrowser(platformId) ? toSignal<MessageDocument[]>(collectionSnapshots<MessageDocument>(collection(firestore, "messages") as CollectionReference<MessageDocument>).pipe<MessageDocument[], MessageDocument[], MessageDocument[], MessageDocument[]>(
-        map<QueryDocumentSnapshot<MessageDocument>[], MessageDocument[]>((messageDocumentSnapshots: QueryDocumentSnapshot<MessageDocument>[]): MessageDocument[] => messageDocumentSnapshots.map<MessageDocument>((messageDocumentSnapshot: QueryDocumentSnapshot<MessageDocument>): MessageDocument => messageDocumentSnapshot.data())),
-        catchError<MessageDocument[], Observable<MessageDocument[]>>((): Observable<MessageDocument[]> => new Observable<User | null>((userObserver: Observer<User | null>): TeardownLogic => onIdTokenChanged(auth, (user: User | null) => userObserver.next(user))).pipe<User | null, User, MessageDocument[]>(
-          startWith<User | null>(auth.currentUser),
-          filter<User | null, User>((user: User | null): user is User => !!user),
-          switchMap<User, Observable<MessageDocument[]>>((user: User): Observable<MessageDocument[]> => docSnapshots<MessageDocument>(doc(firestore, "/messages/" + user.uid) as DocumentReference<MessageDocument>).pipe<DocumentSnapshot<MessageDocument>, MessageDocument | undefined, MessageDocument, MessageDocument[]>(
+      .messageDocuments = isPlatformBrowser(platformId) ? toSignal<MessageDocument[]>(new Observable<User | null>((userObserver: Observer<User | null>): TeardownLogic => onIdTokenChanged(auth, (user: User | null) => userObserver.next(user))).pipe<User | null, User, MessageDocument[], MessageDocument[], MessageDocument[]>(
+        startWith<User | null>(auth.currentUser),
+        filter<User | null, User>((user: User | null): user is User => !!user),
+        switchMap<User, Observable<MessageDocument[]>>((user: User): Observable<MessageDocument[]> => collectionSnapshots<MessageDocument>(collection(firestore, "messages") as CollectionReference<MessageDocument>).pipe<MessageDocument[], MessageDocument[]>(
+          map<QueryDocumentSnapshot<MessageDocument>[], MessageDocument[]>((messageDocumentSnapshots: QueryDocumentSnapshot<MessageDocument>[]): MessageDocument[] => messageDocumentSnapshots.map<MessageDocument>((messageDocumentSnapshot: QueryDocumentSnapshot<MessageDocument>): MessageDocument => messageDocumentSnapshot.data())),
+          catchError<MessageDocument[], Observable<MessageDocument[]>>((): Observable<MessageDocument[]> => docSnapshots<MessageDocument>(doc(firestore, "/messages/" + user.uid) as DocumentReference<MessageDocument>).pipe<DocumentSnapshot<MessageDocument>, MessageDocument | undefined, MessageDocument, MessageDocument[]>(
             catchError<DocumentSnapshot<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>((): Observable<DocumentSnapshot<MessageDocument>> => this.createdMessageDocumentReference.asObservable().pipe<DocumentSnapshot<MessageDocument>>(
-              switchMap<DocumentReference<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>((messageDocumentReference: DocumentReference<MessageDocument>): Observable<DocumentSnapshot<MessageDocument>> => docSnapshots<MessageDocument>(messageDocumentReference)),
+              switchMap<DocumentReference<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>((messageDocumentReference: DocumentReference<MessageDocument>): Observable<DocumentSnapshot<MessageDocument>> => docSnapshots<MessageDocument>(messageDocumentReference).pipe<DocumentSnapshot<MessageDocument>>(
+                catchError<DocumentSnapshot<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>(() => new Observable<DocumentSnapshot<MessageDocument>>()),
+              )),
             )),
             map<DocumentSnapshot<MessageDocument>, MessageDocument | undefined>((messageDocumentSnapshot: DocumentSnapshot<MessageDocument>): MessageDocument | undefined => messageDocumentSnapshot.data()),
             filter<MessageDocument | undefined, MessageDocument>((messageDocument: MessageDocument | undefined): messageDocument is MessageDocument => !!messageDocument),
