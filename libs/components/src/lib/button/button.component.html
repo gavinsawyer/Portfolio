@@ -1,8 +1,9 @@
 <ng-template #buttonTemplate>
   <img
     alt="Icon"
+    class="foregroundIcon"
     [height]="iconHeight"
-    [loaderParams]="{type: 'Icon', foregroundAppearance: hyperResponsivityService.foregroundAppearance()}"
+    [loaderParams]="{type: 'Icon'}"
     *ngIf="iconWidth && iconHeight && iconName"
     [ngSrc]="iconName"
     ngSrcset="1x"
