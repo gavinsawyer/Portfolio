@@ -1,12 +1,13 @@
 {
-  "name": "components",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "components",
+  "prefix": "portfolio",
   "projectType": "library",
   "sourceRoot": "libs/components/src",
-  "prefix": "portfolio",
+  "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/components/**/*.ts",
@@ -14,6 +15,5 @@
         ]
       }
     }
-  },
-  "tags": []
+  }
 }

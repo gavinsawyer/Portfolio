@@ -1,26 +1,31 @@
 {
-  "name": "functions",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/functions/src",
+  "name": "functions",
   "projectType": "library",
+  "sourceRoot": "libs/functions/src",
+  "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+    "lint": {
+      "executor": "@nx/linter:eslint",
       "options": {
-        "assets": [
-          {
-            "glob": "README.md",
-            "input": "libs/functions",
-            "output": "."
-          }
-        ],
+        "lintFilePatterns": [
+          "libs/functions/**/*.ts"
+        ]
+      },
+      "outputs": [
+        "{options.outputFile}"
+      ]
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
         "main": "libs/functions/src/index.ts",
         "outputPath": "dist/libs/functions",
         "tsConfig": "libs/functions/tsconfig.lib.json"
-      }
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "deploy": {
       "dependsOn": [
@@ -30,18 +35,6 @@
       "options": {
         "command": "firebase deploy --only functions"
       }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "libs/functions/**/*.ts"
-        ]
-      }
     }
-  },
-  "tags": []
+  }
 }
