@@ -1,16 +1,16 @@
 {
-  "name": "services",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name":        "services",
+  "$schema":     "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/services/src",
-  "prefix": "portfolio",
-  "targets": {
+  "sourceRoot":  "libs/services/src",
+  "prefix":      "portfolio",
+  "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": [
+      "outputs":  [
         "{options.outputFile}"
       ],
-      "options": {
+      "options":  {
         "lintFilePatterns": [
           "libs/services/**/*.ts",
           "libs/services/**/*.html"
@@ -18,5 +18,5 @@
       }
     }
   },
-  "tags": []
+  "tags":        []
 }

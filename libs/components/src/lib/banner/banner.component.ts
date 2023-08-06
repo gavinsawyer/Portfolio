@@ -3,12 +3,12 @@ import { Component }    from "@angular/core";
 
 
 @Component({
-  imports: [
+  imports:     [
     CommonModule,
   ],
-  selector: "portfolio-banner",
-  standalone: true,
-  styleUrls: [
+  selector:    "portfolio-banner",
+  standalone:  true,
+  styleUrls:   [
     "./banner.component.sass",
   ],
   templateUrl: "./banner.component.html",

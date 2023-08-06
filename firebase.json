@@ -1,26 +1,26 @@
 {
-  "hosting": [
+  "hosting":    [
     {
-      "target": "console",
-      "public": "dist/apps/console/browser",
-      "ignore": [
+      "target":   "console",
+      "public":   "dist/apps/console/browser",
+      "ignore":   [
         "**/.*"
       ],
-      "headers": [
+      "headers":  [
         {
-          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
+          "source":  "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
           "headers": [
             {
-              "key": "Cache-Control",
+              "key":   "Cache-Control",
               "value": "public,max-age=31536000,immutable"
             }
           ]
         },
         {
-          "source": "/@(ngsw-worker.js|ngsw.json)",
+          "source":  "/@(ngsw-worker.js|ngsw.json)",
           "headers": [
             {
-              "key": "Cache-Control",
+              "key":   "Cache-Control",
               "value": "no-cache"
             }
           ]
@@ -28,39 +28,39 @@
       ],
       "rewrites": [
         {
-          "source": "/firebase-web-authn-api",
+          "source":   "/firebase-web-authn-api",
           "function": "ext-firebase-web-authn-api"
         },
         {
           "source": "**",
-          "run": {
+          "run":    {
             "serviceId": "ssr-console",
-            "pinTag": true
+            "pinTag":    true
           }
         }
       ]
     },
     {
-      "target": "website",
-      "public": "dist/apps/website/browser",
-      "ignore": [
+      "target":   "website",
+      "public":   "dist/apps/website/browser",
+      "ignore":   [
         "**/.*"
       ],
-      "headers": [
+      "headers":  [
         {
-          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
+          "source":  "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
           "headers": [
             {
-              "key": "Cache-Control",
+              "key":   "Cache-Control",
               "value": "public,max-age=31536000,immutable"
             }
           ]
         },
         {
-          "source": "/@(ngsw-worker.js|ngsw.json)",
+          "source":  "/@(ngsw-worker.js|ngsw.json)",
           "headers": [
             {
-              "key": "Cache-Control",
+              "key":   "Cache-Control",
               "value": "no-cache"
             }
           ]
@@ -69,29 +69,29 @@
       "rewrites": [
         {
           "source": "**",
-          "run": {
+          "run":    {
             "serviceId": "ssr-website",
-            "pinTag": true
+            "pinTag":    true
           }
         }
       ]
     }
   ],
-  "functions": [
+  "functions":  [
     {
       "codebase": "default",
-      "ignore": [
+      "ignore":   [
         "node_modules",
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "runtime": "nodejs18",
-      "source": "dist/libs/functions"
+      "runtime":  "nodejs18",
+      "source":   "dist/libs/functions"
     }
   ],
-  "firestore": {
-    "rules": "firestore.rules",
+  "firestore":  {
+    "rules":   "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
   "extensions": {

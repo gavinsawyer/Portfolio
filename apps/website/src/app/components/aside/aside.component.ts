@@ -6,16 +6,16 @@ import { FocusService, MessagesService }                               from "@po
 
 
 @Component({
-  imports: [
+  imports:     [
     CommonModule,
     ButtonComponent,
     CreateMessageFormComponent,
     FocusComponent,
     NgOptimizedImage,
   ],
-  selector: "portfolio-aside",
-  standalone: true,
-  styleUrls: [
+  selector:    "portfolio-aside",
+  standalone:  true,
+  styleUrls:   [
     "./aside.component.sass",
   ],
   templateUrl: "./aside.component.html",
@@ -26,15 +26,21 @@ export class AsideComponent {
   public readonly logClickOpenResumeEvent: () => void;
 
   constructor(
-    private readonly analytics: Analytics,
-
-    public readonly focusService: FocusService,
+    public readonly focusService:    FocusService,
     public readonly messagesService: MessagesService,
+
+    analytics: Analytics,
   ) {
     this
-      .logClickAddToContactsEvent = (): void => logEvent<"click_addToContacts">(analytics, "click_addToContacts");
+      .logClickAddToContactsEvent = (): void => logEvent<"click_addToContacts">(
+        analytics,
+        "click_addToContacts",
+      );
     this
-      .logClickOpenResumeEvent = (): void => logEvent<"click_openResume">(analytics, "click_openResume");
+      .logClickOpenResumeEvent = (): void => logEvent<"click_openResume">(
+        analytics,
+        "click_openResume",
+      );
   }
 
 }

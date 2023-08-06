@@ -1,6 +1,6 @@
-import { Component }                             from "@angular/core";
-import { HyperResponsivityService, PathService } from "@portfolio/services";
-import { GitInfo }                               from "git-describe";
+import { Component }                        from "@angular/core";
+import { ResponsivityService, PathService } from "@portfolio/services";
+import { GitInfo }                          from "git-describe";
 import { gitInfo }                               from "../git-info";
 import { packageVersion }                        from "../package-version";
 
@@ -18,7 +18,7 @@ export class AppComponent {
   public readonly packageVersion: string = packageVersion;
 
   constructor(
-    public readonly hyperResponsivityService: HyperResponsivityService,
+    public readonly hyperResponsivityService: ResponsivityService,
     public readonly pathService: PathService,
   ) {
   }

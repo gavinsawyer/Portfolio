@@ -1,187 +1,187 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "console",
-  "prefix": "console-app",
+  "$schema":     "../../node_modules/nx/schemas/project-schema.json",
+  "name":        "console",
+  "prefix":      "console-app",
   "projectType": "application",
-  "sourceRoot": "apps/console/src",
-  "tags": [],
-  "targets": {
+  "sourceRoot":  "apps/console/src",
+  "tags":        [],
+  "targets":     {
     "prebuild": {
       "executor": "nx:run-commands",
-      "options": {
+      "options":  {
         "command": "node -p \"'export const packageVersion = ' + JSON.stringify(require('./package.json').version) + ';'\" > apps/console/src/package-version.ts && node -p \"'import { GitInfo } from \\'git-describe\\';\\n\\n\\nexport const gitInfo: Partial<GitInfo> = ' + JSON.stringify(((gitInfo) => ({dirty: gitInfo.dirty,hash: gitInfo.hash}))(require('git-describe').gitDescribeSync())) + ';'\" > apps/console/src/git-info.ts"
       }
     },
-    "lint": {
+    "lint":     {
       "dependsOn": [
         "prebuild"
       ],
-      "executor": "@nx/linter:eslint",
-      "options": {
+      "executor":  "@nx/linter:eslint",
+      "options":   {
         "lintFilePatterns": [
           "apps/console/**/*.ts",
           "apps/console/**/*.html"
         ]
       }
     },
-    "browser": {
-      "configurations": {
+    "browser":  {
+      "configurations":       {
         "development": {
-          "buildOptimizer": false,
+          "buildOptimizer":  false,
           "extractLicenses": false,
-          "namedChunks": true,
-          "optimization": true,
-          "sourceMap": true,
-          "vendorChunk": true
+          "namedChunks":     true,
+          "optimization":    true,
+          "sourceMap":       true,
+          "vendorChunk":     true
         },
-        "production": {
-          "budgets": [
+        "production":  {
+          "budgets":          [
             {
-              "maximumError": "1mb",
+              "maximumError":   "1mb",
               "maximumWarning": "500kb",
-              "type": "initial"
+              "type":           "initial"
             },
             {
-              "maximumError": "4kb",
+              "maximumError":   "4kb",
               "maximumWarning": "2kb",
-              "type": "anyComponentStyle"
+              "type":           "anyComponentStyle"
             }
           ],
           "fileReplacements": [
             {
               "replace": "apps/console/src/environments/environment.ts",
-              "with": "apps/console/src/environments/environment.prod.ts"
+              "with":    "apps/console/src/environments/environment.prod.ts"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing":    "all"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "executor": "@angular-devkit/build-angular:browser",
-      "options": {
-        "assets": [
+      "executor":             "@angular-devkit/build-angular:browser",
+      "options":              {
+        "assets":              [
           "apps/console/src/assets",
           "apps/console/src/favicon.png",
           "apps/console/src/robots.txt",
           "apps/console/src/sitemap.xml"
         ],
-        "index": "apps/console/src/index.html",
+        "index":               "apps/console/src/index.html",
         "inlineStyleLanguage": "sass",
-        "main": "apps/console/src/main.ts",
-        "outputPath": "dist/apps/console/browser",
-        "polyfills": "apps/console/src/polyfills.ts",
-        "scripts": [],
-        "styles": [
+        "main":                "apps/console/src/main.ts",
+        "outputPath":          "dist/apps/console/browser",
+        "polyfills":           "apps/console/src/polyfills.ts",
+        "scripts":             [],
+        "styles":              [
           "apps/console/src/styles.sass"
         ],
-        "tsConfig": "apps/console/tsconfig.app.json"
+        "tsConfig":            "apps/console/tsconfig.app.json"
       },
-      "outputs": [
+      "outputs":              [
         "{options.outputPath}"
       ]
     },
-    "server": {
-      "configurations": {
+    "server":   {
+      "configurations":       {
         "development": {
           "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true
+          "optimization":    false,
+          "sourceMap":       true
         },
-        "production": {
+        "production":  {
           "fileReplacements": [
             {
               "replace": "apps/console/src/environments/environment.ts",
-              "with": "apps/console/src/environments/environment.prod.ts"
+              "with":    "apps/console/src/environments/environment.prod.ts"
             }
           ],
-          "outputHashing": "media"
+          "outputHashing":    "media"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "development": {
+      "development":          {
         "extractLicenses": false,
-        "optimization": false,
-        "sourceMap": true
+        "optimization":    false,
+        "sourceMap":       true
       },
-      "executor": "@angular-devkit/build-angular:server",
-      "options": {
+      "executor":             "@angular-devkit/build-angular:server",
+      "options":              {
         "inlineStyleLanguage": "sass",
-        "main": "apps/console/server.ts",
-        "outputPath": "dist/apps/console/server",
-        "tsConfig": "apps/console/tsconfig.server.json"
+        "main":                "apps/console/server.ts",
+        "outputPath":          "dist/apps/console/server",
+        "tsConfig":            "apps/console/tsconfig.server.json"
       },
-      "production": {
+      "production":           {
         "fileReplacements": [
           {
             "replace": "apps/console/src/environments/environment.ts",
-            "with": "apps/console/src/environments/environment.prod.ts"
+            "with":    "apps/console/src/environments/environment.prod.ts"
           }
         ],
-        "outputHashing": "media"
+        "outputHashing":    "media"
       }
     },
-    "build": {
-      "configurations": {
+    "build":    {
+      "configurations":       {
         "development": {
           "browserTarget": "console:browser:development",
-          "serverTarget": "console:server:development"
+          "serverTarget":  "console:server:development"
         },
-        "production": {
+        "production":  {
           "browserTarget": "console:browser:production",
-          "serverTarget": "console:server:production"
+          "serverTarget":  "console:server:production"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "executor": "@nguniversal/builders:prerender",
-      "options": {
+      "executor":             "@nguniversal/builders:prerender",
+      "options":              {
         "routesFile": "apps/console/src/routes.txt"
       }
     },
-    "deploy": {
+    "deploy":   {
       "dependsOn": [
         "prebuild",
         "build"
       ],
-      "executor": "@angular/fire:deploy",
-      "options": {
-        "browserTarget": "console:browser:production",
-        "firebaseHostingSite": "portfolio-a59e2-console",
-        "firebaseProject": "portfolio-a59e2",
-        "functionName": "ssr-console",
+      "executor":  "@angular/fire:deploy",
+      "options":   {
+        "browserTarget":        "console:browser:production",
+        "firebaseHostingSite":  "portfolio-a59e2-console",
+        "firebaseProject":      "portfolio-a59e2",
+        "functionName":         "ssr-console",
         "functionsNodeVersion": "18.16",
-        "outputPath": "dist/apps/console/run",
-        "prerender": true,
-        "prerenderTarget": "console:build:production",
-        "region": "us-central1",
-        "serverTarget": "console:server:production",
-        "ssr": "cloud-run"
+        "outputPath":           "dist/apps/console/run",
+        "prerender":            true,
+        "prerenderTarget":      "console:build:production",
+        "region":               "us-central1",
+        "serverTarget":         "console:server:production",
+        "ssr":                  "cloud-run"
       }
     },
-    "serve": {
-      "configurations": {
+    "serve":    {
+      "configurations":       {
         "development": {
           "browserTarget": "console:browser:development",
-          "serverTarget": "console:server:development"
+          "serverTarget":  "console:server:development"
         },
-        "production": {
+        "production":  {
           "browserTarget": "console:browser:production",
-          "serverTarget": "console:server:production"
+          "serverTarget":  "console:server:production"
         }
       },
       "defaultConfiguration": "production",
-      "dependsOn": [
+      "dependsOn":            [
         "prebuild"
       ],
-      "executor": "@nguniversal/builders:ssr-dev-server"
+      "executor":             "@nguniversal/builders:ssr-dev-server"
     }
   }
 }

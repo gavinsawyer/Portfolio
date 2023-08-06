@@ -8,13 +8,13 @@ import { AuthenticationService }                    from "@portfolio/services";
 
 
 @Component({
-  imports: [
+  imports:     [
     ButtonComponent,
     CommonModule,
   ],
-  selector: "portfolio-aside",
-  standalone: true,
-  styleUrls: [
+  selector:    "portfolio-aside",
+  standalone:  true,
+  styleUrls:   [
     "./aside.component.sass",
   ],
   templateUrl: "./aside.component.html",
@@ -22,18 +22,24 @@ import { AuthenticationService }                    from "@portfolio/services";
 export class AsideComponent {
 
   public readonly verifyUserWithPasskey: () => Promise<void>;
-  public readonly signInWithPasskey: () => Promise<void>;
+  public readonly signInWithPasskey:     () => Promise<void>;
 
   constructor(
-    private readonly auth: Auth,
-    private readonly functions: Functions,
-
     public readonly authenticationService: AuthenticationService,
+
+    auth:      Auth,
+    functions: Functions,
   ) {
     this
-      .verifyUserWithPasskey = (): Promise<void> => verifyUserWithPasskey(auth, functions);
+      .verifyUserWithPasskey = (): Promise<void> => verifyUserWithPasskey(
+        auth,
+        functions,
+      );
     this
-      .signInWithPasskey = (): Promise<void> => signInWithPasskey(auth, functions)
+      .signInWithPasskey = (): Promise<void> => signInWithPasskey(
+        auth,
+        functions,
+      )
       .then<void>((): void => void (0));
   }
 

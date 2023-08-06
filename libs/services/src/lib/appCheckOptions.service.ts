@@ -11,8 +11,7 @@ export class AppCheckOptionsService {
   public readonly appCheckOptions: (app: string, recaptchaSiteKey: string) => AppCheckOptions;
 
   constructor(
-    @Inject(PLATFORM_ID)
-    private readonly platformId: object,
+    @Inject(PLATFORM_ID) platformId: object,
   ) {
     this
       .appCheckOptions = (app: string, recaptchaSiteKey: string): AppCheckOptions => isPlatformBrowser(platformId) ? {
@@ -20,12 +19,16 @@ export class AppCheckOptionsService {
         provider: new ReCaptchaV3Provider(recaptchaSiteKey),
       } : {
         isTokenAutoRefreshEnabled: false,
-        provider: new CustomProvider({
-          getToken: (): Promise<AppCheckToken> => Promise.resolve({
-            token: process.env["APP_CHECK_TOKEN_" + app.toUpperCase()] as string,
-            expireTimeMillis: Date.now(),
-          }),
-        }),
+        provider: new CustomProvider(
+          {
+            getToken: (): Promise<AppCheckToken> => Promise.resolve(
+              {
+                token: process.env["APP_CHECK_TOKEN_" + app.toUpperCase()] as string,
+                expireTimeMillis: Date.now(),
+              },
+            ),
+          },
+        ),
       };
   }
 

@@ -8,7 +8,8 @@
             [ngClass]="{'active': routerLinkActive.isActive}"
             [routerLinkActiveOptions]="{'exact': true}"
             routerLink=""
-            routerLinkActive="">Gavin Sawyer</a>
+            routerLinkActive="">Gavin Sawyer
+          </a>
         </h1>
         <h2 style="text-align: center;">
           Boston
@@ -17,7 +18,7 @@
     </header>
     <div>
       <portfolio-aside [ngClass]="{'pathRoot': pathService.path() === '/'}"></portfolio-aside>
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   </div>
 </main>
@@ -25,7 +26,8 @@
   <div>
     <ul>
       <li>
-        v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/gavinsawyer/Portfolio/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
+        v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+
+        <a [href]="'https://github.com/gavinsawyer/Portfolio/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
       </li>
     </ul>
   </div>

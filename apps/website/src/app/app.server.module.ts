@@ -5,7 +5,7 @@ import { AppComponent }     from "./app.component";
 
 
 @NgModule({
-  imports: [
+  imports:   [
     AppBrowserModule,
     ServerModule,
   ],

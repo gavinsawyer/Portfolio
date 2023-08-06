@@ -1,29 +1,29 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "functions",
+  "$schema":     "../../node_modules/nx/schemas/project-schema.json",
+  "name":        "functions",
   "projectType": "library",
-  "sourceRoot": "libs/functions/src",
-  "tags": [],
-  "targets": {
-    "lint": {
+  "sourceRoot":  "libs/functions/src",
+  "tags":        [],
+  "targets":     {
+    "lint":   {
       "executor": "@nx/linter:eslint",
-      "options": {
+      "options":  {
         "lintFilePatterns": [
           "libs/functions/**/*.ts"
         ]
       },
-      "outputs": [
+      "outputs":  [
         "{options.outputFile}"
       ]
     },
-    "build": {
+    "build":  {
       "executor": "@nx/js:tsc",
-      "options": {
-        "main": "libs/functions/src/index.ts",
+      "options":  {
+        "main":       "libs/functions/src/index.ts",
         "outputPath": "dist/libs/functions",
-        "tsConfig": "libs/functions/tsconfig.lib.json"
+        "tsConfig":   "libs/functions/tsconfig.lib.json"
       },
-      "outputs": [
+      "outputs":  [
         "{options.outputPath}"
       ]
     },
@@ -31,8 +31,8 @@
       "dependsOn": [
         "build"
       ],
-      "executor": "nx:run-commands",
-      "options": {
+      "executor":  "nx:run-commands",
+      "options":   {
         "command": "firebase deploy --only functions"
       }
     }

@@ -4,12 +4,12 @@ import { AuthenticationService, MessagesService } from "@portfolio/services";
 
 
 @Component({
-  imports: [
+  imports:     [
     CommonModule,
   ],
-  selector: "console-app-home",
-  standalone: true,
-  styleUrls: [
+  selector:    "console-app-home",
+  standalone:  true,
+  styleUrls:   [
     "./home.component.sass",
   ],
   templateUrl: "./home.component.html",

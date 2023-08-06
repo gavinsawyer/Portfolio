@@ -1,23 +1,23 @@
 {
-  "name": "@portfolio/functions",
-  "homepage": "https://gavinsawyer.dev",
-  "author": {
-    "name": "Gavin Sawyer",
+  "name":         "@portfolio/functions",
+  "homepage":     "https://gavinsawyer.dev",
+  "author":       {
+    "name":  "Gavin Sawyer",
     "email": "g@vinsawyer.dev",
-    "url": "https://github.com/gavinsawyer"
+    "url":   "https://github.com/gavinsawyer"
   },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gavinsawyer/Portfolio.git",
+  "license":      "MIT",
+  "repository":   {
+    "type":      "git",
+    "url":       "git+https://github.com/gavinsawyer/Portfolio.git",
     "directory": "libs/functions"
   },
-  "engines": {
+  "engines":      {
     "node": "18"
   },
-  "main": "./main.js",
+  "main":         "./main.js",
   "dependencies": {
-    "@gavinsawyer/shortcuts-api": "^1",
-    "firebase-functions": "^4"
+    "@gavinsawyer/shortcuts-api": "^1.5.2",
+    "firebase-functions":         "^4.4.1"
   }
 }

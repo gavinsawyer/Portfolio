@@ -6,12 +6,12 @@ import { Response }                                 from "express";
 
 
 @Component({
-  imports: [
+  imports:     [
     CommonModule,
   ],
-  selector: "website-app-otherwise",
-  standalone: true,
-  styleUrls: [
+  selector:    "website-app-otherwise",
+  standalone:  true,
+  styleUrls:   [
     "./otherwise.component.sass",
   ],
   templateUrl: "./otherwise.component.html",
@@ -19,12 +19,8 @@ import { Response }                                 from "express";
 export class OtherwiseComponent {
 
   constructor(
-    @Inject(PLATFORM_ID)
-    private readonly platformId: object,
-
-    @Optional()
-    @Inject(RESPONSE)
-    private readonly response: Response,
+                @Inject(PLATFORM_ID) platformId: object,
+    @Optional() @Inject(RESPONSE)    response: Response,
 
     public readonly pathService: PathService,
   ) {

@@ -19,57 +19,92 @@ import { AsideComponent }                                                       
 const baseTitle = "Gavin Sawyer";
 
 @NgModule({
-  declarations: [ AppComponent ],
-  imports: [
+  declarations: [AppComponent],
+  imports:      [
     AsideComponent,
     BannerComponent,
     BrowserModule,
-    provideAnalytics((): Analytics => getAnalytics()),
-    provideAppCheck((injector: Injector): AppCheck => initializeAppCheck(undefined, injector.get(AppCheckOptionsService).appCheckOptions(environment.app, environment.recaptchaSiteKey))),
-    provideAuth((): Auth => getAuth()),
-    provideFirebaseApp((): FirebaseApp => initializeApp(environment.firebase)),
-    provideFirestore((): Firestore => getFirestore()),
+    provideAnalytics(
+      (): Analytics => getAnalytics(),
+    ),
+    provideAppCheck(
+      (injector: Injector): AppCheck => initializeAppCheck(
+        undefined,
+        injector.get(AppCheckOptionsService).appCheckOptions(
+          environment.app,
+          environment.recaptchaSiteKey,
+        ),
+      ),
+    ),
+    provideAuth(
+      (): Auth => getAuth(),
+    ),
+    provideFirebaseApp(
+      (): FirebaseApp => initializeApp(environment.firebase),
+    ),
+    provideFirestore(
+      (): Firestore => getFirestore(),
+    ),
     ReactiveFormsModule,
     RouterModule.forRoot(
       [
         {
-          loadComponent: () => import("./components/home").then((m) => m.HomeComponent),
-          path: "",
-          pathMatch: "full",
-          title: baseTitle,
+          loadComponent: () => import("./components/home").then(
+            (m) => m.HomeComponent,
+          ),
+          path:          "",
+          pathMatch:     "full",
+          title:         baseTitle,
         },
         {
-          loadComponent: () => import("./components/privacy").then((m) => m.PrivacyComponent),
-          path: "privacy",
-          title: baseTitle + " | Privacy",
+          loadComponent: () => import("./components/privacy").then(
+            (m) => m.PrivacyComponent,
+          ),
+          path:          "privacy",
+          title:         baseTitle + " | Privacy",
         },
         {
-          loadComponent: () => import("./components/otherwise").then((m) => m.OtherwiseComponent),
-          path: "**",
-          title: baseTitle + " | Page not found",
+          loadComponent: () => import("./components/otherwise").then(
+            (m) => m.OtherwiseComponent,
+          ),
+          path:          "**",
+          title:         baseTitle + " | Page not found",
         },
       ],
       {
-        initialNavigation: "enabledBlocking",
+        initialNavigation:         "enabledBlocking",
         scrollPositionRestoration: "enabled",
       },
     ),
     TransferHttpCacheModule,
   ],
-  providers: [
+  providers:    [
     provideClientHydration(),
     ScreenTrackingService,
     UserTrackingService,
     {
-      provide: APP_ID,
+      provide:  APP_ID,
       useValue: "website",
     },
     {
-      provide: IMAGE_LOADER,
-      useValue: (imageLoaderConfig: ImageLoaderConfig): string => "/assets/" + (imageLoaderConfig.loaderParams?.["type"] === "Focus Icon" ? "icons/focus/" + imageLoaderConfig.src.replace(/\s+/g, '-') + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Icon" ? "icons/" + imageLoaderConfig.src.replace(/\s+/g, '-') + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Photo" ? "photos/" + [imageLoaderConfig.src.replace(/\s+/g, '-'), (imageLoaderConfig.width || imageLoaderConfig.loaderParams?.["maxWidth"]) + "px", "webp"].join(".") : ""),
+      provide:  IMAGE_LOADER,
+      useValue: (imageLoaderConfig: ImageLoaderConfig): string => "/assets/" + (imageLoaderConfig.loaderParams?.["type"] === "Focus Icon" ? "icons/focus/" + imageLoaderConfig.src.replace(
+        /\s+/g,
+        "-",
+      ) + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Icon" ? "icons/" + imageLoaderConfig.src.replace(
+        /\s+/g,
+        "-",
+      ) + ".svg" : imageLoaderConfig.loaderParams?.["type"] === "Photo" ? "photos/" + [
+        imageLoaderConfig.src.replace(
+          /\s+/g,
+          "-",
+        ),
+        (imageLoaderConfig.width || imageLoaderConfig.loaderParams?.["maxWidth"]) + "px",
+        "webp",
+      ].join(".") : ""),
     },
   ],
-  bootstrap: [
+  bootstrap:    [
     AppComponent,
   ],
 })

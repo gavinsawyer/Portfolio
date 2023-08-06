@@ -1,14 +1,14 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "name": "interfaces",
-  "prefix": "portfolio",
+  "$schema":     "../../node_modules/nx/schemas/project-schema.json",
+  "name":        "interfaces",
+  "prefix":      "portfolio",
   "projectType": "library",
-  "sourceRoot": "libs/interfaces/src",
-  "tags": [],
-  "targets": {
+  "sourceRoot":  "libs/interfaces/src",
+  "tags":        [],
+  "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "options": {
+      "options":  {
         "lintFilePatterns": [
           "libs/interfaces/**/*.ts",
           "libs/interfaces/**/*.html"

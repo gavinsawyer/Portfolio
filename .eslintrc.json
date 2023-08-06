@@ -1,12 +1,12 @@
 {
-  "root": true,
+  "root":           true,
   "ignorePatterns": [
     "**/*"
   ],
-  "plugins": [
+  "plugins":        [
     "@nrwl/nx"
   ],
-  "overrides": [
+  "overrides":      [
     {
       "files": [
         "*.ts",
@@ -19,10 +19,10 @@
           "error",
           {
             "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
+            "allow":                         [],
+            "depConstraints":                [
               {
-                "sourceTag": "*",
+                "sourceTag":                "*",
                 "onlyDependOnLibsWithTags": [
                   "*"
                 ]
@@ -33,24 +33,24 @@
       }
     },
     {
-      "files": [
+      "files":   [
         "*.ts",
         "*.tsx"
       ],
       "extends": [
         "plugin:@nrwl/nx/typescript"
       ],
-      "rules": {}
+      "rules":   {}
     },
     {
-      "files": [
+      "files":   [
         "*.js",
         "*.jsx"
       ],
       "extends": [
         "plugin:@nrwl/nx/javascript"
       ],
-      "rules": {}
+      "rules":   {}
     }
   ]
 }
