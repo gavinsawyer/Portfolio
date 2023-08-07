@@ -19,20 +19,23 @@ A simple personal website built with Firebase, Nx, and Angular 16.
 > `% npm run build` Build browser and server, prerender routes. \
 > `% npm run deploy` Deploy to Cloud Run
 ### Libraries
-> #### [@portfolio/components](libs/components) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
+> #### [@portfolio/components](libs/components) `Angular Forms` `Angular Universal` `Firebase Analytics` `HTML` `NgxMask` `Sass`
 >
-> Angular components used in apps.
-> - [Banner](libs/components/src/lib/banner) `HTML` `Sass`
-> - [Button](libs/components/src/lib/button) `HTML` `Sass`
-> - [Create Message Form](libs/components/src/lib/create-message-form) `Angular Forms` `Firebase Analytics` `HTML` `NgxMask` `Sass`
-> - [Focus](libs/components/src/lib/focus) `HTML` `Sass`
+> Angular components shared between apps.
 
 > #### [@portfolio/functions](libs/functions) `Firebase Admin SDK` `Firebase Functions` `ShortcutsAPI`
 >
+> Custom APIs deployed as Cloud Functions:
 > - [ShortcutsAPI](https://github.com/gavinsawyer/shortcuts-api)
 
+> #### [@portfolio/injection-tokens](libs/injection-tokens) `Angular`
+>
+> Injection tokens shared between apps and components for improved reusability.
+
 > #### [@portfolio/interfaces](libs/interfaces) `TypeScript`
+>
+> Interfaces shared between all projects for type-safety.
 
 > #### [@portfolio/services](libs/services) `Angular CDK` `Angular Router` `Firebase Authentication` `Firestore`
 >
-> Angular services used in the app and components library. Provides anonymous authentication, live data, and responsive design features.
+> Angular services used in apps and components. Provides anonymous authentication, live data, and responsive design features.

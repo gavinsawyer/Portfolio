@@ -1,36 +1,39 @@
 {
   "compileOnSave":   false,
   "compilerOptions": {
-    "rootDir":                ".",
-    "sourceMap":              true,
+    "baseUrl":                ".",
     "declaration":            false,
-    "moduleResolution":       "node",
     "emitDecoratorMetadata":  true,
     "experimentalDecorators": true,
     "importHelpers":          true,
-    "target":                 "es2015",
-    "module":                 "esnext",
     "lib":                    [
-      "es2017",
+      "es2020",
       "dom"
     ],
-    "skipLibCheck":           true,
-    "skipDefaultLibCheck":    true,
-    "baseUrl":                ".",
+    "module":                 "esnext",
+    "moduleResolution":       "node",
     "paths":                  {
-      "@portfolio/components": [
+      "@portfolio/components":       [
         "libs/components/src/index.ts"
       ],
-      "@portfolio/functions":  [
+      "@portfolio/functions":        [
         "libs/functions/src/index.ts"
       ],
-      "@portfolio/interfaces": [
+      "@portfolio/injection-tokens": [
+        "libs/injection-tokens/src/index.ts"
+      ],
+      "@portfolio/interfaces":       [
         "libs/interfaces/src/index.ts"
       ],
-      "@portfolio/services":   [
+      "@portfolio/services":         [
         "libs/services/src/index.ts"
       ]
-    }
+    },
+    "rootDir":                ".",
+    "skipDefaultLibCheck":    true,
+    "skipLibCheck":           true,
+    "sourceMap":              true,
+    "target":                 "es2015"
   },
   "exclude":         [
     "node_modules",

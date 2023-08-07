@@ -1,0 +1,102 @@
+@use 'sass:math'
+@import '../../../../colors'
+
+\:host
+  display: flex
+  flex-direction: column
+  flex-grow: 1
+  min-height: calc(100vh - 2rem)
+
+  main
+    display: flex
+    flex-direction: row
+    flex-grow: 1
+    justify-content: center
+
+    & > div
+      display: flex
+      flex-direction: column
+
+      header
+        backdrop-filter: saturate(2) blur(30px)
+        border-radius: 1rem
+        display: flex
+        flex-direction: row
+        justify-content: center
+        margin: 0 -1rem
+        position: sticky
+        top: 1rem
+        transition: all ease 100ms
+
+        & > div
+          display: flex
+          flex-direction: column
+
+          h1
+            font-size: 1.5rem
+
+            a
+              color: inherit
+
+              &.active
+                cursor: default
+
+              &:hover
+                text-decoration: none
+
+          h2
+            font-size: 0.8775rem
+            margin-bottom: 1em
+
+        &.raised
+          box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
+
+        @media (max-width: 33rem)
+          top: 0
+          margin: 0 calc(-50vw + 50%)
+          border-radius: 0
+
+      & > div
+        display: flex
+        flex-direction: row
+        gap: 1rem
+        justify-content: center
+
+        router-outlet
+          display: none
+
+        @media (max-width: 51.580078125rem)
+          flex-direction: column
+
+  footer
+    display: flex
+    flex-direction: row
+    justify-content: flex-end
+    margin: 1rem -2rem -1rem
+    padding: 0 2rem
+
+    & > div
+      display: flex
+      flex-direction: column
+
+  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
+    header
+      background-color: transparentize($body-background, math.div(1, 4))
+
+      h1
+        color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
+
+      h2
+        color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
+
+    footer
+      color: $footer-foreground
+      background-color: $footer-background
+
+      a
+        color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
+
+  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
+
+  @media (prefers-color-scheme: dark)
+    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken, lighten)

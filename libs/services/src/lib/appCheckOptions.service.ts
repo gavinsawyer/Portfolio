@@ -1,6 +1,8 @@
 import { isPlatformBrowser }                                                   from "@angular/common";
 import { Inject, Injectable, PLATFORM_ID }                                     from "@angular/core";
 import { AppCheckOptions, AppCheckToken, CustomProvider, ReCaptchaV3Provider } from "@angular/fire/app-check";
+import { APP_ENVIRONMENT }                                                     from "@portfolio/injection-tokens";
+import { AppEnvironment }                                                      from "@portfolio/interfaces";
 
 
 @Injectable({
@@ -8,22 +10,23 @@ import { AppCheckOptions, AppCheckToken, CustomProvider, ReCaptchaV3Provider } f
 })
 export class AppCheckOptionsService {
 
-  public readonly appCheckOptions: (app: string, recaptchaSiteKey: string) => AppCheckOptions;
+  public readonly appCheckOptions: () => AppCheckOptions;
 
   constructor(
-    @Inject(PLATFORM_ID) platformId: object,
+    @Inject(APP_ENVIRONMENT) appEnvironment: AppEnvironment,
+    @Inject(PLATFORM_ID)     platformId:     object,
   ) {
     this
-      .appCheckOptions = (app: string, recaptchaSiteKey: string): AppCheckOptions => isPlatformBrowser(platformId) ? {
+      .appCheckOptions = (): AppCheckOptions => isPlatformBrowser(platformId) ? {
         isTokenAutoRefreshEnabled: true,
-        provider: new ReCaptchaV3Provider(recaptchaSiteKey),
+        provider:                  new ReCaptchaV3Provider(appEnvironment.recaptchaSiteKey),
       } : {
         isTokenAutoRefreshEnabled: false,
-        provider: new CustomProvider(
+        provider:                  new CustomProvider(
           {
             getToken: (): Promise<AppCheckToken> => Promise.resolve(
               {
-                token: process.env["APP_CHECK_TOKEN_" + app.toUpperCase()] as string,
+                token:            process.env["APP_CHECK_TOKEN_" + appEnvironment.app.toUpperCase()] as string,
                 expireTimeMillis: Date.now(),
               },
             ),

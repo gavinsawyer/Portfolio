@@ -1,1 +1,3 @@
-export * from "./aside";
+export * from "./lib/aside/aside.component";
+export * from "./lib/root/root.component";
+export * from "./lib/routes";

@@ -9,7 +9,7 @@
     "prebuild": {
       "executor": "nx:run-commands",
       "options":  {
-        "command": "node -p \"'export const packageVersion = ' + JSON.stringify(require('./package.json').version) + ';'\" > apps/console/src/package-version.ts && node -p \"'import { GitInfo } from \\'git-describe\\';\\n\\n\\nexport const gitInfo: Partial<GitInfo> = ' + JSON.stringify(((gitInfo) => ({dirty: gitInfo.dirty,hash: gitInfo.hash}))(require('git-describe').gitDescribeSync())) + ';'\" > apps/console/src/git-info.ts"
+        "command": "node -p \"'export const packageVersion = ' + JSON.stringify(require('./package.json').version) + ';'\" > apps/console/src/.package-version.ts && node -p \"'import { GitInfo } from \\'git-describe\\';\\n\\n\\nexport const gitInfo: Partial<GitInfo> = ' + JSON.stringify(((gitInfo) => ({dirty: gitInfo.dirty,hash: gitInfo.hash}))(require('git-describe').gitDescribeSync())) + ';'\" > apps/console/src/.git-info.ts"
       }
     },
     "lint":     {
@@ -49,8 +49,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/console/src/environments/environment.ts",
-              "with":    "apps/console/src/environments/environment.prod.ts"
+              "replace": "apps/console/src/environment.ts",
+              "with":    "apps/console/src/environment.prod.ts"
             }
           ],
           "outputHashing":    "all"
@@ -62,22 +62,26 @@
       ],
       "executor":             "@angular-devkit/build-angular:browser",
       "options":              {
-        "assets":              [
+        "assets":                      [
           "apps/console/src/assets",
           "apps/console/src/favicon.png",
           "apps/console/src/robots.txt",
           "apps/console/src/sitemap.xml"
         ],
-        "index":               "apps/console/src/index.html",
-        "inlineStyleLanguage": "sass",
-        "main":                "apps/console/src/main.ts",
-        "outputPath":          "dist/apps/console/browser",
-        "polyfills":           "apps/console/src/polyfills.ts",
-        "scripts":             [],
-        "styles":              [
+        "allowedCommonJsDependencies": [
+          "url",
+          "xhr2"
+        ],
+        "index":                       "apps/console/src/index.html",
+        "inlineStyleLanguage":         "sass",
+        "main":                        "apps/console/src/main.ts",
+        "outputPath":                  "dist/apps/console/browser",
+        "polyfills":                   "apps/console/src/polyfills.ts",
+        "scripts":                     [],
+        "styles":                      [
           "apps/console/src/styles.sass"
         ],
-        "tsConfig":            "apps/console/tsconfig.app.json"
+        "tsConfig":                    "apps/console/tsconfig.app.json"
       },
       "outputs":              [
         "{options.outputPath}"
@@ -93,8 +97,8 @@
         "production":  {
           "fileReplacements": [
             {
-              "replace": "apps/console/src/environments/environment.ts",
-              "with":    "apps/console/src/environments/environment.prod.ts"
+              "replace": "apps/console/src/environment.ts",
+              "with":    "apps/console/src/environment.prod.ts"
             }
           ],
           "outputHashing":    "media"
@@ -119,8 +123,8 @@
       "production":           {
         "fileReplacements": [
           {
-            "replace": "apps/console/src/environments/environment.ts",
-            "with":    "apps/console/src/environments/environment.prod.ts"
+            "replace": "apps/console/src/environment.ts",
+            "with":    "apps/console/src/environment.prod.ts"
           }
         ],
         "outputHashing":    "media"

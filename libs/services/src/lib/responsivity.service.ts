@@ -29,7 +29,7 @@ export class ResponsivityService {
   }) => number;
 
   constructor(
-    @Inject(DOCUMENT)    document: Document,
+    @Inject(DOCUMENT)    document:   Document,
     @Inject(PLATFORM_ID) platformId: object,
 
     breakpointObserver: BreakpointObserver,
