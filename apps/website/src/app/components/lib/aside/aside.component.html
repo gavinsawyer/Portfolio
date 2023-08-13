@@ -1,7 +1,7 @@
 <aside>
   <div>
     <portfolio-create-message-form
-      *ngIf="messagesService.messageDocuments() as messageDocuments"
+      *ngIf="messagesService.messageDocuments$() as messageDocuments"
       [messageDocuments]="messageDocuments" />
     <div>
       <portfolio-button
@@ -34,7 +34,7 @@
       text="Add to contacts"
       url="/assets/Gavin Sawyer - Contact.vcf" />
     <portfolio-focus
-      *ngIf="focusService.focus() as focus"
+      *ngIf="focusService.focus$() as focus"
       [focus]="focus" />
   </div>
   <!--suppress HtmlUnknownTarget -->

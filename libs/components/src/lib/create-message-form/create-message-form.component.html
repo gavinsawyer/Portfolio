@@ -4,16 +4,12 @@
   name="message">
   <div>
     <div>
-      <h3 style="margin: 0.5rem 0 0;">
-        {{ status() == "unsent" ? "Want to connect?" : (status() == "pending" ? "Sending" : "We'll be in touch") + ellipsesService.ellipses() }}
-      </h3>
+      <h3 style="margin: 0.5rem 0 0;">{{ status() == "unsent" ? "Want to connect?" : (status() == "pending" ? "Sending" : "We'll be in touch") + ellipsesService.ellipses$() }}</h3>
     </div>
     <div>
       <h4
         id="nameInputLabel"
-        style="margin: 0.5rem 0 0;">
-        Name:
-      </h4>
+        style="margin: 0.5rem 0 0;">Name:</h4>
     </div>
     <input
       #nameHTMLInputElement
@@ -23,25 +19,21 @@
       autocomplete="name"
       autofocus
       formControlName="name"
-      type="text">
+      type="text" />
     <div>
       <h4
         id="messageInputLabel"
-        style="margin: 0.5rem 0 0;">
-        Message:
-      </h4>
+        style="margin: 0.5rem 0 0;">Message:</h4>
     </div>
     <textarea
       #messageHTMLTextAreaElement
-      (input)="hyperResponsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"
+      (input)="responsivityService.adjustTextAreaRows(messageHTMLTextAreaElement, { min: 2 });"
       [required]="true"
-      [rows]="hyperResponsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })"
+      [rows]="responsivityService.getTextAreaRows(messageHTMLTextAreaElement, { min: 2 })"
       aria-labelledby="messageInputLabel"
       formControlName="message"></textarea>
     <div>
-      <h4 style="margin: 0.5rem 0 0;">
-        Enter one or both:
-      </h4>
+      <h4 style="margin: 0.5rem 0 0;">Enter one or both:</h4>
     </div>
     <input
       [required]="!formGroup.value.email"
@@ -51,7 +43,7 @@
       formControlName="phone"
       mask="(000) 000-0000"
       placeholder="Phone number"
-      type="tel">
+      type="tel" />
     <input
       [email]="true"
       [required]="!formGroup.value.phone"
@@ -59,11 +51,11 @@
       autocomplete="email"
       formControlName="email"
       placeholder="Email"
-      type="email">
+      type="email" />
     <div></div>
   </div>
   <button
-    [disabled]="!authenticationService.user() || !formGroup.valid || status() !== 'unsent'"
+    [disabled]="!authenticationService.user$() || !formGroup.valid || status() !== 'unsent'"
     disabled=""
     type="submit">
     <!--suppress HtmlUnknownTarget -->
@@ -75,6 +67,6 @@
       ngSrc="submit"
       ngSrcset="1x"
       sizes="11.8438px"
-      width="11.8438px">
+      width="11.8438px" />
   </button>
 </form>

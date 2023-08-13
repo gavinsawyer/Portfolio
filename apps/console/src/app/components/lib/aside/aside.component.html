@@ -5,7 +5,7 @@
       [iconHeight]="15.9141"
       iconName="use passkey"
       [iconWidth]="14.9317"
-      *ngIf="!authenticationService.user() || authenticationService.user()?.isAnonymous"
+      *ngIf="!authenticationService.user$() || authenticationService.user$()?.isAnonymous"
       text="Sign in with passkey" />
   </div>
 </aside>

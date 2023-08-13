@@ -17,7 +17,7 @@ export class RootComponent {
     @Inject(GIT_INFO)        public readonly gitInfo:        Partial<GitInfo>,
     @Inject(PACKAGE_VERSION) public readonly packageVersion: string,
 
-    public readonly hyperResponsivityService: ResponsivityService,
+    public readonly responsivityService: ResponsivityService,
     public readonly pathService: PathService,
   ) {
   }

@@ -5,7 +5,7 @@
   <div>
     <div>
       <h3 style="margin: 0.5rem 0 0;">
-        {{ status() == "unsent" ? "Create an account" : (status() == "pending" ? "Pending" + ellipsesService.ellipses() : "Complete") }}
+        {{ status() == "unsent" ? "Create an account" : (status() == "pending" ? "Pending" + ellipsesService.ellipses$() : "Complete") }}
       </h3>
     </div>
     <div>
@@ -25,7 +25,7 @@
       type="text" />
   </div>
   <button
-    [disabled]="!authenticationService.user() || !formGroup.valid || status() !== 'unsent'"
+    [disabled]="!authenticationService.user$() || !formGroup.valid || status() !== 'unsent'"
     disabled=""
     type="submit">
     <!--suppress HtmlUnknownTarget -->

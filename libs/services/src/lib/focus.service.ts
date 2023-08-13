@@ -11,7 +11,7 @@ import { catchError, filter, map, Observable }                               fro
 })
 export class FocusService {
 
-  public readonly focus: Signal<PublicEnvironmentDocument["focus"]>;
+  public readonly focus$: Signal<PublicEnvironmentDocument["focus"]>;
 
   constructor(
     @Inject(PLATFORM_ID) platformId: object,
@@ -19,7 +19,7 @@ export class FocusService {
     firestore: Firestore,
   ) {
     this
-      .focus = isPlatformBrowser(platformId) ? toSignal<PublicEnvironmentDocument["focus"]>(
+      .focus$ = isPlatformBrowser(platformId) ? toSignal<PublicEnvironmentDocument["focus"]>(
         docSnapshots<PublicEnvironmentDocument>(
           doc(
             firestore,

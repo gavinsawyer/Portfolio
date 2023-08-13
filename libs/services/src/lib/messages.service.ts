@@ -4,8 +4,8 @@ import { toSignal }                                                             
 import { Auth, onIdTokenChanged, User }                                                                                                                           from "@angular/fire/auth";
 import { collection, CollectionReference, collectionSnapshots, doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore, QueryDocumentSnapshot, setDoc } from "@angular/fire/firestore";
 import { MessageDocument }                                                                                                                                        from "@portfolio/interfaces";
-import { catchError, filter, map, Observable, Observer, startWith, Subject, switchMap, TeardownLogic }                                                            from "rxjs";
-import { AuthenticationService }                                                                                                                                  from "./authentication.service";
+import { catchError, filter, map, Observable, Observer, ReplaySubject, startWith, switchMap, TeardownLogic }                                                      from "rxjs";
+import { AuthenticationService }                                                                                                                                  from "../";
 
 
 @Injectable({
@@ -13,10 +13,11 @@ import { AuthenticationService }                                                
 })
 export class MessagesService {
 
-  public readonly createMessageDocument: (messageDocument: MessageDocument) => Promise<void>;
-  public readonly messageDocuments: Signal<MessageDocument[]>;
+  public readonly messageDocuments$: Signal<MessageDocument[]>;
 
-  private readonly createdMessageDocumentReference: Subject<DocumentReference<MessageDocument>>;
+  public readonly createMessageDocument: (messageDocument: MessageDocument) => Promise<void>;
+
+  private readonly createdMessageDocumentReferenceSubject: ReplaySubject<DocumentReference<MessageDocument>>;
 
   constructor(
     @Inject(PLATFORM_ID) platformId: object,
@@ -29,22 +30,22 @@ export class MessagesService {
       .createMessageDocument = async (messageDocument: MessageDocument): Promise<void> => setDoc<MessageDocument>(
         doc(
           firestore,
-          "/messages/" + authenticationService.user()?.uid,
+          "/messages/" + authenticationService.user$()?.uid,
         ) as DocumentReference<MessageDocument>,
         messageDocument,
       )
       .then(
-        (): void => this.createdMessageDocumentReference.next(
+        (): void => this.createdMessageDocumentReferenceSubject.next(
           doc(
             firestore,
-            "/messages/" + authenticationService.user()?.uid,
+            "/messages/" + authenticationService.user$()?.uid,
           ) as DocumentReference<MessageDocument>,
         ),
       );
     this
-      .createdMessageDocumentReference = new Subject<DocumentReference<MessageDocument>>();
+      .createdMessageDocumentReferenceSubject = new ReplaySubject<DocumentReference<MessageDocument>>(1);
     this
-      .messageDocuments = isPlatformBrowser(platformId) ? toSignal<MessageDocument[]>(
+      .messageDocuments$ = isPlatformBrowser(platformId) ? toSignal<MessageDocument[]>(
         new Observable<User | null>(
           (userObserver: Observer<User | null>): TeardownLogic => onIdTokenChanged(
             auth,
@@ -75,7 +76,7 @@ export class MessagesService {
                   ) as DocumentReference<MessageDocument>,
                 ).pipe<DocumentSnapshot<MessageDocument>, MessageDocument | undefined, MessageDocument, MessageDocument[]>(
                   catchError<DocumentSnapshot<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>(
-                    (): Observable<DocumentSnapshot<MessageDocument>> => this.createdMessageDocumentReference.asObservable().pipe<DocumentSnapshot<MessageDocument>>(
+                    (): Observable<DocumentSnapshot<MessageDocument>> => this.createdMessageDocumentReferenceSubject.asObservable().pipe<DocumentSnapshot<MessageDocument>>(
                       switchMap<DocumentReference<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>(
                         (messageDocumentReference: DocumentReference<MessageDocument>): Observable<DocumentSnapshot<MessageDocument>> => docSnapshots<MessageDocument>(messageDocumentReference).pipe<DocumentSnapshot<MessageDocument>>(
                           catchError<DocumentSnapshot<MessageDocument>, Observable<DocumentSnapshot<MessageDocument>>>(
@@ -96,9 +97,9 @@ export class MessagesService {
                       messageDocument,
                     ],
                   ),
-                )
+                ),
               ),
-            )
+            ),
           ),
           startWith<MessageDocument[]>([]),
         ),

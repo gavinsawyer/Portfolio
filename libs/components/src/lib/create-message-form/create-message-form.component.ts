@@ -53,12 +53,12 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
 
   constructor(
     public readonly authenticationService: AuthenticationService,
-    public readonly ellipsesService: EllipsesService,
-    public readonly hyperResponsivityService: ResponsivityService,
+    public readonly ellipsesService:       EllipsesService,
+    public readonly responsivityService:   ResponsivityService,
 
     @Inject(PLATFORM_ID) platformId: Object,
 
-    analytics: Analytics,
+    analytics:       Analytics,
     messagesService: MessagesService,
   ) {
     this
@@ -143,17 +143,17 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     (changes["messageDocuments"].currentValue as MessageDocument[])
       .length > 0 && ((): void => {
-      this
-        .formGroup
-        .disable();
-      this
-        .formGroup
-        .setValue(this.messageDocuments[0]);
+        this
+          .formGroup
+          .disable();
+        this
+          .formGroup
+          .setValue(this.messageDocuments[0]);
 
-      this
-        .status
-        .set("complete");
-    })();
+        this
+          .status
+          .set("complete");
+      })();
   }
 
 }
