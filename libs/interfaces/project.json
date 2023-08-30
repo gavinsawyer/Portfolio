@@ -4,14 +4,12 @@
   "prefix":      "portfolio",
   "projectType": "library",
   "sourceRoot":  "libs/interfaces/src",
-  "tags":        [],
   "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
         "lintFilePatterns": [
-          "libs/interfaces/**/*.ts",
-          "libs/interfaces/**/*.html"
+          "libs/interfaces/**/*.ts"
         ]
       }
     }

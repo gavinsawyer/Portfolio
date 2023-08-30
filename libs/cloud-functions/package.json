@@ -1,0 +1,25 @@
+{
+  "name":         "@portfolio/functions",
+  "homepage":     "https://gavinsawyer.dev",
+  "author":       {
+    "name":  "Gavin Sawyer",
+    "email": "g@vinsawyer.dev",
+    "url":   "https://github.com/gavinsawyer"
+  },
+  "license":      "MIT",
+  "repository":   {
+    "type":      "git",
+    "url":       "git+https://github.com/gavinsawyer/Portfolio.git",
+    "directory": "libs/cloud-functions"
+  },
+  "private":      true,
+  "engines":      {
+    "node": "18"
+  },
+  "main":         "./main.js",
+  "type":         "module",
+  "dependencies": {
+    "@gavinsawyer/shortcuts-api": "^1.5.2",
+    "firebase-functions":         "^4.4.1"
+  }
+}

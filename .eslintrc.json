@@ -1,56 +1,90 @@
 {
-  "root":           true,
-  "ignorePatterns": [
-    "**/*"
-  ],
-  "plugins":        [
-    "@nrwl/nx"
-  ],
-  "overrides":      [
+  "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.js",
-        "*.jsx"
+      "extends": [
+        "plugin:@angular-eslint/template/accessibility",
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@nx/angular-template"
       ],
-      "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+      "files":   [
+        "*.html"
+      ]
+    },
+    {
+      "extends": [
+        "plugin:@nx/angular",
+        "plugin:@nx/typescript"
+      ],
+      "files":   [
+        "*.ts"
+      ],
+      "rules":   {
+        "@nx/enforce-module-boundaries": [
           "error",
           {
-            "enforceBuildableLibDependency": true,
             "allow":                         [],
             "depConstraints":                [
               {
-                "sourceTag":                "*",
                 "onlyDependOnLibsWithTags": [
                   "*"
-                ]
+                ],
+                "sourceTag":                "*"
               }
-            ]
+            ],
+            "enforceBuildableLibDependency": true
           }
         ]
       }
     },
     {
       "files":   [
-        "*.ts",
-        "*.tsx"
+        "./apps/console/src/app/components/lib/**/*.ts"
       ],
-      "extends": [
-        "plugin:@nrwl/nx/typescript"
-      ],
-      "rules":   {}
+      "rules":   {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "portfolio-console",
+            "style":  "kebab-case",
+            "type":   "element"
+          }
+        ]
+      }
     },
     {
       "files":   [
-        "*.js",
-        "*.jsx"
+        "./apps/website/src/app/components/lib/**/*.ts"
       ],
-      "extends": [
-        "plugin:@nrwl/nx/javascript"
+      "rules":   {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "portfolio-website",
+            "style":  "kebab-case",
+            "type":   "element"
+          }
+        ]
+      }
+    },
+    {
+      "files":   [
+        "./libs/components/src/lib/**/*.ts"
       ],
-      "rules":   {}
+      "rules":   {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "portfolio-components",
+            "style":  "kebab-case",
+            "type":   "element"
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "plugins":   [
+    "@angular-eslint",
+    "@nx"
+  ],
+  "root":      true
 }

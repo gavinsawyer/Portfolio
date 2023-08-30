@@ -4,7 +4,6 @@
   "prefix":      "console-app",
   "projectType": "application",
   "sourceRoot":  "apps/console/src",
-  "tags":        [],
   "targets":     {
     "prebuild": {
       "executor": "nx:run-commands",
@@ -58,30 +57,30 @@
       },
       "defaultConfiguration": "production",
       "dependsOn":            [
-        "prebuild"
+        "prebuild",
+        "lint"
       ],
       "executor":             "@angular-devkit/build-angular:browser",
       "options":              {
+        "allowedCommonJsDependencies": [
+          "url",
+          "xhr2"
+        ],
         "assets":                      [
           "apps/console/src/assets",
           "apps/console/src/favicon.png",
           "apps/console/src/robots.txt",
           "apps/console/src/sitemap.xml"
         ],
-        "allowedCommonJsDependencies": [
-          "url",
-          "xhr2"
-        ],
         "index":                       "apps/console/src/index.html",
         "inlineStyleLanguage":         "sass",
-        "main":                        "apps/console/src/main.ts",
+        "main":                        "apps/console/src/app/main.browser.ts",
         "outputPath":                  "dist/apps/console/browser",
         "polyfills":                   "apps/console/src/polyfills.ts",
-        "scripts":                     [],
         "styles":                      [
           "apps/console/src/styles.sass"
         ],
-        "tsConfig":                    "apps/console/tsconfig.app.json"
+        "tsConfig":                    "tsconfig.json"
       },
       "outputs":              [
         "{options.outputPath}"
@@ -106,7 +105,8 @@
       },
       "defaultConfiguration": "production",
       "dependsOn":            [
-        "prebuild"
+        "prebuild",
+        "lint"
       ],
       "development":          {
         "extractLicenses": false,
@@ -116,9 +116,9 @@
       "executor":             "@angular-devkit/build-angular:server",
       "options":              {
         "inlineStyleLanguage": "sass",
-        "main":                "apps/console/server.ts",
+        "main":                "apps/console/src/app/main.server.ts",
         "outputPath":          "dist/apps/console/server",
-        "tsConfig":            "apps/console/tsconfig.server.json"
+        "tsConfig":            "tsconfig.json"
       },
       "production":           {
         "fileReplacements": [
@@ -143,31 +143,14 @@
       },
       "defaultConfiguration": "production",
       "dependsOn":            [
-        "prebuild"
+        "prebuild",
+        "lint"
       ],
       "executor":             "@nguniversal/builders:prerender",
       "options":              {
-        "routesFile": "apps/console/src/routes.txt"
-      }
-    },
-    "deploy":   {
-      "dependsOn": [
-        "prebuild",
-        "build"
-      ],
-      "executor":  "@angular/fire:deploy",
-      "options":   {
-        "browserTarget":        "console:browser:production",
-        "firebaseHostingSite":  "portfolio-a59e2-console",
-        "firebaseProject":      "portfolio-a59e2",
-        "functionName":         "ssr-console",
-        "functionsNodeVersion": "18.16",
-        "outputPath":           "dist/apps/console/run",
-        "prerender":            true,
-        "prerenderTarget":      "console:build:production",
-        "region":               "us-central1",
-        "serverTarget":         "console:server:production",
-        "ssr":                  "cloud-run"
+        "routes": [
+          "/"
+        ]
       }
     },
     "serve":    {
@@ -183,9 +166,30 @@
       },
       "defaultConfiguration": "production",
       "dependsOn":            [
-        "prebuild"
+        "prebuild",
+        "lint"
       ],
       "executor":             "@nguniversal/builders:ssr-dev-server"
+    },
+    "deploy":   {
+      "dependsOn": [
+        "prebuild",
+        "lint"
+      ],
+      "executor":  "@angular/fire:deploy",
+      "options":   {
+        "browserTarget":        "console:browser:production",
+        "firebaseHostingSite":  "portfolio-a59e2-console",
+        "firebaseProject":      "portfolio-a59e2",
+        "functionName":         "ssr-console",
+        "functionsNodeVersion": "18.17",
+        "outputPath":           "dist/apps/console/run",
+        "prerender":            true,
+        "prerenderTarget":      "console:build:production",
+        "region":               "us-central1",
+        "serverTarget":         "console:server:production",
+        "ssr":                  "cloud-run"
+      }
     }
   }
 }

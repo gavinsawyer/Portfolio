@@ -1,6 +1,9 @@
-export const environment = {
+import { Environment } from "@portfolio/interfaces";
+
+
+export const environment: Environment = {
   app:              "website",
-  firebase:         {
+  firebase:       {
     apiKey:            "AIzaSyBntJS81ciqCvnYrCiY9gMdr-i-Inms04Y",
     appId:             "1:853175724479:web:b34d7f9cf6586af3a2190a",
     authDomain:        "portfolio-a59e2.firebaseapp.com",
@@ -9,6 +12,6 @@ export const environment = {
     projectId:         "portfolio-a59e2",
     storageBucket:     "portfolio-a59e2.appspot.com",
   },
-  production:       false,
-  recaptchaSiteKey: "6LdVjDQkAAAAAN-i-Z_ZOqlKAJusNGJzYfLZBkBn",
+  production:     false,
+  recaptchaKeyID: "6LdVjDQkAAAAAN-i-Z_ZOqlKAJusNGJzYfLZBkBn",
 };

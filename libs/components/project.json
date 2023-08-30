@@ -4,7 +4,6 @@
   "prefix":      "portfolio",
   "projectType": "library",
   "sourceRoot":  "libs/components/src",
-  "tags":        [],
   "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",

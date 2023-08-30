@@ -1,0 +1,14 @@
+# System files
+*-debug.log
+.DS_Store
+.angular
+.idea
+.run
+dist
+node_modules
+tmp
+
+# Sensitive Firebase files
+.firebase
+.runtimeconfig.json
+gha-creds-*.json

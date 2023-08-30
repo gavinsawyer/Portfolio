@@ -1,0 +1,62 @@
+{
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters":       true,
+    "strictInputAccessModifiers":      true,
+    "strictTemplates":                 true
+  },
+  "compileOnSave":          false,
+  "compilerOptions":        {
+    "baseUrl":                            ".",
+    "declaration":                        true,
+    "emitDecoratorMetadata":              true,
+    "experimentalDecorators":             true,
+    "forceConsistentCasingInFileNames":   true,
+    "importHelpers":                      true,
+    "lib":                                [
+      "ES2020",
+      "DOM"
+    ],
+    "module":                             "ESNext",
+    "moduleResolution":                   "Node",
+    "noFallthroughCasesInSwitch":         true,
+    "noImplicitOverride":                 true,
+    "noImplicitReturns":                  true,
+    "noPropertyAccessFromIndexSignature": true,
+    "outDir":                             "dist/out-tsc",
+    "paths":                              {
+      "@portfolio/app-module-providers":  [
+        "libs/app-module-providers/src/index.ts"
+      ],
+      "@portfolio/cloud-functions":  [
+        "libs/cloud-functions/src/index.ts"
+      ],
+      "@portfolio/components":       [
+        "libs/components/src/index.ts"
+      ],
+      "@portfolio/injection-tokens": [
+        "libs/injection-tokens/src/index.ts"
+      ],
+      "@portfolio/interfaces":       [
+        "libs/interfaces/src/index.ts"
+      ],
+      "@portfolio/services":         [
+        "libs/services/src/index.ts"
+      ],
+      "@portfolio/types":         [
+        "libs/types/src/index.ts"
+      ]
+    },
+    "rootDir":                            ".",
+    "skipDefaultLibCheck":                true,
+    "skipLibCheck":                       true,
+    "sourceMap":                          true,
+    "strict":                             true,
+    "target":                             "ESNext"
+  },
+  "exclude":                [
+    "node_modules",
+    "tmp",
+    "**/README.md"
+  ]
+}

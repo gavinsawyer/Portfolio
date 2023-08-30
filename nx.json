@@ -1,75 +1,48 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "portfolio",
-  "affected": {
+  "affected":           {
     "defaultBase": "main"
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/nx-cloud",
-      "options": {
-        "cacheableOperations": [
-          "browser",
-          "server",
-          "build"
-        ],
-        "accessToken": "${NX_CLOUD_ACCESS_TOKEN}"
-      }
-    }
-  },
-  "targetDefaults": {
-    "browser": {
-      "dependsOn": [
-        "^browser"
-      ]
-    },
-    "server": {
-      "dependsOn": [
-        "^server"
-      ]
-    },
-    "build": {
-      "dependsOn": [
-        "^build"
-      ]
-    }
-  },
-  "generators": {
-    "@nrwl/angular:application": {
-      "style": "sass",
-      "linter": "eslint",
-      "unitTestRunner": "none",
-      "e2eTestRunner": "none",
-      "routing": true,
-      "skipTests": true,
-      "standalone": true
-    },
-    "@nrwl/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "none",
-      "skipModule": true
-    },
-    "@nrwl/angular:component": {
-      "style": "sass",
-      "displayBlock": true,
-      "export": true,
-      "skipTests": true,
-      "standalone": true
-    },
-    "@nrwl/js:library": {
-      "unitTestRunner": "none"
-    }
-  },
-  "defaultProject": "website",
-  "namedInputs": {
-    "default": [
+  "namedInputs":        {
+    "default":       [
       "{projectRoot}/**/*",
       "sharedGlobals"
     ],
-    "sharedGlobals": [],
-    "production": [
-      "default",
-      "!{projectRoot}/.eslintrc.json"
-    ]
+    "production":    [
+      "default"
+    ],
+    "sharedGlobals": []
+  },
+  "npmScope":           "portfolio",
+  "targetDefaults":     {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs":    [
+        "production",
+        "^production"
+      ]
+    },
+    "lint":  {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "accessToken":         "${NX_CLOUD_ACCESS_TOKEN}",
+        "cacheableOperations": [
+          "lint",
+          "browser",
+          "server",
+          "build"
+        ]
+      },
+      "runner":  "@nrwl/nx-cloud"
+    }
   }
 }

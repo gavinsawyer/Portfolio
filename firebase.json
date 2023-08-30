@@ -87,14 +87,11 @@
         "firebase-debug.*.log"
       ],
       "runtime":  "nodejs18",
-      "source":   "dist/libs/functions"
+      "source":   "dist/libs/cloud-functions"
     }
   ],
   "firestore":  {
     "rules":   "firestore.rules",
     "indexes": "firestore.indexes.json"
-  },
-  "extensions": {
-    "firebase-web-authn": "gavinsawyer/firebase-web-authn@9.6.6"
   }
 }
