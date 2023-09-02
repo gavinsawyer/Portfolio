@@ -1,6 +1,6 @@
 {
   "name":            "@portfolio/source",
-  "version":         "16.3.0",
+  "version":         "16.3.1",
   "homepage":        "https://gavinsawyer.dev",
   "license":         "MIT",
   "author":          {
@@ -51,7 +51,6 @@
     "@nx/eslint-plugin":                      "^16.7.4",
     "@typescript-eslint/eslint-plugin":       "^5.62.0",
     "@typescript-eslint/parser":              "^5.62.0",
-    "firebase":                               "^10.3.1",
     "firebase-functions":                     "^4.4.1",
     "firebase-tools":                         "^12.5.2",
     "git-describe":                           "^4.1.1",

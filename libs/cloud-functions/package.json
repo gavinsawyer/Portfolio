@@ -1,12 +1,12 @@
 {
   "name":         "@portfolio/functions",
   "homepage":     "https://gavinsawyer.dev",
+  "license":         "MIT",
   "author":       {
     "name":  "Gavin Sawyer",
     "email": "g@vinsawyer.dev",
     "url":   "https://github.com/gavinsawyer"
   },
-  "license":      "MIT",
   "repository":   {
     "type":      "git",
     "url":       "git+https://github.com/gavinsawyer/Portfolio.git",

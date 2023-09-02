@@ -21,7 +21,9 @@ import { AsideComponent, RootComponent, routes as websiteRoutes } from "../../co
   bootstrap:    [
     RootComponent,
   ],
-  declarations: [ RootComponent ],
+  declarations: [
+    RootComponent,
+  ],
   imports:      [
     AsideComponent,
     BannerComponent,
