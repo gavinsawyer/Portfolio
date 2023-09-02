@@ -2,13 +2,13 @@
   "$schema":     "../../node_modules/nx/schemas/project-schema.json",
   "name":        "cloud-functions",
   "projectType": "library",
-  "sourceRoot":  "libs/cloud-functions/src",
+  "sourceRoot":  "libs/cloud functions/src",
   "targets":     {
     "lint":   {
       "executor": "@nx/linter:eslint",
       "options":  {
         "lintFilePatterns": [
-          "libs/cloud-functions/**/*.ts"
+          "libs/cloud functions/**/*.ts"
         ]
       }
     },
@@ -18,8 +18,8 @@
       ],
       "executor": "@nx/esbuild:esbuild",
       "options":  {
-        "main":       "libs/cloud-functions/src/lib/main.ts",
-        "outputPath": "dist/libs/cloud-functions",
+        "main":       "libs/cloud functions/src/lib/main.ts",
+        "outputPath": "dist/libs/cloud functions",
         "tsConfig":   "tsconfig.json"
       },
       "outputs":  [

@@ -87,7 +87,7 @@
         "firebase-debug.*.log"
       ],
       "runtime":  "nodejs18",
-      "source":   "dist/libs/cloud-functions"
+      "source":   "dist/libs/cloud functions"
     }
   ],
   "firestore":  {

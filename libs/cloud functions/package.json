@@ -10,7 +10,7 @@
   "repository":   {
     "type":      "git",
     "url":       "git+https://github.com/gavinsawyer/Portfolio.git",
-    "directory": "libs/cloud-functions"
+    "directory": "libs/cloud functions"
   },
   "private":      true,
   "engines":      {

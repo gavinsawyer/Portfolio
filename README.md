@@ -23,12 +23,12 @@ A simple personal website built with Firebase, Nx, and Angular 16.
 >
 > Angular components shared between apps.
 
-> #### [@portfolio/functions](libs/cloud-functions) `Firebase Admin SDK` `Firebase Functions` `ShortcutsAPI`
+> #### [@portfolio/functions](libs/cloud functions) `Firebase Admin SDK` `Firebase Functions` `ShortcutsAPI`
 >
 > Custom APIs deployed as Cloud Functions:
 > - [ShortcutsAPI](https://github.com/gavinsawyer/shortcuts-api)
 
-> #### [@portfolio/injection-tokens](libs/injection-tokens) `Angular`
+> #### [@portfolio/injection-tokens](libs/injection tokens) `Angular`
 >
 > Injection tokens shared between apps and components for improved reusability.
 

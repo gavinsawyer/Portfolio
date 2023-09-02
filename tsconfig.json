@@ -26,16 +26,16 @@
     "outDir":                             "dist/out-tsc",
     "paths":                              {
       "@portfolio/app-module-providers":  [
-        "libs/app-module-providers/src/index.ts"
+        "libs/app module providers/src/index.ts"
       ],
       "@portfolio/cloud-functions":  [
-        "libs/cloud-functions/src/index.ts"
+        "libs/cloud functions/src/index.ts"
       ],
       "@portfolio/components":       [
         "libs/components/src/index.ts"
       ],
       "@portfolio/injection-tokens": [
-        "libs/injection-tokens/src/index.ts"
+        "libs/injection tokens/src/index.ts"
       ],
       "@portfolio/interfaces":       [
         "libs/interfaces/src/index.ts"
