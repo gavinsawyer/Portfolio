@@ -20,7 +20,7 @@
       "options":  {
         "main":       "libs/cloud functions/src/lib/main.ts",
         "outputPath": "dist/libs/cloud functions",
-        "tsConfig":   "tsconfig.json"
+        "tsConfig":   "libs/cloud functions/tsconfig.lib.json"
       },
       "outputs":  [
         "{options.outputPath}"

@@ -44,7 +44,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "prefix": "portfolio-console",
+            "prefix": "console",
             "style":  "kebab-case",
             "type":   "element"
           }
@@ -59,7 +59,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "prefix": "portfolio-website",
+            "prefix": "website",
             "style":  "kebab-case",
             "type":   "element"
           }
@@ -74,7 +74,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "prefix": "portfolio-components",
+            "prefix": "components",
             "style":  "kebab-case",
             "type":   "element"
           }

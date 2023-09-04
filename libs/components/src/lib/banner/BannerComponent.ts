@@ -1,12 +1,8 @@
-import { CommonModule } from "@angular/common";
-import { Component }    from "@angular/core";
+import { Component } from "@angular/core";
 
 
 @Component({
-  imports:     [
-    CommonModule,
-  ],
-  selector:    "portfolio-components-banner",
+  selector:    "components-banner",
   standalone:  true,
   styleUrls:   [
     "./BannerComponent.sass",

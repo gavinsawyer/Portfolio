@@ -10,18 +10,15 @@ import { distinctUntilChanged, filter, map, startWith }                         
 })
 export class PathService {
 
-  private readonly location: Location = inject(Location);
-  private readonly router:   Router   = inject(Router);
-
   public readonly path$: Signal<string> = toSignal<string>(
-    this.router.events.pipe<NavigationEnd, string, string, string>(
+    inject<Router>(Router).events.pipe<NavigationEnd, string, string, string>(
       filter<RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd, NavigationEnd>(
         (routerEvent: RouterEvent | NavigationStart | NavigationEnd | NavigationCancel | NavigationError | RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd | ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart | ResolveEnd): routerEvent is NavigationEnd => routerEvent instanceof NavigationEnd,
       ),
       map<NavigationEnd, string>(
         (navigationEnd: NavigationEnd): string => navigationEnd.url.split("?")[0],
       ),
-      startWith<string, [ string ]>(this.location.path()),
+      startWith<string, [ string ]>(inject<Location>(Location).path()),
       distinctUntilChanged<string>(),
     ),
     {

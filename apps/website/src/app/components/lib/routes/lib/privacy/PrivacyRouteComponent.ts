@@ -3,7 +3,7 @@ import { RouteComponent } from "@portfolio/components";
 
 
 @Component({
-  selector:    "portfolio-website-privacy-route",
+  selector:    "website-privacy-route",
   standalone:  true,
   styleUrls:   [
     "./PrivacyRouteComponent.sass",

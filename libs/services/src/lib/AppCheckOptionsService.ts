@@ -10,10 +10,9 @@ import { Environment }                                                         f
 })
 export class AppCheckOptionsService {
 
-  private readonly environment: Environment = inject(ENVIRONMENT);
-  private readonly platformId:  object      = inject(PLATFORM_ID);
+  private readonly environment: Environment = inject<Environment>(ENVIRONMENT);
 
-  public readonly appCheckOptions: AppCheckOptions = isPlatformBrowser(this.platformId) ? {
+  public readonly appCheckOptions: AppCheckOptions = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? {
     isTokenAutoRefreshEnabled: true,
     provider:                  new ReCaptchaV3Provider(this.environment.recaptchaKeyID),
   } : {

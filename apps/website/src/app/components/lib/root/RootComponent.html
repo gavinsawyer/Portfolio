@@ -15,9 +15,9 @@
         </h2>
       </div>
     </header>
-    <portfolio-components-banner [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
+    <components-banner [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
     <div>
-      <portfolio-website-aside [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
+      <website-aside [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
       <router-outlet />
     </div>
   </div>

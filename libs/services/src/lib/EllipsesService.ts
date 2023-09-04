@@ -10,9 +10,7 @@ import { interval, map, startWith }                        from "rxjs";
 })
 export class EllipsesService {
 
-  private readonly platformId: object = inject(PLATFORM_ID);
-
-  public readonly ellipses$: Signal<Ellipses> = isPlatformBrowser(this.platformId) ? toSignal<Ellipses>(
+  public readonly ellipses$: Signal<Ellipses> = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<Ellipses>(
     interval(800).pipe<Ellipses, Ellipses>(
       map<number, Ellipses>(
         (n: number): Ellipses => ".".repeat(((n + 1) % 3) + 1) as Ellipses,

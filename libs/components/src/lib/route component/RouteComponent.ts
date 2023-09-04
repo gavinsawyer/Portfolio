@@ -3,8 +3,12 @@ import { Meta }                             from "@angular/platform-browser";
 
 
 @Component({
-  standalone: true,
-  template:   "",
+  selector:    "components-route",
+  standalone:  true,
+  styleUrls:   [
+    "./RouteComponent.sass",
+  ],
+  templateUrl: "./RouteComponent.html",
 })
 export class RouteComponent implements OnInit {
 
@@ -12,14 +16,14 @@ export class RouteComponent implements OnInit {
     required: true,
   }) private readonly description!: string;
 
-  private readonly meta: Meta = inject(Meta);
+  private readonly meta: Meta = inject<Meta>(Meta);
 
   ngOnInit(): void {
     this
       .meta
       .updateTag(
         {
-          "name": "description",
+          "name":    "description",
           "content": this.description,
         },
       );

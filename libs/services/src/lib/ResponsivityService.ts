@@ -9,10 +9,9 @@ import { distinctUntilChanged, fromEvent, map, startWith } from "rxjs";
 })
 export class ResponsivityService {
 
-  private readonly document:   Document = inject(DOCUMENT);
-  private readonly platformId: object   = inject(PLATFORM_ID);
+  private readonly document: Document = inject<Document>(DOCUMENT);
 
-  public readonly scrollPosition$:    Signal<number>                                                                                                                            = isPlatformBrowser(this.platformId) ? toSignal<number>(
+  public readonly scrollPosition$:    Signal<number>                                                                                                                            = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<number>(
     fromEvent<Event>(
       this.document,
       "scroll",

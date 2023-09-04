@@ -3,7 +3,7 @@ import { HttpsFunction }   from "firebase-functions";
 
 
 // noinspection JSUnusedGlobalSymbols
-export const shortcutsAPI: HttpsFunction = getShortcutsApi(
+export const ShortcutsAPI: HttpsFunction = getShortcutsApi(
   {
     environmentCollectionPath: "shortcutsEnvironment",
   },

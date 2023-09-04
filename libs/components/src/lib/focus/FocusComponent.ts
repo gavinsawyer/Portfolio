@@ -1,21 +1,15 @@
-import { CommonModule, NgOptimizedImage } from "@angular/common";
-import { Component, Input }               from "@angular/core";
-import { PublicEnvironmentDocument }      from "@gavinsawyer/shortcuts-api";
+import { NgIf, NgOptimizedImage, NgStyle } from "@angular/common";
+import { Component, Input }                from "@angular/core";
+import { PublicEnvironmentDocument }       from "@gavinsawyer/shortcuts-api";
 
-
-interface FocusIconSizes {
-  [key: string]: {
-    "height": number,
-    "width": number,
-  };
-}
 
 @Component({
-  imports:     [
-    CommonModule,
+  imports: [
+    NgIf,
     NgOptimizedImage,
+    NgStyle,
   ],
-  selector:    "portfolio-components-focus",
+  selector:    "components-focus",
   standalone:  true,
   styleUrls:   [
     "./FocusComponent.sass",
@@ -29,7 +23,12 @@ export class FocusComponent {
   })
   public focus!: PublicEnvironmentDocument["focus"];
 
-  public readonly focusIconSizes: FocusIconSizes = {
+  public readonly focusIconSizes: {
+    [key: string]: {
+      "height": number,
+      "width": number,
+    };
+  } = {
     "Developing":     {
       height: 16.1484,
       width:  14.5469,

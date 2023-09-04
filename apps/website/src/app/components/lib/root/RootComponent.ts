@@ -5,7 +5,7 @@ import { GitInfo }                          from "git-describe";
 
 
 @Component({
-  selector:    "portfolio-website-root",
+  selector:    "website-root",
   styleUrls:   [
     "./RootComponent.sass",
   ],
@@ -13,9 +13,9 @@ import { GitInfo }                          from "git-describe";
 })
 export class RootComponent {
 
-  public readonly gitInfo:             Partial<GitInfo>    = inject(GIT_INFO);
-  public readonly packageVersion:      string              = inject(PACKAGE_VERSION);
-  public readonly pathService:         PathService         = inject(PathService);
-  public readonly responsivityService: ResponsivityService = inject(ResponsivityService);
+  public readonly gitInfo:             Partial<GitInfo>    = inject<Partial<GitInfo>>(GIT_INFO);
+  public readonly packageVersion:      string              = inject<string>(PACKAGE_VERSION);
+  public readonly pathService:         PathService         = inject<PathService>(PathService);
+  public readonly responsivityService: ResponsivityService = inject<ResponsivityService>(ResponsivityService);
 
 }

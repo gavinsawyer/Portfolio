@@ -1,13 +1,15 @@
-import { CommonModule, NgOptimizedImage }         from "@angular/common";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { NgIf, NgOptimizedImage, NgStyle, NgTemplateOutlet } from "@angular/common";
+import { Component, EventEmitter, Input, Output }            from "@angular/core";
 
 
 @Component({
-  imports:     [
-    CommonModule,
+  imports: [
+    NgIf,
     NgOptimizedImage,
+    NgStyle,
+    NgTemplateOutlet,
   ],
-  selector:    "portfolio-components-button",
+  selector:    "components-button",
   standalone:  true,
   styleUrls:   [
     "./ButtonComponent.sass",

@@ -11,13 +11,10 @@ import { catchError, filter, map, Observable }                               fro
 })
 export class FocusService {
 
-  private readonly platformId: object    = inject(PLATFORM_ID);
-  private readonly firestore:  Firestore = inject(Firestore);
-
-  public readonly focus$: Signal<PublicEnvironmentDocument["focus"]> = isPlatformBrowser(this.platformId) ? toSignal<PublicEnvironmentDocument["focus"]>(
+  public readonly focus$: Signal<PublicEnvironmentDocument["focus"]> = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<PublicEnvironmentDocument["focus"]>(
     docSnapshots<PublicEnvironmentDocument>(
       doc(
-        this.firestore,
+        inject<Firestore>(Firestore),
         "shortcutsEnvironment/public",
       ) as DocumentReference<PublicEnvironmentDocument>,
     ).pipe<PublicEnvironmentDocument | undefined, PublicEnvironmentDocument, PublicEnvironmentDocument["focus"], PublicEnvironmentDocument["focus"]>(

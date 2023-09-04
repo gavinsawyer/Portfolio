@@ -54,6 +54,9 @@
     "strict":                             true,
     "target":                             "ESNext"
   },
+  "include": [
+    "!**/*.ts"
+  ],
   "exclude":                [
     "node_modules",
     "tmp",

@@ -16,7 +16,7 @@
       </div>
     </header>
     <div>
-      <portfolio-console-aside [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
+      <console-aside [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
       <router-outlet />
     </div>
   </div>

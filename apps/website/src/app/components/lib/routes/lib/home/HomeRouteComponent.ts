@@ -4,15 +4,15 @@ import { RouteComponent }   from "@portfolio/components";
 
 
 @Component({
-  selector:    "portfolio-website-home-route",
+  imports:     [
+    NgOptimizedImage,
+  ],
+  selector:    "website-home-route",
   standalone:  true,
   styleUrls:   [
     "./HomeRouteComponent.sass",
   ],
   templateUrl: "./HomeRouteComponent.html",
-  imports:     [
-    NgOptimizedImage,
-  ],
 })
 export class HomeRouteComponent extends RouteComponent {
 

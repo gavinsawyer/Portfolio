@@ -1,4 +1,4 @@
-import { CommonModule }                           from "@angular/common";
+import { NgIf }                                   from "@angular/common";
 import { Component, inject }                      from "@angular/core";
 import { RouteComponent }                         from "@portfolio/components";
 import { AuthenticationService, MessagesService } from "@portfolio/services";
@@ -6,9 +6,9 @@ import { AuthenticationService, MessagesService } from "@portfolio/services";
 
 @Component({
   imports:     [
-    CommonModule,
+    NgIf,
   ],
-  selector:    "portfolio-console-app-home",
+  selector:    "console-home-route",
   standalone:  true,
   styleUrls:   [
     "./HomeRouteComponent.sass",
@@ -17,7 +17,7 @@ import { AuthenticationService, MessagesService } from "@portfolio/services";
 })
 export class HomeRouteComponent extends RouteComponent {
 
-  public readonly authenticationService: AuthenticationService = inject(AuthenticationService);
-  public readonly messagesService:       MessagesService       = inject(MessagesService);
+  public readonly authenticationService: AuthenticationService = inject<AuthenticationService>(AuthenticationService);
+  public readonly messagesService:       MessagesService       = inject<MessagesService>(MessagesService);
 
 }

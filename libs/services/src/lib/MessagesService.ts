@@ -13,13 +13,12 @@ import { AuthenticationService }                                                
 })
 export class MessagesService {
 
-  private readonly authenticationService:                  AuthenticationService                             = inject(AuthenticationService);
-  private readonly auth:                                   Auth                                              = inject(Auth);
+  private readonly auth:                                   Auth                                              = inject<Auth>(Auth);
+  private readonly authenticationService:                  AuthenticationService                             = inject<AuthenticationService>(AuthenticationService);
   private readonly createdMessageDocumentReferenceSubject: ReplaySubject<DocumentReference<MessageDocument>> = new ReplaySubject<DocumentReference<MessageDocument>>(1);
-  private readonly firestore:                              Firestore                                         = inject(Firestore);
-  private readonly platformId:                             object                                            = inject(PLATFORM_ID);
+  private readonly firestore:                              Firestore                                         = inject<Firestore>(Firestore);
 
-  public readonly messageDocuments$: Signal<MessageDocument[]>                               = isPlatformBrowser(this.platformId) ? toSignal<MessageDocument[]>(
+  public readonly messageDocuments$:     Signal<MessageDocument[]>                             = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<MessageDocument[]>(
     new Observable<User | null>(
       (userObserver: Observer<User | null>): TeardownLogic => onIdTokenChanged(
         this.auth,

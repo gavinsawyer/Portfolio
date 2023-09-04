@@ -80,7 +80,7 @@
         "styles":                      [
           "apps/console/src/styles.sass"
         ],
-        "tsConfig":                    "tsconfig.json"
+        "tsConfig":                    "apps/console/tsconfig.app.json"
       },
       "outputs":              [
         "{options.outputPath}"
@@ -118,7 +118,7 @@
         "inlineStyleLanguage": "sass",
         "main":                "apps/console/src/app/main.server.ts",
         "outputPath":          "dist/apps/console/server",
-        "tsConfig":            "tsconfig.json"
+        "tsConfig":            "apps/console/tsconfig.app.json"
       },
       "production":           {
         "fileReplacements": [

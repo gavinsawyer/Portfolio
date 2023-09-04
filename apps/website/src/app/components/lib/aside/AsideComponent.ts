@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage }                              from "@angular/common";
+import { NgIf, NgOptimizedImage }                                      from "@angular/common";
 import { Component, inject }                                           from "@angular/core";
 import { Analytics, logEvent }                                         from "@angular/fire/analytics";
 import { ButtonComponent, CreateMessageFormComponent, FocusComponent } from "@portfolio/components";
@@ -6,14 +6,14 @@ import { FocusService, MessagesService }                               from "@po
 
 
 @Component({
-  imports:     [
-    CommonModule,
+  imports: [
     ButtonComponent,
     CreateMessageFormComponent,
     FocusComponent,
+    NgIf,
     NgOptimizedImage,
   ],
-  selector:    "portfolio-website-aside",
+  selector:    "website-aside",
   standalone:  true,
   styleUrls:   [
     "./AsideComponent.sass",
@@ -22,10 +22,10 @@ import { FocusService, MessagesService }                               from "@po
 })
 export class AsideComponent {
 
-  private readonly analytics: Analytics = inject(Analytics);
+  private readonly analytics: Analytics = inject<Analytics>(Analytics);
 
-  public readonly focusService:               FocusService    = inject(FocusService);
-  public readonly messagesService:            MessagesService = inject(MessagesService);
+  public readonly focusService:               FocusService    = inject<FocusService>(FocusService);
+  public readonly messagesService:            MessagesService = inject<MessagesService>(MessagesService);
   public readonly logClickAddToContactsEvent: () => void      = (): void => logEvent<"click_addToContacts">(
     this.analytics,
     "click_addToContacts",
