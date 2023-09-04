@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage }              from "@angular/common";
-import { Component, signal, WritableSignal }           from "@angular/core";
+import { Component, inject, signal, WritableSignal }   from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { AuthenticationService, EllipsesService }      from "@portfolio/services";
 
@@ -19,40 +19,30 @@ import { AuthenticationService, EllipsesService }      from "@portfolio/services
 })
 export class CreateAccountFormComponent {
 
-  public readonly formGroup: FormGroup<{ "displayName": FormControl<string> }>;
-  public readonly status:    WritableSignal<"unsent" | "pending" | "complete">;
-  public readonly submit:    () => void;
-
-  constructor(
-    public readonly authenticationService: AuthenticationService,
-    public readonly ellipsesService:       EllipsesService,
-  ) {
-    this
-      .formGroup = new FormGroup<{ "displayName": FormControl<string> }>(
+  public readonly authenticationService: AuthenticationService                             = inject(AuthenticationService);
+  public readonly ellipsesService:       EllipsesService                                   = inject(EllipsesService);
+  public readonly formGroup:             FormGroup<{ "displayName": FormControl<string> }> = new FormGroup<{ "displayName": FormControl<string> }>(
+    {
+      displayName: new FormControl<string>(
+        "",
         {
-          displayName: new FormControl<string>(
-            "",
-            {
-              nonNullable: true,
-            },
-          ),
+          nonNullable: true,
         },
-      );
+      ),
+    },
+  );
+  public readonly status:                WritableSignal<"unsent" | "pending" | "complete"> = signal<"unsent" | "pending" | "complete">("unsent");
+  public readonly submit:                () => void                                        = (): void => this
+    .formGroup
+    .value
+    .displayName ? ((): void => {
     this
-      .status = signal<"unsent" | "pending" | "complete">("unsent");
-    this
-      .submit = (): void => this
       .formGroup
-      .value
-      .displayName ? ((): void => {
-        this
-          .formGroup
-          .disable();
+      .disable();
 
-        this
-          .status
-          .set("pending");
-      })() : void (0);
-  }
+    this
+      .status
+      .set("pending");
+  })() : void (0);
 
 }

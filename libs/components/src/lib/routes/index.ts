@@ -13,3 +13,4 @@ export const routes: Route[] = [
     },
   },
 ];
+export * from "./lib/RouteComponent";

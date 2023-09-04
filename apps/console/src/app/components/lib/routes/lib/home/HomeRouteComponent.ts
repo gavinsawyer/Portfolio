@@ -1,6 +1,6 @@
 import { CommonModule }                           from "@angular/common";
-import { Component, Input, OnInit }               from "@angular/core";
-import { Meta }                                   from "@angular/platform-browser";
+import { Component, inject }                      from "@angular/core";
+import { RouteComponent }                         from "@portfolio/components";
 import { AuthenticationService, MessagesService } from "@portfolio/services";
 
 
@@ -15,29 +15,9 @@ import { AuthenticationService, MessagesService } from "@portfolio/services";
   ],
   templateUrl: "./HomeRouteComponent.html",
 })
-export class HomeRouteComponent implements OnInit {
+export class HomeRouteComponent extends RouteComponent {
 
-  @Input({
-    required: true,
-  }) private readonly description!: string;
-
-  constructor(
-    private readonly meta: Meta,
-
-    public readonly authenticationService: AuthenticationService,
-    public readonly messagesService:       MessagesService,
-  ) {
-  }
-
-  ngOnInit(): void {
-    this
-      .meta
-      .updateTag(
-        {
-          "name": "description",
-          "content": this.description,
-        },
-      );
-  }
+  public readonly authenticationService: AuthenticationService = inject(AuthenticationService);
+  public readonly messagesService:       MessagesService       = inject(MessagesService);
 
 }

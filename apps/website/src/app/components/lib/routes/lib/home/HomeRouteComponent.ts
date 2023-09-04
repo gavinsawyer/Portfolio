@@ -1,6 +1,6 @@
-import { NgOptimizedImage }         from "@angular/common";
-import { Component, Input, OnInit } from "@angular/core";
-import { Meta }                     from "@angular/platform-browser";
+import { NgOptimizedImage } from "@angular/common";
+import { Component }        from "@angular/core";
+import { RouteComponent }   from "@portfolio/components";
 
 
 @Component({
@@ -14,32 +14,10 @@ import { Meta }                     from "@angular/platform-browser";
     NgOptimizedImage,
   ],
 })
-export class HomeRouteComponent implements OnInit {
+export class HomeRouteComponent extends RouteComponent {
 
-  @Input({
-    required: true,
-  }) private readonly description!: string;
-
-  public readonly yearsSinceSummer2014: number;
-
-  constructor(
-    private readonly meta: Meta,
-  ) {
-    this
-      .yearsSinceSummer2014 = new Date(
-        new Date().getTime() - new Date("Sat Jun 21 2014 12:00:00 GMT-0400 (Eastern Daylight Time)").getTime()
-      ).getFullYear() - 1970;
-  }
-
-  ngOnInit(): void {
-    this
-      .meta
-      .updateTag(
-        {
-          "name": "description",
-          "content": this.description,
-        },
-      );
-  }
+  public readonly yearsSinceSummer2014: number = new Date(
+    new Date().getTime() - new Date("Sat Jun 21 2014 12:00:00 GMT-0400 (Eastern Daylight Time)").getTime()
+  ).getFullYear() - 1970;
 
 }

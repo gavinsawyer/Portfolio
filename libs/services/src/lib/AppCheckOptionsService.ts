@@ -1,5 +1,5 @@
 import { isPlatformBrowser }                                                   from "@angular/common";
-import { Inject, Injectable, PLATFORM_ID }                                     from "@angular/core";
+import { inject, Injectable, PLATFORM_ID }                                     from "@angular/core";
 import { AppCheckOptions, AppCheckToken, CustomProvider, ReCaptchaV3Provider } from "@angular/fire/app-check";
 import { ENVIRONMENT }                                                         from "@portfolio/injection-tokens";
 import { Environment }                                                         from "@portfolio/interfaces";
@@ -10,29 +10,24 @@ import { Environment }                                                         f
 })
 export class AppCheckOptionsService {
 
-  public readonly appCheckOptions: AppCheckOptions;
+  private readonly environment: Environment = inject(ENVIRONMENT);
+  private readonly platformId:  object      = inject(PLATFORM_ID);
 
-  constructor(
-    @Inject(ENVIRONMENT) private readonly environment: Environment,
-    @Inject(PLATFORM_ID) private readonly platformId:  object,
-  ) {
-    this
-      .appCheckOptions = isPlatformBrowser(this.platformId) ? {
-        isTokenAutoRefreshEnabled: true,
-        provider:                  new ReCaptchaV3Provider(this.environment.recaptchaKeyID),
-      } : {
-        isTokenAutoRefreshEnabled: false,
-        provider:                  new CustomProvider(
+  public readonly appCheckOptions: AppCheckOptions = isPlatformBrowser(this.platformId) ? {
+    isTokenAutoRefreshEnabled: true,
+    provider:                  new ReCaptchaV3Provider(this.environment.recaptchaKeyID),
+  } : {
+    isTokenAutoRefreshEnabled: false,
+    provider:                  new CustomProvider(
+      {
+        getToken: (): Promise<AppCheckToken> => Promise.resolve(
           {
-            getToken: (): Promise<AppCheckToken> => Promise.resolve(
-              {
-                token:            process.env["APP_CHECK_TOKEN_" + this.environment.app.toUpperCase()] as string,
-                expireTimeMillis: Date.now(),
-              },
-            ),
+            token:            process.env["APP_CHECK_TOKEN_" + this.environment.app.toUpperCase()] as string,
+            expireTimeMillis: Date.now(),
           },
         ),
-      };
-  }
+      },
+    ),
+  };
 
 }

@@ -1,6 +1,6 @@
-import { CommonModule, NgOptimizedImage }                                                                           from "@angular/common";
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, signal, SimpleChanges, ViewChild, WritableSignal } from "@angular/core";
-import { Analytics, logEvent }                                                                                      from "@angular/fire/analytics";
+import { CommonModule, NgOptimizedImage }                                                                                   from "@angular/common";
+import { AfterViewInit, Component, ElementRef, inject, Input, OnChanges, signal, SimpleChanges, ViewChild, WritableSignal } from "@angular/core";
+import { Analytics, logEvent }                                                                                              from "@angular/fire/analytics";
 import { FormControl, FormGroup, ReactiveFormsModule }                                                              from "@angular/forms";
 import { MessageDocument }                                                                                          from "@portfolio/interfaces";
 import { AuthenticationService, EllipsesService, MessagesService, ResponsivityService }                             from "@portfolio/services";
@@ -35,14 +35,6 @@ type Status = "unsent" | "pending" | "complete";
 })
 export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
 
-  @Input({
-    required: true,
-  }) public messageDocuments!: MessageDocument[];
-
-  public readonly formGroup: FormGroup<CreateMessageForm>;
-  public readonly status:    WritableSignal<Status>;
-  public readonly submit:    () => void;
-
   @ViewChild(
     "nameHTMLInputElement",
     {
@@ -50,86 +42,84 @@ export class CreateMessageFormComponent implements AfterViewInit, OnChanges {
     },
   ) private nameInputElementRef!: ElementRef;
 
-  constructor(
-    private readonly analytics:       Analytics,
-    private readonly messagesService: MessagesService,
+  private readonly analytics:       Analytics       = inject(Analytics);
+  private readonly messagesService: MessagesService = inject(MessagesService);
 
-    public readonly authenticationService: AuthenticationService,
-    public readonly ellipsesService:       EllipsesService,
-    public readonly responsivityService:   ResponsivityService,
-  ) {
-    this
-      .formGroup = new FormGroup<CreateMessageForm>(
+  public readonly authenticationService: AuthenticationService        = inject(AuthenticationService);
+  public readonly ellipsesService:       EllipsesService              = inject(EllipsesService);
+  public readonly responsivityService:   ResponsivityService          = inject(ResponsivityService);
+  public readonly formGroup:             FormGroup<CreateMessageForm> = new FormGroup<CreateMessageForm>(
+    {
+      email:   new FormControl<string>(
+        "",
         {
-          email:   new FormControl<string>(
-            "",
-            {
-              nonNullable: true,
-            },
-          ),
-          message: new FormControl<string>(
-            "",
-            {
-              nonNullable: true,
-            },
-          ),
-          name:    new FormControl<string>(
-            "",
-            {
-              nonNullable: true,
-            },
-          ),
-          phone:   new FormControl<string>(
-            "",
-            {
-              nonNullable: true,
-            },
-          ),
-        }
+          nonNullable: true,
+        },
+      ),
+      message: new FormControl<string>(
+        "",
+        {
+          nonNullable: true,
+        },
+      ),
+      name:    new FormControl<string>(
+        "",
+        {
+          nonNullable: true,
+        },
+      ),
+      phone:   new FormControl<string>(
+        "",
+        {
+          nonNullable: true,
+        },
+      ),
+    }
+  );
+  public readonly status:                WritableSignal<Status>       = signal<Status>("unsent");
+  public readonly submit:                () => Promise<void>          = async (): Promise<void> => (this.formGroup.value.email || this.formGroup.value.phone) && this
+    .formGroup
+    .value
+    .message && this
+    .formGroup
+    .value
+    .name ? ((): Promise<void> => {
+      this
+        .formGroup
+        .disable();
+      this
+        .status
+        .set("pending");
+
+      logEvent(
+        this.analytics,
+        "form_submit",
+        {
+          "form_id":          "",
+          "form_name":        "message",
+          "form_destination": window.location.protocol + "//" + window.location.hostname + (window.location.port !== "" ? ":" + window.location.port : "") + "/",
+        },
       );
-    this
-      .status = signal<Status>("unsent");
-    this
-      .submit = async (): Promise<void> => (this.formGroup.value.email || this.formGroup.value.phone) && this
-      .formGroup
-      .value
-      .message && this
-      .formGroup
-      .value
-      .name ? (async (): Promise<void> => {
-        this
-          .formGroup
-          .disable();
 
-        this
-          .status
-          .set("pending");
-
-        logEvent(
-          this.analytics,
-          "form_submit",
-          {
-            "form_id":          "",
-            "form_name":        "message",
-            "form_destination": window.location.protocol + "//" + window.location.hostname + (window.location.port !== "" ? ":" + window.location.port : "") + "/",
-          },
-        );
-
-        return await this
-          .messagesService
-          .createMessageDocument(this.formGroup.getRawValue())
-          .then<void>((): void => this.status.set("complete"))
-          .catch<void>((): void => {
+      return this
+        .messagesService
+        .createMessageDocument(this.formGroup.getRawValue())
+        .then<void, void>(
+          (): void => this.status.set("complete"),
+          (): void => {
             this
               .formGroup
               .enable();
-
             this
               .status
               .set("unsent");
-          });
-      })() : void (0);
-  }
+          },
+        );
+    })() : void (0);
+
+  @Input({
+    required: true,
+  }) public messageDocuments!: MessageDocument[];
 
   ngAfterViewInit(): void {
     this

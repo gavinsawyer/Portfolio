@@ -1,6 +1,6 @@
-import { Component, Inject }                from "@angular/core";
+import { Component, inject }                from "@angular/core";
 import { GIT_INFO, PACKAGE_VERSION }        from "@portfolio/injection-tokens";
-import { ResponsivityService, PathService } from "@portfolio/services";
+import { PathService, ResponsivityService } from "@portfolio/services";
 import { GitInfo }                          from "git-describe";
 
 
@@ -13,13 +13,9 @@ import { GitInfo }                          from "git-describe";
 })
 export class RootComponent {
 
-  constructor(
-    @Inject(GIT_INFO)        public readonly gitInfo:        Partial<GitInfo>,
-    @Inject(PACKAGE_VERSION) public readonly packageVersion: string,
-
-    public readonly responsivityService: ResponsivityService,
-    public readonly pathService:         PathService,
-  ) {
-  }
+  public readonly gitInfo:             Partial<GitInfo>    = inject(GIT_INFO);
+  public readonly packageVersion:      string              = inject(PACKAGE_VERSION);
+  public readonly pathService:         PathService         = inject(PathService);
+  public readonly responsivityService: ResponsivityService = inject(ResponsivityService);
 
 }

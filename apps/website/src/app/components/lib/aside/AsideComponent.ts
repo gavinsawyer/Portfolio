@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage }                              from "@angular/common";
-import { Component }                                                   from "@angular/core";
+import { Component, inject }                                           from "@angular/core";
 import { Analytics, logEvent }                                         from "@angular/fire/analytics";
 import { ButtonComponent, CreateMessageFormComponent, FocusComponent } from "@portfolio/components";
 import { FocusService, MessagesService }                               from "@portfolio/services";
@@ -22,25 +22,17 @@ import { FocusService, MessagesService }                               from "@po
 })
 export class AsideComponent {
 
-  public readonly logClickAddToContactsEvent: () => void;
-  public readonly logClickOpenResumeEvent: () => void;
+  private readonly analytics: Analytics = inject(Analytics);
 
-  constructor(
-    private readonly analytics: Analytics,
-
-    public readonly focusService:    FocusService,
-    public readonly messagesService: MessagesService,
-  ) {
-    this
-      .logClickAddToContactsEvent = (): void => logEvent<"click_addToContacts">(
-        this.analytics,
-        "click_addToContacts",
-      );
-    this
-      .logClickOpenResumeEvent = (): void => logEvent<"click_openResume">(
-        this.analytics,
-        "click_openResume",
-      );
-  }
+  public readonly focusService:               FocusService    = inject(FocusService);
+  public readonly messagesService:            MessagesService = inject(MessagesService);
+  public readonly logClickAddToContactsEvent: () => void      = (): void => logEvent<"click_addToContacts">(
+    this.analytics,
+    "click_addToContacts",
+  );
+  public readonly logClickOpenResumeEvent:    () => void      = (): void => logEvent<"click_openResume">(
+    this.analytics,
+    "click_openResume",
+  );
 
 }

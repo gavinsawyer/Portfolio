@@ -16,7 +16,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 })
 export class ButtonComponent {
 
-  @Output() public readonly action: EventEmitter<void>;
+  @Output() public readonly action: EventEmitter<void> = new EventEmitter<void>();
 
   @Input() public iconHeight?: number;
   @Input() public iconName?:   string;
@@ -24,11 +24,6 @@ export class ButtonComponent {
   @Input({
     required: true,
   })       public text!:       string;
-  @Input() public url!:        string;
-
-  constructor() {
-    this
-      .action = new EventEmitter<void>();
-  }
+  @Input() public url?:        string;
 
 }
