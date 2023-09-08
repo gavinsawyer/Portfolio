@@ -57,6 +57,10 @@ export class FocusComponent {
       height: 17.8359,
       width:  18.6898,
     },
+    "Work":           {
+      height: 19.8359,
+      width:  13.1406,
+    },
   };
 
 }

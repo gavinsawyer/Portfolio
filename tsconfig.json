@@ -25,25 +25,25 @@
     "noPropertyAccessFromIndexSignature": true,
     "outDir":                             "dist/out-tsc",
     "paths":                              {
-      "@portfolio/app-module-providers":  [
+      "@portfolio/app-module-providers": [
         "libs/app module providers/src/index.ts"
       ],
-      "@portfolio/cloud-functions":  [
+      "@portfolio/cloud-functions":      [
         "libs/cloud functions/src/index.ts"
       ],
-      "@portfolio/components":       [
+      "@portfolio/components":           [
         "libs/components/src/index.ts"
       ],
-      "@portfolio/injection-tokens": [
+      "@portfolio/injection-tokens":     [
         "libs/injection tokens/src/index.ts"
       ],
-      "@portfolio/interfaces":       [
+      "@portfolio/interfaces":           [
         "libs/interfaces/src/index.ts"
       ],
-      "@portfolio/services":         [
+      "@portfolio/services":             [
         "libs/services/src/index.ts"
       ],
-      "@portfolio/types":         [
+      "@portfolio/types":                [
         "libs/types/src/index.ts"
       ]
     },
@@ -54,12 +54,12 @@
     "strict":                             true,
     "target":                             "ESNext"
   },
-  "include": [
-    "!**/*.ts"
-  ],
   "exclude":                [
     "node_modules",
     "tmp",
     "**/README.md"
+  ],
+  "include":                [
+    "!**/*.ts"
   ]
 }

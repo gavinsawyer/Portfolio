@@ -12,6 +12,7 @@
     },
     {
       "extends": [
+        "plugin:@typescript-eslint/recommended",
         "plugin:@nx/angular",
         "plugin:@nx/typescript"
       ],
@@ -37,10 +38,10 @@
       }
     },
     {
-      "files":   [
+      "files": [
         "./apps/console/src/app/components/lib/**/*.ts"
       ],
-      "rules":   {
+      "rules": {
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -52,10 +53,10 @@
       }
     },
     {
-      "files":   [
+      "files": [
         "./apps/website/src/app/components/lib/**/*.ts"
       ],
-      "rules":   {
+      "rules": {
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -67,10 +68,10 @@
       }
     },
     {
-      "files":   [
+      "files": [
         "./libs/components/src/lib/**/*.ts"
       ],
-      "rules":   {
+      "rules": {
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -82,7 +83,9 @@
       }
     }
   ],
+  "parser":    "@typescript-eslint/parser",
   "plugins":   [
+    "@typescript-eslint",
     "@angular-eslint",
     "@nx"
   ],

@@ -1,7 +1,6 @@
 {
   "$schema":     "../../node_modules/nx/schemas/project-schema.json",
   "name":        "console",
-  "prefix":      "console-app",
   "projectType": "application",
   "sourceRoot":  "apps/console/src",
   "targets":     {

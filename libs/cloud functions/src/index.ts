@@ -1,1 +1,1 @@
-export * from "./lib/ShortcutsAPI";
+export * from "./lib/ShortcutsApi";
