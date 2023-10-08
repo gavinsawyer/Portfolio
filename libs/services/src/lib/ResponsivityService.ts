@@ -1,7 +1,7 @@
 import { DOCUMENT, isPlatformBrowser }                     from "@angular/common";
 import { inject, Injectable, PLATFORM_ID, signal, Signal } from "@angular/core";
 import { toSignal }                                        from "@angular/core/rxjs-interop";
-import { distinctUntilChanged, fromEvent, map, startWith } from "rxjs";
+import { fromEvent, map, startWith }                       from "rxjs";
 
 
 @Injectable({
@@ -15,12 +15,11 @@ export class ResponsivityService {
     fromEvent<Event>(
       this.document,
       "scroll",
-    ).pipe<number, number, number>(
+    ).pipe<number, number>(
       map<Event, number>(
         (): number => this.document.defaultView?.scrollY || 0,
       ),
       startWith<number, [ number ]>(this.document.defaultView?.scrollY || 0),
-      distinctUntilChanged<number>(),
     ),
     {
       requireSync: true,

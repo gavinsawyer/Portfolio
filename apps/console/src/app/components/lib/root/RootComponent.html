@@ -1,32 +1,16 @@
-<main>
-  <div>
-    <header [ngClass]="{'raised': (responsivityService.scrollPosition$() || 0) > 16}">
-      <div>
-        <h1 style="margin-bottom: 0; text-align: center;">
-          <a
-            #routerLinkActive="routerLinkActive"
-            [ngClass]="{'active': routerLinkActive.isActive}"
-            [routerLinkActiveOptions]="{'exact': true}"
-            routerLink=""
-            routerLinkActive="">Gavin Sawyer</a>
-        </h1>
-        <h2 style="text-align: center;">
-          Boston
-        </h2>
-      </div>
-    </header>
+<div>
+  <components-header [ngClass]="{'raised': (responsivityService.scrollPosition$() || 0) > 16}" />
+  <main>
+    <console-aside [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
     <div>
-      <console-aside [ngClass]="{'pathRoot': pathService.path$() === '/'}" />
       <router-outlet />
     </div>
-  </div>
-</main>
+  </main>
+</div>
 <footer>
-  <div>
-    <ul>
-      <li>
-        v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/gavinsawyer/Portfolio/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
-      </li>
-    </ul>
-  </div>
+  <ul>
+    <li>
+      v{{ packageVersion + (gitInfo.dirty ? "-next" : "") }}+<a [href]="'https://github.com/gavinsawyer/Portfolio/commit/' + gitInfo.hash">{{ gitInfo.hash }}</a>
+    </li>
+  </ul>
 </footer>

@@ -182,7 +182,7 @@
         "firebaseHostingSite":  "portfolio-a59e2",
         "firebaseProject":      "portfolio-a59e2",
         "functionName":         "ssr-website",
-        "functionsNodeVersion": "18.17",
+        "functionsNodeVersion": "18.18",
         "outputPath":           "dist/apps/website/run",
         "prerender":            true,
         "prerenderTarget":      "website:build:production",

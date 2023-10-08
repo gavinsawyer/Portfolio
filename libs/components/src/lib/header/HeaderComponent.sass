@@ -1,0 +1,55 @@
+@use 'sass:math'
+@import '../../../../../colors'
+
+\:host
+  position: sticky
+  top: 1rem
+
+  header
+    align-items: center
+    backdrop-filter: saturate(2) blur(2rem)
+    border-radius: 1rem
+    display: flex
+    flex-direction: column
+    margin: 0 -1rem
+    transition: all ease 100ms
+
+    h1
+      font-size: 1.5rem
+
+      a
+        color: inherit
+
+        &.no-op
+          cursor: default
+
+        &:hover
+          text-decoration: none
+
+    h2
+      font-size: 0.8775rem
+      margin-bottom: 1em
+
+  &.raised > header
+    box-shadow: $shadow 0 0.25rem 0.5rem -0.25rem
+
+  @media (max-width: 22.25rem)
+    top: 0
+
+    & > header
+      border-radius: 0
+
+  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
+    header
+      background-color: transparentize($body-background, math.div(1, 3))
+
+      h1
+        color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
+
+      h2
+        color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
+
+  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten, darken)
+
+  @media (prefers-color-scheme: dark)
+    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken, lighten)

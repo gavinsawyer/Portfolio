@@ -1,5 +1,4 @@
 export interface Environment {
-  "app": string,
   "firebase": {
     "apiKey": string,
     "appId": string,
@@ -10,5 +9,6 @@ export interface Environment {
     "storageBucket": string
   },
   "production": boolean,
+  "projectName": string,
   "recaptchaKeyID": string,
 }

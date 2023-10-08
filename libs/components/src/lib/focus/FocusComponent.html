@@ -1,10 +1,11 @@
 <div
   *ngIf="focus"
   [ngStyle]="{'height': svg.offsetWidth + 'px'}"
-  class="indicator">
+  id="indicator">
   <img
     #svg
     [alt]="focus + (focus === 'Do Not Disturb' ? '' : ' Focus') + ' icon'"
+    class="focus-icon"
     [height]="focusIconSizes[focus].height"
     [loaderParams]="{type: 'Focus Icon'}"
     [ngSrc]="focus"
@@ -12,7 +13,11 @@
     [sizes]="focusIconSizes[focus].width + ''"
     [width]="focusIconSizes[focus].width" />
 </div>
-<div class="description">
-  <h3>{{ focus + (focus === "Do Not Disturb" ? "" : " Focus") }}</h3>
-  <p>Gavin has message notifications turned {{ focus === "Personal" ? "on" : "off"  }}.</p>
+<div id="description">
+  <h3>
+    {{ focus + (focus === "Do Not Disturb" ? "" : " Focus") }}
+  </h3>
+  <p>
+    Gavin has message notifications turned {{ focus === "Personal" ? "on" : "off"  }}.
+  </p>
 </div>

@@ -1,4 +1,4 @@
-@import '../../colors'
+@import '../../../../../colors'
 
 \:host
   display: flex
@@ -35,7 +35,7 @@
       display: none
       flex-shrink: 1
 
-      @media (max-width: 52.22265625rem)
+      @media (max-width: 52.25rem)
         display: flex
 
   &.merge-left
@@ -54,12 +54,6 @@
     button
       #spacer
         display: none
-
-      @media (max-width: 22.22265625rem)
-        border-radius: calc(1.5rem + (14.28125px / 2))
-
-        #spacer
-          display: flex
 
   @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function, $degrade-background-function)
     button,

@@ -10,9 +10,6 @@ import { AuthenticationService, MessagesService } from "@portfolio/services";
   ],
   selector:    "console-home-route",
   standalone:  true,
-  styleUrls:   [
-    "./HomeRouteComponent.sass",
-  ],
   templateUrl: "./HomeRouteComponent.html",
 })
 export class HomeRouteComponent extends RouteComponent {

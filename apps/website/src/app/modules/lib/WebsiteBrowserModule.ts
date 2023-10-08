@@ -1,20 +1,20 @@
-import { Injector, NgModule }                                     from "@angular/core";
-import { Analytics, getAnalytics, provideAnalytics }              from "@angular/fire/analytics";
-import { FirebaseApp, initializeApp, provideFirebaseApp }         from "@angular/fire/app";
-import { AppCheck, initializeAppCheck, provideAppCheck }          from "@angular/fire/app-check";
-import { Auth, getAuth, provideAuth }                             from "@angular/fire/auth";
-import { Firestore, getFirestore, provideFirestore }              from "@angular/fire/firestore";
-import { ReactiveFormsModule }                                    from "@angular/forms";
-import { BrowserModule }                                          from "@angular/platform-browser";
-import { RouterModule }                                           from "@angular/router";
-import { TransferHttpCacheModule }                                from "@nguniversal/common";
-import { getAppModuleProviders }                                  from "@portfolio/app-module-providers";
-import { BannerComponent, routes as portfolioRoutes }             from "@portfolio/components";
-import { AppCheckOptionsService }                                 from "@portfolio/services";
-import { gitInfo }                                                from "../../../.git-info";
-import { packageVersion }                                         from "../../../.package-version";
-import { environment }                                            from "../../../environment";
-import { AsideComponent, RootComponent, routes as websiteRoutes } from "../../components";
+import { Injector, NgModule }                                          from "@angular/core";
+import { Analytics, getAnalytics, provideAnalytics }                   from "@angular/fire/analytics";
+import { FirebaseApp, initializeApp, provideFirebaseApp }              from "@angular/fire/app";
+import { AppCheck, initializeAppCheck, provideAppCheck }               from "@angular/fire/app-check";
+import { Auth, getAuth, provideAuth }                                  from "@angular/fire/auth";
+import { Firestore, getFirestore, provideFirestore }                   from "@angular/fire/firestore";
+import { ReactiveFormsModule }                                         from "@angular/forms";
+import { BrowserModule }                                               from "@angular/platform-browser";
+import { RouterModule }                                                from "@angular/router";
+import { TransferHttpCacheModule }                                     from "@nguniversal/common";
+import { getAppModuleProviders }                                       from "@portfolio/app-module-providers";
+import { BannerComponent, HeaderComponent, routes as portfolioRoutes } from "@portfolio/components";
+import { AppCheckOptionsService }                                      from "@portfolio/services";
+import { gitInfo }                                                     from "../../../.git-info";
+import { packageVersion }                                              from "../../../.package-version";
+import { environment }                                                 from "../../../environment";
+import { AsideComponent, RootComponent, routes as websiteRoutes }      from "../../components";
 
 
 @NgModule({
@@ -59,6 +59,7 @@ import { AsideComponent, RootComponent, routes as websiteRoutes } from "../../co
       },
     ),
     TransferHttpCacheModule,
+    HeaderComponent,
   ],
   providers:    getAppModuleProviders(
     {

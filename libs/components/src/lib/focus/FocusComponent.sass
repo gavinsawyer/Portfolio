@@ -1,4 +1,4 @@
-@import '../../colors'
+@import '../../../../../colors'
 
 \:host
   align-content: flex-start
@@ -13,7 +13,7 @@
   padding: 0.75rem 1.5rem 0.75rem 0.75rem
   user-select: none
 
-  .indicator
+  #indicator
     border-radius: 100%
     display: flex
     flex-direction: column
@@ -21,7 +21,7 @@
     padding: 0.75rem
     background: transparentize($body-light, 0.125)
 
-  .description
+  #description
     padding: 0.5rem 0
 
     h3
@@ -30,13 +30,13 @@
     p
       font-size: 0.85rem
       margin-bottom: 0
+      max-width: 206px
 
-      @media (max-width: 52.22265625rem)
+      @media (max-width: 52.25rem)
         max-width: 100%
 
-  .indicator,
-  .liveBadge,
-  .description
+  #indicator,
+  #description
     display: flex
     flex-direction: column
 

@@ -5,14 +5,13 @@ import { ConsoleBrowserModule } from "../../modules";
 
 
 @NgModule({
+  bootstrap: [
+    RootComponent,
+  ],
   imports:   [
     ConsoleBrowserModule,
     ServerModule,
   ],
-  bootstrap: [
-    RootComponent,
-  ],
-  providers: [],
 })
 export class ConsoleServerModule {
 }

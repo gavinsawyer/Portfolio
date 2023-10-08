@@ -1,7 +1,7 @@
 <ng-template #buttonTemplate>
   <img
     alt="Icon"
-    class="foregroundIcon"
+    class="icon"
     [height]="iconHeight"
     [loaderParams]="{type: 'Icon'}"
     *ngIf="iconWidth && iconHeight && iconName"
@@ -9,7 +9,9 @@
     ngSrcset="1x"
     [sizes]="iconWidth + 'px'"
     [width]="iconWidth" />
-  <div id="text">{{ text }}</div>
+  <div id="text">
+    {{ text }}
+  </div>
   <div
     *ngIf="iconWidth && iconHeight && iconName"
     [ngStyle]="{'flex-basis': iconWidth + 'px', 'max-width': iconWidth + 'px'}"

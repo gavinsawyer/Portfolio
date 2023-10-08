@@ -1,74 +1,78 @@
 @import 'normalize.css'
-@import 'colors'
+@import '../../../colors'
 
 
-html
-  overflow-x: hidden
+body
+  display: flex
+  flex-direction: row
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif
+  font-size: 16px
+  justify-content: center
 
-  body
-    display: flex
-    flex-direction: row
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif
-    font-size: 16px
-    padding: 1rem 2rem
+  section
+    width: min(29rem, 100%)
+
+  a
+    color: $primary
+    text-decoration: none
+
+    &:hover
+      text-decoration: underline
+
+  ul
+    padding-inline-start: 0
+
+    li
+      margin: 0.25rem 0
+      list-style: none
+
+  h1
+    font-size: 2.8rem
+
+  h2
+    font-size: 2rem
+
+  h3
+    font-size: 1.2rem
+
+  h4
+    font-size: 0.8rem
+
+  h1,
+  h2,
+  h3,
+  h4
+    margin: 1rem 0 0.5em
+
+    & + h2,
+    & + h3,
+    & + h4
+      margin-top: 0
 
     a
-      color: $primary
-      text-decoration: none
+      font-weight: bolder
 
-      &:hover
-        text-decoration: underline
+  img:not(.icon, .focus-icon)
+    border-radius: calc(1.5rem + (14.28125px / 2))
+    box-shadow: $shadow 0 0.25rem 1rem -0.25rem
 
-    ul
-      padding-inline-start: 0
-
-      li
-        margin: 0.25rem 0
-        list-style: none
+  @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
+    color: $body-foreground
+    background-color: $body-background
 
     h1
-      font-size: 2.8rem
-
+      color: call(get-function($degrade-foreground-function), $body-foreground, 0%)
     h2
-      font-size: 2rem
-
+      color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
     h3
-      font-size: 1.2rem
-
+      color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
     h4
-      font-size: 0.8rem
+      color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
 
-    h1,
-    h2,
-    h3,
-    h4
-      margin: 1rem 0 0.5em
+  @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
 
-      & + h2,
-      & + h3,
-      & + h4
-        margin-top: 0
+  @media (prefers-color-scheme: dark)
+    @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)
 
-      a
-        font-weight: bolder
-
-    @mixin colors($body-foreground, $body-background, $footer-foreground, $footer-background, $degrade-foreground-function)
-      color: $body-foreground
-      background-color: $body-background
-
-      h1
-        color: call(get-function($degrade-foreground-function), $body-foreground, 0%)
-      h2
-        color: call(get-function($degrade-foreground-function), $body-foreground, 10%)
-      h3
-        color: call(get-function($degrade-foreground-function), $body-foreground, 20%)
-      h4
-        color: call(get-function($degrade-foreground-function), $body-foreground, 30%)
-
-    @include colors($body-dark, $body-light, $footer-dark, $footer-light, lighten)
-
-    @media (prefers-color-scheme: dark)
-      @include colors($body-light, $body-dark, $footer-light, $footer-dark, darken)
-
-      img.foregroundIcon
-        filter: invert(1)
+    img.icon
+      filter: invert(1)

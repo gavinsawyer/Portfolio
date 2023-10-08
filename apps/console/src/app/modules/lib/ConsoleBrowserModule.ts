@@ -9,7 +9,7 @@ import { BrowserModule }                                          from "@angular
 import { RouterModule }                                           from "@angular/router";
 import { TransferHttpCacheModule }                                from "@nguniversal/common";
 import { getAppModuleProviders }                                  from "@portfolio/app-module-providers";
-import { routes as portfolioRoutes }                              from "@portfolio/components";
+import { HeaderComponent, routes as portfolioRoutes }             from "@portfolio/components";
 import { AppCheckOptionsService }                                 from "@portfolio/services";
 import { gitInfo }                                                from "../../../.git-info";
 import { packageVersion }                                         from "../../../.package-version";
@@ -58,6 +58,7 @@ import { AsideComponent, RootComponent, routes as consoleRoutes } from "../../co
       },
     ),
     TransferHttpCacheModule,
+    HeaderComponent,
   ],
   providers:    getAppModuleProviders(
     {

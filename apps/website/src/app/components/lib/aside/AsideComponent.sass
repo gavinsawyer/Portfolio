@@ -1,55 +1,26 @@
-@import '../../../../../../../libs/components/src/colors'
-
 \:host
   display: flex
-  flex-basis: 18.22265625rem
   flex-direction: column
-  flex-shrink: 1
-  max-width: 18.22265625rem
-
-  @media (max-width: 52.22265625rem)
-    display: none
-    flex-basis: calc(100vw - 4rem)
-    flex-grow: 1
-    flex-shrink: 0
-    max-width: calc(100vw - 4rem)
-
-    &.pathRoot
-      display: flex
+  width: 18.25rem
 
   aside
     display: flex
-    flex-basis: 18.22265625rem
     flex-direction: column
-    flex-shrink: 1
-    gap: 2rem
-    max-width: 18.22265625rem
-    margin-top: 1rem
+    gap: 1rem
+    padding: 1rem 0
 
     & > div
       display: flex
-      flex-direction: column
+      flex-direction: row
       gap: 1rem
 
-      & > div
-        display: flex
-        flex-direction: row
-        gap: 1rem
-
-        @media (max-width: 22.22265625rem)
-          flex-direction: column
-
     img
-      border-radius: calc(1.5rem + (14.28125px / 2))
-      box-shadow: $shadow 0 0.25rem 1rem -0.25rem
-      display: flex
-      flex-direction: column
       height: auto
-      max-width: 29rem
-      width: auto
+      width: 100%
 
-    @media (max-width: 52.22265625rem)
-      flex-basis: calc(100vw - 4rem)
-      flex-grow: 1
-      flex-shrink: 0
-      max-width: calc(100vw - 4rem)
+  @media (max-width: 52.25rem)
+    display: none
+    width: min(100%, 29rem)
+
+    &.always-shown
+      display: flex

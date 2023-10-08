@@ -181,7 +181,7 @@
         "firebaseHostingSite":  "portfolio-a59e2-console",
         "firebaseProject":      "portfolio-a59e2",
         "functionName":         "ssr-console",
-        "functionsNodeVersion": "18.17",
+        "functionsNodeVersion": "18.18",
         "outputPath":           "dist/apps/console/run",
         "prerender":            true,
         "prerenderTarget":      "console:build:production",

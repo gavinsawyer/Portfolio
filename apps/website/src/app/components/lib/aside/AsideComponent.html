@@ -1,49 +1,46 @@
 <aside>
+  <components-create-message-form
+    *ngIf="messagesService.messageDocuments$() as messageDocuments"
+    [messageDocuments]="messageDocuments" />
   <div>
-    <components-create-message-form
-      *ngIf="messagesService.messageDocuments$() as messageDocuments"
-      [messageDocuments]="messageDocuments" />
-    <div>
-      <components-button
-        class="merge-right"
-        [iconHeight]="17.2578"
-        iconName="send message"
-        [iconWidth]="22.3828"
-        text="Message"
-        url="sms:+16177979041" />
-      <components-button
-        class="merge-left"
-        [iconHeight]="13.4766"
-        iconName="send mail"
-        [iconWidth]="22.3828"
-        text="Mail"
-        url="mailto:g@vinsawyer.dev" />
-    </div>
     <components-button
-      (action)="logClickOpenResumeEvent();"
-      [iconHeight]="16.7578"
-      iconName="document"
+      class="merge-right"
+      [iconHeight]="17.2578"
+      iconName="send message"
       [iconWidth]="22.3828"
-      text="Open résumé"
-      url="/assets/Gavin Sawyer - Resume.pdf" />
+      text="Message"
+      url="sms:+16177979041" />
     <components-button
-      (action)="logClickAddToContactsEvent();"
-      [iconHeight]="17.3359"
-      iconName="add to contacts"
+      class="merge-left"
+      [iconHeight]="13.4766"
+      iconName="send mail"
       [iconWidth]="22.3828"
-      text="Add to contacts"
-      url="/assets/Gavin Sawyer - Contact.vcf" />
-    <components-focus
-      *ngIf="focusService.focus$() as focus"
-      [focus]="focus" />
+      text="Mail"
+      url="mailto:g@vinsawyer.dev" />
   </div>
-  <!--suppress HtmlUnknownTarget -->
+  <components-button
+    (action)="logClickOpenResumeEvent();"
+    [iconHeight]="16.7578"
+    iconName="document"
+    [iconWidth]="22.3828"
+    text="Open résumé"
+    url="/assets/Gavin Sawyer - Resume.pdf" />
+  <components-button
+    (action)="logClickAddToContactsEvent();"
+    [iconHeight]="17.3359"
+    iconName="add to contacts"
+    [iconWidth]="22.3828"
+    text="Add to contacts"
+    url="/assets/Gavin Sawyer - Contact.vcf" />
+  <components-focus
+    *ngIf="focusService.focus$() as focus"
+    [focus]="focus" />
   <img
     alt=""
     height="2703"
     [loaderParams]="{type: 'Photo', maxWidth: 464}"
     [ngSrc]="'gavin'"
     ngSrcset="256w, 292w, 464w"
-    sizes="(max-width: 20em) 16rem, ((min-width: 33em) and (max-width: 52.22265625em)) 29rem, 18.22265625rem"
+    sizes="(max-width: 22.25em) 16rem, ((min-width: 22.25em) and (max-width: 52.25em)) 29rem, 18.25rem"
     width="2024" />
 </aside>

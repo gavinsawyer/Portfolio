@@ -1,13 +1,11 @@
-<article>
-  <section>
-    <p *ngIf="authenticationService.user$()?.isAnonymous">
-      You're not signed in.
-    </p>
-    <p *ngIf="authenticationService.user$()?.isAnonymous === false">
-      {{ (messagesService.messageDocuments$().length || "Loading") + " message" + (messagesService.messageDocuments$().length === 1 ? "." : "s.") }}
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid aut, consectetur cupiditate dicta dolor eaque error ex excepturi exercitationem libero mollitia, nihil obcaecati officia pariatur placeat provident quis quod repellendus rerum sequi sunt veniam veritatis. Animi aspernatur, aut corporis cum exercitationem fugit harum impedit magni maxime odit officia sint, suscipit temporibus vitae voluptatem. Ad aliquam at, autem culpa deserunt, dolore et ex ipsum labore nisi obcaecati odio provident reprehenderit, sit sunt unde voluptates. Aliquid id mollitia optio sed voluptatem.
-    </p>
-  </section>
-</article>
+<section>
+  <p *ngIf="authenticationService.user$()?.isAnonymous">
+    You're not signed in.
+  </p>
+  <p *ngIf="authenticationService.user$()?.isAnonymous === false">
+    {{ (messagesService.messageDocuments$().length || "Loading") + " message" + (messagesService.messageDocuments$().length === 1 ? "." : "s.") }}
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi consectetur consequuntur debitis dolores earum est, facere hic id iste iure maxime nam perspiciatis quod, saepe sed temporibus, unde veniam veritatis vitae? Corporis culpa fugiat id mollitia necessitatibus nihil provident repudiandae unde vero vitae? Aspernatur enim error necessitatibus nesciunt nobis. Ab aperiam assumenda deleniti dicta dignissimos doloremque, obcaecati officia porro quod ratione reprehenderit, unde veritatis! Amet, animi culpa enim est facilis ipsam iste minus nam obcaecati, optio quae repudiandae ut veritatis voluptatibus voluptatum. A ad assumenda consequuntur doloremque dolorum ea eaque id illum, iure iusto labore magnam minus mollitia, officiis quaerat quam quasi, quia sapiente sequi similique sit sunt vero voluptate. A aliquam animi architecto aspernatur assumenda commodi corporis dolorem, ea eligendi excepturi facilis ipsum magnam maiores maxime nam nemo nihil omnis perferendis quia quidem quisquam quos ratione rem reprehenderit rerum tempora tempore temporibus ullam veritatis voluptate. Aperiam atque autem commodi consequuntur corporis cupiditate dignissimos eaque eveniet ex explicabo facere fuga illum laborum laudantium minima nam nulla numquam odio pariatur quibusdam reprehenderit repudiandae rerum sed, soluta veritatis voluptas voluptates! Adipisci aliquid, atque blanditiis cum eligendi explicabo impedit ipsum maiores nobis obcaecati officia pariatur quam sequi soluta totam velit, voluptate. Expedita?
+  </p>
+</section>

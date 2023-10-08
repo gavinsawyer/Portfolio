@@ -1,8 +1,8 @@
-import { isPlatformBrowser }                                                    from "@angular/common";
-import { inject, Injectable, PLATFORM_ID, signal, Signal }                      from "@angular/core";
-import { toSignal }                                                             from "@angular/core/rxjs-interop";
-import { Auth, onIdTokenChanged, signInAnonymously, User, UserCredential }      from "@angular/fire/auth";
-import { distinctUntilChanged, Observable, Observer, startWith, TeardownLogic } from "rxjs";
+import { isPlatformBrowser }                                               from "@angular/common";
+import { inject, Injectable, PLATFORM_ID, signal, Signal }                 from "@angular/core";
+import { toSignal }                                                        from "@angular/core/rxjs-interop";
+import { Auth, onIdTokenChanged, signInAnonymously, User, UserCredential } from "@angular/fire/auth";
+import { Observable, Observer, startWith, TeardownLogic }                  from "rxjs";
 
 
 @Injectable({
@@ -20,9 +20,8 @@ export class AuthenticationService {
           (userCredential: UserCredential): void => userObserver.next(userCredential.user),
         ) : userObserver.next(user),
       ),
-    ).pipe<User | null, User | null>(
+    ).pipe<User | null>(
       startWith<User | null, [ User | null ]>(this.auth.currentUser),
-      distinctUntilChanged<User | null>(),
     ),
     {
       requireSync: true,
