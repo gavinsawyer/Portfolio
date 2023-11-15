@@ -145,7 +145,7 @@
         "prebuild",
         "lint"
       ],
-      "executor":             "@nguniversal/builders:prerender",
+      "executor":             "@angular-devkit/build-angular:prerender",
       "options":              {
         "routes": [
           "/",
@@ -169,7 +169,7 @@
         "prebuild",
         "lint"
       ],
-      "executor":             "@nguniversal/builders:ssr-dev-server"
+      "executor":             "@angular-devkit/build-angular:ssr-dev-server"
     },
     "deploy":   {
       "dependsOn": [

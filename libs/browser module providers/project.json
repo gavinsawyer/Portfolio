@@ -1,14 +1,14 @@
 {
   "$schema":     "../../node_modules/nx/schemas/project-schema.json",
-  "name":        "app-module-providers",
+  "name":        "browser-module-providers",
   "projectType": "library",
-  "sourceRoot":  "libs/app module providers/src",
+  "sourceRoot":  "libs/browser module providers/src",
   "targets":     {
     "lint": {
       "executor": "@nx/linter:eslint",
       "options":  {
         "lintFilePatterns": [
-          "libs/app module providers/**/*.ts"
+          "libs/browser module providers/**/*.ts"
         ]
       }
     }

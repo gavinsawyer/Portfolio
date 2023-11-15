@@ -25,8 +25,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "outDir":                             "dist/out-tsc",
     "paths":                              {
-      "@portfolio/app-module-providers": [
-        "libs/app module providers/src/index.ts"
+      "@portfolio/browser-module-providers": [
+        "libs/browser module providers/src/index.ts"
       ],
       "@portfolio/cloud-functions":      [
         "libs/cloud functions/src/index.ts"

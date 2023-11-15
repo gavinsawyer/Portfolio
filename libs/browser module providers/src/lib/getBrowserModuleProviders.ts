@@ -7,7 +7,7 @@ import { Environment }                                from "@portfolio/interface
 import { GitInfo }                                    from "git-describe";
 
 
-export const getAppModuleProviders: (options: { "environment": Environment, "gitInfo": Partial<GitInfo>, "packageVersion": string }) => (EnvironmentProviders | typeof ScreenTrackingService | typeof UserTrackingService | { "provide": InjectionToken<Environment>, "useValue": string | Environment | Partial<GitInfo> | ((imageLoaderConfig: ImageLoaderConfig) => string) })[] = (options: { "environment": Environment, "gitInfo": Partial<GitInfo>, "packageVersion": string }): (EnvironmentProviders | typeof ScreenTrackingService | typeof UserTrackingService | { "provide": InjectionToken<Environment>, "useValue": string | Environment | Partial<GitInfo> | ((imageLoaderConfig: ImageLoaderConfig) => string) })[] => [
+export const getBrowserModuleProviders: (options: { "environment": Environment, "gitInfo": Partial<GitInfo>, "packageVersion": string }) => (EnvironmentProviders | typeof ScreenTrackingService | typeof UserTrackingService | { "provide": InjectionToken<Environment>, "useValue": string | Environment | Partial<GitInfo> | ((imageLoaderConfig: ImageLoaderConfig) => string) })[] = (options: { "environment": Environment, "gitInfo": Partial<GitInfo>, "packageVersion": string }): (EnvironmentProviders | typeof ScreenTrackingService | typeof UserTrackingService | { "provide": InjectionToken<Environment>, "useValue": string | Environment | Partial<GitInfo> | ((imageLoaderConfig: ImageLoaderConfig) => string) })[] => [
   provideClientHydration(),
   ScreenTrackingService,
   UserTrackingService,
@@ -40,4 +40,7 @@ export const getAppModuleProviders: (options: { "environment": Environment, "git
       "webp",
     ].join(".") : ""),
   },
+  provideClientHydration(),
+  ScreenTrackingService,
+  UserTrackingService,
 ];

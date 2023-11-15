@@ -12,6 +12,6 @@ export const environment: Environment = {
     storageBucket:     "portfolio-a59e2.appspot.com",
   },
   production:     false,
-  projectName:    "website",
+  project:        "website",
   recaptchaKeyID: "6LdVjDQkAAAAAN-i-Z_ZOqlKAJusNGJzYfLZBkBn",
 };

@@ -1,7 +1,7 @@
-import { NgModule }             from "@angular/core";
-import { ServerModule }         from "@angular/platform-server";
-import { RootComponent }        from "../../components";
-import { ConsoleBrowserModule } from "../../modules";
+import { NgModule }                             from "@angular/core";
+import { provideServerRendering, ServerModule } from "@angular/platform-server";
+import { RootComponent }                        from "../../components";
+import { ConsoleBrowserModule }                 from "../../modules";
 
 
 @NgModule({
@@ -11,6 +11,9 @@ import { ConsoleBrowserModule } from "../../modules";
   imports:   [
     ConsoleBrowserModule,
     ServerModule,
+  ],
+  providers: [
+    provideServerRendering(),
   ],
 })
 export class ConsoleServerModule {

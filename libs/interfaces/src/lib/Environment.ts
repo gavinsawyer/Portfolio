@@ -3,12 +3,12 @@ export interface Environment {
     "apiKey": string,
     "appId": string,
     "authDomain": string,
-    "measurementId": string,
+    "measurementId"?: string,
     "messagingSenderId": string,
     "projectId": string,
     "storageBucket": string
   },
   "production": boolean,
-  "projectName": string,
+  "project": "console" | "website",
   "recaptchaKeyID": string,
 }

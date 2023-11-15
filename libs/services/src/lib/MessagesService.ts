@@ -1,11 +1,11 @@
-import { isPlatformBrowser }                                                                                                                                      from "@angular/common";
-import { inject, Injectable, PLATFORM_ID, signal, Signal }                                                                                                        from "@angular/core";
-import { toSignal }                                                                                                                                               from "@angular/core/rxjs-interop";
-import { Auth, onIdTokenChanged, User }                                                                                                                           from "@angular/fire/auth";
-import { collection, CollectionReference, collectionSnapshots, doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore, QueryDocumentSnapshot, setDoc } from "@angular/fire/firestore";
-import { MessageDocument }                                                                                                                                        from "@portfolio/interfaces";
-import { catchError, filter, map, Observable, Observer, ReplaySubject, startWith, switchMap, TeardownLogic }                                                      from "rxjs";
-import { AuthenticationService }                                                                                                                                  from "../";
+import { isPlatformBrowser }                                                                                                                                                    from "@angular/common";
+import { inject, Injectable, PLATFORM_ID, signal, Signal }                                                                                                                      from "@angular/core";
+import { toSignal }                                                                                                                                                             from "@angular/core/rxjs-interop";
+import { Auth, onIdTokenChanged, User }                                                                                                                                         from "@angular/fire/auth";
+import { collection, CollectionReference, collectionSnapshots, doc, docSnapshots, DocumentData, DocumentReference, DocumentSnapshot, Firestore, QueryDocumentSnapshot, setDoc } from "@angular/fire/firestore";
+import { MessageDocument }                                                                                                                                                      from "@portfolio/interfaces";
+import { catchError, filter, map, Observable, Observer, ReplaySubject, startWith, switchMap, TeardownLogic }                                                                    from "rxjs";
+import { AuthenticationService }                                                                                                                                                from "../";
 
 
 @Injectable({
@@ -13,12 +13,12 @@ import { AuthenticationService }                                                
 })
 export class MessagesService {
 
-  private readonly auth:                                   Auth                                              = inject<Auth>(Auth);
-  private readonly authenticationService:                  AuthenticationService                             = inject<AuthenticationService>(AuthenticationService);
+  private readonly auth: Auth = inject<Auth>(Auth);
+  private readonly authenticationService: AuthenticationService = inject<AuthenticationService>(AuthenticationService);
   private readonly createdMessageDocumentReferenceSubject: ReplaySubject<DocumentReference<MessageDocument>> = new ReplaySubject<DocumentReference<MessageDocument>>(1);
-  private readonly firestore:                              Firestore                                         = inject<Firestore>(Firestore);
+  private readonly firestore: Firestore = inject<Firestore>(Firestore);
 
-  public readonly messageDocuments$:     Signal<MessageDocument[]>                             = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<MessageDocument[]>(
+  public readonly messageDocuments$: Signal<MessageDocument[]> = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<MessageDocument[]>(
     new Observable<User | null>(
       (userObserver: Observer<User | null>): TeardownLogic => onIdTokenChanged(
         this.auth,
@@ -80,7 +80,7 @@ export class MessagesService {
       requireSync: true,
     },
   ) : signal<MessageDocument[]>([]);
-  public readonly createMessageDocument: (messageDocument: MessageDocument) => Promise<void> = async (messageDocument: MessageDocument): Promise<void> => setDoc<MessageDocument>(
+  public readonly createMessageDocument: (messageDocument: MessageDocument) => Promise<void> = async (messageDocument: MessageDocument): Promise<void> => setDoc<MessageDocument, DocumentData>(
     doc(
       this.firestore,
       "/messages/" + this.authenticationService.user$()?.uid,

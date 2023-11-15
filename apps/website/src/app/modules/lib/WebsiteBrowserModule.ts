@@ -7,8 +7,7 @@ import { Firestore, getFirestore, provideFirestore }                   from "@an
 import { ReactiveFormsModule }                                         from "@angular/forms";
 import { BrowserModule }                                               from "@angular/platform-browser";
 import { RouterModule }                                                from "@angular/router";
-import { TransferHttpCacheModule }                                     from "@nguniversal/common";
-import { getAppModuleProviders }                                       from "@portfolio/app-module-providers";
+import { getBrowserModuleProviders }                                   from "@portfolio/browser-module-providers";
 import { BannerComponent, HeaderComponent, routes as portfolioRoutes } from "@portfolio/components";
 import { AppCheckOptionsService }                                      from "@portfolio/services";
 import { gitInfo }                                                     from "../../../.git-info";
@@ -58,10 +57,9 @@ import { AsideComponent, RootComponent, routes as websiteRoutes }      from "../
         scrollPositionRestoration: "enabled",
       },
     ),
-    TransferHttpCacheModule,
     HeaderComponent,
   ],
-  providers:    getAppModuleProviders(
+  providers:    getBrowserModuleProviders(
     {
       environment:    environment,
       gitInfo:        gitInfo,

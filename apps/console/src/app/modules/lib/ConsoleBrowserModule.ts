@@ -7,8 +7,7 @@ import { Functions, getFunctions, provideFunctions }              from "@angular
 import { ReactiveFormsModule }                                    from "@angular/forms";
 import { BrowserModule }                                          from "@angular/platform-browser";
 import { RouterModule }                                           from "@angular/router";
-import { TransferHttpCacheModule }                                from "@nguniversal/common";
-import { getAppModuleProviders }                                  from "@portfolio/app-module-providers";
+import { getBrowserModuleProviders }                              from "@portfolio/browser-module-providers";
 import { HeaderComponent, routes as portfolioRoutes }             from "@portfolio/components";
 import { AppCheckOptionsService }                                 from "@portfolio/services";
 import { gitInfo }                                                from "../../../.git-info";
@@ -57,10 +56,9 @@ import { AsideComponent, RootComponent, routes as consoleRoutes } from "../../co
         scrollPositionRestoration: "enabled",
       },
     ),
-    TransferHttpCacheModule,
     HeaderComponent,
   ],
-  providers:    getAppModuleProviders(
+  providers:    getBrowserModuleProviders(
     {
       environment:    environment,
       gitInfo:        gitInfo,

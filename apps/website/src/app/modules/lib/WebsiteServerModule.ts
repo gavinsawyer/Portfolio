@@ -1,7 +1,7 @@
-import { NgModule }             from "@angular/core";
-import { ServerModule }         from "@angular/platform-server";
-import { RootComponent }        from "../../components";
-import { WebsiteBrowserModule } from "../../modules";
+import { NgModule }                             from "@angular/core";
+import { provideServerRendering, ServerModule } from "@angular/platform-server";
+import { RootComponent }                        from "../../components";
+import { WebsiteBrowserModule }                 from "../../modules";
 
 
 @NgModule({
@@ -11,6 +11,9 @@ import { WebsiteBrowserModule } from "../../modules";
   imports:   [
     WebsiteBrowserModule,
     ServerModule,
+  ],
+  providers: [
+    provideServerRendering(),
   ],
 })
 export class WebsiteServerModule {
