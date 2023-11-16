@@ -5,10 +5,10 @@ import { Auth, getAuth, provideAuth }                             from "@angular
 import { Firestore, getFirestore, provideFirestore }              from "@angular/fire/firestore";
 import { Functions, getFunctions, provideFunctions }              from "@angular/fire/functions";
 import { ReactiveFormsModule }                                    from "@angular/forms";
-import { BrowserModule }                                          from "@angular/platform-browser";
+import { BrowserModule, provideClientHydration }                  from "@angular/platform-browser";
 import { RouterModule }                                           from "@angular/router";
-import { getBrowserModuleProviders }                              from "@portfolio/browser-module-providers";
 import { HeaderComponent, routes as portfolioRoutes }             from "@portfolio/components";
+import { ENVIRONMENT, GIT_INFO, PACKAGE_VERSION }                 from "@portfolio/injection-tokens";
 import { AppCheckOptionsService }                                 from "@portfolio/services";
 import { gitInfo }                                                from "../../../.git-info";
 import { packageVersion }                                         from "../../../.package-version";
@@ -58,13 +58,21 @@ import { AsideComponent, RootComponent, routes as consoleRoutes } from "../../co
     ),
     HeaderComponent,
   ],
-  providers:    getBrowserModuleProviders(
+  providers:    [
     {
-      environment:    environment,
-      gitInfo:        gitInfo,
-      packageVersion: packageVersion,
+      provide:  ENVIRONMENT,
+      useValue: environment,
     },
-  ),
+    {
+      provide:  GIT_INFO,
+      useValue: gitInfo,
+    },
+    {
+      provide:  PACKAGE_VERSION,
+      useValue: packageVersion,
+    },
+    provideClientHydration(),
+  ],
 })
 export class ConsoleBrowserModule {
 }
