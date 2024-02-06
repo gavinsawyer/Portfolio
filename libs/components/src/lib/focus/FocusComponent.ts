@@ -1,10 +1,10 @@
 import { NgIf, NgOptimizedImage, NgStyle } from "@angular/common";
 import { Component, Input }                from "@angular/core";
-import { PublicEnvironmentDocument }       from "@gavinsawyer/shortcuts-api";
+import { Focus }                           from "@gavinsawyer/shortcuts-api";
 
 
 @Component({
-  imports: [
+  imports:     [
     NgIf,
     NgOptimizedImage,
     NgStyle,
@@ -21,7 +21,7 @@ export class FocusComponent {
   @Input({
     required: true,
   })
-  public focus!: PublicEnvironmentDocument["focus"];
+  public focus!: Focus;
 
   public readonly focusIconSizes: {
     [key: string]: {

@@ -16,7 +16,9 @@
   "engines":      {
     "node": "18"
   },
+  "main":         "./main.js",
+  "type":         "module",
   "dependencies": {
-    "@gavinsawyer/shortcuts-api": "^1.7.6"
+    "@gavinsawyer/shortcuts-api": "^2.0.0"
   }
 }

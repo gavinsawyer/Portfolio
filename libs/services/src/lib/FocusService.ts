@@ -3,7 +3,7 @@ import { inject, Injectable, PLATFORM_ID, signal, Signal }                      
 import { toSignal }                                                                        from "@angular/core/rxjs-interop";
 import { FirebaseApp }                                                                     from "@angular/fire/app";
 import { doc, docSnapshots, DocumentReference, DocumentSnapshot, Firestore, getFirestore } from "@angular/fire/firestore";
-import { PublicEnvironmentDocument }                                                       from "@gavinsawyer/shortcuts-api";
+import { Focus, PublicDocument }                                                           from "@gavinsawyer/shortcuts-api";
 import { catchError, filter, map, Observable }                                             from "rxjs";
 
 
@@ -17,26 +17,26 @@ export class FocusService {
     "shortcuts-api",
   );
 
-  public readonly focus$: Signal<PublicEnvironmentDocument["focus"]> = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<PublicEnvironmentDocument["focus"]>(
-    docSnapshots<PublicEnvironmentDocument>(
+  public readonly focus$: Signal<Focus | undefined> = isPlatformBrowser(inject<object>(PLATFORM_ID)) ? toSignal<Focus | undefined>(
+    docSnapshots<PublicDocument>(
       doc(
         this.firestore,
         "environment/public",
-      ) as DocumentReference<PublicEnvironmentDocument>,
-    ).pipe<PublicEnvironmentDocument | undefined, PublicEnvironmentDocument, PublicEnvironmentDocument["focus"], PublicEnvironmentDocument["focus"]>(
-      map<DocumentSnapshot<PublicEnvironmentDocument>, PublicEnvironmentDocument | undefined>(
-        (shortcutsAPIPublicDocumentSnapshot: DocumentSnapshot<PublicEnvironmentDocument>): PublicEnvironmentDocument | undefined => shortcutsAPIPublicDocumentSnapshot.data(),
+      ) as DocumentReference<PublicDocument>,
+    ).pipe<PublicDocument | undefined, PublicDocument, Focus | undefined, Focus | undefined>(
+      map<DocumentSnapshot<PublicDocument>, PublicDocument | undefined>(
+        (publicDocumentDocumentSnapshot: DocumentSnapshot<PublicDocument>): PublicDocument | undefined => publicDocumentDocumentSnapshot.data(),
       ),
-      filter<PublicEnvironmentDocument | undefined, PublicEnvironmentDocument>(
-        (shortcutsAPIPublicDocument: PublicEnvironmentDocument | undefined): shortcutsAPIPublicDocument is PublicEnvironmentDocument => !!shortcutsAPIPublicDocument,
+      filter<PublicDocument | undefined, PublicDocument>(
+        (publicDocument: PublicDocument | undefined): publicDocument is PublicDocument => !!publicDocument,
       ),
-      map<PublicEnvironmentDocument, PublicEnvironmentDocument["focus"]>(
-        (publicEnvironmentDocument: PublicEnvironmentDocument): PublicEnvironmentDocument["focus"] => publicEnvironmentDocument.focus,
+      map<PublicDocument, Focus | undefined>(
+        (publicDocument: PublicDocument): Focus | undefined => publicDocument.users["gavin"].focus,
       ),
-      catchError<PublicEnvironmentDocument["focus"], Observable<PublicEnvironmentDocument["focus"]>>(
-        (): Observable<PublicEnvironmentDocument["focus"]> => new Observable<PublicEnvironmentDocument["focus"]>(),
+      catchError<Focus | undefined, Observable<Focus | undefined>>(
+        (): Observable<Focus | undefined> => new Observable<Focus | undefined>(),
       ),
     ),
-  ) : signal<PublicEnvironmentDocument["focus"]>(undefined);
+  ) : signal<Focus | undefined>(undefined);
 
 }

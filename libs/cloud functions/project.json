@@ -16,7 +16,7 @@
       "dependsOn": [
         "lint"
       ],
-      "executor":  "@nx/js:tsc",
+      "executor":  "@nx/esbuild:esbuild",
       "options":   {
         "main":           "libs/cloud functions/src/lib/main.ts",
         "outputPath":     "dist/libs/cloud functions",
